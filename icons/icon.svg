@@ -1,6 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" rx="112" fill="#0F1613"/>
-  <circle cx="256" cy="256" r="150" fill="none" stroke="#6CC49A" stroke-width="28"/>
-  <circle cx="256" cy="256" r="62" fill="#6CC49A"/>
-  <path d="M256 70v84M256 358v84M70 256h84M358 256h84" stroke="#6CC49A" stroke-width="28" stroke-linecap="round"/>
+  <defs>
+    <linearGradient id="m" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A3F46"/><stop offset=".5" stop-color="#24282E"/><stop offset="1" stop-color="#15181C"/></linearGradient>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6DC96"/><stop offset=".55" stop-color="#D9AE4C"/><stop offset="1" stop-color="#A97F2A"/></linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="url(#m)"/>
+  <path d="M256 96 416 256 256 416 96 256Z" fill="none" stroke="url(#g)" stroke-width="24"/>
+  <path d="M256 186 326 256 256 326 186 256Z" fill="url(#g)"/>
+  <path d="M136 256h40M336 256h40M256 136v40M256 336v40" stroke="url(#g)" stroke-width="12"/>
 </svg>

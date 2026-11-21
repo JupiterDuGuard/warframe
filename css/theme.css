@@ -1,0 +1,69 @@
+/* Тема «Инкарнон»: оружейный металл и золото Инкарнона. Общая для всех страниц сайта. */
+:root{
+  /* светлая: полированная сталь */
+  --bg:#C2C7CC;
+  --bg-page:radial-gradient(ellipse 70% 38% at 50% -6%,rgba(176,132,40,.16),transparent 70%),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.16) 0 1px,transparent 1px 4px),
+    linear-gradient(180deg,#D2D6DA 0%,#BCC2C8 100%);
+  --bar:linear-gradient(180deg,#E8EBEE 0%,#CDD2D7 100%);
+  --surface:#E3E6E9;
+  --plate:linear-gradient(180deg,#EFF1F3 0%,#DDE1E4 55%,#D2D6DA 100%);
+  --plate-hi:rgba(255,255,255,.9); --plate-lo:rgba(30,36,44,.16);
+  --ink:#14171A; --muted:#4B545E; --line:#9AA2AA; --line-soft:#B6BDC4;
+  --accent:#86600F; --accent-soft:rgba(168,124,34,.15);
+  --accent-grad:linear-gradient(180deg,#EACB80 0%,#C69A3E 55%,#A07424 100%); --on-accent:#1C1406;
+  --glow:none;
+  --red:#992A37; --code:#CED3D8; --warn:#7A4E0C; --warn-soft:#EAD9B4;
+  --display:"Exo 2","Golos Text",system-ui,sans-serif;
+  --body:"Golos Text",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#14171B;
+    --bg-page:radial-gradient(ellipse 70% 38% at 50% -6%,rgba(221,182,92,.13),transparent 70%),
+      repeating-linear-gradient(90deg,rgba(255,255,255,.018) 0 1px,transparent 1px 4px),
+      linear-gradient(180deg,#1F2328 0%,#15181C 45%,#0F1114 100%);
+    --bar:linear-gradient(180deg,#2B3036 0%,#1C1F23 100%);
+    --surface:#23272D;
+    --plate:linear-gradient(180deg,#2D3238 0%,#23272D 45%,#1D2025 100%);
+    --plate-hi:rgba(255,255,255,.07); --plate-lo:rgba(0,0,0,.5);
+    --ink:#E4E6E8; --muted:#9AA2AA; --line:#3B4149; --line-soft:#2E333A;
+    --accent:#DDB65C; --accent-soft:rgba(221,182,92,.13);
+    --accent-grad:linear-gradient(180deg,#F3D68C 0%,#D5AA47 55%,#A97F2A 100%); --on-accent:#1A1305;
+    --glow:0 0 14px rgba(240,200,110,.45);
+    --red:#E2747D; --code:#16191D; --warn:#E5B866; --warn-soft:#2E2614;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#14171B;
+  --bg-page:radial-gradient(ellipse 70% 38% at 50% -6%,rgba(221,182,92,.13),transparent 70%),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.018) 0 1px,transparent 1px 4px),
+    linear-gradient(180deg,#1F2328 0%,#15181C 45%,#0F1114 100%);
+  --bar:linear-gradient(180deg,#2B3036 0%,#1C1F23 100%);
+  --surface:#23272D;
+  --plate:linear-gradient(180deg,#2D3238 0%,#23272D 45%,#1D2025 100%);
+  --plate-hi:rgba(255,255,255,.07); --plate-lo:rgba(0,0,0,.5);
+  --ink:#E4E6E8; --muted:#9AA2AA; --line:#3B4149; --line-soft:#2E333A;
+  --accent:#DDB65C; --accent-soft:rgba(221,182,92,.13);
+  --accent-grad:linear-gradient(180deg,#F3D68C 0%,#D5AA47 55%,#A97F2A 100%); --on-accent:#1A1305;
+  --glow:0 0 14px rgba(240,200,110,.45);
+  --red:#E2747D; --code:#16191D; --warn:#E5B866; --warn-soft:#2E2614;
+  color-scheme:dark;
+}
+
+html{background:var(--bg)}
+body{background:var(--bg-page);background-color:var(--bg);background-attachment:fixed}
+
+/* Металлическая пластина со скошенными углами и золотыми гранями */
+.plate,.card{position:relative;border:1px solid var(--line);
+  background:
+    linear-gradient(to top right,transparent calc(50% - 1.5px),var(--accent) calc(50% - 1.5px) 50%,transparent 50%) top right / 14px 14px no-repeat border-box,
+    linear-gradient(to top right,transparent 50%,var(--accent) 50% calc(50% + 1.5px),transparent calc(50% + 1.5px)) bottom left / 14px 14px no-repeat border-box,
+    var(--plate) border-box;
+  box-shadow:inset 0 1px 0 var(--plate-hi),inset 0 -1px 0 var(--plate-lo);
+  clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px))}
+.plate::before,.card::before{content:'';position:absolute;left:14px;right:40%;top:-1px;height:1px;
+  background:linear-gradient(90deg,var(--accent),transparent);pointer-events:none}
