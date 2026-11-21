@@ -15,7 +15,7 @@ const DEFAULT = {
   cat: 'secondary', weapon: 'Laetum', attack: 0, meleeMode: 'normal', combo: 1, exaltedScale: true, incarnon: {},
   mods: Array(8).fill(null), exilus: null, arcane: null,
   stacks: {}, flags: {}, statusTypes: 0,
-  buffs: [{ id: 'silken_stride', on: true, variant: 'ground', ownStrength: false, strength: 100, helminth: false }], customMult: 1, customStatus: 0,
+  buffs: [], customMult: 1, customStatus: 0,
   enemy: 'Heavy Gunner', level: 115, part: 'body', crit: 'none', armorStrip: 0, drOverride: '',
   status: { viral: 0, corrosive: 0, magnetic: 0, heat: false },
   frame: FRAME_DEFAULT,
@@ -117,13 +117,67 @@ function frameInput() {
     shards: f.shards, stacks: f.stacks, flags: f.flags, adaptation: f.adaptation,
   };
 }
-// баффы: сила «своя» берётся у фрейма с его модами и баффами на силу (два прохода)
+// ---------- баффы ----------
+// S.ownBuffs {id: {on, variant, input}} — способности своего фрейма (появляются сами, с учётом Гельминта);
+// S.allies [{frame, buffs: {id: {on, variant, input}}}] — фреймы союзников, сила стоковая (100%);
+// S.buffs [{id, on}] — пассивки фокуса.
+const buffDef = id => D.buffs.buffs.find(d => d.id === id);
+const frameBuffDefs = base => D.buffs.buffs.filter(d => !d.focus && d.frame === base);
+function ownBuffDefs() {
+  const fr = currentFrame(), hel = F().helminth;
+  const slot = hel.slot === '' ? -1 : +hel.slot;
+  const replaced = slot >= 0 ? fr.abilities?.[slot]?.name : null;     // способность, которую заменил Гельминт
+  const out = frameBuffDefs(frameBase(fr)).filter(d => d.ability !== replaced).map(def => ({ def, helminth: false }));
+  if (slot >= 0 && hel.ability) {
+    const d = D.buffs.buffs.find(x => !x.focus && x.ability === hel.ability);
+    if (d && !out.some(o => o.def.id === d.id)) out.push({ def: d, helminth: true });
+  }
+  return out;
+}
+function activeBuffs() {
+  if (!S.ownBuffs) return S.buffs || [];                       // старый формат (снимок A до обновления)
+  const own = ownBuffDefs().map(({ def, helminth }) => {
+    const st = S.ownBuffs[def.id] || {};
+    return { id: def.id, on: st.on ?? false, variant: st.variant, input: st.input, ownStrength: true, helminth };
+  });
+  const seen = new Set(own.filter(a => a.on).map(a => a.id));   // одна способность от двух фреймов не складывается
+  const allies = [];
+  for (const al of S.allies || []) for (const d of frameBuffDefs(al.frame)) {
+    const st = al.buffs[d.id] || {};
+    const a = { id: d.id, on: st.on ?? true, variant: st.variant, input: st.input, ownStrength: false, strength: 100, helminth: false };
+    if (a.on && seen.has(a.id)) continue;
+    if (a.on) seen.add(a.id);
+    allies.push(a);
+  }
+  return [...own, ...allies, ...(S.buffs || []).filter(a => buffDef(a.id)?.focus)];
+}
+// старый список S.buffs -> свой фрейм / союзники / фокус
+function migrateBuffs() {
+  if (S.ownBuffs) return;
+  S.ownBuffs = {}; S.allies = [];
+  const base = frameBase(currentFrame()), focus = [];
+  for (const a of S.buffs || []) {
+    const d = buffDef(a.id);
+    if (!d) continue;
+    if (d.focus) { focus.push({ id: a.id, on: a.on !== false }); continue; }
+    const st = { on: !!a.on, variant: a.variant, input: a.input };
+    if (d.frame === base || (a.helminth && d.ability === F().helminth.ability)) S.ownBuffs[d.id] = st;
+    else {
+      let al = S.allies.find(x => x.frame === d.frame);
+      if (!al) S.allies.push(al = { frame: d.frame, buffs: {} });
+      al.buffs[d.id] = st;
+    }
+  }
+  S.buffs = focus;
+}
+// сила «своя» берётся у фрейма с его модами и баффами на силу (два прохода)
 function buffState() {
   const fr = currentFrame();
+  const active = activeBuffs();
   const own0 = frameStats(fr, frameInput(), D.shards).strength;
-  let res = resolveBuffs(S.buffs, D.buffs.buffs, { ownStrength: own0, slot: S.cat });
+  let res = resolveBuffs(active, D.buffs.buffs, { ownStrength: own0, slot: S.cat });
   const own = frameStats(fr, { ...frameInput(), buffSources: res.frameSources }, D.shards).strength;
-  if (own !== own0) res = resolveBuffs(S.buffs, D.buffs.buffs, { ownStrength: own, slot: S.cat });
+  if (own !== own0) res = resolveBuffs(active, D.buffs.buffs, { ownStrength: own, slot: S.cat });
   return { res, own };
 }
 const frameResult = () => frameStats(currentFrame(), { ...frameInput(), buffSources: buffState().res.frameSources }, D.shards);
@@ -504,40 +558,46 @@ const buffLabel = d => d.ru || abilRu(d.ability) || d.ability;
 const buffFrom = d => d.focus ? `фокус ${d.focus}` : (ruName(D.warframes.find(w => w.name === d.frame)) || d.frame);
 const buffEffects = d => [...(d.effects || []), ...(d.variants || []).flatMap(v => v.effects || [])];
 
+// строка баффа: вкл., вариант, число (заполнение/секунды); st — где хранится выбор
+function buffRow(d, st, { tag, onRemove, defOn = true } = {}) {
+  const set = patch => { Object.assign(st, patch); onBuffsChange(); };
+  const ctl = [h('label', { class: 'chk' }, h('input', { type: 'checkbox', checked: st.on ?? defOn, onchange: e => set({ on: e.target.checked }) }), 'Вкл.')];
+  if (d.variants) {
+    ctl.push(h('select', { 'aria-label': 'Вариант', onchange: e => set({ variant: e.target.value }) },
+      d.variants.map(v => h('option', { value: v.id, selected: v.id === (st.variant || d.variants[0].id) }, v.ru))));
+  }
+  if (d.input) {
+    ctl.push(h('span', { class: 'chk' }, h('input', { type: 'number', min: 0, step: 'any', value: st.input ?? d.input.default, 'aria-label': d.input.ru,
+      oninput: e => { st.input = +e.target.value || 0; onBuffsChange(false); } }), d.input.ru));
+  }
+  if (onRemove) ctl.push(h('button', { type: 'button', class: 'x-btn', 'aria-label': 'Убрать', onclick: onRemove }, '×'));
+  return h('div', { class: 'buff' },
+    h('div', {}, h('b', {}, buffLabel(d)), tag ? h('span', { class: 'tag' }, tag) : null, d.verified === false ? h('span', { class: 'warn' }, ' · не сверено') : null),
+    h('div', { class: 'muted' }, d.note ? d.note + ' ' : '', h('a', { href: d.source, target: '_blank', rel: 'noopener' }, 'вики')),
+    h('div', { class: 'buff-ctl' }, ctl));
+}
 function renderBuffs() {
   const { own } = buffState();
+  const fr = currentFrame();
   for (const listId of ['buffList', 'fBuffList']) {
-    const rows = S.buffs.map((a, i) => {
-      const d = D.buffs.buffs.find(x => x.id === a.id);
-      if (!d) return null;
-      const set = patch => { Object.assign(a, patch); onBuffsChange(); };
-      const ctl = [h('label', { class: 'chk' }, h('input', { type: 'checkbox', checked: !!a.on, onchange: e => set({ on: e.target.checked }) }), 'Вкл.')];
-      if (d.variants) {
-        ctl.push(h('select', { 'aria-label': 'Вариант', onchange: e => set({ variant: e.target.value }) },
-          d.variants.map(v => h('option', { value: v.id, selected: v.id === (a.variant || d.variants[0].id) }, v.ru))));
-      }
-      const scales = buffEffects(d).some(e => e.scale) || d.extraHit?.scale || (d.variants || []).some(v => v.extraHit?.scale);
-      if (scales) {
-        ctl.push(h('label', { class: 'chk' }, h('input', { type: 'checkbox', checked: !!a.ownStrength, onchange: e => set({ ownStrength: e.target.checked }) }),
-          `сила моего фрейма (${pct(own)})`));
-        if (!a.ownStrength) {
-          ctl.push(h('span', { class: 'chk' }, h('input', { type: 'number', min: 0, step: 'any', value: a.strength ?? 100, 'aria-label': 'Сила способностей, %',
-            oninput: e => { a.strength = +e.target.value || 0; onBuffsChange(false); } }), '% силы'));
-        }
-      }
-      if (buffEffects(d).some(e => e.helminth != null || e.helminthCap != null)) {
-        ctl.push(h('label', { class: 'chk' }, h('input', { type: 'checkbox', checked: !!a.helminth, onchange: e => set({ helminth: e.target.checked }) }), 'через Helminth'));
-      }
-      if (d.input) {
-        ctl.push(h('span', { class: 'chk' }, h('input', { type: 'number', min: 0, step: 'any', value: a.input ?? d.input.default, 'aria-label': d.input.ru,
-          oninput: e => { a.input = +e.target.value || 0; onBuffsChange(false); } }), d.input.ru));
-      }
-      ctl.push(h('button', { type: 'button', class: 'x-btn', 'aria-label': 'Убрать бафф', onclick: () => { S.buffs.splice(i, 1); onBuffsChange(); } }, '×'));
-      return h('div', { class: 'buff' },
-        h('div', {}, h('b', {}, buffLabel(d)), h('span', { class: 'muted' }, ` · ${buffFrom(d)}`), d.verified === false ? h('span', { class: 'warn' }, ' · не сверено') : null),
-        h('div', { class: 'muted' }, d.note ? d.note + ' ' : '', h('a', { href: d.source, target: '_blank', rel: 'noopener' }, 'вики')),
-        h('div', { class: 'buff-ctl' }, ctl));
-    }).filter(Boolean);
+    const ownDefs = ownBuffDefs();
+    const rows = [h('div', { class: 'buff-head' }, h('b', {}, `Свой фрейм: ${ruName(fr)}`), h('span', { class: 'muted' }, `сила ${pct(own)}`))];
+    if (ownDefs.length) {
+      for (const { def, helminth } of ownDefs) rows.push(buffRow(def, S.ownBuffs[def.id] ||= {}, { tag: helminth ? 'Гельминт' : null, defOn: false }));
+    } else {
+      rows.push(h('p', { class: 'muted' }, `У фрейма «${ruName(fr)}» нет баффов в базе калькулятора. Способность из Гельминта выбирается на вкладке «Фрейм».`));
+    }
+    S.allies.forEach((al, i) => {
+      const rec = D.warframes.find(w => w.name === al.frame);
+      rows.push(h('div', { class: 'buff-head' }, h('b', {}, `Союзник: ${ruName(rec) || al.frame}`), h('span', { class: 'muted' }, 'сила 100% (стоковая)'),
+        h('button', { type: 'button', class: 'x-btn', 'aria-label': 'Убрать союзника', onclick: () => { S.allies.splice(i, 1); onBuffsChange(); } }, '×')));
+      for (const d of frameBuffDefs(al.frame)) rows.push(buffRow(d, al.buffs[d.id] ||= {}));
+    });
+    const focus = S.buffs.filter(a => buffDef(a.id)?.focus);
+    if (focus.length) {
+      rows.push(h('div', { class: 'buff-head' }, h('b', {}, 'Фокус')));
+      for (const a of focus) rows.push(buffRow(buffDef(a.id), a, { onRemove: () => { S.buffs.splice(S.buffs.indexOf(a), 1); onBuffsChange(); } }));
+    }
     $(listId).replaceChildren(...rows);
   }
 }
@@ -545,12 +605,22 @@ function onBuffsChange(full = true) {
   if (full) renderBuffs();
   renderFrameResult(); renderResult(); save();
 }
-function openBuffPicker() {
+function openAllyPicker() {
+  const frames = [...new Set(D.buffs.buffs.filter(d => !d.focus).map(d => d.frame))].filter(f => !S.allies.some(a => a.frame === f));
+  const rec = f => D.warframes.find(w => w.name === f) || { name: f };
   openPicker({
-    items: D.buffs.buffs.filter(d => !S.buffs.some(a => a.id === d.id)).sort((a, b) => buffLabel(a).localeCompare(buffLabel(b), 'ru')),
-    placeholder: 'Способность, фрейм или школа фокуса', label: buffLabel,
+    items: frames.map(f => ({ name: f, rec: rec(f) })).sort((a, b) => ruName(a.rec).localeCompare(ruName(b.rec), 'ru')),
+    placeholder: 'Фрейм союзника', label: x => ruName(x.rec),
+    sub: x => [x.name !== ruName(x.rec) ? x.name : '', frameBuffDefs(x.name).map(buffLabel).join(', ')].filter(Boolean).join(' — '),
+    onPick: x => { S.allies.push({ frame: x.name, buffs: {} }); onBuffsChange(); },
+  });
+}
+function openFocusPicker() {
+  openPicker({
+    items: D.buffs.buffs.filter(d => d.focus && !S.buffs.some(a => a.id === d.id)).sort((a, b) => buffLabel(a).localeCompare(buffLabel(b), 'ru')),
+    placeholder: 'Пассивка фокуса', label: buffLabel,
     sub: d => `${buffFrom(d)}${d.ability !== buffLabel(d) ? ' · ' + d.ability : ''}${d.note ? ' · ' + d.note : ''}`,
-    onPick: d => { S.buffs.push({ id: d.id, on: true, variant: d.variants?.[0].id, ownStrength: false, strength: 100, helminth: false }); onBuffsChange(); },
+    onPick: d => { S.buffs.push({ id: d.id, on: true }); onBuffsChange(); },
   });
 }
 
@@ -613,6 +683,7 @@ async function shareLink() {
 }
 async function applySnapshot(st) {
   S = { ...structuredClone(DEFAULT), ...st, compareA: S?.compareA || null, frame: { ...structuredClone(FRAME_DEFAULT), ...(st.frame || {}) } };
+  migrateBuffs();
   await ensureCategory();
   if (S.cat === 'melee') D.mods.stance ||= await load('data/mods/stance.json');
 }
@@ -792,8 +863,8 @@ function bindInputs() {
     label: ruName, sub: w => `${w.name} · здоровье ${w.rank30?.health}, щиты ${w.rank30?.shield}, броня ${w.rank30?.armor}, энергия ${w.rank30?.energy}`,
     onPick: w => { Object.assign(F(), { name: w.name, mods: Array(8).fill(null), exilus: null, helminth: { slot: '', ability: '' } }); renderFrame(); updateFrame(); },
   }));
-  $('addBuff').addEventListener('click', openBuffPicker);
-  $('fAddBuff').addEventListener('click', openBuffPicker);
+  for (const id of ['addBuff', 'fAddBuff']) $(id).addEventListener('click', openAllyPicker);
+  for (const id of ['addFocus', 'fAddFocus']) $(id).addEventListener('click', openFocusPicker);
   $('shareBtn').addEventListener('click', () => shareLink().catch(err => toolMsg('Не получилось: ' + err.message)));
   $('shareCopy').addEventListener('click', async () => { try { await navigator.clipboard.writeText($('shareUrl').value); toolMsg('Ссылка скопирована.'); } catch { $('shareUrl').select(); } });
   $('saveA').addEventListener('click', () => { S.compareA = snapshot(); toolMsg('Билд запомнен как A. Меняй что угодно — сравнение появится в результате.'); update(false); });
@@ -810,6 +881,7 @@ async function start() {
       load('data/enemies.json'), load('data/manual/scaling.json'), load('data/damage.json'), load('data/warframes.json'),
       load('data/manual/shards.json'), load('data/mods/warframe.json'), load('data/arcanes/warframe.json'), load('data/manual/buffs.json')]);
     D.incarnon = await load('data/incarnon.json');
+    migrateBuffs();
     const m = location.hash.match(/^#b=([\w-]+)$/);
     if (m) {
       try { await applySnapshot(await decodeBuild(m[1])); toolMsg('Открыт билд по ссылке.'); }

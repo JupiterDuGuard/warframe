@@ -156,3 +156,9 @@ dialog.sheet::backdrop{background:rgba(6,7,9,.7)}
 .buff-ctl select{width:auto;max-width:100%}
 .x-btn{margin-left:auto;border:1px solid var(--line);background:var(--plate);color:var(--red);border-radius:2px;width:28px;height:26px;cursor:pointer}
 .x-btn:hover{border-color:var(--red)}
+.buff-head{display:flex;align-items:center;gap:6px 10px;flex-wrap:wrap;margin-top:6px;padding-bottom:2px;border-bottom:1px solid var(--line-soft)}
+.buff-head b{font:600 12.5px var(--display);letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.buff-head:first-child{margin-top:0}
+.buff .tag{margin-left:8px;font:600 10.5px var(--display);letter-spacing:.06em;text-transform:uppercase;color:var(--on-accent);background:var(--accent-grad);padding:1px 6px}
+.addrow{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+@media (max-width:560px){.addrow{grid-template-columns:1fr}}
