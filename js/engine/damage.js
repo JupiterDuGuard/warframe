@@ -113,7 +113,8 @@ export function calc(build, target, data, opts = {}) {
       formula: `${fmt(weaponHit)} × ${fmt(x.pct)} × (1 + ${fmt(F)}) × ${fmt(enemy.dtm(x.type))} × (1 − ${fmt(enemy.dr)}) × (1 − ${fmt(resist)})`,
       value: dmg,
     });
-    return { name: x.name, type: x.type, pre, damage: dmg, tick, ticks: DOT_TICKS, procChance: x.statusChance || 0 };
+    const pc = x.statusChance === 'weapon' ? Math.min(1, A.statusChance) : (x.statusChance || 0);
+    return { name: x.name, type: x.type, pre, damage: dmg, tick, ticks: DOT_TICKS, procChance: pc };
   });
 
   // ---- статусы оружия: распределение по типам ∝ урону типа (до слабостей врага)

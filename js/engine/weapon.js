@@ -84,7 +84,7 @@ export function moddedAttack(weapon, attackIndex, eff) {
   const msLocked = eff.special.has('multishot_locked');
   const multishot = (atk.multishot || 1) * (msLocked ? 1 : 1 + (t.multishot || 0));
   const critChance = (atk.critChance || 0) * (1 + (t.crit_chance || 0)) + (t.crit_chance_flat || 0);
-  const critMultiplier = (atk.critMultiplier || 1) * (1 + (t.crit_damage || 0));
+  const critMultiplier = (atk.critMultiplier || 1) * (1 + (t.crit_damage || 0)) * (eff.critFinal || 1);
   const statusChance = (atk.statusChance || 0) * (1 + (t.status_chance || 0)) + (t.status_chance_flat || 0);
   const fireRate = (atk.fireRate || 1) * (1 + (t.fire_rate || 0) + (t.attack_speed || 0));
   const magazine = weapon.magazine ? Math.max(1, Math.round(weapon.magazine * (1 + (t.magazine || 0)))) : null;

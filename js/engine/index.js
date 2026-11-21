@@ -5,3 +5,4 @@ export { enemyState, armorDR, statMultiplier } from './enemy.js';
 export { collect, effectValue, itemEffects, weaponClassFits } from './effects.js';
 export { frameStats, shardSources } from './frame.js';
 export * from './constants.js';
+export { resolveBuffs, buffValue } from './buffs.js';

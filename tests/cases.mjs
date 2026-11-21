@@ -1,11 +1,14 @@
 // Эталонные проверки движка. Работают и в node --test (tests/engine.test.mjs), и в браузере (tests/index.html).
 // Каждый случай: { name, run(ctx) }, ctx = { data, find, near, eq } ; near(a, b, eps) / eq(a, b) бросают ошибку.
-import { calc, combineElements, critInfo, enemyState, frameStats, shardSources } from '../js/engine/index.js';
+import { calc, combineElements, critInfo, enemyState, frameStats, shardSources, resolveBuffs } from '../js/engine/index.js';
 
 const SILKEN = pct => ({ name: 'Шёлковая поступь', pct, type: 'Toxin', statusChance: 1, ability: true });
 const DEVOURING = { name: 'Devouring Attrition', effects: [{ stat: 'final_mult', value: 21, bucket: 'final_mult' }] };
 const buff = (name, stat, value, bucket = stat) => ({ name, effects: [{ stat, value, bucket }] });
 const shown = x => Math.round(x);
+const W = (damage, statusChance = 0) => ({ name: 'Пример', attacks: [{ damage, critChance: 0, critMultiplier: 1, statusChance, fireRate: 1 }] });
+const NEUTRAL = { name: 'Цель', faction: 'Tenno', health: 1, baseLevel: 1 };
+const SERR = { name: 'Serration', effects: [{ stat: 'damage', value: 1.65, bucket: 'base_damage' }] };
 
 export const cases = [
   // ---------- замеры в Симулякре (2026-11-20), Ораксия без модов, выстрел с земли ----------
@@ -187,6 +190,69 @@ export const cases = [
     },
   },
 
+  // ---------- баффы (этап 6), примеры со страниц вики ----------
+  {
+    name: 'Roar (вики): 100 урона, Serration, Roar 3 + Intensify → 100 × 2,65 × (1 + 0,5 × 1,3)',
+    run({ data, near }) {
+      const b = resolveBuffs([{ id: 'roar', on: true, strength: 130 }], data.buffs.buffs);
+      const r = calc({ weapon: W({ Impact: 100 }), buffs: [SERR, ...b.weaponSources] }, { enemy: NEUTRAL, level: 1 }, data);
+      near(r.hit.health, 100 * 2.65 * (1 + 0.5 * 1.3), 0.6);
+    },
+  },
+  {
+    name: 'Roar (вики): тик Разреза 0,35 × 100 × (1 + 0,5) × (1 + 0,5) = 78,75 — фракция дважды',
+    run({ data, near }) {
+      const b = resolveBuffs([{ id: 'roar', on: true, strength: 100 }], data.buffs.buffs);
+      const r = calc({ weapon: W({ Slash: 100 }, 1), buffs: b.weaponSources }, { enemy: NEUTRAL, level: 1 }, data);
+      near(r.dots.Slash.tick, 78.75, 1e-6);
+    },
+  },
+  {
+    name: 'Солнечное затмение (вики): 250 × 2,65 × (1 + 2 × 1,3) = 2385',
+    run({ data, near }) {
+      const b = resolveBuffs([{ id: 'eclipse', on: true, variant: 'solar', strength: 130 }], data.buffs.buffs);
+      const r = calc({ weapon: W({ Impact: 250 }), buffs: [SERR, ...b.weaponSources] }, { enemy: NEUTRAL, level: 1 }, data);
+      near(r.hit.health, 2385, 1e-6);
+    },
+  },
+  {
+    name: 'Vex Armor, Ярость (вики): 100 × (1 + 1,65 + 2,75 × 1,3) = 622,5',
+    run({ data, near }) {
+      const b = resolveBuffs([{ id: 'vex_armor', on: true, strength: 130 }], data.buffs.buffs);
+      const r = calc({ weapon: W({ Impact: 100 }), buffs: [SERR, ...b.weaponSources] }, { enemy: NEUTRAL, level: 1 }, data);
+      near(r.hit.health, 622.5, 1e-6);
+    },
+  },
+  {
+    name: 'Toxic Lash (вики): 200 × 0,3 × 1,3 = 78 доп. урона Токсином',
+    run({ data, near }) {
+      const b = resolveBuffs([{ id: 'toxic_lash', on: true, strength: 130 }], data.buffs.buffs, { slot: 'primary' });
+      const r = calc({ weapon: W({ Impact: 200 }), slot: 'primary', extraHits: b.extraHits }, { enemy: NEUTRAL, level: 1 }, data);
+      near(r.extra[0].damage, 78, 1e-6);
+    },
+  },
+  {
+    name: 'Warcry (вики): броня Валькирии 855 × (1 + 1 + 0,5 × 1,3) = 2265,75',
+    run({ data, find, near }) {
+      const v = find.frame('Valkyr');
+      const own = frameStats(v, { mods: [{ item: find.mod('warframe', 'Intensify'), rank: 5 }] }, data.shards).strength;
+      const b = resolveBuffs([{ id: 'warcry', on: true, ownStrength: true }], data.buffs.buffs, { ownStrength: own });
+      const f = frameStats(v, { mods: [{ item: find.mod('warframe', 'Steel Fiber'), rank: 10 }, { item: find.mod('warframe', 'Intensify'), rank: 5 }],
+        buffSources: b.frameSources }, data.shards);
+      near(v.rank30.armor, 855, 1e-9); near(f.armor, 2265.75, 1e-6);
+    },
+  },
+  {
+    name: 'Terrify при 167% силы снимает всю броню; Molecular Prime удваивает урон',
+    run({ data, find, near }) {
+      const t = resolveBuffs([{ id: 'terrify', on: true, strength: 167 }, { id: 'molecular_prime', on: true }], data.buffs.buffs);
+      near(t.armorStrip, 1, 1e-9); near(t.vulnerability, 1, 1e-9);
+      const base = calc({ weapon: find.weapon('Lex Prime') }, { enemy: find.enemy('Heavy Gunner'), level: 115 }, data);
+      const r = calc({ weapon: find.weapon('Lex Prime') }, { enemy: find.enemy('Heavy Gunner'), level: 115, armorStrip: t.armorStrip, vulnerability: t.vulnerability }, data);
+      near(r.enemy.dr, 0, 1e-9); near(r.hit.health, base.hit.health / 0.1 * 2, 1e-6);
+    },
+  },
+
   // ---------- механики ----------
   {
     name: 'Крит: 250% шанса, ×3 → уровни ×5 и ×7, средний ×6',
@@ -242,6 +308,6 @@ export const DATA_FILES = {
   scaling: 'data/manual/scaling.json', damage: 'data/damage.json', enemies: 'data/enemies.json',
   weapons: { primary: 'data/weapons/primary.json', secondary: 'data/weapons/secondary.json' },
   mods: { secondary: 'data/mods/secondary.json', primary: 'data/mods/primary.json', warframe: 'data/mods/warframe.json' },
-  warframes: 'data/warframes.json', shards: 'data/manual/shards.json',
+  warframes: 'data/warframes.json', shards: 'data/manual/shards.json', buffs: 'data/manual/buffs.json',
   arcanes: { secondary: 'data/arcanes/secondary.json' },
 };

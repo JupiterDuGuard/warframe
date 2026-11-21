@@ -1,5 +1,5 @@
 // Интерфейс калькулятора. Считает движок js/engine (без DOM), здесь только ввод и вывод.
-import { calc, critTable, itemEffects, frameStats, TYPE_RU, DOT_TICKS } from './engine/index.js';
+import { calc, critTable, itemEffects, frameStats, resolveBuffs, TYPE_RU, DOT_TICKS } from './engine/index.js';
 import { load, CATEGORIES, MOD_FILES, ARCANE_FILES, modGroup, modFits } from './store.js';
 import { $, h, num, pct, ruName, textRu, openPicker, initPicker, segmented, slotEl, tile, table, condRows } from './ui.js';
 
@@ -13,7 +13,7 @@ const DEFAULT = {
   cat: 'secondary', weapon: 'Laetum', attack: 0,
   mods: Array(8).fill(null), exilus: null, arcane: null,
   stacks: {}, flags: {}, statusTypes: 0,
-  oraxia: { on: true, strength: 100, wall: false }, customMult: 1, customStatus: 0,
+  buffs: [{ id: 'silken_stride', on: true, variant: 'ground', ownStrength: false, strength: 100, helminth: false }], customMult: 1, customStatus: 0,
   enemy: 'Heavy Gunner', level: 115, part: 'body', crit: 'none', armorStrip: 0, drOverride: '',
   status: { viral: 0, corrosive: 0, magnetic: 0, heat: false },
   frame: FRAME_DEFAULT,
@@ -23,6 +23,10 @@ let S;
 try {
   const saved = JSON.parse(localStorage.getItem(KEY) || '{}');
   S = { ...structuredClone(DEFAULT), ...saved, frame: { ...structuredClone(FRAME_DEFAULT), ...(saved.frame || {}) } };
+  if (saved.oraxia && !saved.buffs) {          // старый формат: отдельная галочка Ораксии
+    S.buffs = saved.oraxia.on ? [{ id: 'silken_stride', on: true, variant: saved.oraxia.wall ? 'wall' : 'ground', strength: saved.oraxia.strength || 100 }] : [];
+  }
+  delete S.oraxia;
 } catch { S = structuredClone(DEFAULT); }
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch { /* приватный режим */ } };
 
@@ -62,7 +66,16 @@ function frameInput() {
     shards: f.shards, stacks: f.stacks, flags: f.flags, adaptation: f.adaptation,
   };
 }
-const frameResult = () => frameStats(currentFrame(), frameInput(), D.shards);
+// баффы: сила «своя» берётся у фрейма с его модами и баффами на силу (два прохода)
+function buffState() {
+  const fr = currentFrame();
+  const own0 = frameStats(fr, frameInput(), D.shards).strength;
+  let res = resolveBuffs(S.buffs, D.buffs.buffs, { ownStrength: own0, slot: S.cat });
+  const own = frameStats(fr, { ...frameInput(), buffSources: res.frameSources }, D.shards).strength;
+  if (own !== own0) res = resolveBuffs(S.buffs, D.buffs.buffs, { ownStrength: own, slot: S.cat });
+  return { res, own };
+}
+const frameResult = () => frameStats(currentFrame(), { ...frameInput(), buffSources: buffState().res.frameSources }, D.shards);
 
 // ---------- оружие: ввод ----------
 function renderWeapon() {
@@ -147,7 +160,9 @@ function buildInput() {
     frameSrc = frameResult().weaponSources;
     buffs.push(...frameSrc);
   }
-  const extraHits = S.oraxia.on ? [{ name: 'Шёлковая поступь', pct: (S.oraxia.wall ? 0.8 : 0.4) * S.oraxia.strength / 100, type: 'Toxin', statusChance: 1, ability: true }] : [];
+  const bs = buffState().res;
+  buffs.push(...bs.weaponSources);
+  const extraHits = bs.extraHits;
   const build = {
     weapon: w, attack: S.attack, slot: S.cat, mods, buffs, extraHits,
     stacks: { ...F().stacks, ...S.stacks }, flags: { ...F().flags, ...S.flags },
@@ -156,7 +171,7 @@ function buildInput() {
   };
   const st = S.status;
   const target = {
-    enemy: currentEnemy(), level: S.level, armorStrip: S.armorStrip / 100,
+    enemy: currentEnemy(), level: S.level, armorStrip: 1 - (1 - S.armorStrip / 100) * (1 - bs.armorStrip), vulnerability: bs.vulnerability,
     drOverride: S.drOverride === '' || S.drOverride == null ? undefined : Math.max(0, Math.min(100, +S.drOverride)) / 100,
     status: { viral: st.viral, corrosive: st.corrosive, magnetic: st.magnetic, heat: st.heat },
   };
@@ -309,7 +324,8 @@ function renderFrameResult() {
   const r = frameResult();
   const b = r.base;
   const tiles = [
-    tile('Эффективное здоровье', num(r.ehp, 0), `здоровье с бронёй ${num(r.ehpHealth, 0)} + щиты ${num(r.shield, 0)}`, true),
+    tile('Эффективное здоровье', num(r.ehpAbil, 0), `здоровье с бронёй ${num(r.ehpHealth, 0)} + щиты ${num(r.shield, 0)}` +
+      (r.abilityDR ? ` · способности −${pct(r.abilityDR)}` : ''), true),
     tile('Снижение урона бронёй', pct(r.dr), `броня ${num(r.armor, 0)}`),
   ];
   if (r.adapt) tiles.push(tile('С Адаптацией', num(r.ehpAdapt, 0), `сопротивление ${pct(r.adapt)} одному типу`, true));
@@ -321,7 +337,7 @@ function renderFrameResult() {
     ['Скорость бега', num(fr.sprint || 1, 2), num(r.sprint, 2)],
   ];
   if (S.view === 'frame') {
-    $('mini').replaceChildren(h('span', {}, 'ЭЗ ', h('b', {}, num(r.ehp, 0))), h('span', {}, 'Здоровье ', h('b', {}, num(r.health, 0))),
+    $('mini').replaceChildren(h('span', {}, 'ЭЗ ', h('b', {}, num(r.ehpAbil, 0))), h('span', {}, 'Здоровье ', h('b', {}, num(r.health, 0))),
       h('span', {}, 'Броня ', h('b', {}, num(r.armor, 0))), h('span', {}, 'Сила ', h('b', {}, pct(r.strength))), h('span', {}, '↓'));
   }
   const ws = r.weaponSources;
@@ -341,6 +357,63 @@ function renderFrameResult() {
   ].filter(Boolean));
 }
 
+
+// ---------- баффы ----------
+const abilRu = name => { for (const w of D.warframes) for (const a of w.abilities || []) if (a.name === name && a.ru) return a.ru; return null; };
+const buffLabel = d => d.ru || abilRu(d.ability) || d.ability;
+const buffFrom = d => d.focus ? `фокус ${d.focus}` : (ruName(D.warframes.find(w => w.name === d.frame)) || d.frame);
+const buffEffects = d => [...(d.effects || []), ...(d.variants || []).flatMap(v => v.effects || [])];
+
+function renderBuffs() {
+  const { own } = buffState();
+  for (const listId of ['buffList', 'fBuffList']) {
+    const rows = S.buffs.map((a, i) => {
+      const d = D.buffs.buffs.find(x => x.id === a.id);
+      if (!d) return null;
+      const set = patch => { Object.assign(a, patch); onBuffsChange(); };
+      const ctl = [h('label', { class: 'chk' }, h('input', { type: 'checkbox', checked: !!a.on, onchange: e => set({ on: e.target.checked }) }), 'Вкл.')];
+      if (d.variants) {
+        ctl.push(h('select', { 'aria-label': 'Вариант', onchange: e => set({ variant: e.target.value }) },
+          d.variants.map(v => h('option', { value: v.id, selected: v.id === (a.variant || d.variants[0].id) }, v.ru))));
+      }
+      const scales = buffEffects(d).some(e => e.scale) || d.extraHit?.scale || (d.variants || []).some(v => v.extraHit?.scale);
+      if (scales) {
+        ctl.push(h('label', { class: 'chk' }, h('input', { type: 'checkbox', checked: !!a.ownStrength, onchange: e => set({ ownStrength: e.target.checked }) }),
+          `сила моего фрейма (${pct(own)})`));
+        if (!a.ownStrength) {
+          ctl.push(h('span', { class: 'chk' }, h('input', { type: 'number', min: 0, step: 'any', value: a.strength ?? 100, 'aria-label': 'Сила способностей, %',
+            oninput: e => { a.strength = +e.target.value || 0; onBuffsChange(false); } }), '% силы'));
+        }
+      }
+      if (buffEffects(d).some(e => e.helminth != null || e.helminthCap != null)) {
+        ctl.push(h('label', { class: 'chk' }, h('input', { type: 'checkbox', checked: !!a.helminth, onchange: e => set({ helminth: e.target.checked }) }), 'через Helminth'));
+      }
+      if (d.input) {
+        ctl.push(h('span', { class: 'chk' }, h('input', { type: 'number', min: 0, step: 'any', value: a.input ?? d.input.default, 'aria-label': d.input.ru,
+          oninput: e => { a.input = +e.target.value || 0; onBuffsChange(false); } }), d.input.ru));
+      }
+      ctl.push(h('button', { type: 'button', class: 'x-btn', 'aria-label': 'Убрать бафф', onclick: () => { S.buffs.splice(i, 1); onBuffsChange(); } }, '×'));
+      return h('div', { class: 'buff' },
+        h('div', {}, h('b', {}, buffLabel(d)), h('span', { class: 'muted' }, ` · ${buffFrom(d)}`), d.verified === false ? h('span', { class: 'warn' }, ' · не сверено') : null),
+        h('div', { class: 'muted' }, d.note ? d.note + ' ' : '', h('a', { href: d.source, target: '_blank', rel: 'noopener' }, 'вики')),
+        h('div', { class: 'buff-ctl' }, ctl));
+    }).filter(Boolean);
+    $(listId).replaceChildren(...rows);
+  }
+}
+function onBuffsChange(full = true) {
+  if (full) renderBuffs();
+  renderFrameResult(); renderResult(); save();
+}
+function openBuffPicker() {
+  openPicker({
+    items: D.buffs.buffs.filter(d => !S.buffs.some(a => a.id === d.id)).sort((a, b) => buffLabel(a).localeCompare(buffLabel(b), 'ru')),
+    placeholder: 'Способность, фрейм или школа фокуса', label: buffLabel,
+    sub: d => `${buffFrom(d)}${d.ability !== buffLabel(d) ? ' · ' + d.ability : ''}${d.note ? ' · ' + d.note : ''}`,
+    onPick: d => { S.buffs.push({ id: d.id, on: true, variant: d.variants?.[0].id, ownStrength: false, strength: 100, helminth: false }); onBuffsChange(); },
+  });
+}
+
 // ---------- обновление ----------
 function update(full = true) {
   if (full) { renderMods(); renderConds(); renderEnemySegs(); }
@@ -349,6 +422,7 @@ function update(full = true) {
 }
 function updateFrame(full = true) {
   if (full) { renderFrameMods(); renderShards(); renderFrameConds(); }
+  renderBuffs();
   renderFrameResult();
   renderResult();
   save();
@@ -367,10 +441,6 @@ function setView(v) {
 function bindInputs() {
   const bindNum = (id, get, set, cb = () => update(false)) => { const el = $(id); el.value = get(); el.addEventListener('input', () => { set(el.value); cb(); }); };
   const bindChk = (id, get, set, cb = () => update(false)) => { const el = $(id); el.checked = get(); el.addEventListener('change', () => { set(el.checked); cb(); }); };
-  bindChk('oraOn', () => S.oraxia.on, v => { S.oraxia.on = v; $('oraRow').hidden = !v; });
-  $('oraRow').hidden = !S.oraxia.on;
-  bindNum('oraStr', () => S.oraxia.strength, v => S.oraxia.strength = +v || 0);
-  bindChk('oraWall', () => S.oraxia.wall, v => S.oraxia.wall = v);
   bindNum('cMult', () => S.customMult, v => S.customMult = v === '' ? 1 : +v);
   bindNum('cStatus', () => S.customStatus, v => S.customStatus = +v || 0);
   bindChk('useFrame', () => F().use, v => F().use = v);
@@ -400,6 +470,8 @@ function bindInputs() {
     label: ruName, sub: w => `${w.name} · здоровье ${w.rank30?.health}, щиты ${w.rank30?.shield}, броня ${w.rank30?.armor}, энергия ${w.rank30?.energy}`,
     onPick: w => { Object.assign(F(), { name: w.name, mods: Array(8).fill(null), exilus: null, helminth: { slot: '', ability: '' } }); renderFrame(); updateFrame(); },
   }));
+  $('addBuff').addEventListener('click', openBuffPicker);
+  $('fAddBuff').addEventListener('click', openBuffPicker);
   $('mini').addEventListener('click', () => $(S.view === 'frame' ? 'fResCard' : 'resCard').scrollIntoView({ behavior: 'smooth' }));
 }
 
@@ -407,9 +479,9 @@ function bindInputs() {
 async function start() {
   initPicker();
   try {
-    [D.enemies, D.scaling, D.damage, D.warframes, D.shards, D.mods.warframe, D.arcanes.warframe] = await Promise.all([
+    [D.enemies, D.scaling, D.damage, D.warframes, D.shards, D.mods.warframe, D.arcanes.warframe, D.buffs] = await Promise.all([
       load('data/enemies.json'), load('data/manual/scaling.json'), load('data/damage.json'), load('data/warframes.json'),
-      load('data/manual/shards.json'), load('data/mods/warframe.json'), load('data/arcanes/warframe.json')]);
+      load('data/manual/shards.json'), load('data/mods/warframe.json'), load('data/arcanes/warframe.json'), load('data/manual/buffs.json')]);
     await ensureCategory();
   } catch (err) {
     $('res').replaceChildren(h('p', { class: 'warn' }, 'Не удалось загрузить данные: ' + err.message));
@@ -418,7 +490,7 @@ async function start() {
   bindInputs();
   setView(S.view || 'weapon');
   renderFrame();
-  renderFrameMods(); renderShards(); renderFrameConds(); renderFrameResult();
+  renderFrameMods(); renderShards(); renderFrameConds(); renderBuffs(); renderFrameResult();
   renderAll();
   load('data/meta.json').then(m => {
     const c = m.counts || {};

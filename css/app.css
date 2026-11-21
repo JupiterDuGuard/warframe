@@ -118,3 +118,8 @@ dialog.sheet::backdrop{background:rgba(10,16,13,.55)}
 .shard select{min-width:0}
 .shard input[type=number]{width:72px}
 @media (max-width:560px){.shard{grid-template-columns:18px minmax(0,1fr) auto;}.shard select:nth-of-type(2){grid-column:2 / -1}}
+.buff{display:flex;flex-direction:column;gap:4px;padding:8px 10px;background:var(--code);border-radius:8px}
+.buff-ctl{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;font-size:13.5px}
+.buff-ctl input[type=number]{width:80px}
+.buff-ctl select{width:auto;max-width:100%}
+.x-btn{margin-left:auto;border:1px solid var(--line);background:var(--surface);color:var(--red);border-radius:6px;width:28px;height:26px;cursor:pointer}

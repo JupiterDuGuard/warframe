@@ -50,6 +50,7 @@ export function frameStats(frame, input, shardData) {
   for (const a of input.arcanes || []) {
     if (a?.item) modSources.push({ key: 'arc:' + a.item.id, name: a.item.ru || a.item.name, effects: itemEffects(a.item, a.rank) });
   }
+  for (const b of input.buffSources || []) modSources.push(b);          // баффы способностей и фокуса
   const ctx = { stacks: input.stacks || {}, flags: input.flags || {} };
   // два прохода: энергия нужна Фиолетовому осколку, а сама зависит от осколков
   let shards = shardSources(input.shards || [], shardData, 0);
@@ -77,8 +78,10 @@ export function frameStats(frame, input, shardData) {
   const dr = core.armor / (core.armor + 300);
   const ehpHealth = core.health / (1 - dr);
   const ehp = ehpHealth + core.shield;
+  const abilityDR = Math.min(0.9, t.damage_reduction || 0);            // Лунное затмение и т.п.
+  const ehpAbil = ehp / (1 - abilityDR);
   const adapt = Math.min(0.9, 0.1 * (input.adaptation || 0));
-  const ehpAdapt = ehp / (1 - adapt);
+  const ehpAdapt = ehpAbil / (1 - adapt);
 
   const pctText = x => `${x >= 0 ? '+' : ''}${Math.round(x * 1000) / 10}%`;
   const steps = [
@@ -89,13 +92,14 @@ export function frameStats(frame, input, shardData) {
     { label: 'Снижение урона бронёй', formula: `${Math.round(core.armor)} / (${Math.round(core.armor)} + 300)`, value: dr },
     { label: 'Эффективное здоровье', formula: `${Math.round(core.health)} / (1 − ${dr.toFixed(3)}) + щиты ${Math.round(core.shield)}`, value: ehp },
   ];
-  if (adapt) steps.push({ label: 'С Адаптацией', formula: `${Math.round(ehp)} / (1 − ${adapt})`, value: ehpAdapt });
+  if (abilityDR) steps.push({ label: 'Со снижением урона способностей', formula: `${Math.round(ehp)} / (1 − ${abilityDR})`, value: ehpAbil });
+  if (adapt) steps.push({ label: 'С Адаптацией', formula: `${Math.round(ehpAbil)} / (1 − ${adapt})`, value: ehpAdapt });
 
   // эффекты для оружия: всё, кроме статов фрейма
-  const weaponSources = [...modSources, ...shards]
+  const weaponSources = [...modSources.filter(x => !String(x.key).startsWith('buff:')), ...shards]
     .map(s => ({ key: s.key, name: s.name, effects: s.effects.filter(e => !FRAME_BUCKETS.has(e.bucket)) }))
     .filter(s => s.effects.length);
 
-  return { base, ...core, strength, duration, range, efficiency, sprint, dr, ehpHealth, ehp, adapt, ehpAdapt,
+  return { base, ...core, strength, duration, range, efficiency, sprint, dr, ehpHealth, ehp, abilityDR, ehpAbil, adapt, ehpAdapt,
     totals: t, contrib: all.contrib, steps, weaponSources };
 }

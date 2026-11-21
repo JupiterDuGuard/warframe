@@ -34,6 +34,7 @@ export function effectValue(eff, ctx, key) {
     if (fam !== want) return 0;
   }
   if (c.slot && ctx.slot && c.slot !== ctx.slot) return 0;
+  if (c.notSlot && ctx.slot && c.notSlot === ctx.slot) return 0;
   if (c.weaponClass && ctx.slot && !weaponClassFits(c.weaponClass, ctx)) return 0;
   for (const f of FLAG_KEYS) if (c[f] && !ctx.flags?.[f]) return 0;
   if (c.attack && ctx.flags?.attack !== c.attack) return 0;
@@ -67,7 +68,7 @@ export function collect(sources, ctx) {
   const contrib = [];
   const special = new Set();
   const forcedProcs = [];
-  let finalMult = 1;
+  let finalMult = 1, critFinal = 1;
   for (const s of sources) {
     for (const e of s.effects || []) {
       const v = effectValue(e, ctx, s.key);
@@ -78,6 +79,8 @@ export function collect(sources, ctx) {
         elements.push({ type: type[0].toUpperCase() + type.slice(1), value: v, source: s.name });
       } else if (e.bucket === 'final_mult') {
         finalMult *= v;
+      } else if (e.bucket === 'crit_final') {             // Электрический щит: ×2 к множителю крита
+        critFinal *= v;
       } else if (e.bucket === 'special') {
         special.add(e.stat);
       } else if (e.bucket === 'forced_proc') {
@@ -88,5 +91,5 @@ export function collect(sources, ctx) {
       }
     }
   }
-  return { totals, elements, contrib, special, forcedProcs, finalMult };
+  return { totals, elements, contrib, special, forcedProcs, finalMult, critFinal };
 }

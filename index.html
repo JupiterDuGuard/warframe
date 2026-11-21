@@ -55,18 +55,15 @@
     <section class="card">
       <h2>Баффы</h2>
       <div class="conds">
-        <label class="chk"><input type="checkbox" id="oraOn"> Ораксия: «Шёлковая поступь» (доп. удар Токсином)</label>
-        <div class="row" id="oraRow">
-          <div class="f"><label for="oraStr">Сила способностей, %</label><input type="number" id="oraStr" min="0" step="any"></div>
-          <div class="f" style="justify-content:flex-end"><label class="chk"><input type="checkbox" id="oraWall"> Висит на стене</label></div>
-        </div>
+        <div class="conds" id="buffList"></div>
+        <button type="button" class="pick" id="addBuff"><b>+ Добавить бафф</b><small>способность или фокус</small></button>
         <div class="row">
           <div class="f"><label for="cMult">Свой множитель урона, ×</label><input type="number" id="cMult" min="0" step="any"><small>Например, ×21 у Devouring Attrition</small></div>
           <div class="f"><label for="cStatus">Свой бонус к урону статусов, %</label><input type="number" id="cStatus" min="0" step="any"><small>Осколки, Элементалист вне модов</small></div>
         </div>
         <label class="chk"><input type="checkbox" id="useFrame"> Учитывать фрейм (аура, осколки, мистификаторы)</label>
         <p class="muted" id="frameLink"></p>
-        <p class="muted">Способности, фокус и баффы союзников появятся на этапе 6.</p>
+
       </div>
     </section>
   </div>
@@ -119,6 +116,11 @@
     <section class="card">
       <h2>Осколки архонтов <small>до 5, таукованые ×1,5</small></h2>
       <div class="conds" id="fShards"></div>
+    </section>
+    <section class="card">
+      <h2>Баффы <small>те же, что на вкладке оружия</small></h2>
+      <div class="conds" id="fBuffList"></div>
+      <button type="button" class="pick" id="fAddBuff"><b>+ Добавить бафф</b><small>способность или фокус</small></button>
     </section>
     <section class="card" id="fCondCard" hidden>
       <h2>Условные эффекты фрейма</h2>

@@ -1,0 +1,104 @@
+{
+  "_comment": "Баффы способностей и фокуса. Значения — на 3-м ранге способности при 100% силы; scale=strength — умножаются на силу способностей. helminth — значение у способности через Helminth. target: weapon (эффект в расчёт оружия), extra (доп. удар), enemy (снятие брони, уязвимость), frame (статы фрейма). asMultiplier — отдельный множитель урона (1 + значение). verified=false — корзина или значение не подтверждены вики (TODO_VERIFY.md). Переписано со страниц вики 2026-11-21.",
+  "buffs": [
+    { "id": "roar", "ability": "Roar", "frame": "Rhino", "source": "https://wiki.warframe.com/w/Roar",
+      "note": "Бонус против фракции: складывается с Проклятиями, умножается на остальное; в тиках статусов учитывается дважды.",
+      "effects": [{ "target": "weapon", "stat": "faction", "bucket": "faction", "value": 0.5, "scale": "strength", "helminth": 0.3 }] },
+    { "id": "eclipse", "ability": "Eclipse", "frame": "Mirage", "source": "https://wiki.warframe.com/w/Eclipse",
+      "variants": [
+        { "id": "solar", "ru": "Солнечное — урон", "effects": [{ "target": "weapon", "stat": "final_mult", "bucket": "final_mult", "value": 2.0, "scale": "strength", "helminth": 0.3, "asMultiplier": true }] },
+        { "id": "lunar", "ru": "Лунное — снижение урона", "effects": [{ "target": "frame", "stat": "damage_reduction", "bucket": "frame", "value": 0.75, "scale": "strength", "cap": 0.9, "helminthCap": 0.75 }] }
+      ],
+      "note": "Солнечное: отдельный множитель ко всему урону оружия (вики: умножается почти на все бонусы)." },
+    { "id": "xata", "ability": "Xata's Whisper", "frame": "Xaku", "source": "https://wiki.warframe.com/w/Xata%27s_Whisper",
+      "note": "Доп. удар Бездной от полного урона оружия; дважды учитывает фракцию и часть тела. Статус — по шансу статуса оружия.",
+      "extraHit": { "pct": 0.26, "type": "Void", "statusChance": "weapon", "ability": true, "scale": "strength" }, "verified": false },
+    { "id": "vex_armor", "ability": "Vex Armor", "frame": "Chroma", "source": "https://wiki.warframe.com/w/Vex_Armor",
+      "input": { "kind": "fill", "ru": "Заполнено, % от максимума", "default": 100 },
+      "note": "Ярость (Fury) — базовый урон, как Serration; Презрение (Scorn) — броня, складывается с модами брони.",
+      "effects": [
+        { "target": "weapon", "stat": "damage", "bucket": "base_damage", "value": 2.75, "scale": "strength", "fill": true },
+        { "target": "frame", "stat": "armor", "bucket": "frame", "value": 3.5, "scale": "strength", "fill": true }
+      ] },
+    { "id": "nourish", "ability": "Nourish", "frame": "Grendel", "source": "https://wiki.warframe.com/w/Nourish",
+      "note": "Вирус к оружию, как мод на стихию (+75%), складывается с модами.",
+      "effects": [{ "target": "weapon", "stat": "element_viral", "bucket": "element", "value": 0.75, "scale": "strength", "helminth": 0.45 }] },
+    { "id": "warcry", "ability": "Warcry", "frame": "Valkyr", "source": "https://wiki.warframe.com/w/Warcry",
+      "effects": [
+        { "target": "weapon", "stat": "attack_speed", "bucket": "fire_rate", "value": 0.5, "scale": "strength", "helminth": 0.3, "condition": { "slot": "melee" } },
+        { "target": "frame", "stat": "armor", "bucket": "frame", "value": 0.5, "scale": "strength" }
+      ] },
+    { "id": "molecular_prime", "ability": "Molecular Prime", "frame": "Nova", "source": "https://wiki.warframe.com/w/Molecular_Prime",
+      "note": "Цель получает +100% уязвимости к урону (от силы не зависит).",
+      "effects": [{ "target": "enemy", "stat": "vulnerability", "value": 1.0 }] },
+    { "id": "webbed_embrace", "ability": "Webbed Embrace", "frame": "Oraxia", "source": "https://wiki.warframe.com/w/Webbed_Embrace",
+      "effects": [{ "target": "enemy", "stat": "vulnerability", "value": 0.5, "scale": "strength" }] },
+    { "id": "terrify", "ability": "Terrify", "frame": "Nekros", "source": "https://wiki.warframe.com/w/Terrify",
+      "effects": [{ "target": "enemy", "stat": "armor_strip", "value": 0.6, "scale": "strength", "cap": 1 }] },
+    { "id": "fusion_strike", "ability": "Fusion Strike", "frame": "Caliban", "source": "https://wiki.warframe.com/w/Fusion_Strike",
+      "effects": [{ "target": "enemy", "stat": "armor_strip", "value": 0.5, "scale": "strength", "cap": 1 }] },
+    { "id": "tharros_strike", "ability": "Tharros Strike", "frame": "Styanax", "source": "https://wiki.warframe.com/w/Tharros_Strike",
+      "effects": [{ "target": "enemy", "stat": "armor_strip", "value": 0.5, "scale": "strength", "cap": 1 }] },
+    { "id": "regurgitate", "ability": "Regurgitate", "frame": "Grendel", "source": "https://wiki.warframe.com/w/Regurgitate",
+      "effects": [{ "target": "enemy", "stat": "armor_strip", "value": 0.75, "scale": "strength", "cap": 1 }] },
+    { "id": "pillage", "ability": "Pillage", "frame": "Hildryn", "source": "https://wiki.warframe.com/w/Pillage",
+      "effects": [{ "target": "enemy", "stat": "armor_strip", "value": 0.25, "scale": "strength", "cap": 1 }] },
+    { "id": "ophanim_eyes", "ability": "Ophanim Eyes", "frame": "Jade", "source": "https://wiki.warframe.com/w/Ophanim_Eyes",
+      "input": { "kind": "seconds", "ru": "Секунд взгляда", "default": 10 },
+      "effects": [{ "target": "enemy", "stat": "armor_strip", "value": 0.1, "scale": "strength", "perSecond": true, "cap": 1 }] },
+    { "id": "smite", "ability": "Smite", "frame": "Oberon", "source": "https://wiki.warframe.com/w/Smite",
+      "note": "Снимает с цели всю броню.",
+      "effects": [{ "target": "enemy", "stat": "armor_strip", "value": 1.0 }] },
+    { "id": "sonar", "ability": "Sonar", "frame": "Banshee", "source": "https://wiki.warframe.com/w/Sonar",
+      "note": "Попадание в подсвеченную точку: ×5 к урону (×силу), умножается на множитель части тела. Включено = стреляешь в точку Сонара.",
+      "effects": [{ "target": "weapon", "stat": "final_mult", "bucket": "final_mult", "value": 5.0, "scale": "strength", "asFactor": true }] },
+    { "id": "toxic_lash", "ability": "Toxic Lash", "frame": "Saryn", "source": "https://wiki.warframe.com/w/Toxic_Lash",
+      "note": "Доп. удар Токсином с гарантированным статусом; для ближнего боя вдвое больше. Все моды на Токсин усиливают его тики.",
+      "extraHit": { "pct": 0.3, "meleePct": 0.6, "type": "Toxin", "statusChance": 1, "ability": true, "scale": "strength" } },
+    { "id": "silken_stride", "ability": "Silken Stride", "ru": "Шёлковая поступь", "frame": "Oraxia", "source": "https://wiki.warframe.com/w/Silken_Stride",
+      "variants": [
+        { "id": "ground", "ru": "На земле (40%)", "extraHit": { "pct": 0.4, "type": "Toxin", "statusChance": 1, "ability": true, "scale": "strength" } },
+        { "id": "wall", "ru": "На стене (80%)", "extraHit": { "pct": 0.8, "type": "Toxin", "statusChance": 1, "ability": true, "scale": "strength" } }
+      ],
+      "note": "Доп. удар Токсином со 100% статусом; у Древнего Разрушителя — защита 50% (замер)." },
+    { "id": "electric_shield", "ability": "Electric Shield", "frame": "Volt", "source": "https://wiki.warframe.com/w/Electric_Shield",
+      "note": "Выстрел сквозь щит: +50% Электричества (как мод) и ×2 к множителю крита (умножается на все бонусы крит. урона).",
+      "effects": [
+        { "target": "weapon", "stat": "element_electricity", "bucket": "element", "value": 0.5 },
+        { "target": "weapon", "stat": "crit_final", "bucket": "crit_final", "value": 2.0 }
+      ], "verified": false },
+    { "id": "covenant", "ability": "Covenant", "frame": "Harrow", "source": "https://wiki.warframe.com/w/Covenant",
+      "input": { "kind": "value", "ru": "Шанс крита от Завета, %", "default": 50 },
+      "note": "Плоская прибавка к шансу крита после модов: до 50% в тело, до 200% в слабые места.",
+      "effects": [{ "target": "weapon", "stat": "crit_chance_flat", "bucket": "crit_chance_flat", "value": 1, "fromInput": true }] },
+    { "id": "shooting_gallery", "ability": "Shooting Gallery", "frame": "Mesa", "source": "https://wiki.warframe.com/w/Shooting_Gallery",
+      "note": "Складывается с модами урона (как Serration).",
+      "effects": [{ "target": "weapon", "stat": "damage", "bucket": "base_damage", "value": 0.25, "scale": "strength" }] },
+    { "id": "haste_mote", "ability": "Reservoirs", "frame": "Wisp", "source": "https://wiki.warframe.com/w/Reservoirs", "ru": "Резервуары: Скорость",
+      "note": "Сфера скорости: +30% скорострельности и +20% скорости атаки ближнего боя.",
+      "effects": [
+        { "target": "weapon", "stat": "fire_rate", "bucket": "fire_rate", "value": 0.3, "condition": { "notSlot": "melee" } },
+        { "target": "weapon", "stat": "attack_speed", "bucket": "fire_rate", "value": 0.2, "condition": { "slot": "melee" } }
+      ], "verified": false },
+
+    { "id": "phoenix_talons", "focus": "Madurai", "ability": "Phoenix Talons", "ru": "Мадурай: Phoenix Talons", "source": "https://wiki.warframe.com/w/Focus/Madurai#Phoenix_Talons",
+      "note": "+30% физического урона (Удар, Пронзание, Разрез) — как моды на физический урон (TODO_VERIFY).",
+      "effects": [
+        { "target": "weapon", "stat": "physical_impact", "bucket": "physical", "value": 0.3 },
+        { "target": "weapon", "stat": "physical_puncture", "bucket": "physical", "value": 0.3 },
+        { "target": "weapon", "stat": "physical_slash", "bucket": "physical", "value": 0.3 }
+      ], "verified": false },
+    { "id": "sling_strength", "focus": "Madurai", "ability": "Sling Strength", "ru": "Мадурай: Sling Strength", "source": "https://wiki.warframe.com/w/Focus/Madurai#Sling_Strength",
+      "effects": [{ "target": "frame", "stat": "ability_strength", "bucket": "frame", "value": 0.4 }] },
+    { "id": "killers_rush", "focus": "Naramon", "ability": "Killer's Rush", "ru": "Нарамон: Killer's Rush", "source": "https://wiki.warframe.com/w/Focus/Naramon#Killer's_Rush",
+      "effects": [{ "target": "weapon", "stat": "crit_chance", "bucket": "crit_chance", "value": 0.5, "condition": { "slot": "melee" } }], "verified": false },
+    { "id": "stone_skin", "focus": "Unairu", "ability": "Stone Skin", "ru": "Унайру: Stone Skin", "source": "https://wiki.warframe.com/w/Focus/Unairu#Stone_Skin",
+      "effects": [{ "target": "frame", "stat": "armor_flat", "bucket": "frame", "value": 200 }] },
+    { "id": "sundering_dash", "focus": "Unairu", "ability": "Sundering Dash", "ru": "Унайру: Sundering Dash", "source": "https://wiki.warframe.com/w/Focus/Unairu#Sundering_Dash",
+      "effects": [{ "target": "enemy", "stat": "armor_strip", "value": 0.75 }] },
+    { "id": "caustic_strike", "focus": "Unairu", "ability": "Caustic Strike", "ru": "Унайру: Caustic Strike", "source": "https://wiki.warframe.com/w/Focus/Unairu#Caustic_Strike",
+      "effects": [{ "target": "enemy", "stat": "armor_strip", "value": 1.0 }] },
+    { "id": "hardened_wellspring", "focus": "Zenurik", "ability": "Hardened Wellspring", "ru": "Зенурик: Hardened Wellspring", "source": "https://wiki.warframe.com/w/Focus/Zenurik#Hardened_Wellspring",
+      "effects": [{ "target": "frame", "stat": "ability_strength", "bucket": "frame", "value": 0.2 }] }
+  ]
+}
