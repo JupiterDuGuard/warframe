@@ -58,6 +58,16 @@ export const cases = [
     },
   },
 
+  {
+    name: 'Летум + 1 стак Вторичной Безжалостности → Пулемётчица 115, тело: 25 (загадочный ×1,3 из замеров)',
+    run({ data, find, eq, near }) {
+      const arc = find.arcane('secondary', 'Secondary Merciless');
+      const r = calc({ weapon: find.weapon('Laetum'), arcanes: [{ item: arc, rank: 5 }], stacks: { ['arc:' + arc.id]: 1 } },
+        { enemy: find.enemy('Heavy Gunner'), level: 115 }, data, { part: 'body' });
+      near(r.hit.health, 19.25 * 1.3, 1e-9); eq(shown(r.hit.health), 25);
+    },
+  },
+
   // ---------- пресеты калькулятора Ораксии ----------
   {
     name: 'Пресет Ораксии: Летум, 138%, Элементалист R5, таукованый осколок, DR 0,87 → 28,7 / 33,73',
@@ -167,6 +177,7 @@ export function makeContext(data) {
     weapon: name => { const w = allWeapons.find(x => x.name === name); if (!w) throw new Error('нет оружия ' + name); return w; },
     enemy: name => { const e = data.enemies.find(x => x.name === name); if (!e) throw new Error('нет врага ' + name); return e; },
     mod: (group, name) => { const m = data.mods[group].find(x => x.name === name); if (!m) throw new Error('нет мода ' + name); return m; },
+    arcane: (group, name) => { const m = data.arcanes[group].find(x => x.name === name); if (!m) throw new Error('нет мистификатора ' + name); return m; },
   };
   const near = (a, b, eps = 1e-6) => { if (!(Math.abs(a - b) <= eps)) throw new Error(`ожидалось ${b} ± ${eps}, получено ${a}`); };
   const eq = (a, b) => { if (a !== b) throw new Error(`ожидалось ${JSON.stringify(b)}, получено ${JSON.stringify(a)}`); };
@@ -177,4 +188,5 @@ export const DATA_FILES = {
   scaling: 'data/manual/scaling.json', damage: 'data/damage.json', enemies: 'data/enemies.json',
   weapons: { primary: 'data/weapons/primary.json', secondary: 'data/weapons/secondary.json' },
   mods: { secondary: 'data/mods/secondary.json', primary: 'data/mods/primary.json' },
+  arcanes: { secondary: 'data/arcanes/secondary.json' },
 };

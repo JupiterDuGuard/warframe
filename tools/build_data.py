@@ -239,24 +239,20 @@ def parse_rank(stats):
             if ch:
                 c = {**(c or {}), "chance": float(ch.group(1)) / 100}
                 text = ch.group(2)
-            sm = COND_SUFFIX.search(text)
-            if sm:
-                c = c or {}
-                c["duration"] = float(sm.group(1))
-                if sm.group(2):
-                    c["stacks"] = int(sm.group(2))
-                text = text[:sm.start()].strip()
-            wm = TO_WEAPONS.search(text)
-            if wm:
-                c = {**(c or {}), "slot": wm.group(1).lower()}
-                text = text[:wm.start()].strip()
-            sm = COND_SUFFIX.search(text)
-            if sm:
-                c = c or {}
-                c["duration"] = float(sm.group(1))
-                if sm.group(2):
-                    c["stacks"] = int(sm.group(2))
-                text = text[:sm.start()].strip()
+            had_suffix = False
+            for _ in range(2):                # «… to Primary Weapons for 24s» — хвосты в любом порядке
+                sm = COND_SUFFIX.search(text)
+                if sm:
+                    had_suffix = True
+                    c = c or {}
+                    c["duration"] = float(sm.group(1))
+                    if sm.group(2):
+                        c["stacks"] = int(sm.group(2))
+                    text = text[:sm.start()].strip()
+                wm = TO_WEAPONS.search(text)
+                if wm:
+                    c = {**(c or {}), "slot": wm.group(1).lower()}
+                    text = text[:wm.start()].strip()
             for rx, extra in COND_PHRASES:
                 pm = rx.search(text)
                 if pm:
@@ -279,7 +275,7 @@ def parse_rank(stats):
                         eff["auto"] = True    # условие разобрано автоматически — сверить с вики
                     if eff not in effects:    # WFCD иногда дублирует строку (Merciless: Reload Speed)
                         effects.append(eff)
-            if sm:
+            if had_suffix:
                 cond = None                   # строки после «for Ns. Stacks up to Nx.» — уже без условия
     return effects, bad
 

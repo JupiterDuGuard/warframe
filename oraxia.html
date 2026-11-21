@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>html{color-scheme:light}body{margin:0}[hidden]{display:none!important}img{max-width:100%}.meta-foot{max-width:1120px;margin:28px auto 0;font-size:12px;color:var(--muted);line-height:1.6}
+.meta-foot a{color:var(--accent)}
+</style>
+<title>Яд Ораксии</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+:root{
+  --bg:#EDF1EC; --surface:#FFFFFF; --ink:#17201C; --muted:#5A6961; --line:#D3DCD5;
+  --accent:#2C7552; --accent-soft:#DDEEE3; --red:#9E2F3D; --code:#F3F6F2;
+  --display:"Unbounded","Golos Text",system-ui,sans-serif;
+  --body:"Golos Text",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0F1613; --surface:#16201B; --ink:#DCE6E0; --muted:#8EA097; --line:#2A3832;
+    --accent:#6CC49A; --accent-soft:#1D3729; --red:#E07580; --code:#0B110E; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0F1613; --surface:#16201B; --ink:#DCE6E0; --muted:#8EA097; --line:#2A3832;
+  --accent:#6CC49A; --accent-soft:#1D3729; --red:#E07580; --code:#0B110E; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--body);padding-inline:16px;padding-block:28px 48px}
+.wrap{max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+h1{font:700 clamp(26px,4vw,38px)/1.1 var(--display);margin:0;letter-spacing:-.01em;text-wrap:balance}
+h1 span{color:var(--accent)}
+h2{font:600 17px/1.3 var(--display);margin:0 0 12px;text-wrap:balance}
+.lead{color:var(--muted);max-width:68ch;margin:8px 0 0}
+.presets{display:flex;flex-wrap:wrap;gap:8px}
+.presets button{font:500 13px/1.3 var(--body);color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;text-align:left}
+.presets button:hover{border-color:var(--accent)}
+.presets button.on{background:var(--accent-soft);border-color:var(--accent)}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.calc{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:24px;align-items:start}
+@media (max-width:860px){.calc{grid-template-columns:1fr}}
+.groups{display:flex;flex-direction:column;gap:14px}
+fieldset{border:1px solid var(--line);border-radius:10px;background:var(--surface);margin:0;padding:14px 16px 16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px 16px}
+legend{font:600 12px/1 var(--body);text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding:0 6px}
+.f{display:flex;flex-direction:column;gap:4px;min-width:0}
+.f label{font-weight:600;font-size:13.5px}
+.f label b{font-family:var(--mono);color:var(--accent);margin-right:4px}
+.f small{color:var(--muted);font-size:12px;line-height:1.35}
+input[type=number],select{width:100%;font:500 15px var(--mono);color:var(--ink);background:var(--code);border:1px solid var(--line);border-radius:6px;padding:7px 9px}
+.chk{flex-direction:row;align-items:center;gap:8px}
+.chk input{width:18px;height:18px;accent-color:var(--accent)}
+.derived{font:13px var(--mono);color:var(--muted)}
+.derived strong{color:var(--ink)}
+.res{position:sticky;top:calc(env(safe-area-inset-top,0px) + 12px);background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:14px}
+.big{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.big div{display:flex;flex-direction:column;gap:2px;padding:10px;border-radius:8px;background:var(--code)}
+.big span{font-size:12px;color:var(--muted)}
+.big strong{font:600 26px/1.1 var(--mono);font-variant-numeric:tabular-nums}
+.big .tick strong{color:var(--accent)}
+.big em{font:normal 12px var(--mono);color:var(--muted)}
+.sub{font:13px/1.6 var(--mono);background:var(--code);border-radius:8px;padding:10px 12px;overflow-x:auto;white-space:pre;margin:0}
+.note{font-size:13px;color:var(--muted);margin:0}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+pre.formula{font:13.5px/1.7 var(--mono);background:var(--code);border-radius:8px;padding:12px 14px;overflow-x:auto;margin:0 0 10px}
+dl{display:grid;grid-template-columns:max-content 1fr;gap:10px 18px;margin:0}
+dt{font:600 15px var(--mono);color:var(--accent)}
+dd{margin:0;max-width:72ch}
+dd ul{margin:4px 0 0;padding-left:18px}
+.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.tool{display:flex;flex-direction:column;gap:10px}
+.tool .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tool button{align-self:flex-start;font:600 13px var(--body);color:var(--surface);background:var(--accent);border:0;border-radius:6px;padding:8px 14px;cursor:pointer}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:560px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:600}
+td.n{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.ok{color:var(--accent);font-weight:600}
+@media (max-width:480px){.big{grid-template-columns:1fr}.tool .row{grid-template-columns:1fr}dl{grid-template-columns:1fr;gap:2px 0}dd{margin-bottom:10px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <p class="lead" style="margin:0 0 6px"><a href="./" style="color:var(--accent)">← Калькулятор урона</a></p>
+    <h1>Яд <span>Ораксии</span></h1>
+    <p class="lead">Доп. удар и тик яда от «Шёлковой поступи» (Silken Stride). Меняй числа слева, результат и подстановка в формулу пересчитываются сразу. Формулы проверены выстрелами в Симулякре (таблица внизу).</p>
+  </header>
+
+  <section>
+    <h2>Готовые примеры</h2>
+    <div class="presets" id="presets">
+      <button type="button" data-p="laetum">Летум · Ораксия 138% · Элементалист R5 · таукованый осколок · Пулемётчица (DR 87%)</button>
+      <button type="button" data-p="lexHg">Лекс Прайм · голая Ораксия · Пулемётчица 115</button>
+      <button type="button" data-p="lexAd">Лекс Прайм · голая Ораксия · Древний Разрушитель</button>
+    </div>
+  </section>
+
+  <section class="calc">
+    <div class="groups">
+      <fieldset>
+        <legend>Оружие</legend>
+        <div class="f"><label for="b"><b>Б</b>урон за выстрел</label><input id="b" type="number" step="any" min="0"><small>Сумма всех типов урона из Арсенала: Лекс Прайм 180, Летум 160, Пророк 101.</small></div>
+        <div class="f"><label for="t"><b>Т</b>моды на токсин, %</label><input id="t" type="number" step="any" min="0"><small>Например, Патогенные Патроны +90%. Влияет только на яд.</small></div>
+        <div class="f"><label for="f"><b>Ф</b>бонус против фракции, %</label><input id="f" type="number" step="any" min="0"><small>Проклятие (Bane), Рёв (Roar). Нет — 0.</small></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Ораксия</legend>
+        <div class="f"><label for="str">Сила способностей, %</label><input id="str" type="number" step="any" min="0"><small>Без модов — 100.</small></div>
+        <div class="f chk"><input id="wall" type="checkbox"><label for="wall">Висит на стене (80% вместо 40%)</label></div>
+        <div class="f"><span class="derived">О = <strong id="oOut">0,40</strong></span><small>О = 0,40 × сила (на стене 0,80 × сила).</small></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Урон статусов (С)</legend>
+        <div class="f"><label for="el">Элементалист: Пистолет</label>
+          <select id="el">
+            <option value="-1">не стоит</option><option value="0">R0 · +15%</option><option value="1">R1 · +30%</option>
+            <option value="2">R2 · +45%</option><option value="3">R3 · +60%</option><option value="4">R4 · +75%</option><option value="5">R5 · +90%</option>
+          </select></div>
+        <div class="f"><label for="sh">Изумрудных осколков (+30%)</label><input id="sh" type="number" step="1" min="0" max="5"></div>
+        <div class="f"><label for="sht">Таукованых изумрудных (+45%)</label><input id="sht" type="number" step="1" min="0" max="5"></div>
+        <div class="f"><label for="so">Другие бонусы к урону статусов, %</label><input id="so" type="number" step="any" min="0"></div>
+        <div class="f"><span class="derived">С = <strong id="sOut">0</strong></span><small>Бонусы складываются.</small></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Выстрел</legend>
+        <div class="f"><label for="cmode"><b>Кр</b>крит</label>
+          <select id="cmode">
+            <option value="none">без крита (×1)</option>
+            <option value="crit">крит (× крит. урон)</option>
+            <option value="avg">в среднем (по шансу)</option>
+            <option value="custom">свой множитель</option>
+          </select></div>
+        <div class="f" id="cmBox"><label for="cm">Крит. урон, ×</label><input id="cm" type="number" step="any" min="1"><small>Лекс Прайм 2, Летум 2,2, Пророк 1,5.</small></div>
+        <div class="f" id="ccBox"><label for="cc">Шанс крита, %</label><input id="cc" type="number" step="any" min="0" max="100"></div>
+        <div class="f" id="cxBox"><label for="cx">Множитель, ×</label><input id="cx" type="number" step="any" min="0"><small>Например, ×21 у Devouring Attrition на Летуме.</small></div>
+        <div class="f"><label for="gmode"><b>Г</b>часть тела</label>
+          <select id="gmode"><option value="1">тело (×1)</option><option value="3">голова (×3)</option><option value="0.5">задний гребень Разрушителя (×0,5)</option></select></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Цель</legend>
+        <div class="f"><label for="dr"><b>DR</b>снижение урона бронёй, %</label><input id="dr" type="number" step="any" min="0" max="100"><small>Пулемётчица 115: по формуле 90, по твоему замеру 87. Нет брони — 0.</small></div>
+        <div class="f"><label for="pr"><b>Защита</b>от урона способностей, %</label><input id="pr" type="number" step="any" min="0" max="100"><small>Древний Разрушитель 50, обычные враги 0.</small></div>
+      </fieldset>
+    </div>
+
+    <aside class="res" aria-live="polite">
+      <h2 style="margin:0">Результат</h2>
+      <div class="big">
+        <div><span>Доп. удар</span><strong id="rExtra">0</strong><em id="rExtraR">на экране ≈ 0</em></div>
+        <div class="tick"><span>Тик яда</span><strong id="rTick">0</strong><em id="rTickR">на экране ≈ 0</em></div>
+        <div><span>Яд за 6 с</span><strong id="rTotal">0</strong><em>6 тиков</em></div>
+      </div>
+      <pre class="sub" id="rSub"></pre>
+      <p class="note">Первый тик через 1 с после попадания, потом по одному в секунду, всего 6. Каждый выстрел вешает новый яд, они стакаются.</p>
+    </aside>
+  </section>
+
+  <section class="panel">
+    <h2>Формулы</h2>
+    <pre class="formula">Доп_удар = Б × О × (1 + Ф)² × Кр × Г × (1 − DR) × (1 − Защита)
+
+Тик      = 0,5 × Б × О × (1 + Т) × (1 + С) × (1 + Ф)³ × Кр × Г × (1 − DR) × (1 − Защита)
+
+Яд_всего = 6 × Тик</pre>
+    <p class="note">Короче: тик — это половина доп. удара, умноженная на моды на токсин, урон статусов и ещё раз на бонус против фракции. Проценты подставляются в долях: 90% = 0,9.</p>
+  </section>
+
+  <section class="panel">
+    <h2>Что значит каждая буква</h2>
+    <dl>
+      <dt>Б</dt><dd>Урон оружия за выстрел: сумма всех типов урона без учёта слабостей врага. Если на оружии моды на урон или стихии: Б = база × (1 + моды на урон) × (1 + все стихии).</dd>
+      <dt>О</dt><dd>Бафф Ораксии: каждое попадание добавляет отдельный удар токсином. 40% × сила способностей с земли, 80% × сила на стене. Без модов 0,40; с 345% силы 1,38.</dd>
+      <dt>Т</dt><dd>Моды на токсин на оружии. Усиливают только яд, на доп. удар не влияют.</dd>
+      <dt>С</dt><dd>Бонус к урону статусов, бонусы складываются. Влияет только на яд.
+        <ul><li>Элементалист: Пистолет R5: +0,9</li><li>изумрудный осколок: +0,3</li><li>таукованый изумрудный осколок: +0,45</li></ul></dd>
+      <dt>Ф</dt><dd>Бонус против фракции. Учитывается в уроне выстрела, в доп. ударе и в яде, поэтому в доп. ударе стоит квадрат, а в тике куб.</dd>
+      <dt>Кр</dt><dd>1 без крита, крит. урон оружия при крите, 1 + шанс × (крит. урон − 1) в среднем. Сюда же идут множители вместо крита, например ×21 у Devouring Attrition на Летуме.</dd>
+      <dt>Г</dt><dd>Часть тела: тело ×1, голова ×3 (у Пулемётчицы и Разрушителя).</dd>
+      <dt>DR</dt><dd>Снижение урона бронёй: 0,9 × √(броня / 2700). Выше 2700 броня не растёт, поэтому максимум 90%. Самый надёжный способ — измерить по удару на экране (ниже).</dd>
+      <dt>Защита</dt><dd>Защита врага от урона способностей: доп. удар и яд Ораксии считаются уроном способности. У Древнего Разрушителя 0,5 (проверено), у обычных врагов 0.</dd>
+      <dt>0,5</dt><dd>Правило яда: каждый тик наносит половину доп. удара. Тиков 6.</dd>
+    </dl>
+  </section>
+
+  <section class="tools">
+    <div class="panel tool">
+      <h2>DR по броне</h2>
+      <div class="f"><label for="arm">Броня врага</label><input id="arm" type="number" step="any" min="0" value="2700"></div>
+      <span class="derived">DR = <strong id="armOut">90%</strong></span>
+      <button type="button" id="armUse">Подставить в расчёт</button>
+    </div>
+    <div class="panel tool">
+      <h2>DR по удару на экране</h2>
+      <div class="row">
+        <div class="f"><label for="hs">Удар на экране</label><input id="hs" type="number" step="any" min="0" value="25"></div>
+        <div class="f"><label for="h0">Удар до брони</label><input id="h0" type="number" step="any" min="0" value="192"><small>С учётом слабостей врага. Летум по гринир: 64 × 1,5 + 96 = 192.</small></div>
+      </div>
+      <span class="derived">DR = 1 − удар / удар до брони = <strong id="hOut">87%</strong></span>
+      <button type="button" id="hUse">Подставить в расчёт</button>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Проверки в Симулякре</h2>
+    <p class="note" style="margin-bottom:10px">Ораксия без модов, выстрел с земли. Числа: удар оружия / доп. удар / тик.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Цель</th><th>Оружие</th><th>Выстрел</th><th>Расчёт</th><th>В игре</th></tr></thead>
+      <tbody>
+        <tr><td>Тяжёлая Пулемётчица 115</td><td>Пророк</td><td>голова</td><td class="n">35 / 12 / 6</td><td class="n ok">35 / 12 / 6</td></tr>
+        <tr><td>Тяжёлая Пулемётчица 115</td><td>Летум, сработал ×21</td><td>тело</td><td class="n">403 / 134 / 67</td><td class="n ok">404 / 134 / 67</td></tr>
+        <tr><td>Тяжёлая Пулемётчица 115</td><td>Лекс Прайм</td><td>тело</td><td class="n">19 / 7 / 4</td><td class="n ok">19 / 7 / 4</td></tr>
+        <tr><td>Древний Разрушитель 115</td><td>Лекс Прайм</td><td>тело</td><td class="n">189 / 36 / 18</td><td class="n ok">188 / 36 / 19</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const num = id => { const x = parseFloat(String($(id).value).replace(',', '.')); return isFinite(x) ? x : 0; };
+const fmt = (x, d = 2) => Number(x).toLocaleString('ru-RU', { maximumFractionDigits: d });
+
+const PRESETS = {
+  laetum: { b:160, t:0, f:0, str:345, wall:false, el:'5', sh:0, sht:1, so:0, cmode:'none', cm:2.2, cc:22, cx:21, gmode:'1', dr:87, pr:0 },
+  lexHg:  { b:180, t:0, f:0, str:100, wall:false, el:'-1', sh:0, sht:0, so:0, cmode:'none', cm:2, cc:25, cx:21, gmode:'1', dr:90, pr:0 },
+  lexAd:  { b:180, t:0, f:0, str:100, wall:false, el:'-1', sh:0, sht:0, so:0, cmode:'none', cm:2, cc:25, cx:21, gmode:'1', dr:0, pr:50 },
+};
+
+function apply(name) {
+  const p = PRESETS[name];
+  for (const [k, v] of Object.entries(p)) {
+    const e = $(k);
+    if (e.type === 'checkbox') e.checked = v; else e.value = v;
+  }
+  document.querySelectorAll('#presets button').forEach(b => b.classList.toggle('on', b.dataset.p === name));
+  calc();
+}
+
+function calc() {
+  const B = num('b'), T = num('t') / 100, F = num('f') / 100;
+  const O = ($('wall').checked ? 0.8 : 0.4) * num('str') / 100;
+  const rank = parseInt($('el').value, 10);
+  const S = (rank >= 0 ? (rank + 1) * 0.15 : 0) + num('sh') * 0.30 + num('sht') * 0.45 + num('so') / 100;
+  const mode = $('cmode').value;
+  $('cmBox').hidden = !(mode === 'crit' || mode === 'avg');
+  $('ccBox').hidden = mode !== 'avg';
+  $('cxBox').hidden = mode !== 'custom';
+  let K = 1;
+  if (mode === 'crit') K = num('cm');
+  else if (mode === 'avg') K = 1 + Math.min(num('cc'), 100) / 100 * (num('cm') - 1);
+  else if (mode === 'custom') K = num('cx');
+  const G = parseFloat($('gmode').value);
+  const DR = Math.min(num('dr'), 100) / 100, P = Math.min(num('pr'), 100) / 100;
+
+  const extra = B * O * (1 + F) ** 2 * K * G * (1 - DR) * (1 - P);
+  const tick = 0.5 * B * O * (1 + T) * (1 + S) * (1 + F) ** 3 * K * G * (1 - DR) * (1 - P);
+
+  $('oOut').textContent = fmt(O, 3);
+  $('sOut').textContent = fmt(S, 3);
+  $('rExtra').textContent = fmt(extra);
+  $('rTick').textContent = fmt(tick);
+  $('rTotal').textContent = fmt(6 * tick, 1);
+  $('rExtraR').textContent = 'на экране ≈ ' + Math.round(extra);
+  $('rTickR').textContent = 'на экране ≈ ' + Math.round(tick);
+  $('rSub').textContent =
+    `Доп. удар = ${fmt(B)} × ${fmt(O,3)} × ${fmt(1+F)}² × ${fmt(K,3)} × ${fmt(G)} × ${fmt(1-DR,3)} × ${fmt(1-P,3)}\n` +
+    `          = ${fmt(extra)}\n\n` +
+    `Тик = 0,5 × ${fmt(B)} × ${fmt(O,3)} × ${fmt(1+T,3)} × ${fmt(1+S,3)} × ${fmt(1+F)}³ × ${fmt(K,3)} × ${fmt(G)} × ${fmt(1-DR,3)} × ${fmt(1-P,3)}\n` +
+    `    = ${fmt(tick)}`;
+}
+
+function armDR() { return 0.9 * Math.sqrt(Math.min(Math.max(num('arm'), 0), 2700) / 2700) * 100; }
+function hitDR() { const h0 = num('h0'); return h0 > 0 ? Math.max(0, (1 - num('hs') / h0) * 100) : 0; }
+function tools() {
+  $('armOut').textContent = fmt(armDR(), 1) + '%';
+  $('hOut').textContent = fmt(hitDR(), 1) + '%';
+}
+
+document.querySelectorAll('.groups input, .groups select').forEach(e => e.addEventListener('input', () => {
+  document.querySelectorAll('#presets button').forEach(b => b.classList.remove('on'));
+  calc();
+}));
+document.querySelectorAll('.tool input').forEach(e => e.addEventListener('input', tools));
+$('presets').addEventListener('click', e => { const b = e.target.closest('button'); if (b) apply(b.dataset.p); });
+$('armUse').addEventListener('click', () => { $('dr').value = +armDR().toFixed(1); calc(); });
+$('hUse').addEventListener('click', () => { $('dr').value = +hitDR().toFixed(1); calc(); });
+
+apply('laetum');
+tools();
+</script>
+<footer class="meta-foot" id="dataMeta">Данные: <a href="https://github.com/WFCD/warframe-items">WFCD warframe-items</a> и <a href="https://wiki.warframe.com">Warframe Wiki</a> (CC BY-SA). Warframe — © Digital Extremes.</footer>
+<script>
+fetch('data/meta.json').then(r => r.json()).then(m => {
+  const c = m.counts || {};
+  document.getElementById('dataMeta').insertAdjacentHTML('afterbegin',
+    `Версия данных: WFCD ${m.wfcd?.tag || '—'} (${m.wfcd?.date || '—'}), сборка ${m.built}. ` +
+    `Оружия ${c.weapons}, модов ${c.mods}, мистификаторов ${c.arcanes}, врагов ${c.enemies}.<br>`);
+}).catch(() => {});
+</script>
+</body>
+</html>
