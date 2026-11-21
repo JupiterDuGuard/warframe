@@ -1,0 +1,40 @@
+{
+  "_comment": "Рост статов врагов с уровнем и снижение урона бронёй. Переписано вручную со страниц вики 2026-11-20.",
+  "source": "https://wiki.warframe.com/w/Enemy_Level_Scaling",
+  "formula": "q = уровень − базовый уровень; t = clamp((q − L)/(U − L), 0, 1); s = t²(3 − 2t); множитель = f1 + (f2 − f1)·s; fi = 1 + C·q^E",
+  "health": {
+    "transition": [70, 80],
+    "factions": {
+      "Grineer":   {"f1": [0.015, 2.12],  "f2": [10.7332, 0.72], "also": ["Scaldra"]},
+      "Corpus":    {"f1": [0.015, 2.12],  "f2": [13.4165, 0.55]},
+      "Infested":  {"f1": [0.0225, 2.12], "f2": [16.0998, 0.72]},
+      "Corrupted": {"f1": [0.015, 2.1],   "f2": [10.7332, 0.685], "also": ["Anarchs", "Orokin"]},
+      "Murmur":    {"f1": [0.015, 2.0],   "f2": [10.7332, 0.5], "also": ["Sentient", "Unaffiliated"]},
+      "Techrot":   {"f1": [0.02, 2.12],   "f2": [15.0998, 0.7]}
+    }
+  },
+  "shield": {
+    "transition": [70, 80],
+    "factions": {
+      "Corpus":    {"f1": [0.02, 1.76], "f2": [2.0, 0.76]},
+      "Corrupted": {"f1": [0.02, 1.75], "f2": [2.0, 0.75], "also": ["Anarchs", "Orokin"]},
+      "Grineer":   {"f1": [0.02, 1.75], "f2": [1.6, 0.75], "also": ["Sentient"]},
+      "Techrot":   {"f1": [0.02, 1.76], "f2": [3.5, 0.76]}
+    }
+  },
+  "armor": {
+    "transition": [70, 80],
+    "all": {"f1": [0.005, 1.75], "f2": [0.4, 0.75]},
+    "min": 200,
+    "max": 2700
+  },
+  "damageReduction": {
+    "source": "https://wiki.warframe.com/w/Armor",
+    "formula": "DR = 0.9 × √(броня / 2700) при броне ≤ 2700; выше (особые случаи) — броня / (броня + 300)"
+  },
+  "damageTypeModifier": {
+    "source": "https://wiki.warframe.com/w/Damage",
+    "vulnerable": 1.5,
+    "resistant": 0.5
+  }
+}

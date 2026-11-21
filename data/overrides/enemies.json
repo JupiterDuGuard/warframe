@@ -1,0 +1,7 @@
+{
+  "_comment": "Ручные правки врагов. Ключ — английское имя из Module:Enemies/data.",
+  "Ancient Disruptor": {
+    "abilityResist": 0.5,
+    "note": "Защита от урона способностей. Вики: 90% (https://wiki.warframe.com/w/Ancient_Disruptor). Замер в Симулякре 2026-11-20 (Ораксия, Лекс Прайм и Пророк): 50%. См. TODO_VERIFY.md"
+  }
+}

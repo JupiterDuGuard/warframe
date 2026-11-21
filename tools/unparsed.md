@@ -1,0 +1,836 @@
+# Неразобранные эффекты
+
+Сборка 2026-11-21 17:04 UTC. Строки, которые скрипт не смог превратить в {stat, value, bucket}. Правка — data/overrides/*.json (ключ — uniqueName или имя).
+
+## Моды: 130
+
+- [Acid Shells](https://wiki.warframe.com/w/Acid_Shells) — Enemies explode on death, dealing 450 Corrosive Damage (+45% Enemy Max Health) in a 10m radius.
+- [Adhesive Blast](https://wiki.warframe.com/w/Adhesive_Blast) — Grenades have 100% chance to stick to surfaces.
+- [Aerial Ace](https://wiki.warframe.com/w/Aerial_Ace) — Refresh Double Jump up to 6x while Airborne.
+- [Aero Agility](https://wiki.warframe.com/w/Aero_Agility) — 100% Reload Speed while Aim Gliding
+- [Aero Periphery](https://wiki.warframe.com/w/Aero_Periphery) — -50% Zoom while Aim Gliding
+- [Amalgam Argonak Metal Auger](https://wiki.warframe.com/w/Amalgam_Argonak_Metal_Auger) — Damage from Daggers reduces Armor by 6.; Enemies are revealed by Punch Through.
+- [Amalgam Barrel Diffusion](https://wiki.warframe.com/w/Amalgam_Barrel_Diffusion) — +60% Dodge Speed
+- [Amalgam Daikyu Target Acquired](https://wiki.warframe.com/w/Amalgam_Daikyu_Target_Acquired) — +3% Life Steal on Nikanas; 60% chance to pickup used arrows.
+- [Amalgam Furax Body Count](https://wiki.warframe.com/w/Amalgam_Furax_Body_Count) — Melee kills Blast and stagger enemies in 15m
+- [Amalgam Javlok Magazine Warp](https://wiki.warframe.com/w/Amalgam_Javlok_Magazine_Warp) — +100% Combo Count Chance while Blocking with a Shield
+- [Amalgam Ripkas True Steel](https://wiki.warframe.com/w/Amalgam_Ripkas_True_Steel) — +20% Reload Speed on Shotguns
+- [Amalgam Shotgun Barrage](https://wiki.warframe.com/w/Amalgam_Shotgun_Barrage) — +45% Revive Speed
+- [Avenging Truth](https://wiki.warframe.com/w/Avenging_Truth) — +1 'Truth'; Blocking absorbs 50% of incoming damage, stored as Extra Damage for the next charge attack.
+- [Ballista Measure](https://wiki.warframe.com/w/Ballista_Measure) — +20% Range
+- [Bhisaj-Bal](https://wiki.warframe.com/w/Bhisaj-Bal) — Restore 300 Health for every 3 Status effects.
+- [Biotic Rounds](https://wiki.warframe.com/w/Biotic_Rounds) — +150% Viral and Magnetic Damage and Status Chance for 15s
+- [Blade Of Truth](https://wiki.warframe.com/w/Blade_of_Truth) — +1 'Truth'
+- [Bright Purity](https://wiki.warframe.com/w/Bright_Purity) — +1 'Purity'
+- [Burning Hate](https://wiki.warframe.com/w/Burning_Hate) — When Hate damages enemies inflicted with Heat Status, they become vulnerable to 120% more Status Damage.
+- [Bursting Mass](https://wiki.warframe.com/w/Bursting_Mass) — The infested mass accumulates 200% of the damage that goes through it and deals it in 15m radius when it expires. Secondary fire will manually detonate an existing mass.
+- [Cautious Shot](https://wiki.warframe.com/w/Cautious_Shot) — +100% chance to reduce the Stagger effect from self-imposed Radial Attacks
+- [Clip Delegation](https://wiki.warframe.com/w/Clip_Delegation) — Next Magazine has Status Chance and Multishot increased by 15% per shot landed with current Magazine. Max 15 stacks.
+- [Combat Reload](https://wiki.warframe.com/w/Combat_Reload) — If 5 pellets are headshots, increase reload speed by +120% for 3s.
+- [Combo Fury](https://wiki.warframe.com/w/Combo_Fury) — +100% Magazine Capacity for 12s on Secondary Weapon
+- [Combo Killer](https://wiki.warframe.com/w/Combo_Killer) — Reset Melee Combo Timer
+- [Combustion Beam](https://wiki.warframe.com/w/Combustion_Beam) — Enemies killed explode, dealing 600 Damage shortly after death.
+- [Condition's Perfection](https://wiki.warframe.com/w/Condition's_Perfection) — Enables Tennokai. Increases status chance by +100% on Tennokai attacks.
+- [Critical Mutation](https://wiki.warframe.com/w/Critical_Mutation) — Each kill increases Critical Chance and Critical Damage by 30% up to 300%. Reduce by 30% when fewer than 3 enemies are struck by the grenade explosion.
+- [Critical Precision](https://wiki.warframe.com/w/Critical_Precision) — Burst Fire Only: Headshots increase Critical Chance by 10% up to 500%. Missing with all shots in a burst removes up to 100% of this bonus Critical Chance.
+- [Deadly Maneuvers](https://wiki.warframe.com/w/Deadly_Maneuvers) — On Dodge, gain 400% Headshot Critical Chance for your next 2 shots.
+- [Deadly Sequence](https://wiki.warframe.com/w/Deadly_Sequence) — +1 'Sequence'
+- [Disarming Purity](https://wiki.warframe.com/w/Disarming_Purity) — +1 'Purity'; Secondary Fire mode has a 40% chance to disarm enemies.
+- [Discipline's Merit](https://wiki.warframe.com/w/Discipline's_Merit) — Enables Tennokai. Opportunities occur every 4 melee hits instead of at random.
+- [Dispatch Overdrive](https://wiki.warframe.com/w/Dispatch_Overdrive) — +60% Movement Speed for 15s
+- [Dizzying Rounds](https://wiki.warframe.com/w/Dizzying_Rounds) — Shots from less than 8m stun enemies and open them to finishers.
+- [Dreadful Killshot](https://wiki.warframe.com/w/Dreadful_Killshot) — Increased Damage and Status Chance by +20% for every 75 Warframe Health. Capped at 360%
+- [Dreamer's Wrath](https://wiki.warframe.com/w/Dreamer's_Wrath) — Enables Tennokai. Increases opportunity chance by 50% and critical damage by 32% for Tennokai attacks.
+- [Electromagnetic Shielding](https://wiki.warframe.com/w/Electromagnetic_Shielding) — While blocking, redirect 50% of damage taken by allies within 12m to yourself.
+- [Energizing Shot](https://wiki.warframe.com/w/Energizing_Shot) — Shoot Energy Orbs to obtain them with +110% extra effect.
+- [Energy Channel](https://wiki.warframe.com/w/Energy_Channel) — Converts 200% of Energy used to up to 200 Bonus Damage on next Melee Attack.
+- [Entropy Burst](https://wiki.warframe.com/w/Entropy_Burst) — +1 'Entropy'
+- [Entropy Detonation](https://wiki.warframe.com/w/Entropy_Detonation) — (+20% Enemy Max Health) Blast Damage; +1 'Entropy'; Lethal ground attacks cause enemies to explode dealing +1,000; in a 10m radius.
+- [Entropy Flight](https://wiki.warframe.com/w/Entropy_Flight) — +1 'Entropy'
+- [Entropy Spike](https://wiki.warframe.com/w/Entropy_Spike) — +1 'Entropy'
+- [Eroding Blight](https://wiki.warframe.com/w/Eroding_Blight) — +1 'Blight'
+- [Eximus Advantage](https://wiki.warframe.com/w/Eximus_Advantage) — Headshots on Eximus enemies increase Secondary Damage by +600% for 10 secs.
+- [Exposing Harpoon](https://wiki.warframe.com/w/Exposing_Harpoon) — Pulling an enemy will give +300% Critical Chance for 15s.
+- [Extend](https://wiki.warframe.com/w/Extend) — +100 Attraction Range (In Space); +3 Melee Range
+- [Fass Canticle](https://wiki.warframe.com/w/Fass_Canticle) — Killing enemies grants Allies in Affinity Range 40% Shield Recharge Rate and -28% Shield Recharge Delay for 15s.
+- [Flux Overdrive](https://wiki.warframe.com/w/Flux_Overdrive) — Status Chance fluctuates between +150% and +250% over 5s while the beam is fired.
+- [Focused Defense](https://wiki.warframe.com/w/Focused_Defense) — +20 Parry Angle
+- [Fomorian Accelerant](https://wiki.warframe.com/w/Fomorian_Accelerant) — Flak now bounces up to 4x and travels 60% faster.
+- [Gilded Truth](https://wiki.warframe.com/w/Gilded_Truth) — +1 'Truth'
+- [Gleaming Blight](https://wiki.warframe.com/w/Gleaming_Blight) — +1 'Blight'
+- [Guardian Derision](https://wiki.warframe.com/w/Guardian_Derision) — Blocking taunts enemies within 15 meters to target you instead of allies.
+- [Hata-Satya](https://wiki.warframe.com/w/Hata-Satya) — Each hit increases Critical Chance by 1.2%. Resets upon reloading or holstering.
+- [Healing Return](https://wiki.warframe.com/w/Healing_Return) — Restores 11 Health per Status Type affecting the target
+- [Hemorrhage](https://wiki.warframe.com/w/Hemorrhage) — Impact Status Effects have 35% chance to apply a Slash Status Effect (x2 when Fire Rate is below 2.5)
+- [Hunter's Bonesaw](https://wiki.warframe.com/w/Hunter's_Bonesaw) — Increase Finisher Damage by 120% against prone enemies.
+- [Jahu Canticle](https://wiki.warframe.com/w/Jahu_Canticle) — Killing enemies reduces the Armor and Shields of other enemies within Affinity Range by 5%.
+- [Justice Blades](https://wiki.warframe.com/w/Justice_Blades) — +1 'Justice'
+- [Khra Canticle](https://wiki.warframe.com/w/Khra_Canticle) — Enemies have a 12% chance to drop a Universal Orb on death.
+- [Kinetic Ricochet](https://wiki.warframe.com/w/Kinetic_Ricochet) — Shots now bounce up to 6x and travel 30% further.
+- [Lasting Purity](https://wiki.warframe.com/w/Lasting_Purity) — +1 'Purity'
+- [Leaded Gas](https://wiki.warframe.com/w/Leaded_Gas) — +300% Gas Damage and Status Chance for 6s
+- [Life Strike](https://wiki.warframe.com/w/Life_Strike) — +20% Life Steal on Heavy Attack
+- [Lohk Canticle](https://wiki.warframe.com/w/Lohk_Canticle) — Killing enemies grants Allies within Affinity Range +30% Fire Rate for 15s.
+- [Magnetic Welt](https://wiki.warframe.com/w/Magnetic_Welt) — Impact Status Effects have 35% chance to apply a Magnetic Status Effect (x2 when Fire Rate is below 2.5)
+- [Mark Of The Beast](https://wiki.warframe.com/w/Mark_of_the_Beast) — +120% Status and Critical Chance for Secondary Weapon for 24s
+- [Master's Edge](https://wiki.warframe.com/w/Master's_Edge) — Enables Tennokai. Increases Tennokai damage by 60%.
+- [Mending Shot](https://wiki.warframe.com/w/Mending_Shot) — Shoot Health Orbs to obtain them with +110% extra effect.
+- [Metamorphic Magazine](https://wiki.warframe.com/w/Metamorphic_Magazine) — Inflicting 20 cumulative attacks on an enemy will petrify them for 5s.
+- [Meticulous Aim](https://wiki.warframe.com/w/Meticulous_Aim) — +105% Headshot Damage; -45% Bodyshot Damage
+- [Motus Impact](https://wiki.warframe.com/w/Motus_Impact) — Increase range of aerial melee attacks by +2m.
+- [Motus Setup](https://wiki.warframe.com/w/Motus_Setup) — 100% Critical and Status Chance for 4s after landing from a Double or Bullet Jump.
+- [Necrophagic Vigor](https://wiki.warframe.com/w/Necrophagic_Vigor) — Reloading drains up to half your Health based on ammo created, increasing Critical Chance and Critical Damage by +20% for every 20 Health drained. Capped at 360%.
+- [Netra Invocation](https://wiki.warframe.com/w/Netra_Invocation) — Alternate Fire increases Ability Efficiency by 4% for 20s for each enemy hit. Stacks up to 15 times.
+- [Neutralizing Justice](https://wiki.warframe.com/w/Neutralizing_Justice) — +1 'Justice'; Each Miter blade has a +90% chance to immediately destroy a Nullifier field.
+- [Nightwatch Napalm](https://wiki.warframe.com/w/Nightwatch_Napalm) — Rockets disperse napalm, inflicting 30% damage over 6s across 90% of the explosion area.
+- [Opportunity's Reach](https://wiki.warframe.com/w/Opportunity's_Reach) — Enables Tennokai. Increases opportunity window to 4.0s and melee range by 3m for Tennokai attacks.
+- [Overpressured Rounds](https://wiki.warframe.com/w/Overpressured_Rounds) — Rifle kills add 120% Falloff Distance and decrease Spread for next attack with Buckshot. Buckshot kills restore 50% of the current Magazine.
+- [Photon Overcharge](https://wiki.warframe.com/w/Photon_Overcharge) — Slain enemies have a 2% chance to drop an Energy Orb per Cold Status affecting them.
+- [Precision Strike](https://wiki.warframe.com/w/Precision_Strike) — Hitting an enemy directly with the grenade increases Reload Speed by 150% for 5s.
+- [Proton Jet](https://wiki.warframe.com/w/Proton_Jet) — During a Wall Latch gain +120% Status Chance and Critical Chance.
+- [Proton Snap](https://wiki.warframe.com/w/Proton_Snap) — Hold Wall Latch for 2s to gain +100% Toxin Damage; and +50% Status Chance for 20s.
+- [Prototype Shock Coils](https://wiki.warframe.com/w/Prototype_Shock_Coils) — Adds +90% Electric damage, and shots have a 20% base chance to apply extra Electric status independent of modded damage types.
+- [Range Advantage](https://wiki.warframe.com/w/Range_Advantage) — +300% damage if no enemies are within 10m.
+- [Relentless Combination](https://wiki.warframe.com/w/Relentless_Combination) — +100% chance to increase Melee Combo Counter when Slash Status deals damage.
+- [Resolute Focus](https://wiki.warframe.com/w/Resolute_Focus) — +100% Chance to Resist Staggers/Knockdowns when Aiming
+- [Rift Strike](https://wiki.warframe.com/w/Rift_Strike) — Heavy attacks now step through the rift to attack enemies up to 25m away
+- [Ris Invocation](https://wiki.warframe.com/w/Ris_Invocation) — Alternate Fire increases Ability Duration by 4% for 20s for each enemy hit. Stacks up to 15 times.
+- [Scattered Justice](https://wiki.warframe.com/w/Scattered_Justice) — +1 'Justice'
+- [Seismic Wave](https://wiki.warframe.com/w/Seismic_Wave) — +200% Slam Attack Damage
+- [Sentient Barrage](https://wiki.warframe.com/w/Sentient_Barrage) — Discharge from Alt-Fire now has infinite Body Punch Through but no longer explodes on contact. Each enemy hit will refill one charge, and reaching a full charge will increase the Critical Chance and Critical Damage of the next discharge by 300%.
+- [Sentient Incision](https://wiki.warframe.com/w/Sentient_Incision) — +120% additional damage matching the target's weakness. Does not combine with other damage types.
+- [Sentient Surge](https://wiki.warframe.com/w/Sentient_Surge) — Each target eliminated refills 20% of Ocucor's magazine. Status Chance and Critical Chance are increased by 60% for each Tendril active.
+- [Sequence Burn](https://wiki.warframe.com/w/Sequence_Burn) — +1 'Sequence'
+- [Sharpshooter](https://wiki.warframe.com/w/Sharpshooter) — +15 Energy
+- [Shattering Impact](https://wiki.warframe.com/w/Shattering_Impact) — Impact Damage reduces enemy Armor by 6.
+- [Shattering Justice](https://wiki.warframe.com/w/Shattering_Justice) — +1 'Justice'
+- [Shell Rush](https://wiki.warframe.com/w/Shell_Rush) — +50% Charge Rate
+- [Shivering Contagion](https://wiki.warframe.com/w/Shivering_Contagion) — 100% chance to spread that status to other enemies within 6m.
+- [Soaring Truth]() — +1 'Purity'
+- [Split Flights](https://wiki.warframe.com/w/Split_Flights) — (Non-AOE Bows)
+- [Spontaneous Singularity](https://wiki.warframe.com/w/Spontaneous_Singularity) — Orbs that strike targets will explode immediately with 90% Bonus Damage and a 18% chance of Singularity that pulls in more targets. Orbs do not bounce or combine.
+- [Spring-Loaded Blade](https://wiki.warframe.com/w/Spring-Loaded_Blade) — +1 Range for 24s. Stacks up to 2 times.
+- [Static Discharge](https://wiki.warframe.com/w/Static_Discharge) — Heavy Attacks electrify nearby enemies for Electricity Damage equal to 80% of weapon damage.
+- [Stinging Truth](https://wiki.warframe.com/w/Stinging_Truth) — +1 'Truth'; +40 Magazine Capacity
+- [Stockpiled Blight](https://wiki.warframe.com/w/Stockpiled_Blight) — +1 'Blight'
+- [Strain Infection](https://wiki.warframe.com/w/Strain_Infection) — Melee Attacks gain +20% Critical Damage per Cyst.
+- [Synth Charge](https://wiki.warframe.com/w/Synth_Charge) — +200% Bonus Damage on final shot. Requires Magazine 6 or higher.
+- [Tek Gravity](https://wiki.warframe.com/w/Tek_Gravity) — Slam Attacks in the Marked Zone pull all enemies within 20m.
+- [Tether Grenades](https://wiki.warframe.com/w/Tether_Grenades) — Grenades tether up to 5 enemies from 9m away.
+- [Thermagnetic Shells](https://wiki.warframe.com/w/Thermagnetic_Shells) — Enemies explode on death, dealing 80 Magnetic Damage (+40% Enemy Max Health) in a 6m radius.
+- [Toxic Blight](https://wiki.warframe.com/w/Toxic_Blight) — +1 'Blight'
+- [Toxic Sequence](https://wiki.warframe.com/w/Toxic_Sequence) — +1 'Sequence'
+- [Truth's Flame](https://wiki.warframe.com/w/Truth's_Flame) — +1 'Truth'; CURSE: Suffer 100 Heat Damage/s for 6s.; Enables Tennokai.; Tennokai kills grant an additional 4s Tennokai opportunity and increase Tennokai damage by 120%.
+- [Unseen Dread](https://wiki.warframe.com/w/Unseen_Dread) — Become invisible for 5 seconds when you strike 3 or more enemies with a single projectile. Deal 175% more Critical Damage with Dread while invisible.
+- [Velox Conclusion](https://wiki.warframe.com/w/Velox_Conclusion) — On hit, gain +0.6% Ability Strength up to 60% maximum. Consumed on your next Ability cast.
+- [Vile Discharge](https://wiki.warframe.com/w/Vile_Discharge) — Damage is accumulated up to 30,000. Use Alt-fire to launch an explosive vile sac dealing and resetting the accumulated damage.
+- [Volatile Quick Return](https://wiki.warframe.com/w/Volatile_Quick_Return) — +3 Blast Radius
+- [Volatile Variant](https://wiki.warframe.com/w/Volatile_Variant) — Shots have +3 Punch Through and barbs explode instantly. Barbs that strike enemies directly have +4m radius and +50% Status Chance.
+- [Voltage Sequence](https://wiki.warframe.com/w/Voltage_Sequence) — +1 'Sequence'; Killing a flying enemy creates a lightning trap from their remains, lasting 8s
+- [Vome Invocation](https://wiki.warframe.com/w/Vome_Invocation) — Alternate Fire increases Ability Strength by 4% for 20s for each enemy hit. Stacks up to 15 times.
+- [Vulcan Blitz](https://wiki.warframe.com/w/Vulcan_Blitz) — Enemies explode on death, dealing 300 Blast Damage (+60% Enemy Max Health) in a 6m radius.
+- [Weeping Wounds](https://wiki.warframe.com/w/Weeping_Wounds) — +40% Status Chance per Combo Multiplier
+- [Wild Frenzy](https://wiki.warframe.com/w/Wild_Frenzy) — Secondary Fire will shoot with +400% Fire Rate until the magazine is empty. Killing 2 or more enemies will refund 100% of the ammo.
+- [Winds Of Purity](https://wiki.warframe.com/w/Winds_of_Purity) — +1 'Purity'; +20% Life Steal
+- [Xata Invocation](https://wiki.warframe.com/w/Xata_Invocation) — Alternate Fire grants 1 Energy Regen/s for 20s for each enemy hit. Stacks up to 10 times.
+- [Zazvat-Kar](https://wiki.warframe.com/w/Zazvat-Kar) — +75% Ammo Efficiency while Airborne
+
+## Мистификаторы: 109
+
+- [Akimbo Slip Shot](https://wiki.warframe.com/w/Akimbo_Slip_Shot) — Gain 65% ammo efficiency with Dual Pistols.
+- [Arcane Acceleration](https://wiki.warframe.com/w/Arcane_Acceleration) — 30% chance for +90% Fire Rate to Primary Weapons (Excludes Shotguns) for 9s
+- [Arcane Arachne](https://wiki.warframe.com/w/Arcane_Arachne) — +150% Damage to Primary and Secondary weapons for 30s
+- [Arcane Awakening](https://wiki.warframe.com/w/Arcane_Awakening) — 60% chance for +150% Damage to Pistols for 24s
+- [Arcane Barrier](https://wiki.warframe.com/w/Arcane_Barrier) — 6% chance to instantly restore all Shields; 6s cooldown
+- [Arcane Battery](https://wiki.warframe.com/w/Arcane_Battery) — Gain 0.30 maximum Energy per Armor point, up to 1000 Energy.
+- [Arcane Bellicose](https://wiki.warframe.com/w/Arcane_Bellicose) — Gain 6% Ability Strength for every 250 Max Health up to 72%.
+- [Arcane Blessing](https://wiki.warframe.com/w/Arcane_Blessing) — +24 Max Health. Stacks up to 50x.
+- [Arcane Bodyguard](https://wiki.warframe.com/w/Arcane_Bodyguard) — Heal Companion for 900
+- [Arcane Camisado](https://wiki.warframe.com/w/Arcane_Camisado) — Attacks from summoned minions increase Ability Strength by 6% up to 60% on the next Ability Cast. Summons gain 20% Movement Speed.
+- [Arcane Circumvent](https://wiki.warframe.com/w/Arcane_Circumvent) — Roll through enemies to steal 50% of their defenses for yourself. Stolen Armor lasts 15s.
+- [Arcane Crepuscular](https://wiki.warframe.com/w/Arcane_Crepuscular) — While invisible, gain +30% Ability Strength and +3x Final Critical Damage.
+- [Arcane Defense]() — +102% chance to resist a Puncture Status effect.
+- [Arcane Deflection](https://wiki.warframe.com/w/Arcane_Deflection) — +102% chance to resist a Slash Status effect.
+- [Arcane Detoxifier]() — +102% chance to resist a Toxin Status effect.
+- [Arcane Double Back](https://wiki.warframe.com/w/Arcane_Double_Back) — Gain +25% damage resistance for 4s per Dodge, Double Jump and Bullet Jump. Stacks up to 3x.
+- [Arcane Energize](https://wiki.warframe.com/w/Arcane_Energize) — 15s cooldown; 60% chance to replenish 150 Energy to self and allies within 15m
+- [Arcane Eruption](https://wiki.warframe.com/w/Arcane_Eruption) — 100% chance to Knockdown nearby enemies
+- [Arcane Escapist](https://wiki.warframe.com/w/Arcane_Escapist) — Gain a stack of Escapist, up to 9x. On taking fatal damage, consume 3 stacks to avoid death and become invulnerable for 12s.
+- [Arcane Expertise](https://wiki.warframe.com/w/Arcane_Expertise) — 100% of Ability Strength modifiers are also applied to Max Shields.
+- [Arcane Grace](https://wiki.warframe.com/w/Arcane_Grace) — 9% chance for +6% Health Regeneration/s for 9s
+- [Arcane Guardian](https://wiki.warframe.com/w/Arcane_Guardian) — 15% chance for +900 Armor for 20s
+- [Arcane Healing](https://wiki.warframe.com/w/Arcane_Healing) — +102% chance to resist a Radiation Status effect.
+- [Arcane Hot Shot](https://wiki.warframe.com/w/Arcane_Hot_Shot) — Gain 6% weapon Critical Chance for 10s, when using abilities to inflict Heat Status effect on enemies. Maximum 50x stacks.
+- [Arcane Ice](https://wiki.warframe.com/w/Arcane_Ice) — +102% chance to resist a Heat Status effect.
+- [Arcane Ice Storm](https://wiki.warframe.com/w/Arcane_Ice_Storm) — Gain +2% Ability Strength and +2% Ability Duration for 15s. Stacks up to 20x.
+- [Arcane Impetus](https://wiki.warframe.com/w/Arcane_Impetus) — Unique Status Effects from Abilities grant +6% Ability Strength and +3% Ability Efficiency for 20s.
+- [Arcane Intention](https://wiki.warframe.com/w/Arcane_Intention) — Gain +250 Max Health per active channeled ability.
+- [Arcane Liquid]() — +102% chance to resist a Gas Status effect.
+- [Arcane Momentum](https://wiki.warframe.com/w/Arcane_Momentum) — 60% chance for +150% Reload Speed to Sniper Rifles for 12s
+- [Arcane Nullifier](https://wiki.warframe.com/w/Arcane_Nullifier) — +102% chance to resist a Magnetic Status effect.
+- [Arcane Persistence](https://wiki.warframe.com/w/Arcane_Persistence) — Remove all Shields. If Armor is above 700: Cannot be hit for more than 500 Damage/s. Magnetic Status and Ability Nullifying Effects disable this protection.
+- [Arcane Phantasm](https://wiki.warframe.com/w/Arcane_Phantasm) — 45% chance for +60% Speed for 18s
+- [Arcane Pistoleer](https://wiki.warframe.com/w/Arcane_Pistoleer) — 60% chance for Infinite Ammo for 12s
+- [Arcane Power Ramp](https://wiki.warframe.com/w/Arcane_Power_Ramp) — Next Ability cast gains +9% Ability Strength, stacking up to 4x. Resets when the same ability is recast consecutively.
+- [Arcane Precision](https://wiki.warframe.com/w/Arcane_Precision) — +300% Damage for 18s on Secondary Weapon
+- [Arcane Primary Charger](https://wiki.warframe.com/w/Arcane_Primary_Charger) — 30% chance for +300% Primary Weapon Damage for 12s
+- [Arcane Protection]() — +102% chance to resist a Corrosive Status effect.
+- [Arcane Pulse](https://wiki.warframe.com/w/Arcane_Pulse) — 15s cooldown; 60% chance to restore 500 Health to allies within 25m
+- [Arcane Reaper](https://wiki.warframe.com/w/Arcane_Reaper) — +24 Health Regen/s and +660 Armor for 10s.
+- [Arcane Resistance](https://wiki.warframe.com/w/Arcane_Resistance) — +102% chance to resist a Toxin Status effect.
+- [Arcane Sculptor](https://wiki.warframe.com/w/Arcane_Sculptor) — casts have 175% Ability Efficiency for 12s.
+- [Arcane Shield]() — +102% chance to resist an Impact Status effect.
+- [Arcane Steadfast](https://wiki.warframe.com/w/Arcane_Steadfast) — 20% chance that the next three Abilities will not cost Energy.
+- [Arcane Survival]() — 60% chance for -100% Bleedout Rate
+- [Arcane Tanker](https://wiki.warframe.com/w/Arcane_Tanker) — +1,200 Armor for 60s
+- [Arcane Temperance]() — -90% Damage Taken During Revive
+- [Arcane Tempo](https://wiki.warframe.com/w/Arcane_Tempo) — 15% chance for +90% Fire Rate to Shotguns for 12s
+- [Arcane Trickery](https://wiki.warframe.com/w/Arcane_Trickery) — 15% chance to become invisible for 30s
+- [Arcane Truculence](https://wiki.warframe.com/w/Arcane_Truculence) — When gaining 3,000 or more Overguard threshold, release a 30m Radial Attack that applies max Viral Status stacks.
+- [Arcane Ultimatum](https://wiki.warframe.com/w/Arcane_Ultimatum) — +1,200 Armor for 45s
+- [Arcane Universal Fallout](https://wiki.warframe.com/w/Arcane_Universal_Fallout) — Each Radiation Status Effect inflicted on enemies by Abilities gives a 6% chance to drop a Universal Orb on enemy death.
+- [Arcane Velocity](https://wiki.warframe.com/w/Arcane_Velocity) — 90% chance for +120% Fire Rate to Pistols for 9s
+- [Arcane Victory](https://wiki.warframe.com/w/Arcane_Victory) — 75% chance for +3% Health Regeneration/s for 9s
+- [Arcane Warmth](https://wiki.warframe.com/w/Arcane_Warmth) — +102% chance to resist a Cold Status effect.
+- [Cascadia Accuracy](https://wiki.warframe.com/w/Cascadia_Accuracy) — +300% Critical Chance on Weak Point Hits for 4s
+- [Cascadia Empowered](https://wiki.warframe.com/w/Cascadia_Empowered) — Deals +750 Damage matching the Damage Type of the Status Effect
+- [Cascadia Flare](https://wiki.warframe.com/w/Cascadia_Flare) — +12% Damage for 10s. Stacks up to 480%.
+- [Exodia Brave](https://wiki.warframe.com/w/Exodia_Brave) — +5 Energy Rate for 4s. Stacks up to 3x.
+- [Exodia Contagion](https://wiki.warframe.com/w/Exodia_Contagion) — Melee while Aim Gliding launches a projectile that explodes on impact
+- [Exodia Epidemic](https://wiki.warframe.com/w/Exodia_Epidemic) — Slam emits a shockwave forwards that suspends enemies in the air for a short period
+- [Exodia Force](https://wiki.warframe.com/w/Exodia_Force) — 50% chance to deal 200% Weapon Damage to enemies within 6m.
+- [Exodia Hunt](https://wiki.warframe.com/w/Exodia_Hunt) — 50% chance to pull enemies within 12m into melee range.
+- [Exodia Might](https://wiki.warframe.com/w/Exodia_Might) — 50% chance for +30% Life Steal for 8s
+- [Longbow Sharpshot](https://wiki.warframe.com/w/Longbow_Sharpshot) — Gain +300% damage on your next shot.
+- [Melee Afflictions](https://wiki.warframe.com/w/Melee_Afflictions) — Enemies affected by Status Effects gain 6 additional stacks when they're knocked down or flung by melee attacks.
+- [Melee Animosity](https://wiki.warframe.com/w/Melee_Animosity) — Gain 42% Critical Chance on your next Heavy Attack, up to 420%
+- [Melee Assimilation](https://wiki.warframe.com/w/Melee_Assimilation) — +150% Melee Damage on Heavy Attack and Heavy Attack kills restore +30% of max Shields for 20s.
+- [Melee Careen](https://wiki.warframe.com/w/Melee_Careen) — x2.50 Melee Damage against Frozen enemies. On Roll: Freeze enemies in a 5.5m radius with a 2s Cooldown.
+- [Melee Crescendo](https://wiki.warframe.com/w/Melee_Crescendo) — Gain 6 Initial Combo for the rest of your mission
+- [Melee Doughty](https://wiki.warframe.com/w/Melee_Doughty) — Gain 1.0x Critical Damage for every 10% Puncture Status chance on your Melee Weapon.
+- [Melee Duplicate](https://wiki.warframe.com/w/Melee_Duplicate) — 100% chance for your attack to strike a second time
+- [Melee Exposure](https://wiki.warframe.com/w/Melee_Exposure) — Gain 60% Corrosive Damage on Melee strikes for 25s. Stacks up to 240%.
+- [Melee Fortification](https://wiki.warframe.com/w/Melee_Fortification) — +210 Armor for 10s
+- [Melee Influence](https://wiki.warframe.com/w/Melee_Influence) — 20% chance for elemental Melee Status Effects to apply to enemies within 20m for 18s. Cannot refresh while active.
+- [Melee Retaliation](https://wiki.warframe.com/w/Melee_Retaliation) — Gain 30% Melee Damage for every 200 current Shields, up to 420%. Bonus halved for Overshields.
+- [Melee Vortex](https://wiki.warframe.com/w/Melee_Vortex) — Kill an enemy affected by Magnetic Status for a 45% chance to pull in enemies within 18m radius
+- [Molt Augmented](https://wiki.warframe.com/w/Molt_Augmented) — +0.24% Ability Strength. Stacks up to 250x.
+- [Molt Efficiency](https://wiki.warframe.com/w/Molt_Efficiency) — Gain 6% Ability Duration per second, up to a maximum of 36%
+- [Molt Reconstruct](https://wiki.warframe.com/w/Molt_Reconstruct) — Heal yourself and allies within Affinity Range 6 Health for each Energy point spent on the initial casting cost of abilities.
+- [Molt Vigor](https://wiki.warframe.com/w/Molt_Vigor) — 45% Ability Strength on next Warframe Ability Cast
+- [Pax Bolt](https://wiki.warframe.com/w/Pax_Bolt) — +30% Ability Efficiency and +30% Ability Strength on the next Ability used within 4s.
+- [Pax Charge](https://wiki.warframe.com/w/Pax_Charge) — Battery Recharge Delay is reduced by +50%
+- [Pax Seeker](https://wiki.warframe.com/w/Pax_Seeker) — 4 projectiles burst from the target and seek the heads of nearby enemies.
+- [Pax Soar](https://wiki.warframe.com/w/Pax_Soar) — +50% Accuracy while Airborne; +5s Aim Glide/Wall Latch Duration; -50% Weapon Recoil while Airborne
+- [Primary Bulwark](https://wiki.warframe.com/w/Primary_Bulwark) — Gain +1% damage for each unit of armor past 1,000, up to a max of +500%.
+- [Primary Compression](https://wiki.warframe.com/w/Primary_Compression) — x0.2 explosion radius, +100% damage and +5.5% ammo efficiency for every 1m radius lost.
+- [Primary Crux](https://wiki.warframe.com/w/Primary_Crux) — Gain +30% Status Chance and +6% Ammo Efficiency for 10s. Stacks up to 10x.
+- [Primary Debilitate](https://wiki.warframe.com/w/Primary_Debilitate) — If an enemy has 10 stacks of a combined Status Effect, inflicting the same Status Effect again has a 100% chance to inflict one of the base Status Effects it is composed of.
+- [Primary Exhilarate](https://wiki.warframe.com/w/Primary_Exhilarate) — +1.2 Energy Regen/s for 10s. Stacks up to 3x.
+- [Primary Obstruct](https://wiki.warframe.com/w/Primary_Obstruct) — Enemy weapons jam within 15m of target. Cooldown 10s.
+- [Primary Overcharge](https://wiki.warframe.com/w/Primary_Overcharge) — Gain 35% of Max Energy as Multishot, capped at 350%.
+- [Primary Plated Round](https://wiki.warframe.com/w/Primary_Plated_Round) — Deal increased damage per round loaded based on max magazine size. Lasts for 10s.
+- [Residual Boils](https://wiki.warframe.com/w/Residual_Boils) — 20% chance to spawn volatile hives for 12s that explode when enemies approach for 80 Heat Damage in 10m. Standing in the area applies Heat Damage type to Theorem Arcanes.
+- [Residual Malodor](https://wiki.warframe.com/w/Residual_Malodor) — 20% chance to create a frigid mist for 12s, dealing 40 Cold Damage/s. Standing in the area applies Cold Damage to Theorem Arcanes.
+- [Residual Shock](https://wiki.warframe.com/w/Residual_Shock) — 20% chance to spawn an electrified spike for 12s, dealing 200 Electricity Damage to enemies within 10m. Standing in the area applies Electricity Damage to Theorem Arcanes.
+- [Residual Viremia](https://wiki.warframe.com/w/Residual_Viremia) — 20% chance to create pool of toxic blood for 12s, dealing 40 Toxin Damage/s. Standing in the area applies the Toxin Damage to Theorem Arcanes.
+- [Secondary Cryogenic](https://wiki.warframe.com/w/Secondary_Cryogenic) — Apply 3 Cold stacks on targets within 15m.
+- [Secondary Encumber](https://wiki.warframe.com/w/Secondary_Encumber) — +24% chance to trigger a second random Status Effect.
+- [Secondary Enervate](https://wiki.warframe.com/w/Secondary_Enervate) — Increase Critical Chance by 10%. Resets after 6 Big Critical Hit.
+- [Secondary Fortifier](https://wiki.warframe.com/w/Secondary_Fortifier) — Deals x8 Extra Damage to Overguard.; Gain 1 Overguard for every 100 Damage dealt to an enemy's Overguard.
+- [Secondary Irradiate](https://wiki.warframe.com/w/Secondary_Irradiate) — Deal 180% of the hit damage to enemies within 7m.
+- [Secondary Kinship](https://wiki.warframe.com/w/Secondary_Kinship) — +20% Critical Chance per buff
+- [Secondary Outburst](https://wiki.warframe.com/w/Secondary_Outburst) — On swapping to Secondary Weapon, consume all Combo Multipliers to increase Secondary Weapon Critical Chance and Critical Damage by 20% per Combo consumed for 30s.
+- [Secondary Shiver](https://wiki.warframe.com/w/Secondary_Shiver) — Enemies take +45% damage per Cold Status
+- [Secondary Surge](https://wiki.warframe.com/w/Secondary_Surge) — Next shot gains a Damage Multiplier for every 200 current Energy, up to x8.
+- [Theorem Contagion](https://wiki.warframe.com/w/Theorem_Contagion) — Standing in a zone created by a Residual Arcane creates a globe that orbits the player every 2s. The globes will strike the nearest enemy within 15m dealing 150 damage increasing their vulnerability to the globe's damage type by 200% for 6s. Globes will persist for 30s upon leaving the zone.
+- [Theorem Demulcent](https://wiki.warframe.com/w/Theorem_Demulcent) — Standing in a zone created by a Residual Arcane increases weapon damage by 12%/s stacking up to 15x. Effect persists for 20s upon leaving the zone.
+- [Theorem Infection](https://wiki.warframe.com/w/Theorem_Infection) — Standing in a zone created by a Residual Arcane increases damage of companions and summoned allies within 90m by 24%/s stacking up to 15x. Effect persists for 20s upon leaving the zone.
+
+## Аугменты способностей (этап 6, баффы): 327
+
+- [Abating Link](https://wiki.warframe.com/w/Abating_Link) — Link Augment: Reduces Armor Rating by 60% on enemies targeted by Link.
+- [Abundant Mutation](https://wiki.warframe.com/w/Abundant_Mutation) — Passive Augment: Nidus gains an additional 300 max stacks of Mutation. Undying has a 30s cooldown.
+- [Accumulating Whipclaw](https://wiki.warframe.com/w/Accumulating_Whipclaw) — Whipclaw Augment: Hitting 3 enemies will grant a 35% stacking Damage Bonus to subsequent Whipclaws. Bonus will decay after 10s.
+- [Adaptation](https://wiki.warframe.com/w/Adaptation) — +10% Resistance to that Damage Type for 20s. Stacks up to 90%.
+- [Aegis Gale](https://wiki.warframe.com/w/Aegis_Gale) — Aegis Storm Augment: Balefire has an Alternate Fire during Aegis Storm. The blast deals 15% of Hildryn's Max Shield as additional damage.
+- [Aero Vantage](https://wiki.warframe.com/w/Aero_Vantage) — -100% Gravity while Aim Gliding
+- [Aerodynamic](https://wiki.warframe.com/w/Aerodynamic) — Squad takes 24% reduced damage while airborne, gains +6s Aim Glide and +12s Wall Latch
+- [Afterburn](https://wiki.warframe.com/w/Afterburn) — Spectral Scream Augment: Upon deactivation, Chroma will launch an elemental projectile dealing 100 Damage for each second the ability was active, to a maximum of 500 Damage.
+- [Agility Drift](https://wiki.warframe.com/w/Agility_Drift) — -6% Enemy Accuracy when targeting Warframe; Reduced damage by 12% while airborne
+- [Airburst Rounds](https://wiki.warframe.com/w/Airburst_Rounds) — Airburst Augment: Each enemy hit by Airburst increases secondary damage by 40% for 14s.
+- [Ambush](https://wiki.warframe.com/w/Ambush) — When Ghost invisibility is broken, Shade's owner is granted +240% Weapon Damage for 3s.
+- [Anchored Glide](https://wiki.warframe.com/w/Anchored_Glide) — Disable Zephyr's reduced airborne gravity. Increase Ability Strength by 15%.
+- [Antimatter Absorb](https://wiki.warframe.com/w/Antimatter_Absorb) — Antimatter Drop Augment: Absorbs enemy bullets within 5m, increasing the power of the explosion from Nova’s particle of antimatter.
+- [Antimatter Mine](https://wiki.warframe.com/w/Antimatter_Mine) — Antimatter Drop Augment: Creates a fully charged stationary orb that explodes after 6s or within enemy proximity.
+- [Antitoxin](https://wiki.warframe.com/w/Antitoxin) — +45% Toxin Resistance
+- [Archon Continuity](https://wiki.warframe.com/w/Archon_Continuity) — Abilities that inflict a Toxin status effect will also apply a Corrosive status effect.
+- [Archon Flow](https://wiki.warframe.com/w/Archon_Flow) — Enemies killed by Cold Abilities have 10% chance to drop an Energy Orb. Cooldown: 10s
+- [Archon Intensify](https://wiki.warframe.com/w/Archon_Intensify) — Restoring health with abilities grants +30% Ability Strength for 10s.
+- [Archon Stretch](https://wiki.warframe.com/w/Archon_Stretch) — Abilities that deal Electricity Damage restore +2 Energy/s over 5s.
+- [Archon Vitality](https://wiki.warframe.com/w/Archon_Vitality) — Status Effects from abilities that deal Heat Damage will be applied twice.
+- [Assimilate](https://wiki.warframe.com/w/Assimilate) — Absorb Augment: Nyx can use weapons during Absorb and its duration is infinite, but it consumes 6.5 Energy/s and its area of effect is halved.
+- [Aviator](https://wiki.warframe.com/w/Aviator) — Reduced damage by 40% while airborne
+- [Axios Javelineers](https://wiki.warframe.com/w/Axios_Javelineers) — Axios Javelin Augment: A pair of Styanax Specters spawn to throw javelins, creating vortexes on impact. Impale an enemy to increase vortex duration by 5s.
+- [Balefire Surge](https://wiki.warframe.com/w/Balefire_Surge) — Balefire Augment: Fully charged direct hits restore 250 Shield to Hildryn. Impact with Nullifier Shields will destroy them and restore 750 Shield.
+- [Ballistic Bullseye](https://wiki.warframe.com/w/Ballistic_Bullseye) — Ballistic Battery Augment: The shot gains a +50% Final Critical Chance bonus, based on the amount charged.
+- [Battering Maneuver](https://wiki.warframe.com/w/Battering_Maneuver) — +18% Aim Glide/Wall Latch Duration; +60% Impact on Bullet Jump
+- [Beguiling Lantern](https://wiki.warframe.com/w/Beguiling_Lantern) — Lantern Augment: Attracted enemies take 100% more Weapon Damage.
+- [Biting Frost](https://wiki.warframe.com/w/Biting_Frost) — Frost gains +200% Critical Chance and +100% Critical Damage against frozen enemies.
+- [Blazing Pillage](https://wiki.warframe.com/w/Blazing_Pillage) — Pillage Augment: Enemies affected by Haven will be set ablaze for 200 Heat Damage and restore 50 additional Shields to Hildryn.
+- [Blending Talons](https://wiki.warframe.com/w/Blending_Talons) — Seeking Talons Augment: Tap to perform a 9m AoE around Garuda. Garuda's Talons gain 100% additional Combo Count Chance when hitting targets affected by Slash Status.
+- [Blinding Reave](https://wiki.warframe.com/w/Blinding_Reave) — Reave Augment: Reave gains +40% range and enemies are blinded by its fog for 10s.
+- [Blood Forge](https://wiki.warframe.com/w/Blood_Forge) — Bloodletting Augment: Garuda's equipped weapon is reloaded up to 100%.
+- [Boreal's Anguish](https://wiki.warframe.com/w/Boreal's_Anguish) — +60% Aim Glide/Wall Latch Duration; -75% Gravity while Aim Gliding
+- [Brief Respite](https://wiki.warframe.com/w/Brief_Respite) — Squad converts 150% of Energy spent to Shields while Overshields are inactive
+- [Brood's Oversurge](https://wiki.warframe.com/w/Brood's_Oversurge) — Widow's Brood Augment: Scuttlers are galvanized with Electricity. Hold to direct all active Scuttlers at the aimed target, inflicting 2000 Electricity Damage and Status Effect in a radius.
+- [Calm & Frenzy](https://wiki.warframe.com/w/Calm_%26_Frenzy) — Rest & Rage Augment: Killing an affected enemy causes the effect to spread to enemies within 5m for 100% of the remaining duration.
+- [Capacitance](https://wiki.warframe.com/w/Capacitance) — Discharge Augment: Converts 3% of Damage dealt into Shields split between Volt and Squadmates.
+- [Cataclysmic Continuum](https://wiki.warframe.com/w/Cataclysmic_Continuum) — Cataclysm Augment: Duration increased by 1s for each enemy killed.
+- [Cataclysmic Gate](https://wiki.warframe.com/w/Cataclysmic_Gate) — Sol Gate Augment : Wisp and 2 spectral images cast a single blast of Sol Gate, leaving an area with 500 Heat Damage / Second with guaranteed Heat and Radiation Status Effects for 10s.
+- [Catalyzing Shields](https://wiki.warframe.com/w/Catalyzing_Shields) — 1.33s Full Shield Gate immunity duration; x0.20 Max Shield Capacity
+- [Catapult](https://wiki.warframe.com/w/Catapult) — Pulverize Augment: to launch Grendel in your aim direction. Costs 5. Crouch to slow down.
+- [Cathode Current](https://wiki.warframe.com/w/Cathode_Current) — Cathode Grace Augment: Eliminating an enemy while Cathode Grace is active will release an additional discharge from Rotorswell with 200% Damage and extend its duration by the same amount.
+- [Celestial Stomp](https://wiki.warframe.com/w/Celestial_Stomp) — Celestial Twin Augment: Hold to command the twin to perform a slam attack suspending enemies in the air within 20m for 25 Energy.
+- [Champion's Blessing](https://wiki.warframe.com/w/Champion's_Blessing) — Blessing Augment: Gain Primary and Secondary Critical Chance for 30s for each percent you heal on allies up to 350%.
+- [Chaos Sphere](https://wiki.warframe.com/w/Chaos_Sphere) — Chaos Augment: Enemies entering the Effect Range will be inflicted with Chaos. Effect Range lasts for 50% of the ability duration and shrinks over time.
+- [Chilling Globe](https://wiki.warframe.com/w/Chilling_Globe) — Snow Globe Augment: Enemies that enter have a 50% chance to become frozen solid for 10s.
+- [Chromatic Blade](https://wiki.warframe.com/w/Chromatic_Blade) — Exalted Blade Augment: Exalted Blade's Damage Type changes depending on Excalibur's Emissive Color, and Status Chance is increased by 300%.
+- [Coaction Drift](https://wiki.warframe.com/w/Coaction_Drift) — Squad benefits +15% more from Auras; You benefit an additional +15% from Auras
+- [Coil Recharge](https://wiki.warframe.com/w/Coil_Recharge) — Coil Horizon Augment: Gyratory Sphere can be recalled. Enemies in its radius suffer 500 Electricity Damage and chain other enemies. Enemies pulled into detonation suffer additional discharges.
+- [Cold Front](https://wiki.warframe.com/w/Cold_Front) — Snow Globe Augment: Snow Globe is now attached to Frost with a smaller radius while increasing your mobility. Kills on frozen enemies increase the Globe health by 4% per kill.
+- [Combat Discipline](https://wiki.warframe.com/w/Combat_Discipline) — Squadmates gain 20 Health on kill; You lose 10 Health on kill
+- [Concentrated Arrow](https://wiki.warframe.com/w/Concentrated_Arrow) — Artemis Bow Augment: Fires a single arrow with +25% Base Critical Chance on full charge, additional +50% Chance and explodes in a 7m radius on Weak Points. Removes Punch Through.
+- [Conductive Sphere](https://wiki.warframe.com/w/Conductive_Sphere) — Arcsphere Augment: Projectiles that pass through Arcsphere have guaranteed Electricity Status Effect and +75% Electricity Damage.
+- [Conductor](https://wiki.warframe.com/w/Conductor) — Resonator Augment: Reactivate the ability to command Resonator to move to your aim point at 150% Speed.
+- [Constitution](https://wiki.warframe.com/w/Constitution) — +40% Faster Knockdown Recovery
+- [Contagion Cloud](https://wiki.warframe.com/w/Contagion_Cloud) — Toxic Lash Augment: Create 5m toxic clouds, dealing 300 Toxin Damage/s for 12s with every kill. Damage is twice as strong for Melee kills.
+- [Controlled Slide](https://wiki.warframe.com/w/Controlled_Slide) — Disable Nezha's passive ability. Increase Ability Strength by 15%.
+- [Corrosive Projection](https://wiki.warframe.com/w/Corrosive_Projection) — Enemies lose -18% Armor
+- [Counter Pulse](https://wiki.warframe.com/w/Counter_Pulse) — Polarize Augment: Enemy weapons are jammed and robotics are disabled for 4s when hit by Polarize.
+- [Creeping Terrify](https://wiki.warframe.com/w/Creeping_Terrify) — Terrify Augment: Affected enemies have 60% reduced Movement Speed.
+- [Critical Surge](https://wiki.warframe.com/w/Critical_Surge) — Breach Surge Augment: Teleporting to a Reservoir costs 50% Energy and grants 10% Critical Chance to Primary Weapons per meter traveled for 9s. Maximum 250% Critical Chance.
+- [Cunning Drift](https://wiki.warframe.com/w/Cunning_Drift) — +12% Slide; -30% Friction
+- [Damage Decoy](https://wiki.warframe.com/w/Damage_Decoy) — Decoy Augment: Decoy can be cast on enemies. Enemies who attack that decoy receive 5 random Status Effects, and the reflected damage is increased by 350%.
+- [Dark Propagation](https://wiki.warframe.com/w/Dark_Propagation) — Sow Augment: Enemies killed while inflicted with Sow spread its effect in a 15m radius. Shadow's Death Harvest also inflicts Sow.
+- [Dead Eye](https://wiki.warframe.com/w/Dead_Eye) — Squad receives +52.5% Sniper Rifle Damage
+- [Deceptive Bond](https://wiki.warframe.com/w/Deceptive_Bond) — Decoy Augment: 50% of damage Loki takes is transferred to Decoy, and vice versa.
+- [Defiled Reckoning](https://wiki.warframe.com/w/Defiled_Reckoning) — Reckoning Augment: Health Orbs become unusable by enemies for 10s.
+- [Desiccation's Curse](https://wiki.warframe.com/w/Desiccation's_Curse) — Desiccation Augment: Killing a blinded enemy with a Finisher has a 100% chance to summon a Swarm Kavat that will spread Scarab Swarm. Maximum Swarm Kavats +2.
+- [Despoil](https://wiki.warframe.com/w/Despoil) — Desecrate Augment: No longer consumes Energy, but consumes 10 Health per corpse instead.
+- [Diamond Skin](https://wiki.warframe.com/w/Diamond_Skin) — +45% Radiation Resistance
+- [Discharge Strike](https://wiki.warframe.com/w/Discharge_Strike) — Soul Punch Augment: Depletes up to 25 Energy from the target.
+- [Divine Retribution](https://wiki.warframe.com/w/Divine_Retribution) — Divine Spears Augment: Status Effects spread to all speared enemies. Spear explosions scale by 1.5x of remaining Slash, Toxin and Heat Status Effects. Base Radius is 14m.
+- [Dread Ward](https://wiki.warframe.com/w/Dread_Ward) — Dread Mirror Augment: Become unkillable for 8s when Dread Mirror kills a target by ripping its life force.
+- [Dreamer's Bond](https://wiki.warframe.com/w/Dreamer's_Bond) — Squad receives +0.3 Energy Regen/s and +1.5 Health Regen/s
+- [Duality](https://wiki.warframe.com/w/Duality) — Metamorphosis Augment: Equinox's other half breaks free for 10s, dealing 300% Damage.
+- [Elemental Sandstorm](https://wiki.warframe.com/w/Elemental_Sandstorm) — Sandstorm Augment: Sandstorm gains 50% Ability Range and has a 100% chance of inflicting Status Effects based on the Damage Types on the equipped Melee Weapon.
+- [Elusive Retribution](https://wiki.warframe.com/w/Elusive_Retribution) — Elude Augment: Every attack Baruuk Eludes increases his Melee Attack Speed and Melee Critical Damage by 5% up to 6 stacks. Stacks last 6s.
+- [Emp Aura](https://wiki.warframe.com/w/EMP_Aura) — Enemy Corpus lose -15% Accuracy
+- [Empowered Blades](https://wiki.warframe.com/w/Empowered_Blades) — Squad receives +60% Status Chance and Status Damage on Heavy Attacks, but lose 90 Shields per hit.
+- [Empowered Quiver](https://wiki.warframe.com/w/Empowered_Quiver) — Quiver Augment: Dashwire grants allies 100% Critical Damage. Cloak arrow has a 100% chance to prevent Status Effects.
+- [Endless Lullaby](https://wiki.warframe.com/w/Endless_Lullaby) — Lull Augment: Performing a finisher on or killing a sleeping enemy will retrigger Lull for 100% of the remaining duration.; Passive: +50% Lull Duration.
+- [Enduring Bastille](https://wiki.warframe.com/w/Enduring_Bastille) — Bastille Augment: Killing an enemy in Bastille extends the duration by 2s. Vortex's duration is increased by 70% of its Maximum Duration for each additional Vortex thrown into it.
+- [Energy Conversion](https://wiki.warframe.com/w/Energy_Conversion) — Energy Orbs grant 50% more Ability Strength to your next cast.
+- [Energy Nexus](https://wiki.warframe.com/w/Energy_Nexus) — Warframe receives +3 Energy Regen/s
+- [Energy Siphon](https://wiki.warframe.com/w/Energy_Siphon) — Squad receives +0.6 Energy Regen/s
+- [Energy Transfer](https://wiki.warframe.com/w/Energy_Transfer) — Mend & Maim Augment: 100% of charge is conserved when switching between forms.
+- [Enraged](https://wiki.warframe.com/w/Enraged) — Hysteria Augment: Damage increased by 350%, Critical Chance increased by 350%. Hysteria lasts for 15s, and receives a matching cooldown.
+- [Enveloping Cloud](https://wiki.warframe.com/w/Enveloping_Cloud) — Cloud Walker Augment: Allies within 4m of the cloud become invisible to enemies for 14s.
+- [Equilibrium](https://wiki.warframe.com/w/Equilibrium) — Health pickups give +110% Energy. Energy pickups give +110% Health.
+- [Escape Velocity](https://wiki.warframe.com/w/Escape_Velocity) — Worm Hole Augment: Allies that travel through wormhole gain a 50% Speed bonus for 7s.
+- [Eternal War](https://wiki.warframe.com/w/Eternal_War) — Warcry Augment: While active, Warcry's duration is increased by 2s for each Melee Kill.
+- [Everlasting Ward](https://wiki.warframe.com/w/Everlasting_Ward) — Elemental Ward Augment: Allies that leave the radius will retain the effect for 100% of the remaining duration.
+- [Exothermic](https://wiki.warframe.com/w/Exothermic) — Inferno Augment: Enemies killed while under the effect of Inferno have a 15% chance to drop an energy orb.
+- [Explosive Legerdemain](https://wiki.warframe.com/w/Explosive_Legerdemain) — Sleight of Hand Augment: Ammo and Orbs pickups are turned into proximity mines that deal 1000 Damage with a 100% Status Chance.
+- [Fast Deflection](https://wiki.warframe.com/w/Fast_Deflection) — -45% Shield Recharge Delay
+- [Fireball Frenzy](https://wiki.warframe.com/w/Fireball_Frenzy) — Fireball Augment: Hold to cast will grant all allies within 15m an additional 100% Heat Damage to their attacks for 40s.
+- [Firewalker](https://wiki.warframe.com/w/Firewalker) — +24.2% Aim Glide/Wall Latch Duration; +275% Heat on Bullet Jump
+- [Flame Repellent](https://wiki.warframe.com/w/Flame_Repellent) — +60% Heat Resistance
+- [Fortitude](https://wiki.warframe.com/w/Fortitude) — +40% Chance to Resist Knockdown
+- [Fracturing Crush](https://wiki.warframe.com/w/Fracturing_Crush) — Crush Augment: Crush gains +50% casting speed. The armor of surviving enemies decreases by 75% and they are unable to move for 7s.
+- [Freeze Force](https://wiki.warframe.com/w/Freeze_Force) — Freeze Augment: Hold to cast will grant all allies within 15m an additional 100% Cold Damage to their attacks for 40s.
+- [Funnel Clouds](https://wiki.warframe.com/w/Funnel_Clouds) — Tornado Augment: Creates 8 additional tornadoes. All tornadoes are 50% their original size and won't pick up enemies.
+- [Furious Javelin](https://wiki.warframe.com/w/Furious_Javelin) — Radial Javelin Augment: Each enemy hit will increase Excalibur's Melee Damage by 15% for 16s.
+- [Fused Crucible](https://wiki.warframe.com/w/Fused_Crucible) — Crucible Blast Augment: Becomes a channeled ability consuming 20 Energy/s that ramps up. While active Chyrinka Pillars trigger chain reactions and their duration is frozen. Mobility is greatly reduced.
+- [Fused Reservoir](https://wiki.warframe.com/w/Fused_Reservoir) — Reservoirs Augment: Adds a fourth reservoir that gives the effects of all three. Costs 200% more Energy.
+- [Gale Kick](https://wiki.warframe.com/w/Gale_Kick) — +100% of Melee Damage converted to Impact Damage on Jump Kick, knocking down nearby enemies on kill.
+- [Gaseous Quake](https://wiki.warframe.com/w/Gaseous_Quake) — Sound Quake Augment: Channel Gas Damage and Status Effect leaks with a 2.75x Damage Multiplier that increases every second on enemies in your sight.
+- [Gastro](https://wiki.warframe.com/w/Gastro) — Regurgitate Augment: Regurgitated enemies bounce up to 3 times, creating gas clouds that last 8s and inflict nearby enemies with Gas Status Effect.
+- [Gastroparesis](https://wiki.warframe.com/w/Gastroparesis) — Passive Augment: Each enemy consumed adds 15% Extra Gas Damage to Primary and Secondary Weapons.
+- [Gladiator Finesse](https://wiki.warframe.com/w/Gladiator_Finesse) — Drains Energy to stop Lethal Damage with +60% Efficiency.
+- [Gourmand](https://wiki.warframe.com/w/Gourmand) — Feast Augment: Instead of Energy, consumes 200 Health on cast. Glutton grants an additional 150 Armor per enemy.
+- [Greedy Pull](https://wiki.warframe.com/w/Greedy_Pull) — Pull Augment: Adds 100% chance to pull pickups towards Mag.
+- [Growing Power](https://wiki.warframe.com/w/Growing_Power) — Squad increases personal Ability Strength by 25% for 6s.
+- [Guardian Armor](https://wiki.warframe.com/w/Guardian_Armor) — Vex Armor Augment: Chroma reduces the damage his squadmates within Affinity Range take by 75%. Squad kills restore 5% of his Health over 3s and increases Vex Armor duration by 1s.
+- [Guided Effigy](https://wiki.warframe.com/w/Guided_Effigy) — Effigy Augment: Cast and hold to make Effigy move to your aim point. Deals 4000 Damage/s and restores 5 Energy for each enemy in its path. Roars on arrival, stunning nearby enemies.
+- [Hall Of Malevolence](https://wiki.warframe.com/w/Hall_of_Malevolence) — Hall of Mirrors Augment: The damage of your doppelgangers is increased by 5% every time you kill an enemy.
+- [Hallowed Eruption](https://wiki.warframe.com/w/Hallowed_Eruption) — Hallowed Ground Augment: Reactivate to deal all Remaining Damage and Radiation Status.; Passive: +200% Hallowed Ground Duration.
+- [Hallowed Reckoning](https://wiki.warframe.com/w/Hallowed_Reckoning) — Reckoning Augment: Reckoning gains +40% range. A 3m radius around each affected enemy grants bonus armor to allies and deals 300 damage per second to enemies.
+- [Handspring](https://wiki.warframe.com/w/Handspring) — +160% Faster Knockdown Recovery
+- [Healing Flame](https://wiki.warframe.com/w/Healing_Flame) — Fire Blast Augment: Each enemy hit heals by 25 to 50 depending on current Immolation level. With Ember, over healing grants you Overguard.
+- [Health Conversion](https://wiki.warframe.com/w/Health_Conversion) — Health Orbs grant 450 Armor, stacking up to 3x. Taking damage will consume a stack after 3s.
+- [Hearty Nourishment](https://wiki.warframe.com/w/Hearty_Nourishment) — Nourish Augment: Clear Status Effects and gain 5s of Status Immunity for each victim in Grendel's stomach.
+- [Heavy Impact](https://wiki.warframe.com/w/Heavy_Impact) — Create 6m seismic shockwaves from heavy landings, dealing 300 Damage and knocking foes off their feet.
+- [Holster Amp](https://wiki.warframe.com/w/Holster_Amp) — Squad gains 60% Weapon Damage for 3s
+- [Hunter Adrenaline](https://wiki.warframe.com/w/Hunter_Adrenaline) — Convert +45% of Damage on Health to Energy. Without Shields, ally Overguard imitates Health.
+- [Hushed Invisibility](https://wiki.warframe.com/w/Hushed_Invisibility) — Invisibility Augment: Weapon noise is reduced by 100% while invisible.
+- [Hysterical Assault](https://wiki.warframe.com/w/Hysterical_Assault) — Hysteria Augment: Attack with Valkyr's Talons to leap onto targeted enemies up to 50m away. Gain +50% Parkour Velocity and +50% Sprint Speed for 5s.
+- [Hysterical Fixation](https://wiki.warframe.com/w/Hysterical_Fixation) — Hysteria Augment: While Hysteria is active, each kill restores 20% Maximum Shields.
+- [Ice Spring](https://wiki.warframe.com/w/Ice_Spring) — +24.2% Aim Glide/Wall Latch Duration; +275% Cold on Bullet Jump
+- [Ice Wave Impedance](https://wiki.warframe.com/w/Ice_Wave_Impedance) — Ice Wave Augment: Create a frozen trail for 12 seconds. Enemies that touch it are inflicted with Cold Status every second.
+- [Icy Avalanche](https://wiki.warframe.com/w/Icy_Avalanche) — Avalanche Augment: Allies within Affinity Range are coated in ice that grants 60 Overguard per enemy hit. Overguard increases by 20% of your Armor once per enemy.
+- [Immolated Radiance](https://wiki.warframe.com/w/Immolated_Radiance) — Immolation Augment: Allies within Affinity range will receive 50% of Immolation's Damage Reduction.
+- [Infernum](https://wiki.warframe.com/w/Infernum) — Infernalis Augment: Release Fireballs for 1500Heat Damage with larger volleys when grabbing Vythelas' Runes during flight. Hits from Fireballs slowly charge Brimstone.
+- [Infested Impedance](https://wiki.warframe.com/w/Infested_Impedance) — Enemy Infested lose -18% Speed
+- [Infiltrate](https://wiki.warframe.com/w/Infiltrate) — Prowl Augment: Ivara is able to bypass laser barriers and gains 25% Movement Speed.
+- [Insatiable](https://wiki.warframe.com/w/Insatiable) — Ravenous Augment: Nidus has a chance for additional Mutation stacks while in the infestation. The base 60% chance increases with power strength, and multiple stacks are possible above 100%.
+- [Insulation](https://wiki.warframe.com/w/Insulation) — +60% Cold Resistance
+- [Intrepid Stand](https://wiki.warframe.com/w/Intrepid_Stand) — Final Stand Augment: Each javelin that damages an enemy grants 60 Overguard to Styanax and 30 Overguard to his allies within Affinity Range.
+- [Intruder](https://wiki.warframe.com/w/Intruder) — +8s to Hacking
+- [Iron Shrapnel](https://wiki.warframe.com/w/Iron_Shrapnel) — Iron Skin Augment: Recasting Iron Skin will cause it to detonate, dealing 100% of its remaining Health as Puncture Damage, and knocking down enemies.
+- [Ironclad Charge](https://wiki.warframe.com/w/Ironclad_Charge) — Rhino Charge Augment: Each enemy hit increases Rhino's Armor Rating by 50% for 10s.
+- [Ironclad Flight](https://wiki.warframe.com/w/Ironclad_Flight) — Disable vacuum in Razorwing. Reduced Damage by 40% while Airborne.
+- [Irradiating Disarm](https://wiki.warframe.com/w/Irradiating_Disarm) — Radial Disarm Augment: Enemies will be affected by Radiation Status for 9s
+- [Jade's Judgment](https://wiki.warframe.com/w/Jade's_Judgment) — Light's Judgment Augment: Enemies damaged by the well have a 5% chance per hit to spawn a Jade Light above them, damaging them for 3s.
+- [Jet Stream](https://wiki.warframe.com/w/Jet_Stream) — Turbulence Augment: Turbulence increases Movement Speed by 40% and Projectile Speed by 100% for Zephyr and her allies.
+- [Kavat's Grace](https://wiki.warframe.com/w/Kavat's_Grace) — Falling is 100% less likely to result in a hard landing.
+- [Kinetic Collision](https://wiki.warframe.com/w/Kinetic_Collision) — Speed Augment: Running into an opponent increases the duration of Speed by 4s.
+- [Kumihimo Loading](https://wiki.warframe.com/w/Kumihimo_Loading) — Kumihimo Augment: 6 kills with weapons affected by Koumei's Passive give a loaded die that always rolls 6. Hold to cast empowered Kumihimo and consume all dice.
+- [Larva Burst](https://wiki.warframe.com/w/Larva_Burst) — Larva Augment: Reactivate Larva to detonate and deal 600 Toxin Damage in a 8m radius. This damage and Status Effect stacks for every enemy grabbed by the Larva.
+- [Lasting Covenant](https://wiki.warframe.com/w/Lasting_Covenant) — Covenant Augment: Weak Point kills increase Critical Chance bonus duration by 3s.
+- [Lightning Dash](https://wiki.warframe.com/w/Lightning_Dash) — +24.2% Aim Glide/Wall Latch Duration; +275% Electricity on Bullet Jump
+- [Lightning Rod](https://wiki.warframe.com/w/Lightning_Rod) — +60% Electricity Resistance
+- [Lingering Transmutation](https://wiki.warframe.com/w/Lingering_Transmutation) — Transmutation Probe Augment: Probe returns to cast position after reaching max range, and remains nearby for 15s. Recall Probe by recasting. Recast again to end.
+- [Loyal Merulina](https://wiki.warframe.com/w/Loyal_Merulina) — Merulina Augment: Yareli no longer rides Merulina. Instead, Merulina follows her and casts Sea Snare on nearby enemies. 2s cooldown.
+- [Mach Crash](https://wiki.warframe.com/w/Mach_Crash) — Mach Rush Augment: Impact shockwave leaves behind a vacuum that sucks in enemies within 8m.
+- [Magnetized Discharge](https://wiki.warframe.com/w/Magnetized_Discharge) — Magnetize Augment: Recast on the target to detonate. Enemies hit have a 50% chance to be disarmed.; Passive: +45% Magnetize Range.
+- [Master Thief](https://wiki.warframe.com/w/Master_Thief) — +40% chance to unlock locked lockers.
+- [Mecha Empowered](https://wiki.warframe.com/w/Mecha_Empowered) — Squad deals +150% extra Damage against a Marked Enemy
+- [Mecha Pulse](https://wiki.warframe.com/w/Mecha_Pulse) — Killing a Marked Enemy grants +60% Armor for 20s for each enemy within 30m.
+- [Melee Guidance](https://wiki.warframe.com/w/Melee_Guidance) — Squadmates gain 12s Melee Combo Duration; You lose 6s Melee Combo Duration
+- [Mending Splinters](https://wiki.warframe.com/w/Mending_Splinters) — Splinter Storm Augment: For each target affected, Splinter Storm heals 15 Health/s.
+- [Merulina Guardian](https://wiki.warframe.com/w/Merulina_Guardian) — Merulina Augment: Enemies eliminated during Sea Snares heal 20% of Merulina's health. Upon healing, gain +200% Reload Speed and Fire Rate on Secondary weapons for 20s.
+- [Mesa's Waltz](https://wiki.warframe.com/w/Mesa's_Waltz) — Peacemaker Augment: Mesa can move at 50% Speed while using Peacemaker.
+- [Mesmer Shield](https://wiki.warframe.com/w/Mesmer_Shield) — Mesmer Skin Augment: Revenant receives +50% Mesmer Skin Strength and allies within Affinity Range are granted a maximum of 5 charges.
+- [Mind Freak](https://wiki.warframe.com/w/Mind_Freak) — Mind Control Augment: Controlled target inflicts +1000% Damage and gains +25% Movement and Attack Speed.
+- [Mobilize](https://wiki.warframe.com/w/Mobilize) — +20% Aim Glide/Wall Latch Duration
+- [Molecular Fission](https://wiki.warframe.com/w/Molecular_Fission) — Molecular Prime Augment: Enemies hit by Null Stars are primed. When killed, primed enemies will restore a Null Star charge and have a 100% chance of restoring two.
+- [Motus Signal](https://wiki.warframe.com/w/Motus_Signal) — Increase Double Jump strength by +200%.
+- [Muzzle Flash](https://wiki.warframe.com/w/Muzzle_Flash) — Shooting Gallery Augment: After 6 kill assists by a player with Shooting Gallery, Mesa's next shot will blind enemies within 12m for 6s.
+- [Negation Armor](https://wiki.warframe.com/w/Negation_Armor) — Scarab Shell Augment: When Inaros takes fatal damage, he consumes Scarab Shell to heal with a brief invulnerability that ends with a deadly Slash Status Effect. Cooldown 30s.
+- [Neutron Star](https://wiki.warframe.com/w/Neutron_Star) — Null Star Augment: Particles deal 240 Heat Damage with guaranteed Status effect in 8m. On recast, remaining particles seek out enemies with doubled search radius.
+- [Nira's Anguish](https://wiki.warframe.com/w/Nira's_Anguish) — +15% Aim Glide/Wall Latch Duration
+- [Noctua Swarm](https://wiki.warframe.com/w/Noctua_Swarm) — Noctua Augment: Alternate Fire releases Paragrimms that swarm 8m around the point of aim for 15s, silencing enemies and stealing their Energy for allies.
+- [Omikuji's Fortune](https://wiki.warframe.com/w/Omikuji's_Fortune) — Omikuji Augment: Reduce Omikuji's Cooldown by 4s when you kill an enemy with the weapon affected by Koumei's Passive.
+- [Ore Gaze](https://wiki.warframe.com/w/Ore_Gaze) — Petrify Augment: Petrified enemies are scanned into the Codex and have a 25% chance to drop additional loot when killed.
+- [Pacifying Bolts](https://wiki.warframe.com/w/Pacifying_Bolts) — Psychic Bolts Augment: Throw an additional 3 force bolts with guaranteed Radiation Status Effect. Enemies struck are confused for 10s.
+- [Pain Threshold](https://wiki.warframe.com/w/Pain_Threshold) — +160% Faster Stagger Recovery
+- [Parasitic Vitality](https://wiki.warframe.com/w/Parasitic_Vitality) — Parasitic Link Augment: Nidus and any ally he's bound to gain 4% Max Health per Mutation during Parasitic Link.
+- [Parry](https://wiki.warframe.com/w/Parry) — +96% chance to open enemies to Finisher Attacks after Warframe blocks Melee
+- [Partitioned Mallet](https://wiki.warframe.com/w/Partitioned_Mallet) — Mallet Augment: Create an additional Mallet with 20% reduced range.
+- [Patagium](https://wiki.warframe.com/w/Patagium) — +90% Aim Glide/Wall Latch Duration
+- [Path Of Statues](https://wiki.warframe.com/w/Path_of_Statues) — Landslide Augment: Leave a trail for 12s that petrifies enemies for 6s.
+- [Peaceful Provocation](https://wiki.warframe.com/w/Peaceful_Provocation) — Pacify & Provoke Augment: Pacify converts damage done to allies into an aura that slows enemies by 40%. Provoke converts damage done to enemies into 15% extra Ability Strength.
+- [Phoenix Renewal](https://wiki.warframe.com/w/Phoenix_Renewal) — Renewal Augment: Taking fatal damage while under the effects of Renewal will instead Heal you or allies to 50% Health. This effect triggers only once for each ally every 60s.
+- [Photon Repeater](https://wiki.warframe.com/w/Photon_Repeater) — Photon Strike Augment: If Photon Strike hits at least 5 enemies, the next cast will cost no Energy and fire two additional strikes.
+- [Physique](https://wiki.warframe.com/w/Physique) — Squad gains +20% Maximum Health
+- [Piercing Navigator](https://wiki.warframe.com/w/Piercing_Navigator) — +3 Projectile Punch Through.; Navigator Augment: Each hit increases the projectile's Critical Chance by 50% up to a max of 250%.
+- [Piercing Roar](https://wiki.warframe.com/w/Piercing_Roar) — Roar Augment: Roar gains +40% range. Enemies within 25m are knocked down and suffer 5 stacks of Puncture Status.
+- [Piercing Step](https://wiki.warframe.com/w/Piercing_Step) — +18% Aim Glide/Wall Latch Duration; +60% Puncture on Bullet Jump
+- [Pilfering Strangledome](https://wiki.warframe.com/w/Pilfering_Strangledome) — Strangledome Augment: Enemies held in Strangledome have a 65% chance of dropping additional loot.
+- [Pilfering Swarm](https://wiki.warframe.com/w/Pilfering_Swarm) — Tentacle Swarm Augment: Enemies held by tentacles have a 100% chance at additional drops.
+- [Pistol Amp](https://wiki.warframe.com/w/Pistol_Amp) — Squad receives +27% Pistol Damage
+- [Pistol Scavenger](https://wiki.warframe.com/w/Pistol_Scavenger) — Squad receives +150% Pistol Ammo Recovery
+- [Pool Of Life](https://wiki.warframe.com/w/Pool_of_Life) — Well of Life Augment: On death, marked enemies will drop 4 Health Orbs with a 100% chance of dropping an Energy Orb.
+- [Power Donation](https://wiki.warframe.com/w/Power_Donation) — Squadmates gain 30% Ability Strength; You lose 30% Ability Strength
+- [Power Drift](https://wiki.warframe.com/w/Power_Drift) — +30% Chance to Resist Knockdown
+- [Power Of Three](https://wiki.warframe.com/w/Power_of_Three) — Quiver Augment: Quiver fires three arrows and consumes 20 more Energy.
+- [Precision Intensify](https://wiki.warframe.com/w/Precision_Intensify) — +90% Ability Strength for your 4th Ability
+- [Preparation](https://wiki.warframe.com/w/Preparation) — +100% Maximum Energy is filled on Spawn
+- [Prey Of Dynar](https://wiki.warframe.com/w/Prey_of_Dynar) — Shroud of Dynar Augment: Increase an enemy’s Damage Vulnerability by 50%. Using Fang of Raksh on that enemy increases its spread radius by 150%.
+- [Primal Rage](https://wiki.warframe.com/w/Primal_Rage) — Primal Fury Augment: Killing an enemy increases Critical Chance by 15%. The increase decays by 1%/s
+- [Primed Fast Deflection]() — -55% Shield Recharge Delay
+- [Primed Sure Footed](https://wiki.warframe.com/w/Primed_Sure_Footed) — +100% Chance to Resist Knockdown
+- [Prism Guard](https://wiki.warframe.com/w/Prism_Guard) — Prism Augment: Prism follows above Mirage. Duration changed to 4s.
+- [Prismatic Companion](https://wiki.warframe.com/w/Prismatic_Companion) — Passive : +50% Prismatic Gem Duration.; Prismatic Gem Augment: The gem now attaches to your free-moving companion.
+- [Prolonged Paralysis](https://wiki.warframe.com/w/Prolonged_Paralysis) — Paralysis Augment: Affected enemies are pulled towards Valkyr and the stun duration is increased by 5s.
+- [Proton Pulse](https://wiki.warframe.com/w/Proton_Pulse) — Wall Dashing grants +100% Bullet Jump Speed.
+- [Provoked](https://wiki.warframe.com/w/Provoked) — +110% Damage during Bleedout
+- [Purging Slash](https://wiki.warframe.com/w/Purging_Slash) — Slash Dash Augment: Allies in the path of Slash Dash have 4 debuffs removed and 70% Shields restored.
+- [Purifying Flames](https://wiki.warframe.com/w/Purifying_Flames) — Fire Blast Augment: Allies hit by the expanding ring of fire are cured of Status Effects and granted 4s of Status Immunity.
+- [Push & Pull](https://wiki.warframe.com/w/Push_%26_Pull) — Metamorphosis Augment: Switching to Day-form staggers enemies within 6m and knocks them down when switching to Night-form.
+- [Pyroclastic Flow](https://wiki.warframe.com/w/Pyroclastic_Flow) — Fire Walker Augment: Accumulate 250% of the damage Fire Walker deals, unleashing it in a trail of fire that lasts 10s.
+- [Radiant Finish](https://wiki.warframe.com/w/Radiant_Finish) — Radial Blind Augment: Blinded enemies take 300% more Finisher Damage.
+- [Rage](https://wiki.warframe.com/w/Rage) — Convert +40% of Damage on Health to Energy. Without Shields, ally Overguard imitates Health.
+- [Rapid Resilience](https://wiki.warframe.com/w/Rapid_Resilience) — -75% Status Duration on Self
+- [Razor Mortar](https://wiki.warframe.com/w/Razor_Mortar) — Razor Gyre Augment: Groups enemies together, while Lethal Progeny's Ortholysts focus fire on those enemies with +70% Electricity Damage and Fire Rate for 6s.
+- [Razorwing Blitz](https://wiki.warframe.com/w/Razorwing_Blitz) — Razorwing Augment: Flight Speed increased by 25% and Fire Rate increased by 25% for 8s when using abilities. Stacks up to 4x.
+- [Reactive Storm](https://wiki.warframe.com/w/Reactive_Storm) — Serene Storm Augment: Desert Wind is granted +250% Status Chance and changes its damage type to match enemy weaknesses.
+- [Ready Steel](https://wiki.warframe.com/w/Ready_Steel) — Squad begins the mission with +24 Initial Combo
+- [Reaping Chakram](https://wiki.warframe.com/w/Reaping_Chakram) — Blazing Chakram Augment: Each enemy hit increases the ring's Damage by 2x and the chance for enemies to drop Health Orbs on death by +0.25x.
+- [Recharge Barrier](https://wiki.warframe.com/w/Recharge_Barrier) — Electric Shield Augment: Allies that pass through have 35% Shields restored.
+- [Recrystalize](https://wiki.warframe.com/w/Recrystalize) — Crystallize Augment: Enemies killed by crystalline growths stagger and spread the crystals to enemies within 16m.
+- [Reflection](https://wiki.warframe.com/w/Reflection) — +10% chance to Stun on Block; +40% chance to Stagger on Block
+- [Regenerative Molt](https://wiki.warframe.com/w/Regenerative_Molt) — Molt Augment: After casting Molt, Saryn regenerates 50 Health/s for 10s.
+- [Reinforcing Stomp](https://wiki.warframe.com/w/Reinforcing_Stomp) — Rhino Stomp Augment: Iron Skin Health is replenished by 4% for each enemy affected.
+- [Rejuvenation](https://wiki.warframe.com/w/Rejuvenation) — Squad receives +3 Health Regen/s
+- [Rending Turn](https://wiki.warframe.com/w/Rending_Turn) — +18% Aim Glide/Wall Latch Duration; +60% Slash on Bullet Jump
+- [Repair Dispensary](https://wiki.warframe.com/w/Repair_Dispensary) — Dispensary Augment: Dispensary also creates pick ups that heal companions for 20% of their maximum health and reduce their incapacitation timer by 12 sec.
+- [Reroot Rampage](https://wiki.warframe.com/w/Reroot_Rampage) — Reroot Augment: Collecting Reroot orbs summons additional Sprodlings inflicting 250 Toxin Damage with increased Critical Chance each hit.
+- [Resilient Focus](https://wiki.warframe.com/w/Resilient_Focus) — +20% Damage Resistance on Stun
+- [Resonance](https://wiki.warframe.com/w/Resonance) — Sonar Augment: Killing an enemy by shooting their Sonar's weak point will trigger another Sonar for 100% of its duration.
+- [Retribution](https://wiki.warframe.com/w/Retribution) — +60% Chance to deal Electrical Damage when shield struck by melee enemies.; +80 Electricity
+- [Reverse Rotorswell](https://wiki.warframe.com/w/Reverse_Rotorswell) — Rotorswell Augment: 35% of damage received is redirected toward the instigator as Electricity Damage.
+- [Rhythm Guard](https://wiki.warframe.com/w/Rhythm_Guard) — Passive Augment: Gain 100 Overguard when using an Ability on the Backbeat. Amount doubles up to 1600 per Beat, but resets if the Beat is missed.
+- [Rifle Amp](https://wiki.warframe.com/w/Rifle_Amp) — Squad receives +27% Rifle Damage
+- [Rifle Scavenger](https://wiki.warframe.com/w/Rifle_Scavenger) — Squad receives +150% Rifle Ammo Recovery
+- [Rift Haven](https://wiki.warframe.com/w/Rift_Haven) — Banish Augment: Allies banished to the rift will have 25% of their Maximum Health restored every second.
+- [Rift Torrent](https://wiki.warframe.com/w/Rift_Torrent) — Rift Surge Augment: Limbo deals 30% Extra Damage for each enemy affected by Rift Surge while in the rift.
+- [Rising Storm](https://wiki.warframe.com/w/Rising_Storm) — Blade Storm Augment: Blade Storm attacks increase your Ability Combo Counter by 4.; Passive: +10s Combo Duration
+- [Rolling Guard](https://wiki.warframe.com/w/Rolling_Guard) — Become invulnerable for 3s and remove all Status Effects. 7s cooldown.
+- [Rousing Plunder](https://wiki.warframe.com/w/Curative_Undertow) — Plunder Augment: Plunder gains 50% max Corrosive Damage and Armor, and heals allies within Affinity range for 50 Health.
+- [Rubble Heap](https://wiki.warframe.com/w/Rubble_Heap) — Passive Augment: When above 1400 Rubble, Landslide costs no Energy, deals 2x Damage, and travels 2x faster.
+- [Rumbled](https://wiki.warframe.com/w/Rumbled) — Rumblers Augment: Atlas becomes a Rumbler with Rock Armor that grants Overguard and absorbs up to 300% of damage to Max Health.
+- [Safeguard](https://wiki.warframe.com/w/Safeguard) — Warding Halo Augment: Can now be cast on allies with 50% effectiveness.
+- [Safeguard Switch](https://wiki.warframe.com/w/Safeguard_Switch) — Switch Teleport Augment: Switch with an enemy for 3s invulnerability. Switch with an ally to give ally 6s invulnerability. Switch also removes negative status effects on Loki and allies.
+- [Sapping Reach](https://wiki.warframe.com/w/Sapping_Reach) — Pull Augment: Steals up to 25 Energy from the target.
+- [Savage Silence](https://wiki.warframe.com/w/Savage_Silence) — Silence Augment: Silence staggers enemies and Finisher damage is increased by 300%
+- [Savior Decoy](https://wiki.warframe.com/w/Savior_Decoy) — Decoy Augment: If Loki takes fatal damage, Decoy absorbs the damage and swaps locations. Also increases Casting Speed of Decoy by 50%
+- [Seeking Shuriken](https://wiki.warframe.com/w/Seeking_Shuriken) — Shuriken Augment: Hits expose weaknesses on enemies, reducing their Armor by 70% for 8s.
+- [Shadow Haze](https://wiki.warframe.com/w/Shadow_Haze) — Reap Augment: Increase Critical Chance by 50% on enemies inflicted with Death Harvest. A new Shadow emerges from those enemies when they perish. Limit of 3 Shadows.
+- [Shattered Storm](https://wiki.warframe.com/w/Shattered_Storm) — Shattered Lash Augment: When Gara breaks her Mass Vitrify ring with Shattered Lash, enemies struck by the glass suffer Splinter Storm at 100% Strength.
+- [Shepherd](https://wiki.warframe.com/w/Shepherd) — Squad's Companions receive +300 Health and +180 Armor
+- [Shield Disruption](https://wiki.warframe.com/w/Shield_Disruption) — Enemies lose -18% Shield Capacity
+- [Shield Of Shadows](https://wiki.warframe.com/w/Shield_of_Shadows) — Shadows of the Dead Augment: Each Shadow within 50m take 6% of the Damage done to Nekros in his stead.
+- [Shield Overload](https://wiki.warframe.com/w/Shield_Overload) — Polarize Augment: Increases the time for the target's Shields to regenerate by 9s.
+- [Shock Absorbers](https://wiki.warframe.com/w/Shock_Absorbers) — +20% Physical Damage Resistance
+- [Shock Trooper](https://wiki.warframe.com/w/Shock_Trooper) — Shock Augment: Hold to cast will grant all allies within 15m an additional 100% Electricity Damage to their attacks for 40s.
+- [Shocking Speed](https://wiki.warframe.com/w/Shocking_Speed) — Speed Augment: While moving under the effects of Speed, enemies within 3m will take 300 Electricity Damage with guaranteed Status effect.
+- [Shotgun Amp](https://wiki.warframe.com/w/Shotgun_Amp) — Squad receives +18% Shotgun Damage
+- [Shotgun Scavenger](https://wiki.warframe.com/w/Shotgun_Scavenger) — Squad receives +150% Shotgun Ammo Recovery
+- [Signal Flare](https://wiki.warframe.com/w/Signal_Flare) — Radial Blind Augment: Blinded enemies are marked on the Minimap for 12s.
+- [Singularity](https://wiki.warframe.com/w/Singularity) — Absorb Augment: Create a ring every 3s that drags in enemies at 15m/s.
+- [Smite Infusion](https://wiki.warframe.com/w/Smite_Infusion) — Smite Augment: Hold to cast will grant all allies within 15m an additional 100% Radiation Damage to their attacks for 40s.
+- [Smoke Shadow](https://wiki.warframe.com/w/Smoke_Shadow) — Smoke Screen Augment: Conceals allies within 15m and grants 150% Critical Chance while invisible.
+- [Sniper Scavenger](https://wiki.warframe.com/w/Sniper_Scavenger) — Squad receives +150% Sniper Rifle Ammo Recovery
+- [Sonic Siphon](https://wiki.warframe.com/w/Sonic_Siphon) — Sonic Boom Augment: Gain Armor for each enemy hit by Sonic Boom for 20s.
+- [Soul Survivor](https://wiki.warframe.com/w/Soul_Survivor) — Soul Punch Augment: Use on a downed ally to revive them with 30% Health.
+- [Spectral Spirit](https://wiki.warframe.com/w/Spectral_Spirit) — Grave Spirit Augment: Immediately assume Spectral Form. 100% chance for weapons and abilities to apply Doom. Kills outside of Spectral Form decrease its cooldown by 1s.
+- [Spectrosiphon](https://wiki.warframe.com/w/Spectrosiphon) — Spectrorage Augment: Enemies that die within Spectrorage have a 50% chance to drop an Energy Orb.
+- [Spellbound Harvest](https://wiki.warframe.com/w/Spellbound_Harvest) — Spellbind Augment: Hitting at least 4 enemies with Spellbind grants Titania 50. The next cast has +40% Ability Range.
+- [Sprint Boost](https://wiki.warframe.com/w/Sprint_Boost) — Squad receives +15% Sprint Speed
+- [Staggering Shield](https://wiki.warframe.com/w/Staggering_Shield) — Shatter Shield Augment: Reflected bullets have a chance to stagger enemies. The base 50% chance increases with power strength.
+- [Stand United](https://wiki.warframe.com/w/Stand_United) — Squad receives +25% Armor
+- [Stealth Drift](https://wiki.warframe.com/w/Stealth_Drift) — +12% Aim Glide/Wall Latch Duration
+- [Steel Charge](https://wiki.warframe.com/w/Steel_Charge) — Squad receives +60% Melee Damage
+- [Strain Consume](https://wiki.warframe.com/w/Strain_Consume) — Dead Maggots within 10m are consumed, increasing Max Health by 4% and increasing Health Regen by 2/sec for 45sec.
+- [Streamlined Form](https://wiki.warframe.com/w/Streamlined_Form) — +30% Slide; -30% Friction
+- [Summoner's Wrath](https://wiki.warframe.com/w/Summoner's_Wrath) — Squad receives 75% Companion and Summon Damage
+- [Sure Footed](https://wiki.warframe.com/w/Sure_Footed) — +60% Chance to Resist Knockdown
+- [Surging Blades](https://wiki.warframe.com/w/Surging_Blades) — Aquablades Augment: Activate Aquablades when the ability is in use or cooldown to throw one blade. Blades gain 10% damage when any Aquablade hits an enemy. No cost to throw with Merulina.
+- [Surging Dash](https://wiki.warframe.com/w/Surging_Dash) — Slash Dash Augment: Each enemy hit during Slash Dash further increases your Melee Counter by 8.
+- [Swift Bite](https://wiki.warframe.com/w/Swift_Bite) — Ophidian Bite Augment: Reduce Ability Cooldowns by 4s when at least 4 enemies are hit. Ophidian Bite is granted 30% additional Ability Range.
+- [Swift Momentum](https://wiki.warframe.com/w/Swift_Momentum) — Squad receives +30% Heavy Attack Wind Up Speed and +6s Melee Combo Duration
+- [Swing Line](https://wiki.warframe.com/w/Swing_Line) — Rip Line Augment: Rip Lines has no Energy cost while Airborne.
+- [Synth Reflex](https://wiki.warframe.com/w/Synth_Reflex) — +40% Bullet Jump for 2s
+- [Target Fixation](https://wiki.warframe.com/w/Target_Fixation) — Tail Wind Augment: Casting Tail Wind resets Zephyr’s bullet jump. Each enemy hit increases Tail Wind Damage by 100%. Damage resets upon being on the ground for 2s.
+- [Tear Gas](https://wiki.warframe.com/w/Tear_Gas) — Smoke Screen Augment: Blinds enemies within 4m for 3s.
+- [Tectonic Fracture](https://wiki.warframe.com/w/Tectonic_Fracture) — Tectonics Augment: Create up to 3 walls with 100% Health. Walls can no longer be turned into boulders.
+- [Teeming Virulence](https://wiki.warframe.com/w/Teeming_Virulence) — Virulence Augment: Hitting 4 enemies with Virulence grants 200% Primary Weapon Critical Chance for 15s.
+- [Tek Collateral](https://wiki.warframe.com/w/Tek_Collateral) — +100% Critical Damage when inside the Marked Zone.
+- [Teleport Rush](https://wiki.warframe.com/w/Fatal_Teleport) — Teleport Augment: Using Teleport increases Parkour Velocity by 30% for 12s. Executing a target with Teleport extends Smoke Screen's duration by 5s. Teleport Mercy Kills fully refresh the duration.
+- [Temporal Artillery](https://wiki.warframe.com/w/Temporal_Artillery) — Blaze Artillery Augment : When Temporal Anchor is activated, one existing Artillery unit will attach to Protea, halting its duration countdown. Max combo count is 20x.
+- [Temporal Erosion](https://wiki.warframe.com/w/Temporal_Erosion) — Temporal Anchor Augment: While Temporal Anchor is active, each strike of Grenade Fan and Blaze Artillery strips 10% Armor from enemies.
+- [Tesla Bank](https://wiki.warframe.com/w/Tesla_Bank) — Tesla Nervos Augment: Enemy health when a Nervos is first attached is converted into 8m burst of Electricity when killed.
+- [Tharros Lethality](https://wiki.warframe.com/w/Tharros_Lethality) — Tharros Strike Augment: Increases Critical Damage by 100% on enemies you hit. Critical Damage bonus is doubled for Spearguns.
+- [The Relentless Lost](https://wiki.warframe.com/w/The_Relentless_Lost) — The Lost Augment: The Lost gains 35% Ability Strength and 15% Ability Efficiency when cast. The effect stacks up to 3x. Casting the same ability back-to-back resets the effect.
+- [Thermal Transfer](https://wiki.warframe.com/w/Thermal_Transfer) — Thermal Sunder Augment: Allies in range gain 75% bonus Elemental Damage for 30s.
+- [Thrall Pact](https://wiki.warframe.com/w/Thrall_Pact) — Enthrall Augment: Gain +25% Primary Weapon Damage for each active Thrall.
+- [Tidal Impunity](https://wiki.warframe.com/w/Tidal_Impunity) — Tidal Surge Augment: Clears Status Effects and grants 12s of Status Immunity for yourself and allies that come in contact with it. Reduces Tidal Surge's Energy cost to 15.
+- [Titanic Rumbler](https://wiki.warframe.com/w/Titanic_Rumbler) — Reactivating will cause him to slam the floor and knockdown enemies in 15m.; Rumblers Augment: Create a single rumbler with 300% Health and 400% Damage.
+- [Total Eclipse](https://wiki.warframe.com/w/Total_Eclipse) — Eclipse Augment: While active, allies within 15m benefit from Eclipse.
+- [Toxic Flight](https://wiki.warframe.com/w/Toxic_Flight) — +24.2% Aim Glide/Wall Latch Duration; +275% Toxin on Bullet Jump
+- [Toxin Resistance](https://wiki.warframe.com/w/Toxin_Resistance) — +15% Toxin Resistance
+- [Transistor Shield](https://wiki.warframe.com/w/Transistor_Shield) — Electric Shield Augment: Allies can pick up Electric Shield. 300% of damage absorbed will be added to Volt's Static Discharge.
+- [Tribunal](https://wiki.warframe.com/w/Tribunal) — Condemn Augment: Other players will trigger 100% of the effects of Penance and Thurible when attacking chained enemies.
+- [Ulfrun's Endurance](https://wiki.warframe.com/w/Ulfrun's_Endurance) — Ulfrun's Descent Augment: During Ulfrun’s attack, enemies that die from Slash Status within 20m restore Voruna’s charges.
+- [Umbral Fiber](https://wiki.warframe.com/w/Umbral_Fiber) — +11% Tau Resistance
+- [Umbral Intensify](https://wiki.warframe.com/w/Umbral_Intensify) — +11% Tau Resistance
+- [Umbral Vitality](https://wiki.warframe.com/w/Umbral_Vitality) — +11% Tau Resistance
+- [Undying Will](https://wiki.warframe.com/w/Undying_Will) — +42% Bleedout Reduction
+- [Untime Rift](https://wiki.warframe.com/w/Untime_Rift) — The Vast Untime Augment: Creates a Rift that connects to enemies suffering from Void Status Effect within 15m, doubling debuffs applied by The Vast Untime and maintaining Void Status.
+- [Valence Formation](https://wiki.warframe.com/w/Valence_Formation) — Passive Augment: Casting an Ability imbued with extra Elemental Damage applies that Element as a 200% bonus to your weapons with guaranteed Status for 20s.
+- [Vampire Leech](https://wiki.warframe.com/w/Vampire_Leech) — Energy Vampire Augment: Excess Energy replenishes Shields by 225%.
+- [Vampiric Grasp](https://wiki.warframe.com/w/Vampiric_Grasp) — Grasp of Lohk Augment: When a stolen weapon deals damage to an enemy affected by The Lost: Gaze or The Vast Untime, Xaku heals by 25.
+- [Venari Bodyguard](https://wiki.warframe.com/w/Venari_Bodyguard) — Venari Augment: Venari dies in Khora's place. Recovery timer increased to 150s. Killing enemies decreases the timer by 4s.
+- [Venom Dose](https://wiki.warframe.com/w/Venom_Dose) — Spores Augment: Hold to cast will grant all allies within 15m an additional 100% Corrosive Damage to their attacks for 40s.
+- [Vexing Retaliation](https://wiki.warframe.com/w/Vexing_Retaliation) — Vex Armor Augment: Taking 150 Damage will trigger a 9m burst. Shield damage will cause a Puncture Status effect while Health damage will cause a Blast Status effect.
+- [Vigilante Vigor](https://wiki.warframe.com/w/Vigilante_Vigor) — -30% Shield Recharge Delay
+- [Viral Tempest](https://wiki.warframe.com/w/Corroding_Barrage) — Tempest Barrage Augment: Each projectile has a 100% chance of inflicting a Viral Status Effect.
+- [Volatile Recompense](https://wiki.warframe.com/w/Volatile_Recompense) — Recompense Augment: Daggers whirl in a ring around Kullervo for 25s, slashing nearby foes and dealing Blast Damage and Status Effect before returning to the ring.
+- [Ward Recovery](https://wiki.warframe.com/w/Ward_Recovery) — Warding Halo Augment: 50% of the casting cost returned based on how much protection is left.
+- [Warding Thurible](https://wiki.warframe.com/w/Warding_Thurible) — Thurible Augment: Allies in range take 50% less Damage while channeling Thurible and grant 1.0 additional Energy charge whenever damaged.
+- [Warm Coat](https://wiki.warframe.com/w/Warm_Coat) — +12% Shield Resistance to Environmental Ice Hazards
+- [Warrior's Rest](https://wiki.warframe.com/w/Warrior's_Rest) — Passive Augment: Umbra's Ability Strength increases by +15% but he no longer fights independently alongside his Operator.
+- [Worthy Comradery](https://wiki.warframe.com/w/Worthy_Comradery) — Squad receives +75% Weak Point Critical Chance
+- [Wrath Of Ukko](https://wiki.warframe.com/w/Wrath_of_Ukko) — Storm of Ukko Augment: Wrathful Advance moves the storm of daggers to the teleportation location and increases its duration by 6s.
+- [Wrecking Wall](https://wiki.warframe.com/w/Wrecking_Wall) — Containment Wall Augment: Strip 50% of armor and shields from struck enemies. Hitting 5 or more enemies will restart the duration of any Chyrinka Pillars and empower them.
+
+## Условные эффекты, разобранные автоматически: 76
+
+Условие (триггер, длительность, стаки) взято из текста; корзину и механику сверить с вики.
+
+- [Amalgam Furax Body Count](https://wiki.warframe.com/w/Amalgam_Furax_Body_Count)
+- [Arcane Aegis](https://wiki.warframe.com/w/Arcane_Aegis)
+- [Arcane Agility](https://wiki.warframe.com/w/Arcane_Agility)
+- [Arcane Avenger](https://wiki.warframe.com/w/Arcane_Avenger)
+- [Arcane Blade Charger](https://wiki.warframe.com/w/Arcane_Blade_Charger)
+- [Arcane Concentration](https://wiki.warframe.com/w/Arcane_Concentration)
+- [Arcane Consequence](https://wiki.warframe.com/w/Arcane_Consequence)
+- [Arcane Fury](https://wiki.warframe.com/w/Arcane_Fury)
+- [Arcane Rage](https://wiki.warframe.com/w/Arcane_Rage)
+- [Arcane Rise](https://wiki.warframe.com/w/Arcane_Rise)
+- [Arcane Strike](https://wiki.warframe.com/w/Arcane_Strike)
+- [Archgun Ace](https://wiki.warframe.com/w/Archgun_Ace)
+- [Argon Scope](https://wiki.warframe.com/w/Argon_Scope)
+- [Berserker Fury](https://wiki.warframe.com/w/Berserker_Fury)
+- [Bladed Rounds](https://wiki.warframe.com/w/Bladed_Rounds)
+- [Blood Rush](https://wiki.warframe.com/w/Blood_Rush)
+- [Cascadia Overcharge](https://wiki.warframe.com/w/Cascadia_Overcharge)
+- [Catalyzer Link](https://wiki.warframe.com/w/Catalyzer_Link)
+- [Charged Chamber](https://wiki.warframe.com/w/Charged_Chamber)
+- [Combo Fury](https://wiki.warframe.com/w/Combo_Fury)
+- [Condition Overload](https://wiki.warframe.com/w/Condition_Overload)
+- [Conjunction Voltage](https://wiki.warframe.com/w/Conjunction_Voltage)
+- [Critical Focus](https://wiki.warframe.com/w/Critical_Focus)
+- [Deadly Efficiency](https://wiki.warframe.com/w/Deadly_Efficiency)
+- [Embedded Catalyzer](https://wiki.warframe.com/w/Embedded_Catalyzer)
+- [Enduring Affliction](https://wiki.warframe.com/w/Enduring_Affliction)
+- [Enduring Strike](https://wiki.warframe.com/w/Enduring_Strike)
+- [Exodia Valor](https://wiki.warframe.com/w/Exodia_Valor)
+- [Fractalized Reset](https://wiki.warframe.com/w/Fractalized_Reset)
+- [Galvanized Acceleration](https://wiki.warframe.com/w/Galvanized_Acceleration)
+- [Galvanized Aptitude](https://wiki.warframe.com/w/Galvanized_Aptitude)
+- [Galvanized Chamber](https://wiki.warframe.com/w/Galvanized_Chamber)
+- [Galvanized Crosshairs](https://wiki.warframe.com/w/Galvanized_Crosshairs)
+- [Galvanized Diffusion](https://wiki.warframe.com/w/Galvanized_Diffusion)
+- [Galvanized Elementalist](https://wiki.warframe.com/w/Galvanized_Elementalist)
+- [Galvanized Hell](https://wiki.warframe.com/w/Galvanized_Hell)
+- [Galvanized Reflex](https://wiki.warframe.com/w/Galvanized_Reflex)
+- [Galvanized Savvy](https://wiki.warframe.com/w/Galvanized_Savvy)
+- [Galvanized Scope](https://wiki.warframe.com/w/Galvanized_Scope)
+- [Galvanized Shot](https://wiki.warframe.com/w/Galvanized_Shot)
+- [Galvanized Steel](https://wiki.warframe.com/w/Galvanized_Steel)
+- [Guardian Derision](https://wiki.warframe.com/w/Guardian_Derision)
+- [Guided Ordnance](https://wiki.warframe.com/w/Guided_Ordnance)
+- [Hydraulic Crosshairs](https://wiki.warframe.com/w/Hydraulic_Crosshairs)
+- [Killing Blow](https://wiki.warframe.com/w/Killing_Blow)
+- [Laser Sight](https://wiki.warframe.com/w/Laser_Sight)
+- [Lasting Purity](https://wiki.warframe.com/w/Lasting_Purity)
+- [Maiming Strike](https://wiki.warframe.com/w/Maiming_Strike)
+- [Marked Target](https://wiki.warframe.com/w/Marked_Target)
+- [Nano-Applicator](https://wiki.warframe.com/w/Nano-Applicator)
+- [Narrow Barrel](https://wiki.warframe.com/w/Narrow_Barrel)
+- [Pain Points](https://wiki.warframe.com/w/Pain_Points)
+- [Power Throw](https://wiki.warframe.com/w/Power_Throw)
+- [Pressurized Magazine](https://wiki.warframe.com/w/Pressurized_Magazine)
+- [Primary Blight](https://wiki.warframe.com/w/Primary_Blight)
+- [Primary Deadhead](https://wiki.warframe.com/w/Primary_Deadhead)
+- [Primary Dexterity](https://wiki.warframe.com/w/Primary_Dexterity)
+- [Primary Frostbite](https://wiki.warframe.com/w/Primary_Frostbite)
+- [Primary Merciless](https://wiki.warframe.com/w/Primary_Merciless)
+- [Primed Chamber](https://wiki.warframe.com/w/Primed_Chamber)
+- [Primed Charged Chamber]()
+- [Primed Deadly Efficiency](https://wiki.warframe.com/w/Primed_Deadly_Efficiency)
+- [Reflex Guard](https://wiki.warframe.com/w/Reflex_Guard)
+- [Repeater Clip](https://wiki.warframe.com/w/Repeater_Clip)
+- [Resolute Focus](https://wiki.warframe.com/w/Resolute_Focus)
+- [Secondary Deadhead](https://wiki.warframe.com/w/Secondary_Deadhead)
+- [Secondary Dexterity](https://wiki.warframe.com/w/Secondary_Dexterity)
+- [Secondary Merciless](https://wiki.warframe.com/w/Secondary_Merciless)
+- [Sharpened Bullets](https://wiki.warframe.com/w/Sharpened_Bullets)
+- [Shotgun Vendetta](https://wiki.warframe.com/w/Shotgun_Vendetta)
+- [Shrapnel Shot](https://wiki.warframe.com/w/Shrapnel_Shot)
+- [Spectral Serration](https://wiki.warframe.com/w/Spectral_Serration)
+- [Split Flights](https://wiki.warframe.com/w/Split_Flights)
+- [Spring-Loaded Chamber](https://wiki.warframe.com/w/Spring-Loaded_Chamber)
+- [Targeting Subsystem](https://wiki.warframe.com/w/Targeting_Subsystem)
+- [Vigorous Swap](https://wiki.warframe.com/w/Vigorous_Swap)
+
+## Пропущены (одноимённые записи WFCD, которых нет на вики): 174
+
+- Adaptation — `/Lotus/Upgrades/Mods/Nemesis/AvatarSentientArmourMod`
+- Ammo Drum — `/Lotus/Upgrades/Mods/Rifle/Expert/WeaponAmmoMaxModExpert`
+- Antitoxin — `/Lotus/Upgrades/Mods/Warframe/Expert/AvatarDamageResistancePoisonExpert`
+- Arcane Steadfast — `/Lotus/Upgrades/CosmeticEnhancers/Utility/NoCostCastChanceAbility1Listener`
+- Arcane Steadfast — `/Lotus/Upgrades/CosmeticEnhancers/Utility/NoCostCastChanceAbility2Listener`
+- Arcane Steadfast — `/Lotus/Upgrades/CosmeticEnhancers/Utility/NoCostCastChanceAbility3Listener`
+- Arcane Steadfast — `/Lotus/Upgrades/CosmeticEnhancers/Utility/NoCostCastChanceAbility4Listener`
+- Arrow Mutation — `/Lotus/Upgrades/Mods/Rifle/Expert/WeaponBowConvertAmmoModExpert`
+- Arrow Mutation — `/Lotus/Upgrades/Mods/Rifle/Intermediate/WeaponBowConvertAmmoModIntermediate`
+- Astral Autopsy — `/Lotus/Upgrades/Mods/Archwing/Melee/ArchwingMeleeScanOnKillMod`
+- Astral Twilight — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/GlaiveCmbTwoMeleeTree`
+- Atlantis Vulcan — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/NunchakuCmbOneMeleeTree`
+- Aviator — `/Lotus/Upgrades/Mods/Warframe/Expert/AvatarDamageReductionInAirExpert`
+- Aviator — `/Lotus/Upgrades/Mods/Warframe/Intermediate/AvatarDamageReductionInAirIntermediate`
+- Bane Of Corpus — `/Lotus/Upgrades/Mods/Rifle/Expert/WeaponFactionDamageCorpusExpert`
+- Bane Of Grineer — `/Lotus/Upgrades/Mods/Rifle/Expert/WeaponFactionDamageGrineerExpert`
+- Bane Of Infested — `/Lotus/Upgrades/Mods/Rifle/Expert/WeaponFactionDamageInfestedExpert`
+- Barrel Diffusion — `/Lotus/Upgrades/Mods/Pistol/Expert/WeaponFireIterationsModExpert`
+- Berserker Fury — `/Lotus/Upgrades/Mods/Melee/Expert/WeaponCritFireRateBonusModExpert`
+- Bleeding Willow — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/PolearmCmbTwoMeleeTree`
+- Blind Justice — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/KatanaCmbThreeMeleeTree`
+- Brutal Tide — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/PunchKickCmbTwoMeleeTree`
+- Bullet Dance — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/GunbladeCmbTwoMeleeTree`
+- Burning Wasp — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/WhipCmbOneMeleeTree`
+- Butcher's Revelry — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/SawBladeCmbOneMeleeTree`
+- Carving Mantis — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/DualSwordCmbThreeMeleeTree`
+- Charged Chamber — `/Lotus/Upgrades/Mods/Rifle/Intermediate/SniperReloadDamageModIntermediate`
+- Cleaving Whirlwind — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/AxeCmbTwoMeleeTree`
+- Coiling Viper — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/WhipCmbTwoMeleeTree`
+- Concussion Rounds — `/Lotus/Upgrades/Mods/Pistol/Expert/WeaponImpactDamageModExpert`
+- Contagious Spread — `/Lotus/Upgrades/Mods/Shotgun/Expert/WeaponToxinDamageModExpert`
+- Convulsion — `/Lotus/Upgrades/Mods/Pistol/Expert/WeaponElectricityDamageModExpert`
+- Crimson Dervish — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/CrimsonDervishMeleeTree`
+- Crossing Snakes — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/DualSwordCmbTwoMeleeTree`
+- Crushing Ruin — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/HammerCmbTwoMeleeTree`
+- Cyclone Kraken — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/MacheteCmbTwoMeleeTree`
+- Decisive Judgement — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/KatanaCmbTwoMeleeTree`
+- Deep Freeze — `/Lotus/Upgrades/Mods/Pistol/Expert/WeaponFreezeDamageModExpert`
+- Defiled Snapdragon — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/SwordWhipCmbOneMeleeTree`
+- Diamond Skin — `/Lotus/Upgrades/Mods/Warframe/Expert/AvatarDamageResistanceLaserExpert`
+- Disruptor — `/Lotus/Upgrades/Mods/Shotgun/Expert/WeaponImpactDamageModExpert`
+- Eagle Eye — `/Lotus/Upgrades/Mods/Rifle/Expert/WeaponZoomFovModExpert`
+- Eagle Eye — `/Lotus/Upgrades/Mods/Rifle/Intermediate/WeaponZoomFovModIntermediate`
+- Eleventh Storm — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/SwordShieldCmbOneMeleeTree`
+- Enemy Sense — `/Lotus/Upgrades/Mods/Warframe/Expert/AvatarEnemyRadarModExpert`
+- Energy Channel — `/Lotus/Upgrades/Mods/Melee/Expert/WeaponPowerDamageModExpert`
+- Energy Channel — `/Lotus/Upgrades/Mods/Melee/Intermediate/WeaponPowerDamageModIntermediate`
+- Final Harbinger — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/RegorSwordShieldMeleeTree`
+- Finishing Touch — `/Lotus/Upgrades/Mods/Melee/Expert/WeaponMeleeFinisherDamageModExpert`
+- Finishing Touch — `/Lotus/Upgrades/Mods/Melee/Intermediate/WeaponMeleeFinisherDamageModIntermediate`
+- Flailing Branch — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/StaffCmbTwoMeleeTree`
+- Flame Repellent — `/Lotus/Upgrades/Mods/Warframe/Expert/AvatarDamageResistanceFireExpert`
+- Flechette — `/Lotus/Upgrades/Mods/Shotgun/Expert/WeaponArmorPiercingDamageModExpert`
+- Four Riders — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/ClawCmbThreeMeleeTree`
+- Fracturing Wind — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/FistCmbOneMeleeTree`
+- Gaia's Tragedy — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/FistCmbThreeMeleeTree`
+- Galeforce Dawn — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/HeavyScytheCmbOneMeleeTree`
+- Gemini Cross — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/TonfaCmbOneMeleeTree`
+- Gleaming Talon — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/GlaiveCmbOneMeleeTree`
+- Gnashing Payara — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/DualDaggerCmbTwoMeleeTree`
+- Grim Fury — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/PunchKickCmbOneMeleeTree`
+- Gunslinger — `/Lotus/Upgrades/Mods/Pistol/Expert/WeaponFireRateModExpert`
+- Handspring — `/Lotus/Upgrades/Mods/Warframe/Expert/AvatarKnockdownRecoveryModExpert`
+- Handspring — `/Lotus/Upgrades/Mods/Warframe/Intermediate/AvatarKnockdownRecoveryModIntermediate`
+- Harrowing Spire — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/BayonetCmbOneMeleeTree`
+- Hawk Eye — `/Lotus/Upgrades/Mods/Pistol/Expert/WeaponPistolZoomFovModExpert`
+- Hawk Eye — `/Lotus/Upgrades/Mods/Pistol/Intermediate/WeaponPistolZoomFovModIntermediate`
+- Health Conversion — `/Lotus/Upgrades/Tau/HealthPickupGivesArmourMax`
+- Heavy Impact — `/Lotus/Upgrades/Mods/Warframe/Expert/AvatarFallingImpactModExpert`
+- Hell's Chamber — `/Lotus/Upgrades/Mods/Shotgun/Expert/WeaponFireIterationsModExpert`
+- Hellfire — `/Lotus/Upgrades/Mods/Rifle/Expert/WeaponFireDamageModExpert`
+- High Noon — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/GunbladeCmbOneMeleeTree`
+- Homing Fang — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/DaggerCmbOneMeleeTree`
+- Hornet Strike — `/Lotus/Upgrades/Mods/Pistol/Intermediate/WeaponDamageAmountModIntermediate`
+- Incendiary Coat — `/Lotus/Upgrades/Mods/Shotgun/Expert/WeaponFireDamageModExpert`
+- Infected Clip — `/Lotus/Upgrades/Mods/Rifle/Expert/WeaponToxinDamageModExpert`
+- Insulation — `/Lotus/Upgrades/Mods/Warframe/Expert/AvatarDamageResistanceIceExpert`
+- Intensify — `/Lotus/Upgrades/Mods/Warframe/Expert/AvatarAbilityStrengthModExpert`
+- Iron Phoenix — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/IronPhoenixMeleeTree`
+- Jagged Edge — `/Lotus/Upgrades/Mods/Melee/Expert/WeaponSlashDamageModExpert`
+- Lightning Rod — `/Lotus/Upgrades/Mods/Warframe/Expert/AvatarDamageResistanceElectricityExpert`
+- Malicious Raptor — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/ClawCmbOneMeleeTree`
+- Master Thief — `/Lotus/Upgrades/Mods/Warframe/Expert/AvatarChanceToLootExpert`
+- Master Thief — `/Lotus/Upgrades/Mods/Warframe/Intermediate/AvatarChanceToLootIntermediate`
+- Melee Prowess — `/Lotus/Upgrades/Mods/Melee/Expert/WeaponStunChanceModExpert`
+- Melee Prowess — `/Lotus/Upgrades/Mods/Melee/Intermediate/WeaponStunChanceModIntermediate`
+- Mentor's Legacy — `/Lotus/Upgrades/EmpoweredHeavyMelee/TennokaiBaseMod`
+- Metal Auger — `/Lotus/Upgrades/Mods/Rifle/Expert/WeaponPunctureDepthModExpert`
+- Molten Impact — `/Lotus/Upgrades/Mods/Melee/Expert/WeaponFireDamageModExpert`
+- Mountain's Edge — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/DualKatanaCmbOneMeleeTree`
+- No Return — `/Lotus/Upgrades/Mods/Pistol/Expert/WeaponArmorPiercingDamageModExpert`
+- North Wind — `/Lotus/Upgrades/Mods/Melee/Expert/WeaponFreezeDamageModExpert`
+- Organ Shatter — `/Lotus/Upgrades/Mods/Melee/Expert/WeaponCritDamageModExpert`
+- Parry — `/Lotus/Upgrades/Mods/Warframe/Expert/AvatarParryMeleeModExpert`
+- Parry — `/Lotus/Upgrades/Mods/Warframe/Intermediate/AvatarParryMeleeModIntermediate`
+- Pathogen Rounds — `/Lotus/Upgrades/Mods/Pistol/Expert/WeaponToxinDamageModExpert`
+- Piercing Hit — `/Lotus/Upgrades/Mods/Rifle/Expert/WeaponArmorPiercingDamageModExpert`
+- Pistol Ammo Mutation — `/Lotus/Upgrades/Mods/Pistol/Intermediate/WeaponPistolConvertAmmoModIntermediate`
+- Point Strike — `/Lotus/Upgrades/Mods/Rifle/Expert/WeaponCritChanceModExpert`
+- Pointed Wind — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/DaggerCmbTwoMeleeTree`
+- Power Throw — `/Lotus/Upgrades/Mods/Melee/Expert/WeaponGlaivePowerthrowModExpert`
+- Pressure Point — `/Lotus/Upgrades/Mods/Melee/WeaponMeleeDamageOnHeavyKillMod`
+- Provoked — `/Lotus/Upgrades/Mods/Warframe/Intermediate/AvatarGroundFireDmgModIntermediate`
+- Rage — `/Lotus/Upgrades/Mods/Warframe/Expert/AvatarDamageToEnergyModExpert`
+- Rage — `/Lotus/Upgrades/Mods/Warframe/Intermediate/AvatarDamageToEnergyModIntermediate`
+- Razor Shot — `/Lotus/Upgrades/Mods/Pistol/Expert/WeaponSlashDamageModExpert`
+- Reach — `/Lotus/Upgrades/Mods/Melee/Intermediate/WeaponMeleeRangeIncModIntermediate`
+- Reaping Spiral — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/ScytheCmbOneMeleeTree`
+- Redirection — `/Lotus/Upgrades/Mods/Warframe/Intermediate/AvatarShieldMaxModIntermediate`
+- Reflection — `/Lotus/Upgrades/Mods/Warframe/Expert/AvatarParryReflectModExpert`
+- Reflex Coil — `/Lotus/Upgrades/Mods/Melee/Expert/WeaponMeleeChannelingEfficiencyModExpert`
+- Reflex Coil — `/Lotus/Upgrades/Mods/Melee/Intermediate/WeaponMeleeChannelingEfficiencyeModIntermediate`
+- Rending Crane — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/AxeCmbOneMeleeTree`
+- Retribution — `/Lotus/Upgrades/Mods/Warframe/Expert/AvatarRevengeDamageMeleeExpert`
+- Retribution — `/Lotus/Upgrades/Mods/Warframe/Intermediate/AvatarRevengeDamageMeleeIntermediate`
+- Rifle Ammo Mutation — `/Lotus/Upgrades/Mods/Rifle/Intermediate/WeaponRifleConvertAmmoModIntermediate`
+- Rifle Aptitude — `/Lotus/Upgrades/Mods/Rifle/Expert/WeaponStatusChanceModExpert`
+- Rifle Aptitude — `/Lotus/Upgrades/Mods/Rifle/Intermediate/WeaponStatusChanceModIntermediate`
+- Rupture — `/Lotus/Upgrades/Mods/Rifle/Expert/WeaponImpactDamageModExpert`
+- Rush — `/Lotus/Upgrades/Mods/Warframe/Expert/AvatarSprintSpeedModExpert`
+- Sawtooth Clip — `/Lotus/Upgrades/Mods/Rifle/Expert/WeaponSlashDamageModExpert`
+- Seeker — `/Lotus/Upgrades/Mods/Pistol/Expert/WeaponPunctureDepthModExpert`
+- Seeking Force — `/Lotus/Upgrades/Mods/Shotgun/Expert/WeaponPunctureDepthModExpert`
+- Seismic Palm — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/FistCmbTwoMeleeTree`
+- Serration — `/Lotus/Upgrades/Mods/Rifle/Intermediate/WeaponDamageAmountModIntermediate`
+- Shattering Storm — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/HammerCmbOneMeleeTree`
+- Shell Compression — `/Lotus/Upgrades/Mods/Shotgun/Expert/WeaponAmmoMaxModExpert`
+- Shimmering Blight — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/PolearmCmbOneMeleeTree`
+- Shock Absorbers — `/Lotus/Upgrades/Mods/Warframe/Intermediate/AvatarDamageResistanceKnockdownIntermediate`
+- Shocking Touch — `/Lotus/Upgrades/Mods/Melee/Expert/WeaponElectricityDamageModExpert`
+- Shotgun Ammo Mutation — `/Lotus/Upgrades/Mods/Shotgun/Intermediate/WeaponShotgunConvertAmmoModIntermediate`
+- Shotgun Barrage — `/Lotus/Upgrades/Mods/Shotgun/Expert/WeaponFireRateModExpert`
+- Shotgun Savvy — `/Lotus/Upgrades/Mods/Shotgun/Expert/WeaponStunChanceModExpert`
+- Shredder — `/Lotus/Upgrades/Mods/Shotgun/Expert/WeaponSlashDamageModExpert`
+- Sinking Talon — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/DualDaggerCmbOneMeleeTree`
+- Slicing Feathers — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/WarfanCmbOneMeleeTree`
+- Sniper Ammo Mutation — `/Lotus/Upgrades/Mods/Rifle/Intermediate/WeaponSnipersConvertAmmoModIntermediate`
+- Sovereign Outcast — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/TonfaCmbTwoMeleeTree`
+- Speed Trigger — `/Lotus/Upgrades/Mods/Rifle/Expert/WeaponFireRateModExpert`
+- Spinning Needle — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/DualDaggerCmbThreeMeleeTree`
+- Split Chamber — `/Lotus/Upgrades/Mods/Rifle/Expert/WeaponFireIterationsModExpert`
+- Stabilizer — `/Lotus/Upgrades/Mods/Rifle/Intermediate/WeaponRecoilReductionModIntermediate`
+- Stalking Fan — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/ScytheCmbTwoMeleeTree`
+- Steady Hands — `/Lotus/Upgrades/Mods/Pistol/Intermediate/WeaponRecoilReductionModIntermediate`
+- Steel Fiber — `/Lotus/Upgrades/Mods/Warframe/Intermediate/AvatarArmourModIntermediate`
+- Stinging Thorn — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/DaggerCmbThreeMeleeTree`
+- Stormbringer — `/Lotus/Upgrades/Mods/Rifle/Expert/WeaponElectricityDamageModExpert`
+- Stretch — `/Lotus/Upgrades/Mods/Warframe/Expert/AvatarAbilityRangeModExpert`
+- Sundering Strike — `/Lotus/Upgrades/Mods/Melee/Expert/WeaponArmorPiercingDamageModExpert`
+- Sundering Weave — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/MacheteCmbOneMeleeTree`
+- Sure Footed — `/Lotus/Upgrades/Mods/Warframe/Intermediate/AvatarKnockdownResistanceModIntermediate`
+- Sure Shot — `/Lotus/Upgrades/Mods/Pistol/Expert/WeaponStatusChanceModExpert`
+- Sure Shot — `/Lotus/Upgrades/Mods/Pistol/Intermediate/WeaponStatusChanceModIntermediate`
+- Swirling Tiger — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/DualSwordCmbOneMeleeTree`
+- Swooping Falcon — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/SwordCmbTwoMeleeTree`
+- Target Cracker — `/Lotus/Upgrades/Mods/Pistol/Expert/WeaponCritDamageModExpert`
+- Tempo Royale — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/AxeCmbThreeMeleeTree`
+- Thief's Wit — `/Lotus/Upgrades/Mods/Warframe/Expert/AvatarLootRadarModExpert`
+- Thunderbolt — `/Lotus/Upgrades/Mods/Rifle/Expert/BowExplosionChanceModExpert`
+- Thunderbolt — `/Lotus/Upgrades/Mods/Rifle/Intermediate/BowExplosionChanceModIntermediate`
+- Tranquil Cleave — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/KatanaCmbOneMeleeTree`
+- Trick Mag — `/Lotus/Upgrades/Mods/Pistol/Expert/WeaponAmmoMaxModExpert`
+- True Steel — `/Lotus/Upgrades/Mods/Melee/Expert/WeaponCritChanceModExpert`
+- Twirling Spire — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/PolearmCmbThreeMeleeTree`
+- Vengeful Revenant — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/StalkerSwordMeleeTree`
+- Vermillion Storm — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/ClawCmbTwoMeleeTree`
+- Vital Sense — `/Lotus/Upgrades/Mods/Rifle/Expert/WeaponCritDamageModExpert`
+- Vitality — `/Lotus/Upgrades/Mods/Warframe/Intermediate/AvatarHealthMaxModIntermediate`
+- Votive Onslaught — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/WarfanCmbTwoMeleeTree`
+- Vulpine Mask — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/RapierCmbOneMeleeTree`
+- Warm Coat — `/Lotus/Upgrades/Mods/Warframe/Expert/AvatarMissionSpecificResistanceIceExpert`
+- Warm Coat — `/Lotus/Upgrades/Mods/Warframe/Intermediate/AvatarMissionSpecificResistanceIceIntermediate`
+- Whirlwind — `/Lotus/Upgrades/Mods/Melee/Expert/WeaponGlaiveSpeedModExpert`
+- Wise Razor — `/Lotus/Weapons/Tenno/Melee/MeleeTrees/LongKatanaCmbOneMeleeTree`

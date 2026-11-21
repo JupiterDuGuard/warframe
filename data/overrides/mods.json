@@ -1,0 +1,15 @@
+{
+  "_comment": "Ручные правки разбора модов. Ключ — uniqueName (или английское имя). Поля перекрывают автоматический разбор. effectsMax — эффекты на максимальном ранге, по рангам растут линейно. source — страница вики, verified — сверено ли с вики (false = только по тексту WFCD, механика в TODO_VERIFY.md).",
+  "/Lotus/Upgrades/Mods/Sets/Hunter/PrimaryHunterMunitionsMod": {
+    "effectsMax": [{"stat": "forced_proc", "value": 0.3, "bucket": "forced_proc", "condition": {"on": "crit", "proc": "slash"}}],
+    "source": "https://wiki.warframe.com/w/Hunter_Munitions",
+    "verified": false,
+    "note": "+30% шанс наложить Разрез при крите (текст WFCD)"
+  },
+  "/Lotus/Upgrades/Mods/Rifle/WeaponBleedOnImpactProcRifleMod": {
+    "effectsMax": [{"stat": "forced_proc", "value": 0.35, "bucket": "forced_proc", "condition": {"on": "impact_proc", "proc": "slash", "x2_below_fire_rate": 2.5}}],
+    "source": "https://wiki.warframe.com/w/Internal_Bleeding",
+    "verified": false,
+    "note": "Статус Удара с шансом 35% накладывает Разрез, ×2 при скорострельности ниже 2,5 (текст WFCD)"
+  }
+}
