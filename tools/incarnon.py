@@ -5,7 +5,7 @@
 """
 import re
 
-INCARNON_NATIVE = {"Laetum", "Phenmor", "Felarx", "Innodem", "Praedos", "Onos", "Ruvox", "Thalys", "Torid"}
+INCARNON_NATIVE = {"Laetum", "Phenmor", "Felarx", "Innodem", "Praedos", "Onos", "Ruvox", "Thalys"}
 BOLD = "'" * 3
 
 
@@ -47,10 +47,48 @@ def table_cells(row):
     return cells
 
 
+# Формулировки перков на вики -> вид, который понимают правила build_data (RULES, COND_*).
+NORMALIZE = [
+    (r"^\*+\s*", ""),                                                     # вложенные пункты «** …»
+    (r"([+-])\s+(\d)", r"\1\2"),                                          # «+ 15%» -> «+15%»
+    (r"^Multishot consumes ammo directly from Capacity and (?:does|increases Damage by) ", ""),
+    (r"^(\+\d+(?:\.\d+)?%) Damage\.?$", r"\1 Damage"),
+    (r"^Increase Base Status by ", "Increase Base Status Chance by "),
+    (r"^Increase Status Chance by ", "Increase Base Status Chance by "),  # Despair — TODO_VERIFY
+    (r"^(?:Increase|increases) Damage by (\+\d+(?:\.\d+)?)\.?$", r"Increase Base Damage by \1"),
+    (r"^increases Damage by (\+\d+(?:\.\d+)?%)", r"\1 Damage"),
+    (r"(Critical Damage Multiplier by \+?\d+(?:\.\d+)?)(?![\d.]|x)", r"\1x"),
+    (r"^\+(\d+(?:\.\d+)?) (?:Base )?Multishot\.?$", r"Increase Base Multishot by +\1"),
+    (r"^(.+?) on (last shot in magazine|final magazine burst)\.?$", r"On \2: \1"),
+    (r"^(.+?) to enemies below half Health\.?$", r"While enemy below 50% Health: \1"),
+    (r"^(.+?), resets on Reload\.?$", r"While not reloaded: \1"),
+    (r"^(.+?) if (no enemies are within \d+m)\.?$", r"If \2: \1"),
+    (r"^Enemies (.+?) will receive:\s*(.+)$", r"While enemies \1: \2"),
+]
+
+
+def normalize(lines):
+    """Строки перка: формулировки по NORMALIZE, «A. B» -> две строки, «Effect doubles in Incarnon Form» -> копия для формы."""
+    out = []
+    for line in lines:
+        for part in re.split(r"\.\s+(?=[+-]?\d|Increase|x\d)|\s+(?=Effect doubles in Incarnon Form)", line):
+            part = part.strip()
+            if re.match(r"Effect doubles in Incarnon Form", part, re.I):
+                if out:
+                    out.append(out[-1].rstrip(".") + " for Incarnon Form")
+                continue
+            for rx, rep in NORMALIZE:
+                part = re.sub(rx, rep, part).strip()
+            if part:
+                out.append(part)
+    return out
+
+
 def parse_evolutions(text, weapon, parse_rank):
-    i = text.find("Evolutions===")
-    if i < 0:
+    m = re.search(r"=+\s*Evolutions\s*=+", text)       # «===Evolutions===» и «=== Evolutions ===»
+    if not m:
         return None
+    i = m.start()
     j = text.find("\n|}", i)
     table = text[i:j]
     first = table.find("EVO")
@@ -79,9 +117,9 @@ def parse_evolutions(text, weapon, parse_rank):
             if vidx < len(vals):
                 for var, num, pc in re.findall(r"\b([XYZ])\s*=\s*([\d.]+)\s*(%?)", vals[vidx]):
                     subs[var] = (num, pc)
-        for var, (num, pc) in subs.items():
-            lines = [re.sub(r"\b%s\b(%%?)" % var, lambda m, n=num, p=pc: n + ("%" if (m.group(1) or p) else ""), l) for l in lines]
-        effects, bad = parse_rank(lines)
+        for var, (num, pc) in subs.items():          # «+Y%», «+Yx», «+Y.» -> число варианта
+            lines = [re.sub(r"(?<![A-Za-z])%s(?=x\b|\b)(%%?)" % var, lambda m, n=num, p=pc: n + ("%" if (m.group(1) or p) else ""), l) for l in lines]
+        effects, bad = parse_rank(normalize(lines))
         perk = {"name": name, "text": lines, "effects": effects}
         if bad:
             perk["unparsed"] = bad
@@ -102,6 +140,16 @@ def build_incarnon(weapons, overrides, fetch, wiki_url, parse_rank, log_unparsed
             log_notes.append(("incarnon", f"{name}: страница {page} не загрузилась", url))
             continue
         tiers = parse_evolutions(text, name, parse_rank)
+        tr = re.search(r"\{\{Transclude\|([^#|}]*Incarnon Genesis)", text)
+        if not tiers and tr:                                   # страница оружия подключает таблицу со страницы Genesis
+            page = tr.group(1).strip()
+            url = wiki_url + page.replace(" ", "_")
+            try:
+                text = fetch(url + "?action=raw", "wiki_page_" + re.sub(r"\W", "_", page) + ".txt")
+                tiers = parse_evolutions(text, name, parse_rank)
+            except Exception:
+                log_notes.append(("incarnon", f"{name}: страница {page} не загрузилась", url))
+                continue
         if not tiers:
             log_notes.append(("incarnon", f"{name}: нет таблицы эволюций на {page}", url))
             continue

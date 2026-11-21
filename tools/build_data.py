@@ -127,6 +127,7 @@ RULES = [
     (rf"^Increase Base Magazine Capacity by \+?{NUM}$", "magazine_base", "base_add", "flat"),
     (rf"^Increase Base Multishot by \+?{NUM}$", "multishot_base", "base_add", "flat"),
     (rf"^Increase Base Fire Rate by \+?{NUM}$", "fire_rate_base", "base_add", "flat"),
+    (rf"^x{NUM} Critical Damage$", "crit_final", "crit_final", "flat"),      # Cestra: ×3 к множителю крита
     # ауры («Squad receives/gains» срезается заранее)
     (rf"^{PCT} (Rifle|Pistol|Shotgun|Sniper Rifle|Melee) Damage$", "damage_class_{1}", "base_damage", "pct"),
     (rf"^{PCT} Weapon Damage$", "damage", "base_damage", "pct"),

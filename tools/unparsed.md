@@ -1,6 +1,6 @@
 # Неразобранные эффекты
 
-Сборка 2026-11-21 18:53 UTC. Строки, которые скрипт не смог превратить в {stat, value, bucket}. Правка — data/overrides/*.json (ключ — uniqueName или имя).
+Сборка 2026-11-21 19:59 UTC. Строки, которые скрипт не смог превратить в {stat, value, bucket}. Правка — data/overrides/*.json (ключ — uniqueName или имя).
 
 ## Моды: 129
 
@@ -245,8 +245,12 @@
 - [Theorem Demulcent](https://wiki.warframe.com/w/Theorem_Demulcent) — Standing in a zone created by a Residual Arcane increases weapon damage by 12%/s stacking up to 15x. Effect persists for 20s upon leaving the zone.
 - [Theorem Infection](https://wiki.warframe.com/w/Theorem_Infection) — Standing in a zone created by a Residual Arcane increases damage of companions and summoned allies within 90m by 24%/s stacking up to 15x. Effect persists for 20s upon leaving the zone.
 
-## Перки Инкарнона: 157
+## Перки Инкарнона: 170
 
+- [Angstrum: Hitman's Hoard](https://wiki.warframe.com/w/Angstrum_Incarnon_Genesis) — Increase Base Ammo Capacity by +9.
+- [Atomos: Mercenary Chamber](https://wiki.warframe.com/w/Atomos_Incarnon_Genesis) — Increase Base Ammo Capacity to 560.
+- [Ballistica Prime: Critical Parallel](https://wiki.warframe.com/w/Ballistica_Incarnon_Genesis) — Increase Base Critical Damage Multiplier by +1.0.
+- [Ballistica: Critical Parallel](https://wiki.warframe.com/w/Ballistica_Incarnon_Genesis) — Increase Base Critical Damage Multiplier by +1.0.
 - [Boar Prime: Mercenary Chamber](https://wiki.warframe.com/w/Boar_Incarnon_Genesis) — Increase Base Ammo Capacity to 195.
 - [Boar Prime: Practiced Grip](https://wiki.warframe.com/w/Boar_Incarnon_Genesis) — Increase Accuracy by +50%.
 - [Boar: Mercenary Chamber](https://wiki.warframe.com/w/Boar_Incarnon_Genesis) — Increase Base Ammo Capacity to 195.
@@ -256,52 +260,43 @@
 - [Boltor: Crimson Overture](https://wiki.warframe.com/w/Boltor_Incarnon_Genesis) — +25% Ammo Efficiency for 5s. Stacks up to 3x.
 - [Boltor: Hunter's Mantra](https://wiki.warframe.com/w/Boltor_Incarnon_Genesis) — Punch Through +4 and +40% Accuracy.
 - [Braton Prime: Critical Parallel](https://wiki.warframe.com/w/Braton_Incarnon_Genesis) — Increase Base Critical Damage Multiplier by +0.2.
-- [Braton Prime: Daring Reverie](https://wiki.warframe.com/w/Braton_Incarnon_Genesis) — Increase Base Damage by +38. +50% Ammo Efficiency
+- [Braton Prime: Daring Reverie](https://wiki.warframe.com/w/Braton_Incarnon_Genesis) — +50% Ammo Efficiency
 - [Braton Prime: Gunsmoke Pick Up](https://wiki.warframe.com/w/Braton_Incarnon_Genesis) — 20% chance for 10% Ammo restored.
 - [Braton Prime: Mercenary Chamber](https://wiki.warframe.com/w/Braton_Incarnon_Genesis) — Increase Base Ammo Capacity to 1125.
-- [Braton Prime: Munitions Grit](https://wiki.warframe.com/w/Braton_Incarnon_Genesis) — Multishot consumes ammo directly from Capacity and does +54% Damage. +20% Multishot.
 - [Braton Prime: Prelude of Might](https://wiki.warframe.com/w/Braton_Incarnon_Genesis) — Increase Base Critical Damage Multiplier by +3.0.
 - [Braton Vandal: Critical Parallel](https://wiki.warframe.com/w/Braton_Incarnon_Genesis) — Increase Base Critical Damage Multiplier by +0.4.
-- [Braton Vandal: Daring Reverie](https://wiki.warframe.com/w/Braton_Incarnon_Genesis) — Increase Base Damage by +34. +50% Ammo Efficiency
+- [Braton Vandal: Daring Reverie](https://wiki.warframe.com/w/Braton_Incarnon_Genesis) — +50% Ammo Efficiency
 - [Braton Vandal: Gunsmoke Pick Up](https://wiki.warframe.com/w/Braton_Incarnon_Genesis) — 20% chance for 10% Ammo restored.
 - [Braton Vandal: Mercenary Chamber](https://wiki.warframe.com/w/Braton_Incarnon_Genesis) — Increase Base Ammo Capacity to 750.
-- [Braton Vandal: Munitions Grit](https://wiki.warframe.com/w/Braton_Incarnon_Genesis) — Multishot consumes ammo directly from Capacity and does +58% Damage. +20% Multishot.
 - [Braton Vandal: Prelude of Might](https://wiki.warframe.com/w/Braton_Incarnon_Genesis) — Increase Base Critical Damage Multiplier by +3.0.
 - [Braton: Critical Parallel](https://wiki.warframe.com/w/Braton_Incarnon_Genesis) — Increase Base Critical Damage Multiplier by +0.4.
-- [Braton: Daring Reverie](https://wiki.warframe.com/w/Braton_Incarnon_Genesis) — Increase Base Damage by +30. +50% Ammo Efficiency
+- [Braton: Daring Reverie](https://wiki.warframe.com/w/Braton_Incarnon_Genesis) — +50% Ammo Efficiency
 - [Braton: Gunsmoke Pick Up](https://wiki.warframe.com/w/Braton_Incarnon_Genesis) — 20% chance for 10% Ammo restored.
 - [Braton: Mercenary Chamber](https://wiki.warframe.com/w/Braton_Incarnon_Genesis) — Increase Base Ammo Capacity to 675.
-- [Braton: Munitions Grit](https://wiki.warframe.com/w/Braton_Incarnon_Genesis) — Multishot consumes ammo directly from Capacity and does +60% Damage. +20% Multishot.
 - [Braton: Prelude of Might](https://wiki.warframe.com/w/Braton_Incarnon_Genesis) — Increase Base Critical Damage Multiplier by +3.4.
 - [Bronco Prime: Enough for Everyone](https://wiki.warframe.com/w/Bronco_Incarnon_Genesis) — +75% Ammo efficiency when 6 enemies are within 6m.
 - [Bronco Prime: Practised Grip](https://wiki.warframe.com/w/Bronco_Incarnon_Genesis) — Increase Accuracy by +30%.
-- [Bronco Prime: Rain of Lead](https://wiki.warframe.com/w/Bronco_Incarnon_Genesis) — +2 Base Multishot.
 - [Bronco: Enough for Everyone](https://wiki.warframe.com/w/Bronco_Incarnon_Genesis) — +75% Ammo efficiency when 6 enemies are within 6m.
 - [Bronco: Practised Grip](https://wiki.warframe.com/w/Bronco_Incarnon_Genesis) — Increase Accuracy by +30%.
-- [Bronco: Rain of Lead](https://wiki.warframe.com/w/Bronco_Incarnon_Genesis) — +2 Base Multishot.
-- [Burston Prime: Forceful Finality](https://wiki.warframe.com/w/Burston_Incarnon_Genesis) — +5 Base Multishot on final magazine burst.
-- [Burston Prime: Reaver's Rapture](https://wiki.warframe.com/w/Burston_Incarnon_Genesis) — +20% Damage, resets on Reload.
-- [Burston: Forceful Finality](https://wiki.warframe.com/w/Burston_Incarnon_Genesis) — +5 Base Multishot on final magazine burst.
-- [Burston: Reaver's Rapture](https://wiki.warframe.com/w/Burston_Incarnon_Genesis) — +20% Damage, resets on Reload.
+- [Burston Prime: Forceful Finality](https://wiki.warframe.com/w/Burston_Incarnon_Genesis) — +5 Base Multishot
+- [Burston Prime: Reaver's Rapture](https://wiki.warframe.com/w/Burston_Incarnon_Genesis) — On Full Burst Hit: +20% Damage
+- [Burston: Forceful Finality](https://wiki.warframe.com/w/Burston_Incarnon_Genesis) — +5 Base Multishot
+- [Burston: Reaver's Rapture](https://wiki.warframe.com/w/Burston_Incarnon_Genesis) — On Full Burst Hit: +20% Damage
+- [Cestra: Wiseman's Regard](https://wiki.warframe.com/w/Cestra_Incarnon_Genesis) — Increase Base Status Chance by 30% of current Critical Chance, up to 40%.
 - [Dera Vandal: Crimson Overture](https://wiki.warframe.com/w/Dera_Incarnon_Genesis) — +25% Ammo Efficiency for 5s. Stacks up to 3x.
-- [Dera Vandal: Deathtrap Trigger](https://wiki.warframe.com/w/Dera_Incarnon_Genesis) — Increase Base Critical Damage Multiplier by +0.4
 - [Dera Vandal: Evolved Autoloader](https://wiki.warframe.com/w/Dera_Incarnon_Genesis) — +50% Magazine Reloaded per second when Holstered.
 - [Dera Vandal: High Ground](https://wiki.warframe.com/w/Dera_Incarnon_Genesis) — Increase Base Critical Chance by 25% of current Status Chance, up to 35%.
 - [Dera: Crimson Overture](https://wiki.warframe.com/w/Dera_Incarnon_Genesis) — +25% Ammo Efficiency for 5s. Stacks up to 3x.
-- [Dera: Deathtrap Trigger](https://wiki.warframe.com/w/Dera_Incarnon_Genesis) — Increase Base Critical Damage Multiplier by +0.6
 - [Dera: Evolved Autoloader](https://wiki.warframe.com/w/Dera_Incarnon_Genesis) — +50% Magazine Reloaded per second when Holstered.
 - [Dera: High Ground](https://wiki.warframe.com/w/Dera_Incarnon_Genesis) — Increase Base Critical Chance by 25% of current Status Chance, up to 35%.
-- [Dex Sybaris: Blazing Barrel](https://wiki.warframe.com/w/Sybaris_Incarnon_Genesis) — Increase Base Damage by + 15.
-- [Dex Sybaris: Elemental Dominance](https://wiki.warframe.com/w/Sybaris_Incarnon_Genesis) — Increase Base Status Chance by + 15% Effect doubles in Incarnon Form.
-- [Dex Sybaris: Extended Volley](https://wiki.warframe.com/w/Sybaris_Incarnon_Genesis) — Increase Base Magazine Capacity by + 10.
-- [Dex Sybaris: Reaver's Rapture](https://wiki.warframe.com/w/Sybaris_Incarnon_Genesis) — +20% Damage, resets on Reload
-- [Dex Sybaris: Survivor's Edge](https://wiki.warframe.com/w/Sybaris_Incarnon_Genesis) — Increase Critical Chance by + 5%.; Increase Status Chance by + 10%.
-- [Dex Sybaris: Well Rehearsed](https://wiki.warframe.com/w/Sybaris_Incarnon_Genesis) — Increase Base Damage by + 15.
+- [Despair: Stalker's Vendetta](https://wiki.warframe.com/w/Despair_Incarnon_Genesis) — +100%.
+- [Despair: Survivor's Edge](https://wiki.warframe.com/w/Despair_Incarnon_Genesis) — Increase Critical Chance by +12%
+- [Dex Sybaris: Reaver's Rapture](https://wiki.warframe.com/w/Sybaris_Incarnon_Genesis) — On Full Burst Hit: +20% Damage
+- [Dex Sybaris: Survivor's Edge](https://wiki.warframe.com/w/Sybaris_Incarnon_Genesis) — Increase Critical Chance by +5%.
 - [Dread: Hitman's Hoard](https://wiki.warframe.com/w/Dread_Incarnon_Genesis) — Increase Base Ammo Capacity to 144
-- [Dread: Hitman's Opportunity](https://wiki.warframe.com/w/Dread_Incarnon_Genesis) — +100% Damage to enemies below half Health
 - [Dread: Stalker's Resentment](https://wiki.warframe.com/w/Dread_Incarnon_Genesis) — Hits increase Base Damage by +10 and Fire Rate by +10%, stacks up to 5x. Resets on missed shot.
+- [Dual Toxocyst: Evolved Autoloader](https://wiki.warframe.com/w/Dual_Toxocyst_Incarnon_Genesis) — +50% Magazine Reloaded/s when holstered.
 - [Felarx: Agile Executor](https://wiki.warframe.com/w/Felarx) — Gain 50% Ammo Efficiency while Aim Gliding and Sliding
-- [Felarx: Devastating Attrition](https://wiki.warframe.com/w/Felarx) — 50% chance to deal +2000% damage on non-critical hits
 - [Felarx: Dual-Mode](https://wiki.warframe.com/w/Felarx) — Reload toggles the weapon between +100% Projectile Speed and +4m Punch Through.
 - [Felarx: Evolved Autoloader](https://wiki.warframe.com/w/Felarx) — +50% Magazine Reloaded/s when Holstered
 - [Felarx: Incarnon Catalyst](https://wiki.warframe.com/w/Felarx) — Headshots Build +50% more Incarnon Transmutation charge.
@@ -313,54 +308,78 @@
 - [Gammacor: Evolved Autoloader](https://wiki.warframe.com/w/Gammacor_Incarnon_Genesis) — +50% Magazine Reloaded/s when Holstered
 - [Gorgon Wraith: Hunter's Mantra](https://wiki.warframe.com/w/Gorgon_Incarnon_Genesis) — +3 Punch Through, +40% Accuracy.
 - [Gorgon: Hunter's Mantra](https://wiki.warframe.com/w/Gorgon_Incarnon_Genesis) — +3 Punch Through, +40% Accuracy.
-- [Kunai: Deathtrap Trigger](https://wiki.warframe.com/w/Kunai_Incarnon_Genesis) — *Increase Base Critical Chance by +40% for 4s.; *Increase Base Critical Damage Multiplier by +1.4 for 4s.
-- [Kunai: Swift Conclusion](https://wiki.warframe.com/w/Kunai_Incarnon_Genesis) — Increase Damage by +70.; Increase Damage by +200% if enemy has less than half health.
+- [Innodem: Armed Inspiration](https://wiki.warframe.com/w/Innodem) — Collecting ammo grants 5 Melee Combo counter
+- [Innodem: Hawk Momentum](https://wiki.warframe.com/w/Innodem) — Gain 5 Combo for every 10m of continuous slide
+- [Innodem: Incarnon Imago](https://wiki.warframe.com/w/Innodem) — Reach 3x Combo and Heavy Attack to activate Incarnon Form
+- [Innodem: Protracted Execution](https://wiki.warframe.com/w/Innodem) — 20 Combo on Finisher
+- [Innodem: Skyborne Hunter](https://wiki.warframe.com/w/Innodem) — Increase range of aerial melee attacks by +0.5m.
+- [Innodem: Stunning Brutality](https://wiki.warframe.com/w/Innodem) — Stun aware enemies in a 10m Radius
+- [Kunai: Swift Conclusion](https://wiki.warframe.com/w/Kunai_Incarnon_Genesis) — Increase Damage by +200% if enemy has less than half health.
 - [Laetum: Awakened Readiness](https://wiki.warframe.com/w/Laetum) — 30% Magazine Reloaded per second while Holstered
 - [Laetum: Feather of Justice](https://wiki.warframe.com/w/Laetum) — Gain 60% Ammo Efficiency while Aim Gliding or Sliding.
 - [Laetum: Incarnon Efficiency](https://wiki.warframe.com/w/Laetum) — Headshots Build +50% more Incarnon Transmutation charge.
 - [Laetum: Raptor's Chase](https://wiki.warframe.com/w/Laetum) — +50% Movement Speed while Aiming
 - [Laetum: Reaper's Plenty](https://wiki.warframe.com/w/Laetum) — +40% Ammo Efficiency for 6 seconds.
-- [Lato Prime: Deathtrap Trigger](https://wiki.warframe.com/w/Lato_Incarnon_Genesis) — *Increase Base Critical Chance by +30% for 4s.; *Increase Base Critical Damage Multiplier by +2.3 for 4s.
 - [Lato Prime: Exact Penance](https://wiki.warframe.com/w/Lato_Incarnon_Genesis) — 50% chance for Instant Reload.
 - [Lato Prime: Marksman's Gain](https://wiki.warframe.com/w/Lato_Incarnon_Genesis) — 20% chance for +50% Ammo Efficiency for 6s.
-- [Lato Vandal: Deathtrap Trigger](https://wiki.warframe.com/w/Lato_Incarnon_Genesis) — *Increase Base Critical Chance by +38% for 4s.; *Increase Base Critical Damage Multiplier by +2.6 for 4s.
 - [Lato Vandal: Exact Penance](https://wiki.warframe.com/w/Lato_Incarnon_Genesis) — 50% chance for Instant Reload.
 - [Lato Vandal: Marksman's Gain](https://wiki.warframe.com/w/Lato_Incarnon_Genesis) — 20% chance for +50% Ammo Efficiency for 6s.
-- [Lato: Deathtrap Trigger](https://wiki.warframe.com/w/Lato_Incarnon_Genesis) — *Increase Base Critical Chance by +50% for 4s.; *Increase Base Critical Damage Multiplier by +3.2 for 4s.
 - [Lato: Exact Penance](https://wiki.warframe.com/w/Lato_Incarnon_Genesis) — 50% chance for Instant Reload.
 - [Lato: Marksman's Gain](https://wiki.warframe.com/w/Lato_Incarnon_Genesis) — 20% chance for +50% Ammo Efficiency for 6s.
-- [Latron Prime: Critical Parallel](https://wiki.warframe.com/w/Latron_Incarnon_Genesis) — Increase Base Critical Damage Multiplier by +Yx.
 - [Latron Prime: Flensing Spikes](https://wiki.warframe.com/w/Latron_Incarnon_Genesis) — Remove 20% of enemy Armor per Puncture Status.
-- [Latron Wraith: Critical Parallel](https://wiki.warframe.com/w/Latron_Incarnon_Genesis) — Increase Base Critical Damage Multiplier by +Yx.
 - [Latron Wraith: Flensing Spikes](https://wiki.warframe.com/w/Latron_Incarnon_Genesis) — Remove 20% of enemy Armor per Puncture Status.
-- [Latron: Critical Parallel](https://wiki.warframe.com/w/Latron_Incarnon_Genesis) — Increase Base Critical Damage Multiplier by +Yx.
 - [Latron: Flensing Spikes](https://wiki.warframe.com/w/Latron_Incarnon_Genesis) — Remove 20% of enemy Armor per Puncture Status.
 - [Lex Prime: Trusty Sidearm](https://wiki.warframe.com/w/Lex_Incarnon_Genesis) — +60% Ammo Efficiency.
 - [Lex: Trusty Sidearm](https://wiki.warframe.com/w/Lex_Incarnon_Genesis) — +60% Ammo Efficiency.
 - [Miter: Mercenary Chamber](https://wiki.warframe.com/w/Miter_Incarnon_Genesis) — Increase Base Ammo Capacity to 160
-- [Miter: Plentiful Mayhem](https://wiki.warframe.com/w/Miter_Incarnon_Genesis) — Multishot consumes ammo directly from Capacity and increases Damage by +20.
+- [Miter: Plentiful Mayhem](https://wiki.warframe.com/w/Miter_Incarnon_Genesis) — +20.
 - [Miter: Sawblade Storm](https://wiki.warframe.com/w/Miter_Incarnon_Genesis) — Hold charged shot for 1s to increase area of effect.
 - [Mk1-Braton: Critical Parallel](https://wiki.warframe.com/w/Braton_Incarnon_Genesis) — Increase Base Critical Damage Multiplier by +0.5.
-- [Mk1-Braton: Daring Reverie](https://wiki.warframe.com/w/Braton_Incarnon_Genesis) — Increase Base Damage by +22. +50% Ammo Efficiency
+- [Mk1-Braton: Daring Reverie](https://wiki.warframe.com/w/Braton_Incarnon_Genesis) — +50% Ammo Efficiency
 - [Mk1-Braton: Gunsmoke Pick Up](https://wiki.warframe.com/w/Braton_Incarnon_Genesis) — 20% chance for 10% Ammo restored.
 - [Mk1-Braton: Mercenary Chamber](https://wiki.warframe.com/w/Braton_Incarnon_Genesis) — Increase Base Ammo Capacity to 600.
-- [Mk1-Braton: Munitions Grit](https://wiki.warframe.com/w/Braton_Incarnon_Genesis) — Multishot consumes ammo directly from Capacity and does +48% Damage. +20% Multishot.
 - [Mk1-Braton: Prelude of Might](https://wiki.warframe.com/w/Braton_Incarnon_Genesis) — Increase Base Critical Damage Multiplier by +3.3.
 - [Mk1-Furis: Executioner's Fortune](https://wiki.warframe.com/w/Furis_Incarnon_Genesis) — 10% chance for Instant Reload
 - [Mk1-Furis: Practiced Grip](https://wiki.warframe.com/w/Furis_Incarnon_Genesis) — Increase Accuracy by +50%
 - [Mk1-Furis: Stormburst](https://wiki.warframe.com/w/Furis_Incarnon_Genesis) — +0.4 Multishot for 2s. Stacks up to 3x.
-- [Mk1-Kunai: Deathtrap Trigger](https://wiki.warframe.com/w/Kunai_Incarnon_Genesis) — *Increase Base Critical Chance by +42% for 4s.; *Increase Base Critical Damage Multiplier by +1 for 4s.
-- [Mk1-Kunai: Swift Conclusion](https://wiki.warframe.com/w/Kunai_Incarnon_Genesis) — Increase Damage by +80.; Increase Damage by +200% if enemy has less than half health.
+- [Mk1-Kunai: Swift Conclusion](https://wiki.warframe.com/w/Kunai_Incarnon_Genesis) — Increase Damage by +200% if enemy has less than half health.
 - [Mk1-Paris: Vicious Promise](https://wiki.warframe.com/w/Paris_Incarnon_Genesis) — Increase Base Critical Chance by +40% on undamaged enemies.; Increase Base Critical Damage Multiplier by +2x on undamaged enemies.
 - [Mk1-Strun: Blazing Barrel](https://wiki.warframe.com/w/Strun_Incarnon_Genesis) — +0.05 Base Multishot. Stacks up to 5x.
 - [Mk1-Strun: Galvanic Reload](https://wiki.warframe.com/w/Strun_Incarnon_Genesis) — On hitting a target affected by an Electricity status, 40% chance to restore 1 round in the magazine from ammo pool.
+- [Onos: Devastation Cascade](https://wiki.warframe.com/w/Onos) — Hitting enemies in Incarnon Form increases the Critical Chance and Critical Damage of the fully charged blast by +5%. Stacks up to 50 times.
+- [Onos: Extended Volley](https://wiki.warframe.com/w/Onos) — +10 Base Magazine Capacity
+- [Onos: Hunter's Rearmament](https://wiki.warframe.com/w/Onos) — 10% chance to replenish 10 Ammo
+- [Onos: Incarnon Efficiency](https://wiki.warframe.com/w/Onos) — Headshots Build +50% more Incarnon Transmutation charge.
 - [Paris Prime: Vicious Promise](https://wiki.warframe.com/w/Paris_Incarnon_Genesis) — Increase Base Critical Chance by +40% on undamaged enemies.; Increase Base Critical Damage Multiplier by +2x on undamaged enemies.
 - [Paris: Vicious Promise](https://wiki.warframe.com/w/Paris_Incarnon_Genesis) — Increase Base Critical Chance by +40% on undamaged enemies.; Increase Base Critical Damage Multiplier by +2x on undamaged enemies.
 - [Phenmor: Executioner's Fortune](https://wiki.warframe.com/w/Phenmor) — 20% chance to instant Reload.
 - [Phenmor: Incarnon Efficiency](https://wiki.warframe.com/w/Phenmor) — Headshots Build +50% more Incarnon Transmutation charge.
-- [Phenmor: Spiteful Defilement](https://wiki.warframe.com/w/Phenmor) — Enemies suffering from fewer than 3 Status Effects will receive: +100% Critical Damage
 - [Phenmor: Void's Guidance](https://wiki.warframe.com/w/Phenmor) — +50% Accuracy and +50% less Recoil while Aiming
+- [Praedos: Drifting Grace](https://wiki.warframe.com/w/Praedos) — +20% Slide
+- [Praedos: Reaching Lunge](https://wiki.warframe.com/w/Praedos) — +1.5m Slide Attack Range
+- [Praedos: Seismic Slam](https://wiki.warframe.com/w/Praedos) — +50% Slam Radius
+- [Praedos: Shockwave Synergy](https://wiki.warframe.com/w/Praedos) — For each enemy hit by Slam radius, gain 4 Combo Count
+- [Praedos: Swift Transmute](https://wiki.warframe.com/w/Praedos) — Reach 3x Combo and Heavy Attack to activate Incarnon Form
+- [Praedos: Universal Readiness](https://wiki.warframe.com/w/Praedos) — Collecting ammo grants 5 Melee Combo counter
+- [Praedos: Vaulting Leap](https://wiki.warframe.com/w/Praedos) — Increase Double Jump strength by +100%
+- [Prisma Angstrum: Hitman's Hoard](https://wiki.warframe.com/w/Angstrum_Incarnon_Genesis) — Increase Base Ammo Capacity by +9.
 - [Prisma Gorgon: Hunter's Mantra](https://wiki.warframe.com/w/Gorgon_Incarnon_Genesis) — +3 Punch Through, +40% Accuracy.
+- [Rakta Ballistica: Critical Parallel](https://wiki.warframe.com/w/Ballistica_Incarnon_Genesis) — Increase Base Critical Damage Multiplier by +1.0.
+- [Ruvox: Brutal Efficiency](https://wiki.warframe.com/w/Ruvox) — Gain +40% Heavy Attack Efficiency for 20s when impaling 5 or more enemies.
+- [Ruvox: Gathering Momentum](https://wiki.warframe.com/w/Ruvox) — Gain +5% Movement Speed per Melee Combo Multiplier
+- [Ruvox: Inspiring Execution](https://wiki.warframe.com/w/Ruvox) — +30% Combo Count Chance on Finishers for 20s
+- [Ruvox: Permanent Perforation](https://wiki.warframe.com/w/Ruvox) — Enemies suffer 5 Puncture Status while impaled
+- [Ruvox: Seismic Slam](https://wiki.warframe.com/w/Ruvox) — +60% Slam Radius
+- [Ruvox: Shockwave Synergy](https://wiki.warframe.com/w/Ruvox) — For each enemy hit by Slam radius, gain 4 Combo Count.
+- [Ruvox: Swift Transmute](https://wiki.warframe.com/w/Ruvox) — Reach 3x Combo and Heavy Attack to activate Incarnon Form
+- [Ruvox: Ternary Vault](https://wiki.warframe.com/w/Ruvox) — Gain +1 mid-air jumps
+- [Ruvox: Vulnerability Serum](https://wiki.warframe.com/w/Ruvox) — Impaled enemies are +35% more vulnerable to Status Chance
+- [Sicarus Prime: King's Gambit](https://wiki.warframe.com/w/Sicarus_Incarnon_Genesis) — x0 Critical Chance on Bodyshots, +150% Critical Chance on Weakpoint Hits.
+- [Sicarus Prime: Survivor's Edge](https://wiki.warframe.com/w/Sicarus_Incarnon_Genesis) — Increase Base Status Chance to 9%.
+- [Sicarus Prime: Wiseman's Regard](https://wiki.warframe.com/w/Sicarus_Incarnon_Genesis) — Increase Base Status Chance by 30% of current Critical Chance, up to 40%
+- [Sicarus: King's Gambit](https://wiki.warframe.com/w/Sicarus_Incarnon_Genesis) — x0 Critical Chance on Bodyshots, +150% Critical Chance on Weakpoint Hits.
+- [Sicarus: Survivor's Edge](https://wiki.warframe.com/w/Sicarus_Incarnon_Genesis) — Increase Base Status Chance to 12%.
+- [Sicarus: Wiseman's Regard](https://wiki.warframe.com/w/Sicarus_Incarnon_Genesis) — Increase Base Status Chance by 30% of current Critical Chance, up to 40%
 - [Soma Prime: Fortifying Bloodshed](https://wiki.warframe.com/w/Soma_Incarnon_Genesis) — +100 Overshield.
 - [Soma Prime: Practiced Grip](https://wiki.warframe.com/w/Soma_Incarnon_Genesis) — Increase Accuracy by +50%.
 - [Soma: Fortifying Bloodshed](https://wiki.warframe.com/w/Soma_Incarnon_Genesis) — +100 Overshield.
@@ -371,18 +390,11 @@
 - [Strun Wraith: Galvanic Reload](https://wiki.warframe.com/w/Strun_Incarnon_Genesis) — On hitting a target affected by an Electricity status, 40% chance to restore 1 round in the magazine from ammo pool.
 - [Strun: Blazing Barrel](https://wiki.warframe.com/w/Strun_Incarnon_Genesis) — +0.05 Base Multishot. Stacks up to 5x.
 - [Strun: Galvanic Reload](https://wiki.warframe.com/w/Strun_Incarnon_Genesis) — On hitting a target affected by an Electricity status, 40% chance to restore 1 round in the magazine from ammo pool.
-- [Sybaris Prime: Blazing Barrel](https://wiki.warframe.com/w/Sybaris_Incarnon_Genesis) — Increase Base Damage by + 15.
-- [Sybaris Prime: Elemental Dominance](https://wiki.warframe.com/w/Sybaris_Incarnon_Genesis) — Increase Base Status Chance by + 8% Effect doubles in Incarnon Form.
-- [Sybaris Prime: Extended Volley](https://wiki.warframe.com/w/Sybaris_Incarnon_Genesis) — Increase Base Magazine Capacity by + 12.
-- [Sybaris Prime: Reaver's Rapture](https://wiki.warframe.com/w/Sybaris_Incarnon_Genesis) — +20% Damage, resets on Reload
-- [Sybaris Prime: Survivor's Edge](https://wiki.warframe.com/w/Sybaris_Incarnon_Genesis) — Increase Critical Chance by + 5%.; Increase Status Chance by + 10%.
-- [Sybaris Prime: Well Rehearsed](https://wiki.warframe.com/w/Sybaris_Incarnon_Genesis) — Increase Base Damage by + 15.
-- [Sybaris: Blazing Barrel](https://wiki.warframe.com/w/Sybaris_Incarnon_Genesis) — Increase Base Damage by + 20.
-- [Sybaris: Elemental Dominance](https://wiki.warframe.com/w/Sybaris_Incarnon_Genesis) — Increase Base Status Chance by + 15% Effect doubles in Incarnon Form.
-- [Sybaris: Extended Volley](https://wiki.warframe.com/w/Sybaris_Incarnon_Genesis) — Increase Base Magazine Capacity by + 8.
-- [Sybaris: Reaver's Rapture](https://wiki.warframe.com/w/Sybaris_Incarnon_Genesis) — +20% Damage, resets on Reload
-- [Sybaris: Survivor's Edge](https://wiki.warframe.com/w/Sybaris_Incarnon_Genesis) — Increase Critical Chance by + 5%.; Increase Status Chance by + 10%.
-- [Sybaris: Well Rehearsed](https://wiki.warframe.com/w/Sybaris_Incarnon_Genesis) — Increase Base Damage by + 20.
+- [Stug: Overcharge Blast](https://wiki.warframe.com/w/Stug_Incarnon_Genesis) — +50% Blast Radius
+- [Sybaris Prime: Reaver's Rapture](https://wiki.warframe.com/w/Sybaris_Incarnon_Genesis) — On Full Burst Hit: +20% Damage
+- [Sybaris Prime: Survivor's Edge](https://wiki.warframe.com/w/Sybaris_Incarnon_Genesis) — Increase Critical Chance by +5%.
+- [Sybaris: Reaver's Rapture](https://wiki.warframe.com/w/Sybaris_Incarnon_Genesis) — On Full Burst Hit: +20% Damage
+- [Sybaris: Survivor's Edge](https://wiki.warframe.com/w/Sybaris_Incarnon_Genesis) — Increase Critical Chance by +5%.
 - [Synoid Gammacor: Evolved Autoloader](https://wiki.warframe.com/w/Gammacor_Incarnon_Genesis) — +50% Magazine Reloaded/s when Holstered
 - [Telos Boltor: Crimson Overture](https://wiki.warframe.com/w/Boltor_Incarnon_Genesis) — +25% Ammo Efficiency for 5s. Stacks up to 3x.
 - [Telos Boltor: Hunter's Mantra](https://wiki.warframe.com/w/Boltor_Incarnon_Genesis) — Punch Through +4 and +40% Accuracy.
@@ -396,14 +408,15 @@
 - [Thalys: Swift Transmute](https://wiki.warframe.com/w/Thalys) — Reach 3x Combo and Heavy Attack to activate Incarnon Form
 - [Thalys: Vaulting Leap](https://wiki.warframe.com/w/Thalys) — +100% Jump and Double Jump Height
 - [Thalys: Void Splinters](https://wiki.warframe.com/w/Thalys) — Shard duration is increased to 30s. Shards become weak spots that have +100% Critical Chance when damaged. Shard damage is reduced by -50%.
+- [Torid: Final Fusillade](https://wiki.warframe.com/w/Torid_Incarnon_Genesis) — +3 Multishot
+- [Torid: Plentiful Mayhem](https://wiki.warframe.com/w/Torid_Incarnon_Genesis) — +60%.
+- [Torid: Renewed Horror](https://wiki.warframe.com/w/Torid_Incarnon_Genesis) — Lingering damage field duration doubles on first shot.
 - [Vasto Prime: Awakened Readiness](https://wiki.warframe.com/w/Vasto_Incarnon_Genesis) — +20% Magazine Reloaded per second when Holstered.
-- [Vasto Prime: Deathtrap Trigger](https://wiki.warframe.com/w/Vasto_Incarnon_Genesis) — * Increase Base Critical Chance by +30% for 3s.; * Increase Base Critical Damage Multiplier by +0.8 for 3s.
-- [Vasto Prime: Lone Gun](https://wiki.warframe.com/w/Vasto_Incarnon_Genesis) — * Increase Base Damage by +40; * Increase Base Magazine Capacity by +14.
 - [Vasto Prime: Reaper's Plenty](https://wiki.warframe.com/w/Vasto_Incarnon_Genesis) — Infinite Ammo for 2s.
 - [Vasto: Awakened Readiness](https://wiki.warframe.com/w/Vasto_Incarnon_Genesis) — +20% Magazine Reloaded per second when Holstered.
-- [Vasto: Deathtrap Trigger](https://wiki.warframe.com/w/Vasto_Incarnon_Genesis) — * Increase Base Critical Chance by +30% for 3s.; * Increase Base Critical Damage Multiplier by +2.2 for 3s.
-- [Vasto: Lone Gun](https://wiki.warframe.com/w/Vasto_Incarnon_Genesis) — * Increase Base Damage by +40; * Increase Base Magazine Capacity by +14.
 - [Vasto: Reaper's Plenty](https://wiki.warframe.com/w/Vasto_Incarnon_Genesis) — Infinite Ammo for 2s.
+- [Vectis Prime: Survivor's Edge](https://wiki.warframe.com/w/Vectis_Incarnon_Genesis) — Increase Base Status Chance by 30% of current Critical Chance, up to 40%
+- [Vectis: Survivor's Edge](https://wiki.warframe.com/w/Vectis_Incarnon_Genesis) — Increase Base Status Chance by 30% of current Critical Chance, up to 40%
 
 ## Аугменты способностей (этап 6, баффы): 314
 
@@ -722,12 +735,11 @@
 - [Wrath Of Ukko](https://wiki.warframe.com/w/Wrath_of_Ukko) — Storm of Ukko Augment: Wrathful Advance moves the storm of daggers to the teleportation location and increases its duration by 6s.
 - [Wrecking Wall](https://wiki.warframe.com/w/Wrecking_Wall) — Containment Wall Augment: Strip 50% of armor and shields from struck enemies. Hitting 5 or more enemies will restart the duration of any Chyrinka Pillars and empower them.
 
-## Условные эффекты, разобранные автоматически: 98
+## Условные эффекты, разобранные автоматически: 79
 
 Условие (триггер, длительность, стаки) взято из текста; корзину и механику сверить с вики.
 
 - [Amalgam Furax Body Count](https://wiki.warframe.com/w/Amalgam_Furax_Body_Count)
-- [Angstrum: нет таблицы эволюций на Angstrum Incarnon Genesis](https://wiki.warframe.com/w/Angstrum_Incarnon_Genesis)
 - [Arcane Aegis](https://wiki.warframe.com/w/Arcane_Aegis)
 - [Arcane Agility](https://wiki.warframe.com/w/Arcane_Agility)
 - [Arcane Avenger](https://wiki.warframe.com/w/Arcane_Avenger)
@@ -740,23 +752,17 @@
 - [Arcane Strike](https://wiki.warframe.com/w/Arcane_Strike)
 - [Archgun Ace](https://wiki.warframe.com/w/Archgun_Ace)
 - [Argon Scope](https://wiki.warframe.com/w/Argon_Scope)
-- [Atomos: нет таблицы эволюций на Atomos Incarnon Genesis](https://wiki.warframe.com/w/Atomos_Incarnon_Genesis)
-- [Ballistica Prime: нет таблицы эволюций на Ballistica Incarnon Genesis](https://wiki.warframe.com/w/Ballistica_Incarnon_Genesis)
-- [Ballistica: нет таблицы эволюций на Ballistica Incarnon Genesis](https://wiki.warframe.com/w/Ballistica_Incarnon_Genesis)
 - [Berserker Fury](https://wiki.warframe.com/w/Berserker_Fury)
 - [Bladed Rounds](https://wiki.warframe.com/w/Bladed_Rounds)
 - [Blood Rush](https://wiki.warframe.com/w/Blood_Rush)
 - [Cascadia Overcharge](https://wiki.warframe.com/w/Cascadia_Overcharge)
 - [Catalyzer Link](https://wiki.warframe.com/w/Catalyzer_Link)
-- [Cestra: нет таблицы эволюций на Cestra Incarnon Genesis](https://wiki.warframe.com/w/Cestra_Incarnon_Genesis)
 - [Charged Chamber](https://wiki.warframe.com/w/Charged_Chamber)
 - [Combo Fury](https://wiki.warframe.com/w/Combo_Fury)
 - [Condition Overload](https://wiki.warframe.com/w/Condition_Overload)
 - [Conjunction Voltage](https://wiki.warframe.com/w/Conjunction_Voltage)
 - [Critical Focus](https://wiki.warframe.com/w/Critical_Focus)
 - [Deadly Efficiency](https://wiki.warframe.com/w/Deadly_Efficiency)
-- [Despair: нет таблицы эволюций на Despair Incarnon Genesis](https://wiki.warframe.com/w/Despair_Incarnon_Genesis)
-- [Dual Toxocyst: нет таблицы эволюций на Dual Toxocyst Incarnon Genesis](https://wiki.warframe.com/w/Dual_Toxocyst_Incarnon_Genesis)
 - [Embedded Catalyzer](https://wiki.warframe.com/w/Embedded_Catalyzer)
 - [Enduring Affliction](https://wiki.warframe.com/w/Enduring_Affliction)
 - [Enduring Strike](https://wiki.warframe.com/w/Enduring_Strike)
@@ -778,7 +784,6 @@
 - [Guided Ordnance](https://wiki.warframe.com/w/Guided_Ordnance)
 - [Holster Amp](https://wiki.warframe.com/w/Holster_Amp)
 - [Hydraulic Crosshairs](https://wiki.warframe.com/w/Hydraulic_Crosshairs)
-- [Innodem: нет таблицы эволюций на Innodem](https://wiki.warframe.com/w/Innodem)
 - [Killing Blow](https://wiki.warframe.com/w/Killing_Blow)
 - [Laser Sight](https://wiki.warframe.com/w/Laser_Sight)
 - [Lasting Purity](https://wiki.warframe.com/w/Lasting_Purity)
@@ -787,10 +792,8 @@
 - [Molt Augmented](https://wiki.warframe.com/w/Molt_Augmented)
 - [Nano-Applicator](https://wiki.warframe.com/w/Nano-Applicator)
 - [Narrow Barrel](https://wiki.warframe.com/w/Narrow_Barrel)
-- [Onos: нет таблицы эволюций на Onos](https://wiki.warframe.com/w/Onos)
 - [Pain Points](https://wiki.warframe.com/w/Pain_Points)
 - [Power Throw](https://wiki.warframe.com/w/Power_Throw)
-- [Praedos: нет таблицы эволюций на Praedos](https://wiki.warframe.com/w/Praedos)
 - [Pressurized Magazine](https://wiki.warframe.com/w/Pressurized_Magazine)
 - [Primary Blight](https://wiki.warframe.com/w/Primary_Blight)
 - [Primary Deadhead](https://wiki.warframe.com/w/Primary_Deadhead)
@@ -800,29 +803,20 @@
 - [Primed Chamber](https://wiki.warframe.com/w/Primed_Chamber)
 - [Primed Charged Chamber]()
 - [Primed Deadly Efficiency](https://wiki.warframe.com/w/Primed_Deadly_Efficiency)
-- [Prisma Angstrum: нет таблицы эволюций на Angstrum Incarnon Genesis](https://wiki.warframe.com/w/Angstrum_Incarnon_Genesis)
-- [Rakta Ballistica: нет таблицы эволюций на Ballistica Incarnon Genesis](https://wiki.warframe.com/w/Ballistica_Incarnon_Genesis)
 - [Reflex Guard](https://wiki.warframe.com/w/Reflex_Guard)
 - [Repeater Clip](https://wiki.warframe.com/w/Repeater_Clip)
 - [Resolute Focus](https://wiki.warframe.com/w/Resolute_Focus)
-- [Ruvox: нет таблицы эволюций на Ruvox](https://wiki.warframe.com/w/Ruvox)
 - [Secondary Deadhead](https://wiki.warframe.com/w/Secondary_Deadhead)
 - [Secondary Dexterity](https://wiki.warframe.com/w/Secondary_Dexterity)
 - [Secondary Merciless](https://wiki.warframe.com/w/Secondary_Merciless)
 - [Sharpened Bullets](https://wiki.warframe.com/w/Sharpened_Bullets)
 - [Shotgun Vendetta](https://wiki.warframe.com/w/Shotgun_Vendetta)
 - [Shrapnel Shot](https://wiki.warframe.com/w/Shrapnel_Shot)
-- [Sicarus Prime: нет таблицы эволюций на Sicarus Incarnon Genesis](https://wiki.warframe.com/w/Sicarus_Incarnon_Genesis)
-- [Sicarus: нет таблицы эволюций на Sicarus Incarnon Genesis](https://wiki.warframe.com/w/Sicarus_Incarnon_Genesis)
 - [Spectral Serration](https://wiki.warframe.com/w/Spectral_Serration)
 - [Split Flights](https://wiki.warframe.com/w/Split_Flights)
 - [Spring-Loaded Blade](https://wiki.warframe.com/w/Spring-Loaded_Blade)
 - [Spring-Loaded Chamber](https://wiki.warframe.com/w/Spring-Loaded_Chamber)
-- [Stug: нет таблицы эволюций на Stug Incarnon Genesis](https://wiki.warframe.com/w/Stug_Incarnon_Genesis)
 - [Targeting Subsystem](https://wiki.warframe.com/w/Targeting_Subsystem)
-- [Torid: нет таблицы эволюций на Torid](https://wiki.warframe.com/w/Torid)
-- [Vectis Prime: нет таблицы эволюций на Vectis Incarnon Genesis](https://wiki.warframe.com/w/Vectis_Incarnon_Genesis)
-- [Vectis: нет таблицы эволюций на Vectis Incarnon Genesis](https://wiki.warframe.com/w/Vectis_Incarnon_Genesis)
 - [Vigorous Swap](https://wiki.warframe.com/w/Vigorous_Swap)
 
 ## Пропущены (одноимённые записи WFCD, которых нет на вики): 174
