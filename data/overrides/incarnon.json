@@ -1,0 +1,7 @@
+{
+  "_comment": "Ручные правки перков Инкарнона. Ключ — название перка (англ.).",
+  "Devouring Attrition": {
+    "effects": [{ "stat": "final_mult", "value": 21, "bucket": "final_mult_noncrit", "condition": { "trigger": "Попадание без крита сработало", "chance": 0.5 } }],
+    "source": "https://wiki.warframe.com/w/Laetum"
+  }
+}

@@ -10,7 +10,7 @@ const FRAME_DEFAULT = {
 };
 const DEFAULT = {
   view: 'weapon',
-  cat: 'secondary', weapon: 'Laetum', attack: 0,
+  cat: 'secondary', weapon: 'Laetum', attack: 0, meleeMode: 'normal', combo: 1, exaltedScale: true, incarnon: {},
   mods: Array(8).fill(null), exilus: null, arcane: null,
   stacks: {}, flags: {}, statusTypes: 0,
   buffs: [{ id: 'silken_stride', on: true, variant: 'ground', ownStrength: false, strength: 100, helminth: false }], customMult: 1, customStatus: 0,
@@ -34,7 +34,7 @@ const D = { weapons: {}, mods: {}, arcanes: {} };
 const F = () => S.frame;
 
 // ---------- данные ----------
-const weaponList = () => (D.weapons[S.cat] || []).filter(w => w.class !== 'Exalted Weapon' && w.attacks?.length);
+const weaponList = () => (D.weapons[S.cat] || []).filter(w => w.attacks?.length);
 const currentWeapon = () => weaponList().find(w => w.name === S.weapon) || weaponList()[0];
 const currentGroup = () => modGroup(currentWeapon(), S.cat);
 const modsOf = () => D.mods[currentGroup()] || [];
@@ -55,6 +55,22 @@ async function ensureCategory() {
   D.mods[g] ||= await load(MOD_FILES[g]);
   if (ARCANE_FILES[S.cat]) D.arcanes[S.cat] ||= await load(ARCANE_FILES[S.cat]);
 }
+
+// ---------- Инкарнон ----------
+const incOf = () => D.incarnon?.[currentWeapon().name];
+function incSources() {
+  const inc = incOf();
+  if (!inc) return [];
+  const sel = S.incarnon[currentWeapon().name] || {};
+  const out = [];
+  for (const t of inc.tiers) {
+    const pk = t.perks.find(p => p.name === sel[t.tier]);
+    if (pk) out.push({ key: `inc:${currentWeapon().name}:${t.tier}`, name: `${pk.name} (эволюция ${t.tier})`, effects: pk.effects, perk: pk });
+  }
+  return out;
+}
+
+const buildState_own = () => buffState().own;
 
 // ---------- фрейм: расчёт ----------
 function frameInput() {
@@ -89,8 +105,32 @@ function renderWeapon() {
   sel.replaceChildren(...w.attacks.map((a, i) => h('option', { value: i }, a.attackName || `Атака ${i + 1}`)));
   if (S.attack >= w.attacks.length) S.attack = 0;
   sel.value = S.attack;
-  $('weaponNote').hidden = S.cat !== 'melee';
-  $('weaponNote').textContent = 'Ближний бой считается как один удар без комбо, стоек и тяжёлых атак — это этап 7.';
+  const melee = S.cat === 'melee';
+  $('meleeRow').hidden = !melee;
+  segmented($('meleeSeg'), [['normal', 'Обычный'], ['heavy', 'Тяжёлый'], ['slide', 'В слайде']], S.meleeMode, v => { S.meleeMode = v; renderWeapon(); update(false); });
+  $('combo').value = S.combo;
+  const exalt = w.class === 'Exalted Weapon';
+  $('exaltRow').hidden = !exalt;
+  $('weaponNote').hidden = !melee;
+  $('weaponNote').textContent = melee ? `Тяжёлый удар: ${num(w.heavyAttack || 0, 0)} базового урона × комбо; в слайде: ${num(w.slideAttack || 0, 0)}. Множители отдельных ударов стоек не учитываются.` : '';
+  renderIncarnon();
+}
+
+function renderIncarnon() {
+  const inc = incOf();
+  $('incCard').hidden = !inc;
+  if (!inc) return;
+  const w = currentWeapon();
+  const sel = S.incarnon[w.name] ||= {};
+  $('incSrc').replaceChildren(h('a', { href: inc.page, target: '_blank', rel: 'noopener' }, 'вики'));
+  $('incList').replaceChildren(...inc.tiers.map(t => {
+    const pk = t.perks.find(p => p.name === sel[t.tier]);
+    return h('div', { class: 'cond' },
+      h('div', {}, h('b', {}, `Эволюция ${t.tier}`),
+        pk ? h('div', { class: 'muted' }, pk.text.join(' · '), !pk.effects.length ? h('span', { class: 'warn' }, ' · не влияет на урон или не разобран') : null) : null),
+      h('select', { 'aria-label': `Эволюция ${t.tier}`, onchange: e => { sel[t.tier] = e.target.value; renderIncarnon(); update(); } },
+        h('option', { value: '' }, '— не выбран —'), ...t.perks.map(p => h('option', { value: p.name, selected: p.name === sel[t.tier] }, p.name))));
+  }));
 }
 
 function pickMod({ items, onPick }) {
@@ -135,7 +175,8 @@ function renderMods() {
 
 function renderConds() {
   const sources = [...[...S.mods, S.exilus].filter(Boolean).map(s => ({ key: 'mod:' + s.id, item: modById(s.id), rank: s.rank })),
-    ...(S.arcane ? [{ key: 'arc:' + S.arcane.id, item: arcById(S.arcane.id), rank: S.arcane.rank }] : [])];
+    ...(S.arcane ? [{ key: 'arc:' + S.arcane.id, item: arcById(S.arcane.id), rank: S.arcane.rank }] : []),
+    ...incSources().map(x => ({ key: x.key, item: { name: x.name, ru: x.name, ranks: [x.effects], text: x.perk.text }, rank: 0 }))];
   const rows = condRows(sources, S, () => update(false), itemEffects);
   $('conds').replaceChildren(...rows);
   $('condCard').hidden = !rows.length;
@@ -168,6 +209,9 @@ function buildInput() {
     stacks: { ...F().stacks, ...S.stacks }, flags: { ...F().flags, ...S.flags },
     arcanes: S.arcane && arcById(S.arcane.id) ? [{ item: arcById(S.arcane.id), rank: S.arcane.rank }] : [],
     statusTypes: S.statusTypes || undefined,
+    meleeMode: S.cat === 'melee' ? S.meleeMode : undefined, comboMultiplier: S.combo || 1,
+    exaltedStrength: w.class === 'Exalted Weapon' && S.exaltedScale ? buffState().own : undefined,
+    incarnon: incSources(),
   };
   const st = S.status;
   const target = {
@@ -180,6 +224,7 @@ function buildInput() {
 
 function renderResult() {
   const { build, target, frameSrc } = buildInput();
+  $('exaltText').textContent = `Урон × сила способностей фрейма (${pct(buildState_own())})`;
   $('frameLink').textContent = frameSrc.length ? `${ruName(currentFrame())}: ${frameSrc.map(s => s.name).join(', ')}` : `${ruName(currentFrame())}: нет эффектов для оружия`;
   const data = { scaling: D.scaling, damage: D.damage };
   let r, ct;
@@ -444,6 +489,8 @@ function bindInputs() {
   bindNum('cMult', () => S.customMult, v => S.customMult = v === '' ? 1 : +v);
   bindNum('cStatus', () => S.customStatus, v => S.customStatus = +v || 0);
   bindChk('useFrame', () => F().use, v => F().use = v);
+  bindNum('combo', () => S.combo, v => S.combo = Math.max(1, Math.min(13, Math.round(+v) || 1)));
+  bindChk('exaltScale', () => S.exaltedScale, v => S.exaltedScale = v);
   bindNum('lvl', () => S.level, v => S.level = Math.max(1, +v || 1));
   bindNum('strip', () => S.armorStrip, v => S.armorStrip = Math.max(0, Math.min(100, +v || 0)));
   bindNum('drOv', () => S.drOverride, v => S.drOverride = v);
@@ -482,6 +529,7 @@ async function start() {
     [D.enemies, D.scaling, D.damage, D.warframes, D.shards, D.mods.warframe, D.arcanes.warframe, D.buffs] = await Promise.all([
       load('data/enemies.json'), load('data/manual/scaling.json'), load('data/damage.json'), load('data/warframes.json'),
       load('data/manual/shards.json'), load('data/mods/warframe.json'), load('data/arcanes/warframe.json'), load('data/manual/buffs.json')]);
+    D.incarnon = await load('data/incarnon.json');
     await ensureCategory();
   } catch (err) {
     $('res').replaceChildren(h('p', { class: 'warn' }, 'Не удалось загрузить данные: ' + err.message));

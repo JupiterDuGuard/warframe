@@ -51,10 +51,23 @@ export function combineElements(modEls, innate = {}) {
  * weapon — запись из data/weapons/*.json; attack — индекс атаки.
  * eff — результат effects.collect().
  */
-export function moddedAttack(weapon, attackIndex, eff) {
+export function moddedAttack(weapon, attackIndex, eff, opts = {}) {
   const atk = weapon.attacks[attackIndex || 0];
   const t = eff.totals;
-  const base = atk.damage || {};
+  // Базовый урон атаки: перки Инкарнона «+X к базовому урону» (распределяется по типам пропорционально — TODO_VERIFY),
+  // тяжёлая атака / атака в слайде ближнего боя (данные вики heavyAttack/slideAttack), экзальт-оружие × сила способностей
+  const raw0 = atk.damage || {};
+  const total0 = Object.values(raw0).reduce((a, b) => a + b, 0);
+  let k = total0 ? (total0 + (t.base_damage_flat || 0)) / total0 : 1;
+  const normalTotal = Object.values(weapon.attacks[0]?.damage || {}).reduce((a, b) => a + b, 0);
+  const isHeavy = opts.meleeMode === 'heavy' && weapon.heavyAttack && normalTotal && (attackIndex || 0) === 0;
+  const isSlide = opts.meleeMode === 'slide' && weapon.slideAttack && normalTotal && (attackIndex || 0) === 0;
+  if (isHeavy) k *= weapon.heavyAttack / normalTotal;
+  if (isSlide) k *= weapon.slideAttack / normalTotal;
+  if (opts.exaltedStrength) k *= opts.exaltedStrength;
+  const base = Object.fromEntries(Object.entries(raw0).map(([type, v]) => [type, v * k]));
+  // тяжёлая атака и тяжёлый слэм умножаются на множитель комбо
+  const comboMult = (isHeavy || /Heavy Slam/i.test(atk.attackName || '')) && opts.combo > 1 ? opts.combo : 1;
   const baseTotal = Object.values(base).reduce((a, b) => a + b, 0);
   const scale = baseTotal / 32;
 
@@ -82,12 +95,12 @@ export function moddedAttack(weapon, attackIndex, eff) {
   for (const e of elements) if (COMBINED[e.type]) elemBonus[e.type] = e.bonus;
 
   const msLocked = eff.special.has('multishot_locked');
-  const multishot = (atk.multishot || 1) * (msLocked ? 1 : 1 + (t.multishot || 0));
-  const critChance = (atk.critChance || 0) * (1 + (t.crit_chance || 0)) + (t.crit_chance_flat || 0);
-  const critMultiplier = (atk.critMultiplier || 1) * (1 + (t.crit_damage || 0)) * (eff.critFinal || 1);
-  const statusChance = (atk.statusChance || 0) * (1 + (t.status_chance || 0)) + (t.status_chance_flat || 0);
-  const fireRate = (atk.fireRate || 1) * (1 + (t.fire_rate || 0) + (t.attack_speed || 0));
-  const magazine = weapon.magazine ? Math.max(1, Math.round(weapon.magazine * (1 + (t.magazine || 0)))) : null;
+  const multishot = ((atk.multishot || 1) + (t.multishot_base || 0)) * (msLocked ? 1 : 1 + (t.multishot || 0));
+  const critChance = ((atk.critChance || 0) + (t.crit_chance_base || 0)) * (1 + (t.crit_chance || 0)) + (t.crit_chance_flat || 0);
+  const critMultiplier = ((atk.critMultiplier || 1) + (t.crit_mult_base || 0)) * (1 + (t.crit_damage || 0)) * (eff.critFinal || 1);
+  const statusChance = ((atk.statusChance || 0) + (t.status_chance_base || 0)) * (1 + (t.status_chance || 0)) + (t.status_chance_flat || 0);
+  const fireRate = ((atk.fireRate || 1) + (t.fire_rate_base || 0)) * (1 + (t.fire_rate || 0) + (t.attack_speed || 0));
+  const magazine = weapon.magazine ? Math.max(1, Math.round((weapon.magazine + (t.magazine_base || 0)) * (1 + (t.magazine || 0)))) : null;
   const reload = weapon.reload ? weapon.reload / (1 + (t.reload_speed || 0)) : null;
 
   return {
@@ -98,7 +111,8 @@ export function moddedAttack(weapon, attackIndex, eff) {
     armorStrip: Math.min(1, t.armor_strip || 0), shieldStrip: Math.min(1, t.shield_strip || 0),
     headshotBonus: t.headshot_multiplier || 0, weakpointBonus: t.weakpoint_damage || 0,
     multishot, critChance, critMultiplier, statusChance, fireRate, magazine, reload,
-    finalMult: eff.finalMult, forcedProcs: eff.forcedProcs, multishotLocked: msLocked,
+    finalMult: eff.finalMult * comboMult, comboMult, finalNonCrit: eff.finalNonCrit || 1, baseScale: k,
+    forcedProcs: eff.forcedProcs, multishotLocked: msLocked,
   };
 }
 

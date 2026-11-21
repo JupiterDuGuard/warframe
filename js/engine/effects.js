@@ -40,7 +40,8 @@ export function effectValue(eff, ctx, key) {
   if (c.attack && ctx.flags?.attack !== c.attack) return 0;
   if (c.target && ctx.flags?.target !== c.target) return 0;
   if (c.per === 'status_type') mult *= ctx.statusTypes ?? 0;
-  if (c.per === 'combo_multiplier') mult *= ctx.comboMultiplier ?? 1;
+  if (c.per === 'combo_multiplier') mult *= Math.max(0, (ctx.comboMultiplier ?? 1) - 1);   // Blood Rush: бонус × (комбо − 1)
+  if (c.form && (ctx.form || 'normal') !== c.form) return 0;                                  // «for Incarnon Form»
   if (c.trigger || c.stacks || c.duration || c.chance) {
     const n = ctx.stacks?.[key] ?? 0;          // по умолчанию выключено
     if (!n) return 0;
@@ -68,7 +69,7 @@ export function collect(sources, ctx) {
   const contrib = [];
   const special = new Set();
   const forcedProcs = [];
-  let finalMult = 1, critFinal = 1;
+  let finalMult = 1, critFinal = 1, finalNonCrit = 1;
   for (const s of sources) {
     for (const e of s.effects || []) {
       const v = effectValue(e, ctx, s.key);
@@ -79,6 +80,8 @@ export function collect(sources, ctx) {
         elements.push({ type: type[0].toUpperCase() + type.slice(1), value: v, source: s.name });
       } else if (e.bucket === 'final_mult') {
         finalMult *= v;
+      } else if (e.bucket === 'final_mult_noncrit') {     // Devouring Attrition: только на ударах без крита
+        finalNonCrit *= v;
       } else if (e.bucket === 'crit_final') {             // Электрический щит: ×2 к множителю крита
         critFinal *= v;
       } else if (e.bucket === 'special') {
@@ -91,5 +94,5 @@ export function collect(sources, ctx) {
       }
     }
   }
-  return { totals, elements, contrib, special, forcedProcs, finalMult, critFinal };
+  return { totals, elements, contrib, special, forcedProcs, finalMult, critFinal, finalNonCrit };
 }

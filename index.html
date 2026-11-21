@@ -37,7 +37,17 @@
       <div class="row" style="margin-top:10px">
         <div class="f"><label for="attackSel">Атака</label><select id="attackSel"></select></div>
       </div>
+      <div class="row" id="meleeRow" style="margin-top:10px" hidden>
+        <div class="f"><span class="lbl">Удар</span><div class="seg" id="meleeSeg"></div></div>
+        <div class="f"><label for="combo">Множитель комбо</label><input type="number" id="combo" min="1" max="13" step="1"><small>от 2× (20 ударов) до 12× (220)</small></div>
+      </div>
+      <label class="chk" id="exaltRow" style="margin-top:10px" hidden><input type="checkbox" id="exaltScale"> <span id="exaltText">Урон × сила способностей фрейма</span></label>
       <p class="muted" id="weaponNote" hidden></p>
+    </section>
+
+    <section class="card" id="incCard" hidden>
+      <h2>Эволюции Инкарнона <small id="incSrc"></small></h2>
+      <div class="conds" id="incList"></div>
     </section>
 
     <section class="card">
@@ -58,7 +68,7 @@
         <div class="conds" id="buffList"></div>
         <button type="button" class="pick" id="addBuff"><b>+ Добавить бафф</b><small>способность или фокус</small></button>
         <div class="row">
-          <div class="f"><label for="cMult">Свой множитель урона, ×</label><input type="number" id="cMult" min="0" step="any"><small>Например, ×21 у Devouring Attrition</small></div>
+          <div class="f"><label for="cMult">Свой множитель урона, ×</label><input type="number" id="cMult" min="0" step="any"><small>Перки Инкарнона — в блоке «Эволюции»</small></div>
           <div class="f"><label for="cStatus">Свой бонус к урону статусов, %</label><input type="number" id="cStatus" min="0" step="any"><small>Осколки, Элементалист вне модов</small></div>
         </div>
         <label class="chk"><input type="checkbox" id="useFrame"> Учитывать фрейм (аура, осколки, мистификаторы)</label>

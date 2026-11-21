@@ -253,6 +253,62 @@ export const cases = [
     },
   },
 
+  // ---------- ближний бой, Инкарнон, экзальт (этап 7) ----------
+  {
+    name: 'Парацесис, тяжёлая атака (1332) → Пулемётчица 115: 148, как в замере',
+    run({ data, find, eq }) {
+      const r = calc({ weapon: find.weapon('Paracesis'), slot: 'melee', meleeMode: 'heavy', comboMultiplier: 1 },
+        { enemy: find.enemy('Heavy Gunner'), level: 115 }, data, { part: 'body' });
+      eq(shown(r.hit.health), 148);
+    },
+  },
+  {
+    name: 'Тяжёлая атака × множитель комбо 4',
+    run({ data, find, near }) {
+      const t = { enemy: find.enemy('Heavy Gunner'), level: 115 };
+      const h1 = calc({ weapon: find.weapon('Paracesis'), slot: 'melee', meleeMode: 'heavy', comboMultiplier: 1 }, t, data).hit.health;
+      const h4 = calc({ weapon: find.weapon('Paracesis'), slot: 'melee', meleeMode: 'heavy', comboMultiplier: 4 }, t, data).hit.health;
+      near(h4, h1 * 4, 1e-6);
+    },
+  },
+  {
+    name: 'Blood Rush (вики): +40% × (комбо − 1) — при 12× это +440% к шансу крита',
+    run({ data, find, near }) {
+      const br = find.mod('melee', 'Blood Rush');
+      const r = calc({ weapon: find.weapon('Nikana Prime'), slot: 'melee', mods: [{ item: br, rank: 10 }], comboMultiplier: 12 },
+        { enemy: NEUTRAL, level: 1 }, data);
+      near(r.stats.critChance, 0.28 * (1 + 0.4 * 11), 1e-9);
+    },
+  },
+  {
+    name: 'Летум: перк Devouring Attrition (сработал) вместо «своего множителя» → 404 / 134 / 67',
+    run({ data, find, eq }) {
+      const perk = data.incarnon['Laetum'].tiers.find(t => t.tier === 5).perks.find(p => p.name === 'Devouring Attrition');
+      const r = calc({ weapon: find.weapon('Laetum'), slot: 'secondary', incarnon: [{ key: 'inc:da', name: perk.name, effects: perk.effects }],
+        stacks: { 'inc:da': 1 }, extraHits: [SILKEN(0.4)] }, { enemy: find.enemy('Heavy Gunner'), level: 115 }, data, { part: 'body' });
+      eq(shown(r.hit.health), 404); eq(shown(r.extra[0].damage), 134); eq(shown(r.extra[0].tick), 67);
+    },
+  },
+  {
+    name: 'Лекс Прайм Инкарнон: Critical Parallel (+19% и +0,4×) и Hoplite Virtue (+20 базового урона)',
+    run({ data, find, near }) {
+      const inc = data.incarnon['Lex Prime'].tiers.flatMap(t => t.perks).filter(p => ['Critical Parallel', 'Hoplite Virtue'].includes(p.name))
+        .map(p => ({ key: 'inc:' + p.name, name: p.name, effects: p.effects }));
+      const r = calc({ weapon: find.weapon('Lex Prime'), slot: 'secondary', incarnon: inc }, { enemy: find.enemy('Heavy Gunner'), level: 115 }, data);
+      near(r.stats.critChance, 0.44, 1e-9); near(r.stats.critMultiplier, 2.4, 1e-9);
+      near(r.hit.health, (18.75 * 1.5 + 18.75 + 162.5) * 0.1, 1e-6);
+    },
+  },
+  {
+    name: 'Экзальт: Железный посох × сила способностей 130%',
+    run({ data, find, near }) {
+      const t = { enemy: NEUTRAL, level: 1 };
+      const a = calc({ weapon: find.weapon('Iron Staff'), slot: 'melee' }, t, data).hit.health;
+      const b = calc({ weapon: find.weapon('Iron Staff'), slot: 'melee', exaltedStrength: 1.3 }, t, data).hit.health;
+      near(b, a * 1.3, 1e-6);
+    },
+  },
+
   // ---------- механики ----------
   {
     name: 'Крит: 250% шанса, ×3 → уровни ×5 и ×7, средний ×6',
@@ -306,8 +362,9 @@ export function makeContext(data) {
 
 export const DATA_FILES = {
   scaling: 'data/manual/scaling.json', damage: 'data/damage.json', enemies: 'data/enemies.json',
-  weapons: { primary: 'data/weapons/primary.json', secondary: 'data/weapons/secondary.json' },
-  mods: { secondary: 'data/mods/secondary.json', primary: 'data/mods/primary.json', warframe: 'data/mods/warframe.json' },
+  weapons: { primary: 'data/weapons/primary.json', secondary: 'data/weapons/secondary.json', melee: 'data/weapons/melee.json' },
+  mods: { secondary: 'data/mods/secondary.json', primary: 'data/mods/primary.json', warframe: 'data/mods/warframe.json', melee: 'data/mods/melee.json' },
+  incarnon: 'data/incarnon.json',
   warframes: 'data/warframes.json', shards: 'data/manual/shards.json', buffs: 'data/manual/buffs.json',
   arcanes: { secondary: 'data/arcanes/secondary.json' },
 };

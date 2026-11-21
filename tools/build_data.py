@@ -20,6 +20,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 from lualite import parse_module  # noqa: E402
+from incarnon import build_incarnon  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
@@ -106,6 +107,8 @@ RULES = [
     (rf"^{PCT} Weak Point Damage$", "weakpoint_damage", "weakpoint", "pct"),
     (rf"^{PCT} Weak Point Critical Chance$", "weakpoint_crit_chance", "weakpoint", "pct"),
     (rf"^{PCT} to Headshot Multiplier$", "headshot_multiplier", "weakpoint", "pct"),
+    (rf"^{PCT} Headshot Damage$", "headshot_multiplier", "weakpoint", "pct"),
+    (rf"^{PCT} Recoil$", "recoil", "utility", "pct"),
     (rf"^{PCT} Blast Range$", "blast_range", "utility", "pct"),
     (rf"^{NUM}m Beam Range$", "beam_range", "utility", "flat"),
     (rf"^{PCT} Beam Range$", "beam_range_pct", "utility", "pct"),
@@ -116,6 +119,14 @@ RULES = [
     (rf"^{PCT} Heavy Attack Wind Up Speed$", "heavy_windup", "utility", "pct"),
     (rf"^{PCT} Fire/Charge Rate$", "fire_rate", "fire_rate", "pct"),
     (rf"^{NUM} Final Status Chance$", "status_chance_flat", "status_chance_flat", "pct100"),
+    # перки Инкарнона: прибавки к базовым статам (до модов)
+    (rf"^Increase Base Damage by \+?{NUM}$", "base_damage_flat", "base_add", "flat"),
+    (rf"^Increase Base Critical Chance by \+?{PCT}$", "crit_chance_base", "base_add", "pct"),
+    (rf"^Increase Base Critical Damage Multiplier by \+?{NUM}x$", "crit_mult_base", "base_add", "flat"),
+    (rf"^Increase Base Status Chance by \+?{PCT}$", "status_chance_base", "base_add", "pct"),
+    (rf"^Increase Base Magazine Capacity by \+?{NUM}$", "magazine_base", "base_add", "flat"),
+    (rf"^Increase Base Multishot by \+?{NUM}$", "multishot_base", "base_add", "flat"),
+    (rf"^Increase Base Fire Rate by \+?{NUM}$", "fire_rate_base", "base_add", "flat"),
     # ауры («Squad receives/gains» срезается заранее)
     (rf"^{PCT} (Rifle|Pistol|Shotgun|Sniper Rifle|Melee) Damage$", "damage_class_{1}", "base_damage", "pct"),
     (rf"^{PCT} Weapon Damage$", "damage", "base_damage", "pct"),
@@ -159,8 +170,8 @@ RULES = [
 ]
 RULES = [(re.compile(r, re.I), s, b, k) for r, s, b, k in RULES]
 
-COND_PREFIX = re.compile(r"^(On [^:]+|While [^:]+|When [^:]+|After [^:]+|Every [^:]+|If [^:]+|Upon [^:]+):\s*", re.I)
-COND_SUFFIX = re.compile(r"\s*for (\d+(?:\.\d+)?)s\.?(?:\s*Stacks up to (\d+)x\.?)?$", re.I)
+COND_PREFIX = re.compile(r"^(On [^:]+|While [^:]+|When [^:]+|After [^:]+|Every [^:]+|If [^:]+|Upon [^:]+|With [^:]+):\s*", re.I)
+COND_SUFFIX = re.compile(r"\s*for (\d+(?:\.\d+)?)\s*(?:s|sec|seconds?)\.?(?:\s*Stacks up to (\d+)\s*(?:x|times)\.?)?$", re.I)
 # хвосты-условия внутри строки: «… when Aiming», «… per Status Type affecting the target» и т.п.
 COND_PHRASES = [
     (re.compile(r"\s+when Aiming$", re.I), {"aiming": True}),
@@ -173,7 +184,10 @@ COND_PHRASES = [
     (re.compile(r"\s+on first shot in Magazine$", re.I), {"first_shot": True}),
     (re.compile(r"\s+per Status Type affecting the target$", re.I), {"per": "status_type"}),
     (re.compile(r"\s+stacks with Combo Multiplier$", re.I), {"per": "combo_multiplier"}),
+    (re.compile(r"\s+for Incarnon Form$", re.I), {"form": "incarnon"}),
+    (re.compile(r"\s+per (?:projectile|pellet)$", re.I), {}),
 ]
+STACKS_ONLY = re.compile(r"\.?\s*Stacks up to (\d+)\s*(?:x|times)\.?$", re.I)
 AND_SPLIT = re.compile(rf"^({PCT} [^0-9]+?) and ({PCT} .+)$", re.I)
 CHANCE = re.compile(r"^(\d+(?:\.\d+)?)% chance for (.+)$", re.I)
 TO_WEAPONS = re.compile(r"\s+(?:to|for) (Primary|Secondary|Melee) Weapons?$", re.I)
@@ -253,6 +267,11 @@ def parse_rank(stats):
                 c = {**(c or {}), "chance": float(ch.group(1)) / 100}
                 text = ch.group(2)
             had_suffix = False
+            so = STACKS_ONLY.search(text)
+            if so and not COND_SUFFIX.search(text):
+                c = {**(c or {}), "stacks": int(so.group(1))}
+                text = text[:so.start()].strip()
+                had_suffix = True
             for _ in range(2):                # «… to Primary Weapons for 24s» — хвосты в любом порядке
                 sm = COND_SUFFIX.search(text)
                 if sm:
@@ -517,6 +536,8 @@ def main():
     weapons = build_weapons(ru)
     for g, rows in weapons.items():
         sizes[f"weapons/{g}.json"] = write(f"weapons/{g}.json", rows)
+    incarnon = build_incarnon(weapons, load_overrides("incarnon"), fetch, WIKI, parse_rank, log_unparsed, log_notes)
+    sizes["incarnon.json"] = write("incarnon.json", incarnon)
     frames = build_warframes(ru, wf_wfcd)
     sizes["warframes.json"] = write("warframes.json", frames)
     enemies = build_enemies(ru, load_overrides("enemies"))
@@ -527,14 +548,14 @@ def main():
               "weapons": sum(len(v) for v in weapons.values()), "warframes": len(frames), "enemies": len(enemies)}
     meta = {"built": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"), "wfcd": wfcd_version(),
             "sources": {"wfcd": "https://github.com/WFCD/warframe-items", "wiki": "https://wiki.warframe.com"},
-            "counts": counts, "files": sorted(sizes)}
+            "counts": {**counts, "incarnon": len(incarnon)}, "files": sorted(sizes)}
     write("meta.json", meta)
 
     # отчёт о неразобранном
     rep = ["# Неразобранные эффекты", "", f"Сборка {meta['built']}. Строки, которые скрипт не смог превратить в "
            "{stat, value, bucket}. Правка — data/overrides/*.json (ключ — uniqueName или имя).", ""]
-    titles = {"mod": "Моды", "arcane": "Мистификаторы", "augment": "Аугменты способностей (этап 6, баффы)"}
-    for kind in ("mod", "arcane", "augment"):
+    titles = {"mod": "Моды", "arcane": "Мистификаторы", "incarnon": "Перки Инкарнона", "augment": "Аугменты способностей (этап 6, баффы)"}
+    for kind in ("mod", "arcane", "incarnon", "augment"):
         items = [x for x in log_unparsed if x[0] == kind]
         rep += [f"## {titles[kind]}: {len(items)}", ""]
         rep += [f"- [{n}]({u}) — {t}" for _, n, u, t in sorted(items, key=lambda x: x[1])]

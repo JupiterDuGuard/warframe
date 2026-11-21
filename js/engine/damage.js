@@ -19,7 +19,8 @@ export function buildSources(build) {
   for (const a of build.arcanes || []) {
     if (a?.item) src.push({ key: 'arc:' + (a.item.id || a.item.name), name: a.item.ru || a.item.name, effects: itemEffects(a.item, a.rank) });
   }
-  for (const b of build.buffs || []) src.push({ key: 'buff:' + b.name, name: b.name, effects: b.effects || [] });
+  // баффы, эффекты фрейма и перки Инкарнона: свой key сохраняется — по нему ищутся стаки условных эффектов
+  for (const b of [...(build.incarnon || []), ...(build.buffs || [])]) src.push({ key: b.key || 'buff:' + b.name, name: b.name, effects: b.effects || [] });
   return src;
 }
 
@@ -33,13 +34,16 @@ export function buildSources(build) {
 export function calc(build, target, data, opts = {}) {
   const steps = [];
   let enemy = enemyState(target.enemy, target, data.scaling, data.damage);
+  const atkName = build.weapon?.attacks?.[build.attack || 0]?.attackName || '';
+  const meleeAttack = build.meleeMode === 'heavy' ? 'heavy' : build.meleeMode === 'slide' ? 'slide' : undefined;
   const ctx = {
-    faction: enemy.faction, stacks: build.stacks || {}, flags: build.flags || {},
+    faction: enemy.faction, stacks: build.stacks || {}, flags: { ...(build.flags || {}), ...(meleeAttack ? { attack: meleeAttack } : {}) },
     statusTypes: build.statusTypes ?? enemy.statusTypes, comboMultiplier: build.comboMultiplier, slot: build.slot,
-    weaponClass: build.weapon?.class,
+    weaponClass: build.weapon?.class, form: /Incarnon/i.test(atkName) ? 'incarnon' : 'normal',
   };
   const eff = collect(buildSources(build), ctx);
-  const A = moddedAttack(build.weapon, build.attack || 0, eff);
+  const A = moddedAttack(build.weapon, build.attack || 0, eff,
+    { meleeMode: build.meleeMode, combo: build.comboMultiplier, exaltedStrength: build.exaltedStrength });
   if (A.armorStrip && target.drOverride == null) {          // аура Corrosive Projection и т.п. снимает броню
     enemy = enemyState(target.enemy, { ...target, armorStrip: 1 - (1 - (target.armorStrip || 0)) * (1 - A.armorStrip) }, data.scaling, data.damage);
   }
@@ -58,7 +62,12 @@ export function calc(build, target, data, opts = {}) {
     return ci.tierMult(ci.lowTier);                         // «без крита» = нижний гарантированный уровень
   };
   const critMode = opts.crit ?? 'none';
-  const K = critFor(critMode);
+  let K = critFor(critMode);
+  // Devouring Attrition и т.п.: множитель только на ударах без крита
+  if (A.finalNonCrit !== 1) {
+    if (critMode === 'none' && ci.lowTier === 0) K *= A.finalNonCrit;
+    else if (critMode === 'avg' && ci.chance < 1) K = (1 - ci.chance) * A.finalNonCrit + ci.chance * ci.tierMult(1);
+  }
 
   // ---- удар оружия (один снаряд)
   const F = A.factionBonus;

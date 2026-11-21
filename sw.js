@@ -1,10 +1,10 @@
 // Офлайн-кэш калькулятора. Сеть в приоритете (обновления видны сразу), без сети — из кэша.
 // При изменении файлов сайта поднимать VERSION, чтобы приложение предложило перезагрузку.
-const VERSION = 'v6-1';
+const VERSION = 'v7-1';
 const CACHE = 'wf-calc-' + VERSION;
 const SHELL = [
   './', 'index.html', 'oraxia.html', 'css/app.css', 'manifest.webmanifest', 'icons/icon.svg', 'icons/icon-192.png',
-  'js/app.js', 'js/store.js', 'js/ui.js', 'js/engine/frame.js', 'js/engine/buffs.js', 'data/manual/buffs.json', 'js/engine/index.js', 'js/engine/damage.js', 'js/engine/weapon.js',
+  'js/app.js', 'js/store.js', 'js/ui.js', 'js/engine/frame.js', 'js/engine/buffs.js', 'data/manual/buffs.json', 'data/incarnon.json', 'js/engine/index.js', 'js/engine/damage.js', 'js/engine/weapon.js',
   'js/engine/enemy.js', 'js/engine/effects.js', 'js/engine/constants.js',
   'data/meta.json', 'data/enemies.json', 'data/warframes.json', 'data/manual/shards.json', 'data/damage.json', 'data/manual/scaling.json',
 ];
