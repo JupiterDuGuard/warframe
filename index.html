@@ -25,7 +25,18 @@
   <button type="button" class="update" id="updateBtn" hidden>Есть обновление — перезагрузить</button>
 </header>
 
-<div class="views"><div class="seg" id="viewSeg" role="group" aria-label="Что считать"></div></div>
+<div class="views">
+  <div class="seg" id="viewSeg" role="group" aria-label="Что считать"></div>
+  <div class="tools">
+    <label class="btn" for="alecaFile" title="Файл %LOCALAPPDATA%\AlecaFrame\lastData.dat — расшифровывается в браузере и никуда не отправляется">Импорт из AlecaFrame</label>
+    <input type="file" id="alecaFile" accept=".dat" hidden>
+    <button type="button" id="shareBtn">Ссылка на билд</button>
+    <button type="button" id="saveA">Запомнить как A</button>
+    <button type="button" id="clearA" hidden>Убрать A</button>
+  </div>
+  <div class="sharebox" id="shareBox" hidden><input type="text" id="shareUrl" readonly aria-label="Ссылка на билд"><button type="button" id="shareCopy">Копировать</button></div>
+  <p class="muted" id="toolMsg" hidden></p>
+</div>
 
 <main class="wrap" id="viewWeapon">
   <div class="col">
@@ -54,6 +65,7 @@
       <h2>Моды <small>порядок слотов влияет на объединение стихий</small></h2>
       <div class="slots" id="slots"></div>
       <div class="slots" style="margin-top:8px" id="slotsExtra"></div>
+      <div class="capline" id="capInfo"></div>
       <div id="modWarn" class="warn" style="margin-top:8px"></div>
     </section>
 
@@ -122,6 +134,7 @@
       <h2>Моды фрейма <small>аура, эксилус, мистификаторы и 8 слотов</small></h2>
       <div class="slots" id="fSlotsTop"></div>
       <div class="slots" style="margin-top:8px" id="fSlots"></div>
+      <div class="capline" id="fCapInfo"></div>
     </section>
     <section class="card">
       <h2>Осколки архонтов <small>до 5, таукованые ×1,5</small></h2>

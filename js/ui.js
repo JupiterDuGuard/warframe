@@ -58,14 +58,25 @@ export function segmented(el, options, value, onChange) {
  * Слот мода/мистификатора.
  * slot: { id, rank } | null; item — запись мода; tag — подпись в углу; onPick, onChange (после смены ранга/очистки), onClear
  */
-export function slotEl({ slot, item, tag, empty, cls = '', onPick, onChange, onClear }) {
+// полярность слота: значок + выбор (Forma)
+const POL_OPTS = [['', '·'], ['madurai', 'V'], ['vazarin', 'D'], ['naramon', '—'], ['zenurik', '='], ['unairu', 'R'], ['penjaga', 'Y'], ['umbra', 'U'], ['any', 'O']];
+const POL_TITLE = { '': 'без полярности', madurai: 'Мадурай', vazarin: 'Вазарин', naramon: 'Нарамон', zenurik: 'Зенурик', unairu: 'Унайру', penjaga: 'Пенджага', umbra: 'Умбра', any: 'Любая' };
+function polSelect(pol, onPol) {
+  return h('select', { class: 'pol', 'aria-label': 'Полярность слота', title: 'Полярность слота: ' + POL_TITLE[pol || ''],
+    onchange: e => onPol(e.target.value || null) },
+  POL_OPTS.map(([v, t]) => h('option', { value: v, selected: (pol || '') === v, title: POL_TITLE[v] }, t)));
+}
+
+export function slotEl({ slot, item, tag, empty, cls = '', onPick, onChange, onClear, pol, onPol, cost }) {
+  const head = h('span', { class: 'num' }, onPol ? polSelect(pol, onPol) : null,
+    cost != null && item ? h('b', { class: 'cost' + (cost < 0 ? ' plus' : '') }, cost < 0 ? `+${-cost}` : `${cost}`) : null, tag);
   if (!item) {
-    return h('div', { class: 'slot ' + cls }, h('span', { class: 'num' }, tag),
+    return h('div', { class: 'slot ' + cls }, head,
       h('button', { type: 'button', class: 'empty', onclick: onPick }, empty));
   }
   const max = item.maxRank ?? (item.ranks.length - 1);
   const setRank = d => { slot.rank = Math.max(0, Math.min(max, slot.rank + d)); onChange(); };
-  return h('div', { class: 'slot filled ' + cls }, h('span', { class: 'num' }, tag),
+  return h('div', { class: 'slot filled ' + cls }, head,
     h('button', { type: 'button', class: 'name', onclick: onPick, title: textRu(item) }, ruName(item)),
     h('div', { class: 'rank' },
       h('button', { type: 'button', 'aria-label': 'Ранг ниже', onclick: () => setRank(-1) }, '−'),

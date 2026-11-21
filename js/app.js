@@ -1,5 +1,7 @@
 // Интерфейс калькулятора. Считает движок js/engine (без DOM), здесь только ввод и вывод.
-import { calc, critTable, itemEffects, frameStats, resolveBuffs, TYPE_RU, DOT_TICKS } from './engine/index.js';
+import { calc, critTable, itemEffects, frameStats, resolveBuffs, modContribution, shotThresholds, capacity, formaCount, polarityMatch, TYPE_RU, DOT_TICKS } from './engine/index.js';
+import { readAleca, upgradeLookup, slotPolarities, readShards, ownedItems } from './aleca.js';
+import { encodeBuild, decodeBuild } from './share.js';
 import { load, CATEGORIES, MOD_FILES, ARCANE_FILES, modGroup, modFits } from './store.js';
 import { $, h, num, pct, ruName, textRu, openPicker, initPicker, segmented, slotEl, tile, table, condRows } from './ui.js';
 
@@ -17,6 +19,7 @@ const DEFAULT = {
   enemy: 'Heavy Gunner', level: 115, part: 'body', crit: 'none', armorStrip: 0, drOverride: '',
   status: { viral: 0, corrosive: 0, magnetic: 0, heat: false },
   frame: FRAME_DEFAULT,
+  pol: {}, stance: null, compareA: null,
 };
 const KEY = 'wf-calc-v1';
 let S;
@@ -55,6 +58,38 @@ async function ensureCategory() {
   D.mods[g] ||= await load(MOD_FILES[g]);
   if (ARCANE_FILES[S.cat]) D.arcanes[S.cat] ||= await load(ARCANE_FILES[S.cat]);
 }
+
+// ---------- полярности и вместимость ----------
+const lower = p => {
+  const s = p ? String(p).toLowerCase() : null;
+  return s === 'none' ? null : s === 'universal' ? 'any' : s;
+};
+const basePol = item => Array.from({ length: 8 }, (_, i) => lower((item.polarities || [])[i]));
+// ранг 40 — у оружия Kuva, Tenet, Coda и Парацесиса
+const maxItemRank = (kind, item) => kind === 'w' && /^(Kuva|Tenet|Coda) |^Paracesis$/.test(item.name) ? 40 : 30;
+function polState(kind, item) {
+  const k = kind + ':' + item.name;
+  S.pol ||= {};
+  if (!S.pol[k]) {
+    S.pol[k] = { slots: basePol(item), exilus: lower(item.exilusPolarity),
+      aura: lower(kind === 'f' ? item.auraPolarity : item.stancePolarity), catalyst: true, rank: maxItemRank(kind, item) };
+  }
+  return S.pol[k];
+}
+function capLine(el, cap, pol, item, onToggle) {
+  const forma = formaCount([...pol.slots, pol.exilus, pol.aura], [...(item.polarities || []), item.exilusPolarity, item.auraPolarity || item.stancePolarity]);
+  el.replaceChildren(
+    h('span', {}, 'Вместимость ', h('b', { class: cap.used > cap.max ? 'over' : '' }, `${cap.used} / ${cap.max}`), cap.bonus ? ` (с бонусом ${cap.bonus})` : ''),
+    h('span', {}, 'Forma: ', h('b', {}, String(forma))),
+    h('label', { class: 'chk' }, 'Ранг', h('select', { style: 'width:auto', 'aria-label': 'Ранг предмета', onchange: e => { pol.rank = +e.target.value; onToggle(); } },
+      [30, 40].map(r => h('option', { value: r, selected: (pol.rank || 30) === r }, String(r))))),
+    h('label', { class: 'chk' }, h('input', { type: 'checkbox', checked: pol.catalyst, onchange: e => { pol.catalyst = e.target.checked; onToggle(); } }), 'Катализатор / Реактор'),
+    cap.used > cap.max ? h('span', { class: 'warn' }, `не хватает ${cap.used - cap.max}`) : '');
+}
+
+// стойка подходит классу оружия: «Glaives» ~ «Glaive», «Staves» ~ «Staff»
+const clsKey = c => (c || '').toLowerCase().replace('staves', 'staff').replace(/s\b/g, '');
+const stanceFits = (m, w) => clsKey(m.compat) === clsKey(w.class);
 
 // ---------- Инкарнон ----------
 const incOf = () => D.incarnon?.[currentWeapon().name];
@@ -96,8 +131,10 @@ const frameResult = () => frameStats(currentFrame(), { ...frameInput(), buffSour
 // ---------- оружие: ввод ----------
 function renderWeapon() {
   segmented($('catSeg'), CATEGORIES.map(c => [c.id, c.ru]), S.cat, async v => {
-    S.cat = v; S.weapon = ''; S.attack = 0; S.mods = Array(8).fill(null); S.exilus = null; S.arcane = null;
-    await ensureCategory(); renderAll();
+    S.cat = v; S.weapon = ''; S.attack = 0; S.mods = Array(8).fill(null); S.exilus = null; S.arcane = null; S.stance = null;
+    await ensureCategory();
+    if (v === 'melee') D.mods.stance ||= await load('data/mods/stance.json');
+    renderAll();
   });
   const w = currentWeapon();
   $('weaponPick').replaceChildren(h('b', {}, ruName(w)), h('small', {}, `${w.name} · ${w.class || ''}`));
@@ -143,10 +180,14 @@ const maxRank = m => m.maxRank ?? (m.ranks.length - 1);
 
 function renderMods() {
   const w = currentWeapon();
+  const pol = polState('w', w);
+  const cost = (slot, sp) => { const m = slot && modById(slot.id); return m ? capacity({ slots: [{ mod: m, rank: slot.rank, polarity: sp }] }).costs[0] : null; };
   const used = () => new Set([...S.mods, S.exilus].filter(Boolean).map(s => s.id));
   const modSlot = (slot, idx, exilus) => slotEl({
     slot, item: slot && modById(slot.id), tag: exilus ? 'Эксилус' : idx + 1, empty: exilus ? '+ мод эксилуса' : '+ мод',
     cls: exilus ? 'exilus' : '',
+    pol: exilus ? pol.exilus : pol.slots[idx], cost: cost(slot, exilus ? pol.exilus : pol.slots[idx]),
+    onPol: v => { if (exilus) pol.exilus = v; else pol.slots[idx] = v; update(); },
     onPick: () => pickMod({
       items: modsOf().filter(m => modFits(m, w, S.cat) && (!exilus || m.exilus) && !used().has(m.id)),
       onPick: m => { const v = { id: m.id, rank: maxRank(m) }; if (exilus) S.exilus = v; else S.mods[idx] = v; update(); },
@@ -162,7 +203,26 @@ function renderMods() {
       onChange: update, onClear: () => { S.arcane = null; update(); },
     }));
   }
+  if (S.cat === 'melee' && D.mods.stance) {
+    const st = S.stance && D.mods.stance.find(m => m.id === S.stance.id);
+    extra.unshift(slotEl({
+      slot: S.stance, item: st, tag: 'Стойка', empty: '+ стойка', cls: 'exilus', pol: pol.aura,
+      cost: st ? capacity({ bonusSlot: { mod: st, rank: S.stance.rank, polarity: pol.aura } }).bonusCost : null,
+      onPol: v => { pol.aura = v; update(); },
+      onPick: () => pickMod({ items: D.mods.stance.filter(m => stanceFits(m, w)),
+        onPick: m => { S.stance = { id: m.id, rank: maxRank(m) }; update(); } }),
+      onChange: update, onClear: () => { S.stance = null; update(); },
+    }));
+  }
   $('slotsExtra').replaceChildren(...extra);
+  const stanceMod = S.cat === 'melee' && S.stance && D.mods.stance?.find(m => m.id === S.stance.id);
+  const cap = capacity({
+    rank: pol.rank || 30, catalyst: pol.catalyst,
+    slots: [...S.mods.map((x, i) => ({ mod: x && modById(x.id), rank: x?.rank, polarity: pol.slots[i] })),
+      { mod: S.exilus && modById(S.exilus.id), rank: S.exilus?.rank, polarity: pol.exilus }],
+    bonusSlot: stanceMod ? { mod: stanceMod, rank: S.stance.rank, polarity: pol.aura } : null,
+  });
+  capLine($('capInfo'), cap, pol, w, update);
   const warn = [];
   for (const s of [...S.mods, S.exilus]) {
     const m = s && modById(s.id);
@@ -270,8 +330,25 @@ function renderResult() {
   for (const x of r.extra) mini.push(h('span', {}, 'Доп. ', h('b', {}, num(x.damage, 1))), h('span', {}, 'Тик ', h('b', {}, num(x.tick, 2))));
   if (S.view !== 'frame') $('mini').replaceChildren(...mini, h('span', {}, '↓'));
   const sub = t => h('h3', { class: 'lbl', style: 'margin:14px 0 6px' }, t);
+  // вклад модов и пороговые уровни
+  let contrib = null, thr = null;
+  try {
+    contrib = modContribution(build, target, data, { part: S.part, crit: 'avg' });
+    thr = shotThresholds(build, target, data, { part: S.part, crit: 'avg' });
+  } catch (err) { console.error(err); }
+  const contribRows = contrib ? contrib.rows.map(x => [`${x.name} (${x.kind})`, `−${num(x.loss * 100, 1)}%`, num(x.value, 0)]) : [];
+  const thrRows = thr ? thr.map(t => [`${t.shots} ${t.shots === 1 ? 'выстрел' : t.shots < 5 ? 'выстрела' : 'выстрелов'}`,
+    t.level === 0 ? 'не убивает и на мин. уровне' : t.level >= 9999 ? 'до 9999+' : `до ${num(t.level, 0)} ур.`]) : [];
+  const cmp = compareBlock(r);
   $('res').replaceChildren(...[
     h('div', { class: 'tiles' }, tiles),
+    cmp,
+    contribRows.length ? h('details', { style: 'margin-top:12px' }, h('summary', {}, 'Вклад модов в DPS (средний крит)'),
+      h('p', { class: 'muted' }, 'На сколько упадёт DPS, если снять мод, мистификатор, перк или бафф.'),
+      table(['Что снять', 'DPS падает на', 'DPS без него'], contribRows)) : null,
+    thrRows.length ? h('details', { style: 'margin-top:8px' }, h('summary', {}, `Пороговые уровни: ${ruName(target.enemy) || target.enemy.name}`),
+      h('p', { class: 'muted' }, 'До какого уровня этот враг умирает за N выстрелов (средний крит, тики и доп. удары включены).'),
+      table(['Выстрелов', 'Уровень врага'], thrRows)) : null,
     sub('Оружие с модами'), table(['Стат', 'Значение'], statRows),
     sub(`Урон по типам (${where}, ${S.crit === 'avg' ? 'средний крит' : S.crit === 'crit' ? 'крит' : 'без крита'})`),
     table(['Тип', 'На оружии', 'Фракция', 'По здоровью'], typeRows),
@@ -308,7 +385,17 @@ function renderFrameMods() {
   const used = () => new Set([f.aura, ...f.mods, f.exilus].filter(Boolean).map(s => s.id));
   const own = c => { const x = (c || '').toLowerCase(); return x === 'warframe' || x === frameBase(fr).toLowerCase() || x === fr.name.toLowerCase(); };
   const isAura = m => (m.compat || '').toUpperCase() === 'AURA';
+  const pol = polState('f', fr);
+  const polOf = (kind, idx) => kind === 'aura' ? pol.aura : kind === 'exilus' ? pol.exilus : pol.slots[idx];
+  const costOf = (s, kind, idx) => {
+    const m = s && fModById(s.id);
+    if (!m) return null;
+    return kind === 'aura' ? capacity({ bonusSlot: { mod: m, rank: s.rank, polarity: pol.aura } }).bonusCost
+      : capacity({ slots: [{ mod: m, rank: s.rank, polarity: polOf(kind, idx) }] }).costs[0];
+  };
   const slot = (s, idx, kind) => slotEl({
+    pol: polOf(kind, idx), cost: costOf(s, kind, idx),
+    onPol: v => { if (kind === 'aura') pol.aura = v; else if (kind === 'exilus') pol.exilus = v; else pol.slots[idx] = v; updateFrame(); },
     slot: s, item: s && fModById(s.id), tag: kind === 'aura' ? 'Аура' : kind === 'exilus' ? 'Эксилус' : idx + 1,
     empty: kind === 'aura' ? '+ аура' : kind === 'exilus' ? '+ мод эксилуса' : '+ мод', cls: kind === 'normal' ? '' : 'exilus',
     onPick: () => pickMod({
@@ -325,6 +412,14 @@ function renderFrameMods() {
       onChange: updateFrame, onClear: () => { f.arcanes[i] = null; updateFrame(); },
     })));
   $('fSlots').replaceChildren(...f.mods.map((s, i) => slot(s, i, 'normal')));
+  const aura = f.aura && fModById(f.aura.id);
+  const cap = capacity({
+    rank: pol.rank || 30, catalyst: pol.catalyst,
+    slots: [...f.mods.map((x, i) => ({ mod: x && fModById(x.id), rank: x?.rank, polarity: pol.slots[i] })),
+      { mod: f.exilus && fModById(f.exilus.id), rank: f.exilus?.rank, polarity: pol.exilus }],
+    bonusSlot: aura ? { mod: aura, rank: f.aura.rank, polarity: pol.aura } : null,
+  });
+  capLine($('fCapInfo'), cap, pol, fr, updateFrame);
 }
 
 function renderShards() {
@@ -459,6 +554,186 @@ function openBuffPicker() {
   });
 }
 
+// ---------- сравнение A/B ----------
+const snapshot = () => { const { compareA, view, ...rest } = S; return structuredClone(rest); };
+function withState(st, fn) {
+  const saved = S;
+  S = { ...structuredClone(DEFAULT), ...st, frame: { ...structuredClone(FRAME_DEFAULT), ...(st.frame || {}) } };
+  try { return fn(); } finally { S = saved; }
+}
+function compareBlock(rB) {
+  $('clearA').hidden = !S.compareA;
+  if (!S.compareA) return null;
+  let rA;
+  try {
+    rA = withState(S.compareA, () => {
+      if (!D.weapons[S.cat]) return null;
+      const { build, target } = buildInput();
+      return calc(build, target, { scaling: D.scaling, damage: D.damage }, { part: S.part, crit: S.crit });
+    });
+  } catch (err) { console.error(err); }
+  if (!rA) return h('p', { class: 'muted' }, 'Билд A ещё загружается…');
+  const row = (name, a, b, better = 'up', d = 0) => {
+    const diff = a ? (b - a) / a : 0;
+    const good = better === 'up' ? diff > 0 : diff < 0;
+    return h('tr', {}, h('td', {}, name), h('td', { class: 'n' }, num(a, d)), h('td', { class: 'n' }, num(b, d)),
+      h('td', { class: 'n ' + (Math.abs(diff) < 1e-9 ? '' : good ? 'up' : 'down') }, `${diff >= 0 ? '+' : ''}${num(diff * 100, 1)}%`));
+  };
+  const nameA = withState(S.compareA, () => ruName(currentWeapon()));
+  return h('div', { style: 'margin-top:12px' },
+    h('h3', { class: 'lbl', style: 'margin:0 0 6px' }, `Сравнение: A — ${nameA}, B — текущий`),
+    h('div', { class: 'tbl' }, h('table', {}, h('thead', {}, h('tr', {}, ['', 'A', 'B', 'Разница'].map(x => h('th', {}, x)))),
+      h('tbody', {},
+        row('Удар', rA.hit.health, rB.hit.health, 'up', 1),
+        row('За выстрел', rA.perShot.health, rB.perShot.health),
+        row('DPS', rA.dps.sustained, rB.dps.sustained),
+        row('Выстрелов до убийства', rA.kill.shots, rB.kill.shots, 'down'),
+        row('Время на убийство, с', rA.kill.seconds, rB.kill.seconds, 'down', 1),
+        row('Шанс крита, %', rA.stats.critChance * 100, rB.stats.critChance * 100, 'up', 1),
+        row('Шанс статуса, %', rA.stats.statusChance * 100, rB.stats.statusChance * 100, 'up', 1)))));
+}
+async function loadStateData(st) {
+  const cat = CATEGORIES.find(c => c.id === st.cat);
+  if (!cat) return;
+  D.weapons[st.cat] ||= await load(cat.file);
+  const g = withState(st, () => currentGroup());
+  D.mods[g] ||= await load(MOD_FILES[g]);
+  if (ARCANE_FILES[st.cat]) D.arcanes[st.cat] ||= await load(ARCANE_FILES[st.cat]);
+}
+
+// ---------- ссылка на билд ----------
+function toolMsg(text) { $('toolMsg').hidden = !text; $('toolMsg').textContent = text || ''; }
+async function shareLink() {
+  const code = await encodeBuild(snapshot());
+  const url = `${location.origin}${location.pathname}#b=${code}`;
+  $('shareBox').hidden = false;
+  $('shareUrl').value = url;
+  try { await navigator.clipboard.writeText(url); toolMsg('Ссылка скопирована. Кто откроет её, увидит этот билд.'); }
+  catch { $('shareUrl').select(); toolMsg('Скопируй ссылку из поля выше.'); }
+}
+async function applySnapshot(st) {
+  S = { ...structuredClone(DEFAULT), ...st, compareA: S?.compareA || null, frame: { ...structuredClone(FRAME_DEFAULT), ...(st.frame || {}) } };
+  await ensureCategory();
+  if (S.cat === 'melee') D.mods.stance ||= await load('data/mods/stance.json');
+}
+
+// ---------- импорт из AlecaFrame ----------
+async function onAlecaFile(file) {
+  if (!file) return;
+  toolMsg('Читаю файл AlecaFrame…');
+  let inv;
+  try { inv = await readAleca(file); }
+  catch { toolMsg('Не получилось расшифровать файл. Нужен %LOCALAPPDATA%\\AlecaFrame\\lastData.dat.'); return; }
+  for (const c of CATEGORIES) D.weapons[c.id] ||= await load(c.file);
+  const lookup = upgradeLookup(inv);
+  const entries = [];
+  for (const o of ownedItems(inv)) {
+    const rec = o.kind === 'weapon' ? D.weapons[o.cat].find(x => x.id === o.item.ItemType) : D.warframes.find(x => x.id === o.item.ItemType);
+    if (!rec) continue;
+    (o.item.Configs || []).forEach((c, i) => {
+      const n = (c.Upgrades || []).filter(Boolean).length;
+      if (n || i === 0) entries.push({ ...o, rec, ci: i, n, cname: c.Name });
+    });
+  }
+  toolMsg(`В инвентаре ${entries.length} конфигураций. Выбери, что загрузить.`);
+  openPicker({
+    items: entries.sort((a, b) => ruName(a.rec).localeCompare(ruName(b.rec), 'ru') || a.ci - b.ci),
+    placeholder: 'Оружие или фрейм из инвентаря',
+    label: e => `${ruName(e.rec)} — конфиг ${'ABCDEF'[e.ci] || e.ci + 1}${e.cname ? ' «' + e.cname + '»' : ''}`,
+    sub: e => `${e.kind === 'weapon' ? 'Оружие' : 'Фрейм'} · модов ${e.n}`,
+    onPick: e => applyAleca(e, lookup).catch(err => { console.error(err); toolMsg('Ошибка импорта: ' + err.message); }),
+  });
+}
+
+async function applyAleca(e, lookup) {
+  const ups = e.item.Configs[e.ci].Upgrades || [];
+  const sp = slotPolarities(e.item);
+  const missing = [];
+  const slotOf = (entry, find) => {
+    const u = lookup(entry);
+    if (!u) return null;
+    const m = find(u.type);
+    if (!m) { missing.push(u.type.split('/').pop()); return null; }
+    return { id: m.id, rank: Math.min(u.rank, maxRank(m)) };
+  };
+  const visual = [7, 6, 5, 4, 3, 2, 1, 0];       // в игре слоты идут в обратном порядке массива Upgrades
+  const catalyst = !!((e.item.Features || 0) & 1);
+  // В Polarity только поляризованные слоты; где стоят врождённые полярности, файл не говорит.
+  // Ставим каждую врождённую в свободный слот с самым дорогим модом той же полярности, иначе в пустой, иначе к самому дешёвому.
+  const slotPols = (mods, innate) => {
+    const pol = visual.map(i => sp[i] || null);
+    const free = pol.map((p, j) => (p ? -1 : j)).filter(j => j >= 0);
+    const cost = j => (mods[j] ? (findAny(mods[j].id)?.drain ?? 0) + mods[j].rank : -1);
+    for (const p of innate.map(lower).filter(Boolean)) {
+      if (!free.length) break;
+      let k = -1, best = -1;
+      free.forEach((j, n) => { const m = mods[j] && findAny(mods[j].id); if (m && polarityMatch(p, m.polarity) === true && cost(j) > best) { best = cost(j); k = n; } });
+      if (k < 0) k = free.findIndex(j => !mods[j]);
+      if (k < 0) { best = Infinity; free.forEach((j, n) => { if (cost(j) < best) { best = cost(j); k = n; } }); }
+      pol[free.splice(k, 1)[0]] = p;
+    }
+    return pol;
+  };
+  let findAny;
+  if (e.kind === 'weapon') {
+    S.cat = e.cat; S.weapon = e.rec.name; S.attack = 0;
+    await ensureCategory();
+    const melee = S.cat === 'melee';
+    if (melee) D.mods.stance ||= await load('data/mods/stance.json');
+    // оружие: 0–7 моды, 8 эксилус, 9 мистификатор; ближний бой: 8 стойка, 9 эксилус, 10 мистификатор
+    const ix = melee ? { exilus: 9, arcane: 10 } : { exilus: 8, arcane: 9 };
+    const findMod = t => modsOf().find(m => m.id === t);
+    findAny = findMod;
+    S.mods = visual.map(i => slotOf(ups[i], findMod));
+    S.exilus = slotOf(ups[ix.exilus], findMod);
+    S.arcane = slotOf(ups[ix.arcane], t => arcanesOf().find(a => a.id === t));
+    S.stance = melee ? slotOf(ups[8], t => D.mods.stance.find(m => m.id === t)) : null;
+    delete S.pol['w:' + e.rec.name];
+    const pol = polState('w', e.rec);
+    pol.slots = slotPols(S.mods, e.rec.polarities || []);
+    pol.exilus = sp[ix.exilus] || lower(e.rec.exilusPolarity);
+    if (melee) pol.aura = sp[8] || lower(e.rec.stancePolarity);
+    pol.catalyst = catalyst;
+    pol.rank = maxItemRank('w', e.rec);
+    const inc = D.incarnon?.[e.rec.name];
+    if (inc && e.item.SkillTree) {
+      const sel = S.incarnon[e.rec.name] = {};
+      for (const t of inc.tiers) {
+        const idx = +e.item.SkillTree[t.tier - 1];
+        if (Number.isFinite(idx) && t.perks[idx]) sel[t.tier] = t.perks[idx].name;
+      }
+    }
+    setView('weapon');
+    renderAll();
+  } else {
+    const f = F();
+    f.name = e.rec.name;
+    findAny = fModById;
+    f.mods = visual.map(i => slotOf(ups[i], fModById));
+    f.aura = slotOf(ups[8], fModById);
+    f.exilus = slotOf(ups[9], fModById);
+    f.arcanes = [slotOf(ups[10], fArcById), slotOf(ups[11], fArcById)];
+    const sh = readShards(e.item, D.shards);
+    f.shards = Array.from({ length: 5 }, (_, i) => sh[i] ? { color: sh[i].color, effect: sh[i].effect, tau: sh[i].tau } : null);
+    const ov = e.item.Configs[e.ci].AbilityOverride;
+    f.helminth = { slot: '', ability: '' };
+    if (ov?.Ability) {
+      for (const w of D.warframes) for (const a of w.abilities || []) if (a.id === ov.Ability) f.helminth = { slot: String(ov.Index), ability: a.name };
+    }
+    // фрейм: 0–7 моды, 8 аура, 9 эксилус, 10–11 мистификаторы
+    delete S.pol['f:' + e.rec.name];
+    const pol = polState('f', e.rec);
+    pol.slots = slotPols(f.mods, e.rec.polarities || []);
+    pol.aura = sp[8] || lower(e.rec.auraPolarity);
+    pol.exilus = sp[9] || lower(e.rec.exilusPolarity);
+    pol.catalyst = catalyst;
+    setView('frame');
+    renderFrame(); updateFrame();
+  }
+  toolMsg(`Загружено: ${ruName(e.rec)}, конфиг ${'ABCDEF'[e.ci] || e.ci + 1}.` + (missing.length ? ` Не нашёл в данных: ${missing.join(', ')}.` : ''));
+  save();
+}
+
 // ---------- обновление ----------
 function update(full = true) {
   if (full) { renderMods(); renderConds(); renderEnemySegs(); }
@@ -519,6 +794,11 @@ function bindInputs() {
   }));
   $('addBuff').addEventListener('click', openBuffPicker);
   $('fAddBuff').addEventListener('click', openBuffPicker);
+  $('shareBtn').addEventListener('click', () => shareLink().catch(err => toolMsg('Не получилось: ' + err.message)));
+  $('shareCopy').addEventListener('click', async () => { try { await navigator.clipboard.writeText($('shareUrl').value); toolMsg('Ссылка скопирована.'); } catch { $('shareUrl').select(); } });
+  $('saveA').addEventListener('click', () => { S.compareA = snapshot(); toolMsg('Билд запомнен как A. Меняй что угодно — сравнение появится в результате.'); update(false); });
+  $('clearA').addEventListener('click', () => { S.compareA = null; toolMsg(''); update(false); });
+  $('alecaFile').addEventListener('change', e => { onAlecaFile(e.target.files[0]); e.target.value = ''; });
   $('mini').addEventListener('click', () => $(S.view === 'frame' ? 'fResCard' : 'resCard').scrollIntoView({ behavior: 'smooth' }));
 }
 
@@ -530,7 +810,15 @@ async function start() {
       load('data/enemies.json'), load('data/manual/scaling.json'), load('data/damage.json'), load('data/warframes.json'),
       load('data/manual/shards.json'), load('data/mods/warframe.json'), load('data/arcanes/warframe.json'), load('data/manual/buffs.json')]);
     D.incarnon = await load('data/incarnon.json');
+    const m = location.hash.match(/^#b=([\w-]+)$/);
+    if (m) {
+      try { await applySnapshot(await decodeBuild(m[1])); toolMsg('Открыт билд по ссылке.'); }
+      catch (err) { console.error(err); toolMsg('Ссылка на билд повреждена — открыт последний сохранённый.'); }
+      history.replaceState(null, '', location.pathname);
+    }
     await ensureCategory();
+    if (S.cat === 'melee') D.mods.stance ||= await load('data/mods/stance.json');
+    if (S.compareA) await loadStateData(S.compareA).catch(() => {});
   } catch (err) {
     $('res').replaceChildren(h('p', { class: 'warn' }, 'Не удалось загрузить данные: ' + err.message));
     return;

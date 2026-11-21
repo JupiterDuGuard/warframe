@@ -1,6 +1,8 @@
 // Эталонные проверки движка. Работают и в node --test (tests/engine.test.mjs), и в браузере (tests/index.html).
 // Каждый случай: { name, run(ctx) }, ctx = { data, find, near, eq } ; near(a, b, eps) / eq(a, b) бросают ошибку.
-import { calc, combineElements, critInfo, enemyState, frameStats, shardSources, resolveBuffs } from '../js/engine/index.js';
+import { calc, combineElements, critInfo, enemyState, frameStats, shardSources, resolveBuffs, capacity, modCost, polarityMatch, formaCount, modContribution, shotThresholds } from '../js/engine/index.js';
+import { encodeBuild, decodeBuild } from '../js/share.js';
+import { readAleca, upgradeLookup, slotPolarities, readShards } from '../js/aleca.js';
 
 const SILKEN = pct => ({ name: 'Шёлковая поступь', pct, type: 'Toxin', statusChance: 1, ability: true });
 const DEVOURING = { name: 'Devouring Attrition', effects: [{ stat: 'final_mult', value: 21, bucket: 'final_mult' }] };
@@ -341,6 +343,78 @@ export const cases = [
     run({ data, find, near }) {
       const e = enemyState(find.enemy('Heavy Gunner'), { level: 115, status: { corrosive: 10 } }, data.scaling, data.damage);
       near(e.armor, 540, 1e-6); near(e.dr, 0.9 * Math.sqrt(540 / 2700), 1e-9);
+    },
+  },
+  // ---------- этап 8: вместимость, анализ, ссылка, AlecaFrame ----------
+  {
+    name: 'Вместимость: Hornet Strike R10 (14) — V-слот 7, D-слот 18, без полярности 14',
+    run({ data, find, eq }) {
+      const m = find.mod('secondary', 'Hornet Strike');
+      eq(modCost(m, 10, 'madurai'), 7); eq(modCost(m, 10, 'vazarin'), 18); eq(modCost(m, 10, null), 14);
+      eq(modCost(m, 10, 'any'), 7); eq(polarityMatch('any', 'umbra'), false);
+    },
+  },
+  {
+    name: 'Вместимость: Corrosive Projection R5 в «—»-ауре даёт +14, с Реактором 60 + 14 = 74',
+    run({ data, find, eq }) {
+      const cp = find.mod('warframe', 'Corrosive Projection');
+      eq(modCost(cp, 5, 'naramon'), -14); eq(modCost(cp, 5, null), -7); eq(modCost(cp, 5, 'madurai'), -5);
+      const c = capacity({ catalyst: true, slots: [{ mod: find.mod('warframe', 'Vitality'), rank: 10, polarity: 'vazarin' }], bonusSlot: { mod: cp, rank: 5, polarity: 'naramon' } });
+      eq(c.max, 74); eq(c.used, Math.ceil((2 + 10) / 2)); eq(c.bonus, 14);
+      eq(capacity({ catalyst: false }).max, 30);
+    },
+  },
+  {
+    name: 'Forma: новые полярности считаются, перестановка врождённых — нет',
+    run({ eq }) {
+      eq(formaCount(['madurai', 'vazarin', null, 'naramon'], ['madurai', null, null, 'Vazarin']), 1);
+      eq(formaCount(['madurai', 'madurai', 'any'], ['Madurai', 'Universal', 'None']), 1);
+    },
+  },
+  {
+    name: 'Вклад модов: Hornet Strike +220% — без него DPS падает на 1 − 1/3,2 ≈ 68,75%',
+    run({ data, find, near }) {
+      const build = { weapon: find.weapon('Lex Prime'), mods: [{ item: find.mod('secondary', 'Hornet Strike'), rank: 10 }] };
+      const { rows } = modContribution(build, { enemy: NEUTRAL, level: 1 }, data, { crit: 'avg' });
+      near(rows[0].loss, 1 - 1 / 3.2, 0.01);
+    },
+  },
+  {
+    name: 'Пороговые уровни: Лекс Прайм → Пулемётчица, уровни не убывают с числом выстрелов и точны на границе',
+    run({ data, find, eq }) {
+      const build = { weapon: find.weapon('Lex Prime'), mods: [{ item: find.mod('secondary', 'Hornet Strike'), rank: 10 }] };
+      const target = { enemy: find.enemy('Heavy Gunner') };
+      const t = shotThresholds(build, target, data, { part: 'head', crit: 'avg' });
+      for (let i = 1; i < t.length; i++) if (t[i].level < t[i - 1].level) throw new Error('уровни убывают: ' + JSON.stringify(t));
+      const shots = lvl => calc(build, { ...target, level: lvl }, data, { part: 'head', crit: 'avg' }).kill.shots;
+      for (const x of t) if (x.level > 0 && x.level < 9999) { eq(shots(x.level) <= x.shots, true); eq(shots(x.level + 1) > x.shots, true); }
+    },
+  },
+  {
+    name: 'Ссылка на билд: кодирование и раскодирование без потерь',
+    async run({ eq }) {
+      const st = { cat: 'secondary', weapon: 'Laetum', mods: [{ id: '/Lotus/Upgrades/Mods/Pistol/WeaponDamageAmountMod', rank: 10 }, null], pol: { 'w:Laetum': { slots: ['madurai'] } }, ru: 'Ёж' };
+      const code = await encodeBuild(st);
+      eq(/^[zj][\w-]+$/.test(code), true);
+      eq(JSON.stringify(await decodeBuild(code)), JSON.stringify(st));
+    },
+  },
+  {
+    name: 'AlecaFrame: расшифровка, ранги модов, полярности слотов, осколки',
+    async run({ data, eq }) {
+      const inv = { Upgrades: [{ ItemId: { $oid: 'a1' }, ItemType: '/Lotus/Upgrades/Mods/Pistol/WeaponDamageAmountMod', UpgradeFingerprint: '{"lvl":7}' }],
+        Suits: [{ ItemType: '/Lotus/Powersuits/Oraxia/Oraxia', Polarity: [{ Slot: 3, Value: 'AP_ATTACK' }, { Slot: 8, Value: 'AP_TACTIC' }],
+          ArchonCrystalUpgrades: [{ Color: 'ACC_GREEN_MYTHIC', UpgradeType: '/Lotus/Upgrades/Invigorations/ArchonCrystalUpgrades/ArchonCrystalUpgradeToxinDamageMythic' }, {}] }] };
+      const key = await crypto.subtle.importKey('raw', new TextEncoder().encode('LEO-ALEC\tEO-ALEC'), { name: 'AES-CBC' }, false, ['encrypt']);
+      const iv = new Uint8Array([49, 50, 70, 71, 66, 51, 54, 45, 76, 69, 51, 45, 113, 61, 57, 0]);
+      const enc = await crypto.subtle.encrypt({ name: 'AES-CBC', iv }, key, new TextEncoder().encode(JSON.stringify({ InventoryJson: JSON.stringify(inv) })));
+      const got = await readAleca({ arrayBuffer: async () => enc });
+      const look = upgradeLookup(got);
+      eq(look('a1').rank, 7); eq(look('/Lotus/Upgrades/Mods/Rifle/Foo').rank, 0); eq(look('zz'), null);
+      const sp = slotPolarities(got.Suits[0]);
+      eq(sp[3], 'madurai'); eq(sp[8], 'naramon');
+      const sh = readShards(got.Suits[0], data.shards);
+      eq(sh[0].color, 'emerald'); eq(sh[0].tau, true); eq(sh[0].effect, 'toxin_status'); eq(sh[1], null);
     },
   },
 ];

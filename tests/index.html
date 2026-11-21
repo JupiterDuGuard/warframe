@@ -25,7 +25,7 @@ const ctx = makeContext(await loadTree(DATA_FILES));
 let ok = 0;
 for (const c of cases) {
   const li = document.createElement('li');
-  try { c.run(ctx); li.className = 'ok'; li.textContent = '✓ ' + c.name; ok++; }
+  try { await c.run(ctx); li.className = 'ok'; li.textContent = '✓ ' + c.name; ok++; }
   catch (e) { li.className = 'fail'; li.innerHTML = '✗ ' + c.name + '<br><code>' + e.message + '</code>'; }
   document.getElementById('list').append(li);
 }

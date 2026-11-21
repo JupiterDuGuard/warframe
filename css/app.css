@@ -123,3 +123,16 @@ dialog.sheet::backdrop{background:rgba(10,16,13,.55)}
 .buff-ctl input[type=number]{width:80px}
 .buff-ctl select{width:auto;max-width:100%}
 .x-btn{margin-left:auto;border:1px solid var(--line);background:var(--surface);color:var(--red);border-radius:6px;width:28px;height:26px;cursor:pointer}
+.slot .num{display:flex;align-items:center;gap:6px;justify-content:flex-end;position:static;order:-1;font:600 10px var(--mono);color:var(--muted)}
+.slot .num select.pol{width:auto;padding:0 3px;font:600 11px var(--mono);background:var(--surface);border:1px solid var(--line);border-radius:4px;margin-right:auto}
+.slot .num .cost{color:var(--ink)}
+.slot .num .cost.plus{color:var(--accent)}
+.capline{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;margin-top:8px;font-size:13px}
+.capline b{font-family:var(--mono)}
+.capline .over{color:var(--red)}
+.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:8px}
+.tools button,.tools label.btn{font:600 13px var(--body);border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:7px 12px;cursor:pointer}
+.tools button:hover,.tools label.btn:hover{border-color:var(--accent)}
+.sharebox{display:flex;gap:8px;margin-top:8px}
+.sharebox input{flex:1}
+td.up{color:var(--accent)} td.down{color:var(--red)}

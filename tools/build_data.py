@@ -411,12 +411,14 @@ def build_weapons(ru):
 
 def build_warframes(ru, wf_wfcd):
     data = wiki("Warframes/data")
-    abil_ru = {}
+    abil_ru, abil_id = {}, {}
     for w in wf_wfcd:
         for a in w.get("abilities") or []:
             n = ru_name(ru, a.get("uniqueName"))
             if n:
                 abil_ru[a["name"]] = n
+            if a.get("uniqueName"):
+                abil_id[a["name"]] = a["uniqueName"]
     rows = []
     for key, w in (data.get("Warframes") or {}).items():
         if not isinstance(w, dict) or w.get("_IgnoreEntry"):
@@ -431,7 +433,7 @@ def build_warframes(ru, wf_wfcd):
                "energy": w.get("Energy"), "energyRank30": w.get("EnergyRank30"), "initialEnergy": w.get("InitialEnergy"),
                "sprint": w.get("Sprint"), "auraPolarity": w.get("AuraPolarity"), "exilusPolarity": w.get("ExilusPolarity"),
                "polarities": w.get("Polarities"), "progenitor": w.get("Progenitor"), "subsumed": w.get("Subsumed"),
-               "abilities": [{"name": a, "ru": abil_ru.get(a)} for a in w.get("Abilities") or []],
+               "abilities": [{"name": a, "ru": abil_ru.get(a), "id": abil_id.get(a)} for a in w.get("Abilities") or []],
                "passive": w.get("Passive")}
         rows.append({k: v for k, v in rec.items() if v not in (None, [], "")})
     rows.sort(key=lambda r: r["name"])
