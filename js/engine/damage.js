@@ -32,13 +32,18 @@ export function buildSources(build) {
  */
 export function calc(build, target, data, opts = {}) {
   const steps = [];
-  const enemy = enemyState(target.enemy, target, data.scaling, data.damage);
+  let enemy = enemyState(target.enemy, target, data.scaling, data.damage);
   const ctx = {
     faction: enemy.faction, stacks: build.stacks || {}, flags: build.flags || {},
     statusTypes: build.statusTypes ?? enemy.statusTypes, comboMultiplier: build.comboMultiplier, slot: build.slot,
+    weaponClass: build.weapon?.class,
   };
   const eff = collect(buildSources(build), ctx);
   const A = moddedAttack(build.weapon, build.attack || 0, eff);
+  if (A.armorStrip && target.drOverride == null) {          // аура Corrosive Projection и т.п. снимает броню
+    enemy = enemyState(target.enemy, { ...target, armorStrip: 1 - (1 - (target.armorStrip || 0)) * (1 - A.armorStrip) }, data.scaling, data.damage);
+  }
+  const sdType = type => A.statusDamage + (A.statusDamageType[type] || 0);
 
   // ---- часть тела и крит
   const head = opts.part === 'head';
@@ -94,11 +99,11 @@ export function calc(build, target, data, opts = {}) {
     let tick = 0;
     if (dot && x.statusChance) {
       const tb = A.elemBonus[x.type] || 0;
-      tick = dot.coef * pre * (1 + tb) * (1 + A.statusDamage) * (1 + F) * enemy.dtm(x.type) *
+      tick = dot.coef * pre * (1 + tb) * (1 + sdType(x.type)) * (1 + F) * enemy.dtm(x.type) *
         (dot.ignoresArmor ? 1 : 1 - enemy.dr) * (1 - resist) * healthFactor;
       steps.push({
         label: `${x.name}: тик`,
-        formula: `${dot.coef} × ${fmt(pre)} × (1 + ${fmt(tb)}) × (1 + ${fmt(A.statusDamage)}) × (1 + ${fmt(F)}) × ${fmt(enemy.dtm(x.type))}` +
+        formula: `${dot.coef} × ${fmt(pre)} × (1 + ${fmt(tb)}) × (1 + ${fmt(sdType(x.type))}) × (1 + ${fmt(F)}) × ${fmt(enemy.dtm(x.type))}` +
           ` × (1 − ${fmt(dot.ignoresArmor ? 0 : enemy.dr)}) × (1 − ${fmt(resist)})`,
         value: tick,
       });
@@ -135,7 +140,7 @@ export function calc(build, target, data, opts = {}) {
     const d = DOT[type];
     if (!d || !p) continue;
     const tb = type === 'Slash' ? 0 : (A.elemBonus[type] || 0);
-    const tick = d.coef * mbd * (1 + tb) * (1 + F) * (1 + A.statusDamage) * K * bodyMult *
+    const tick = d.coef * mbd * (1 + tb) * (1 + F) * (1 + sdType(type)) * K * bodyMult *
       enemy.dtm(type) * (d.ignoresArmor ? 1 : 1 - enemy.dr) * healthFactor;
     dots[type] = { procsPerPellet: p, tick, ticks, perProc: tick * ticks };
     dotPerPellet += p * tick * ticks;

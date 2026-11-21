@@ -1,0 +1,47 @@
+{
+  "_comment": "Осколки архонтов. Переписано со страницы вики 2026-11-21. value — обычный осколок, таукованый = ×1,5 (tau). target: frame — статы фрейма, weapon — урон оружия (slot — для какого слота). flat — плоская прибавка после всех бонусов.",
+  "source": "https://wiki.warframe.com/w/Archon_Shard",
+  "slots": 5,
+  "tauMultiplier": 1.5,
+  "colors": [
+    { "id": "crimson", "ru": "Багровый", "en": "Crimson", "effects": [
+      { "id": "melee_crit_damage", "ru": "Крит. урон ближнего боя", "target": "weapon", "stat": "crit_damage", "bucket": "crit_damage", "value": 0.25, "condition": { "slot": "melee" } },
+      { "id": "primary_status", "ru": "Шанс статуса основного оружия", "target": "weapon", "stat": "status_chance", "bucket": "status_chance", "value": 0.25, "condition": { "slot": "primary" } },
+      { "id": "secondary_crit", "ru": "Шанс крита вторичного оружия", "target": "weapon", "stat": "crit_chance", "bucket": "crit_chance", "value": 0.25, "condition": { "slot": "secondary" } },
+      { "id": "strength", "ru": "Сила способностей", "target": "frame", "stat": "ability_strength", "bucket": "frame", "value": 0.10 },
+      { "id": "duration", "ru": "Длительность способностей", "target": "frame", "stat": "ability_duration", "bucket": "frame", "value": 0.10 }
+    ]},
+    { "id": "amber", "ru": "Янтарный", "en": "Amber", "effects": [
+      { "id": "initial_energy", "ru": "Энергия при появлении", "target": "frame", "stat": "initial_energy", "bucket": "frame", "value": 0.30 },
+      { "id": "health_orbs", "ru": "Эффективность сфер здоровья", "target": "frame", "stat": "health_orb", "bucket": "frame", "value": 1.0 },
+      { "id": "energy_orbs", "ru": "Эффективность сфер энергии", "target": "frame", "stat": "energy_orb", "bucket": "frame", "value": 0.5 },
+      { "id": "casting_speed", "ru": "Скорость применения", "target": "frame", "stat": "casting_speed", "bucket": "frame", "value": 0.25 },
+      { "id": "parkour", "ru": "Скорость паркура", "target": "frame", "stat": "parkour_velocity", "bucket": "frame", "value": 0.15 }
+    ]},
+    { "id": "azure", "ru": "Лазурный", "en": "Azure", "effects": [
+      { "id": "health", "ru": "Здоровье", "target": "frame", "stat": "health_flat", "bucket": "frame", "value": 150, "flat": true },
+      { "id": "shield", "ru": "Щиты", "target": "frame", "stat": "shield_flat", "bucket": "frame", "value": 150, "flat": true },
+      { "id": "energy", "ru": "Энергия", "target": "frame", "stat": "energy_flat", "bucket": "frame", "value": 50, "flat": true },
+      { "id": "armor", "ru": "Броня", "target": "frame", "stat": "armor_flat", "bucket": "frame", "value": 150, "flat": true },
+      { "id": "regen", "ru": "Восстановление здоровья, ед./с", "target": "frame", "stat": "health_regen", "bucket": "frame", "value": 5, "flat": true }
+    ]},
+    { "id": "emerald", "ru": "Изумрудный", "en": "Emerald", "effects": [
+      { "id": "toxin_status", "ru": "Урон статуса Токсина", "target": "weapon", "stat": "status_damage_toxin", "bucket": "status_damage", "value": 0.30 },
+      { "id": "toxin_heal", "ru": "Здоровье за тик Токсина", "target": "frame", "stat": "toxin_heal", "bucket": "frame", "value": 2, "flat": true },
+      { "id": "corrosion_ability", "ru": "Урон способностей по целям с Коррозией", "target": "frame", "stat": "ability_damage_corrosion", "bucket": "frame", "value": 0.10 },
+      { "id": "corrosion_stacks", "ru": "Макс. стаков Коррозии", "target": "frame", "stat": "corrosion_max_stacks", "bucket": "frame", "value": 2, "flat": true, "tauValue": 3 }
+    ]},
+    { "id": "topaz", "ru": "Топазовый", "en": "Topaz", "effects": [
+      { "id": "blast_health", "ru": "Здоровье за убийство Взрывом (до 300)", "target": "frame", "stat": "health_flat", "bucket": "frame", "value": 1, "flat": true, "tauValue": 2, "stacksMax": 300, "stacksMaxTau": 225 },
+      { "id": "blast_shield", "ru": "Щиты за убийство Взрывом", "target": "frame", "stat": "shield_on_kill", "bucket": "frame", "value": 5, "flat": true },
+      { "id": "heat_secondary_crit", "ru": "Шанс крита вторичного за убийство цели с Огнём (до 50%)", "target": "weapon", "stat": "crit_chance", "bucket": "crit_chance", "value": 0.01, "condition": { "slot": "secondary" }, "stacksMax": 50 },
+      { "id": "radiation_ability", "ru": "Урон способностей по целям с Радиацией", "target": "frame", "stat": "ability_damage_radiation", "bucket": "frame", "value": 0.10 }
+    ]},
+    { "id": "violet", "ru": "Фиолетовый", "en": "Violet", "effects": [
+      { "id": "electricity_ability", "ru": "Урон способностей по целям с Электричеством", "target": "frame", "stat": "ability_damage_electricity", "bucket": "frame", "value": 0.10 },
+      { "id": "primary_electricity", "ru": "Электричество основного оружия (+10% за каждый Багровый, Лазурный, Фиолетовый)", "target": "weapon", "stat": "element_electricity", "bucket": "element", "value": 0.30, "perShard": 0.10, "perShardColors": ["crimson", "azure", "violet"], "condition": { "slot": "primary" } },
+      { "id": "melee_crit_damage", "ru": "Крит. урон ближнего боя (×2 при энергии больше 500)", "target": "weapon", "stat": "crit_damage", "bucket": "crit_damage", "value": 0.25, "condition": { "slot": "melee" }, "doubleIfEnergyOver": 500 },
+      { "id": "orb_conversion", "ru": "Сферы здоровья дают энергию и наоборот", "target": "frame", "stat": "orb_conversion", "bucket": "frame", "value": 0.20 }
+    ]}
+  ]
+}

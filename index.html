@@ -25,7 +25,9 @@
   <button type="button" class="update" id="updateBtn" hidden>Есть обновление — перезагрузить</button>
 </header>
 
-<main class="wrap">
+<div class="views"><div class="seg" id="viewSeg" role="group" aria-label="Что считать"></div></div>
+
+<main class="wrap" id="viewWeapon">
   <div class="col">
     <section class="card">
       <h2>Оружие</h2>
@@ -62,7 +64,9 @@
           <div class="f"><label for="cMult">Свой множитель урона, ×</label><input type="number" id="cMult" min="0" step="any"><small>Например, ×21 у Devouring Attrition</small></div>
           <div class="f"><label for="cStatus">Свой бонус к урону статусов, %</label><input type="number" id="cStatus" min="0" step="any"><small>Осколки, Элементалист вне модов</small></div>
         </div>
-        <p class="muted">Осколки архонтов, способности, фокус и ауры появятся на этапах 5–6.</p>
+        <label class="chk"><input type="checkbox" id="useFrame"> Учитывать фрейм (аура, осколки, мистификаторы)</label>
+        <p class="muted" id="frameLink"></p>
+        <p class="muted">Способности, фокус и баффы союзников появятся на этапе 6.</p>
       </div>
     </section>
   </div>
@@ -92,6 +96,39 @@
     <section class="card" id="resCard">
       <h2>Результат</h2>
       <div id="res"><p class="muted">Считаю…</p></div>
+    </section>
+  </div>
+</main>
+
+<main class="wrap" id="viewFrame" hidden>
+  <div class="col">
+    <section class="card">
+      <h2>Фрейм</h2>
+      <button type="button" class="pick" id="framePick"><b>Загрузка…</b></button>
+      <div class="row" style="margin-top:10px">
+        <div class="f" style="justify-content:flex-end"><label class="chk"><input type="checkbox" id="fRank30"> 30-й ранг</label></div>
+        <div class="f"><label for="helSlot">Helminth: заменить</label><select id="helSlot"></select></div>
+        <div class="f"><label for="helAbility">на способность</label><select id="helAbility"></select></div>
+      </div>
+    </section>
+    <section class="card">
+      <h2>Моды фрейма <small>аура, эксилус, мистификаторы и 8 слотов</small></h2>
+      <div class="slots" id="fSlotsTop"></div>
+      <div class="slots" style="margin-top:8px" id="fSlots"></div>
+    </section>
+    <section class="card">
+      <h2>Осколки архонтов <small>до 5, таукованые ×1,5</small></h2>
+      <div class="conds" id="fShards"></div>
+    </section>
+    <section class="card" id="fCondCard" hidden>
+      <h2>Условные эффекты фрейма</h2>
+      <div class="conds" id="fConds"></div>
+    </section>
+  </div>
+  <div class="col">
+    <section class="card" id="fResCard">
+      <h2>Статы фрейма</h2>
+      <div id="fRes"><p class="muted">Считаю…</p></div>
     </section>
   </div>
 </main>

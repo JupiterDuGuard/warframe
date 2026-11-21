@@ -100,7 +100,7 @@ FACTIONS = r"Grineer|Corpus|Infested|Corrupted|Orokin|Murmur|The Murmur|Sentient
 # (regex, stat, bucket, вид значения) ; {1} в stat — подстановка второй группы
 RULES = [
     (rf"^{PCT} Damage$", "damage", "base_damage", "pct"),
-    (rf"^{PCT} Melee Damage$", "damage", "base_damage", "pct"),
+    (rf"^{PCT} Melee Damage$", "damage_class_melee", "base_damage", "pct"),
     # «Direct Damage» у новых Galvanized: отдельная корзина, пока не сверено с вики (TODO_VERIFY)
     (rf"^{PCT} Direct Damage$", "direct_damage", "direct_damage", "pct"),
     (rf"^{PCT} Weak Point Damage$", "weakpoint_damage", "weakpoint", "pct"),
@@ -116,6 +116,13 @@ RULES = [
     (rf"^{PCT} Heavy Attack Wind Up Speed$", "heavy_windup", "utility", "pct"),
     (rf"^{PCT} Fire/Charge Rate$", "fire_rate", "fire_rate", "pct"),
     (rf"^{NUM} Final Status Chance$", "status_chance_flat", "status_chance_flat", "pct100"),
+    # ауры («Squad receives/gains» срезается заранее)
+    (rf"^{PCT} (Rifle|Pistol|Shotgun|Sniper Rifle|Melee) Damage$", "damage_class_{1}", "base_damage", "pct"),
+    (rf"^{PCT} Weapon Damage$", "damage", "base_damage", "pct"),
+    (rf"^{PCT} Maximum Health$", "health", "frame", "pct"),
+    (rf"^Enemies lose -?{PCT} Armor$", "armor_strip", "enemy", "pct"),
+    (rf"^Enemies lose -?{PCT} Shield Capacity$", "shield_strip", "enemy", "pct"),
+    (rf"^{PCT} Weak Point Critical Chance$", "weakpoint_crit_chance", "weakpoint", "pct"),
     (rf"^{PCT} ({ELEMENTS})$", "element_{1}", "element", "pct"),
     (rf"^{PCT} (Impact|Puncture|Slash)$", "physical_{1}", "physical", "pct"),
     (rf"^{PCT} Multishot$", "multishot", "multishot", "pct"),
@@ -173,7 +180,7 @@ TO_WEAPONS = re.compile(r"\s+(?:to|for) (Primary|Secondary|Melee) Weapons?$", re
 TAG = re.compile(r"<DT_[A-Z_]+>|<[A-Z_]+>")
 # строки, которые на урон и статы не влияют: в отчёт не попадают
 IGNORE = re.compile(r"Arcane Revive|Converts .* ammo pickups|Chance to Explode|Gore Chance|Hush|"
-                    r"chance an enemy will hear|Enemy Radar|Loot Radar", re.I)
+                    r"chance an enemy will hear|Enemy Radar|Loot Radar|^Squadmates gain", re.I)
 
 
 def clean(line):
@@ -204,6 +211,8 @@ def match_line(line):
             g2 = m.group(2).lower().replace("the ", "").replace(" ", "_")
             stat = stat.replace("{1}", "sentient" if g2 == "sentients" else g2)
         eff = {"stat": stat, "value": round(v, 6), "bucket": bucket}
+        if stat.startswith("damage_class_"):
+            eff = {"stat": "damage", "value": round(v, 6), "bucket": bucket, "condition": {"weaponClass": stat[13:]}}
         if bucket == "faction":
             eff["condition"] = {"faction": stat.split("_", 1)[1]}
         return eff
@@ -230,6 +239,10 @@ def parse_rank(stats):
                 cond = {"trigger": line}
                 continue
             text, c = line.rstrip("."), (dict(cond) if cond else None)
+            text = re.sub(r"^Squad (?:receives|gains) ", "", text)
+            pd = re.match(rf"^You lose {NUM}% Ability Strength", text)   # Power Donation
+            if pd:
+                text = f"-{pd.group(1)}% Ability Strength"
             if re.search(r"\.?\s*Multishot cannot be modified$", text, re.I):   # Acuity-моды
                 text = re.sub(r"\.?\s*Multishot cannot be modified$", "", text, flags=re.I)
                 lock = {"stat": "multishot_locked", "value": 1, "bucket": "special"}
@@ -314,7 +327,7 @@ def build_upgrades(items, ru, groups, wiki_map, kind, overrides):
             "type": it.get("type"), "compat": it.get("compatName"),
             "polarity": it.get("polarity"), "rarity": it.get("rarity"),
             "drain": it.get("baseDrain"), "maxRank": it.get("fusionLimit", len(ranks) - 1 if ranks else 0),
-            "exilus": bool(it.get("isExilus")), "augment": bool(it.get("isAugment")),
+            "exilus": bool(it.get("isExilus") or it.get("isUtility")), "augment": bool(it.get("isAugment")),
             "set": (it.get("modSet") or "").split("/")[-1] or None,
             "upgradeTypes": w.get("UpgradeTypes"),
             "text": [" / ".join(" ".join(b) for b in split_lines(ranks_en[-1]))] if ranks_en else [],
@@ -391,6 +404,11 @@ def build_warframes(ru, wf_wfcd):
             continue
         rec = {"id": w.get("InternalName"), "name": w.get("Name", key), "ru": ru_name(ru, w.get("InternalName")),
                "health": w.get("Health"), "shield": w.get("Shield"), "armor": w.get("Armor"),
+               # 30-й ранг: +100 здоровья, +100 щитов, +50 энергии; исключения заданы в данных вики полями *Rank30
+               "rank30": {"health": w.get("HealthRank30", (w.get("Health") or 0) + 100),
+                          "shield": w.get("ShieldRank30", (w.get("Shield") or 0) + 100 if w.get("Shield") else 0),
+                          "energy": w.get("EnergyRank30", (w.get("Energy") or 0) + 50 if w.get("Energy") else 0),
+                          "armor": w.get("ArmorRank30", w.get("Armor"))},
                "energy": w.get("Energy"), "energyRank30": w.get("EnergyRank30"), "initialEnergy": w.get("InitialEnergy"),
                "sprint": w.get("Sprint"), "auraPolarity": w.get("AuraPolarity"), "exilusPolarity": w.get("ExilusPolarity"),
                "polarities": w.get("Polarities"), "progenitor": w.get("Progenitor"), "subsumed": w.get("Subsumed"),

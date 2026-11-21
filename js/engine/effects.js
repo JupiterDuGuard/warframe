@@ -13,6 +13,17 @@ import { FACTION_FAMILY } from './constants.js';
 
 const FLAG_KEYS = ['aiming', 'first_shot', 'invisible', 'blocking'];
 
+// Ауры «+X% урона винтовкам/пистолетам/…» (Rifle Amp и др.). Какие классы считаются «винтовками» — TODO_VERIFY.
+export function weaponClassFits(wc, ctx) {
+  const cls = ctx.weaponClass || '';
+  if (wc === 'melee') return ctx.slot === 'melee';
+  if (wc === 'pistol') return ctx.slot === 'secondary';
+  if (wc === 'rifle') return ctx.slot === 'primary' && cls !== 'Shotgun';
+  if (wc === 'shotgun') return cls === 'Shotgun';
+  if (wc === 'sniper_rifle') return cls === 'Sniper Rifle';
+  return true;
+}
+
 export function effectValue(eff, ctx, key) {
   const c = eff.condition;
   if (!c) return eff.value;
@@ -23,6 +34,7 @@ export function effectValue(eff, ctx, key) {
     if (fam !== want) return 0;
   }
   if (c.slot && ctx.slot && c.slot !== ctx.slot) return 0;
+  if (c.weaponClass && ctx.slot && !weaponClassFits(c.weaponClass, ctx)) return 0;
   for (const f of FLAG_KEYS) if (c[f] && !ctx.flags?.[f]) return 0;
   if (c.attack && ctx.flags?.attack !== c.attack) return 0;
   if (c.target && ctx.flags?.target !== c.target) return 0;

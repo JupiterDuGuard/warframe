@@ -1,6 +1,6 @@
 // Эталонные проверки движка. Работают и в node --test (tests/engine.test.mjs), и в браузере (tests/index.html).
 // Каждый случай: { name, run(ctx) }, ctx = { data, find, near, eq } ; near(a, b, eps) / eq(a, b) бросают ошибку.
-import { calc, combineElements, critInfo, enemyState } from '../js/engine/index.js';
+import { calc, combineElements, critInfo, enemyState, frameStats, shardSources } from '../js/engine/index.js';
 
 const SILKEN = pct => ({ name: 'Шёлковая поступь', pct, type: 'Toxin', statusChance: 1, ability: true });
 const DEVOURING = { name: 'Devouring Attrition', effects: [{ stat: 'final_mult', value: 21, bucket: 'final_mult' }] };
@@ -134,6 +134,59 @@ export const cases = [
     },
   },
 
+  // ---------- фрейм (этап 5) ----------
+  {
+    name: 'Фрейм: Ораксия на 30-м ранге — здоровье 675, щиты 225, броня 125, энергия 200',
+    run({ data, find, near }) {
+      const f = frameStats(find.frame('Oraxia'), {}, data.shards);
+      near(f.health, 675, 1e-9); near(f.shield, 225, 1e-9); near(f.armor, 125, 1e-9); near(f.energy, 200, 1e-9);
+    },
+  },
+  {
+    name: 'Фрейм: Живучесть R10 + таукованый Лазурный (здоровье) → 1575, эффективное здоровье 1575 × (1 + 125/300)',
+    run({ data, find, near }) {
+      const f = frameStats(find.frame('Oraxia'), { mods: [{ item: find.mod('warframe', 'Vitality'), rank: 10 }],
+        shards: [{ color: 'azure', effect: 'health', tau: true }] }, data.shards);
+      near(f.health, 1575, 1e-9); near(f.ehpHealth, 1575 * (1 + 125 / 300), 1e-6);
+    },
+  },
+  {
+    name: 'Фрейм → оружие: таукованый Изумрудный осколок вместо «своего бонуса» даёт тот же тик 33,73',
+    run({ data, find, near }) {
+      const f = frameStats(find.frame('Oraxia'), { shards: [{ color: 'emerald', effect: 'toxin_status', tau: true }] }, data.shards);
+      const r = calc({
+        weapon: find.weapon('Laetum'), slot: 'secondary', mods: [{ item: find.mod('secondary', 'Pistol Elementalist'), rank: 5 }],
+        buffs: f.weaponSources, extraHits: [SILKEN(1.38)],
+      }, { enemy: find.enemy('Heavy Gunner'), level: 115, drOverride: 0.87 }, data, { part: 'body' });
+      near(r.extra[0].tick, 33.73, 0.01);
+    },
+  },
+  {
+    name: 'Аура Rifle Amp: +27% винтовкам, пистолетам — нет',
+    run({ data, find, near }) {
+      const amp = { name: 'Rifle Amp', effects: find.mod('warframe', 'Rifle Amp').ranks.at(-1) };
+      const rifle = calc({ weapon: find.weapon('Supra Vandal'), slot: 'primary', buffs: [amp] }, { enemy: find.enemy('Runner'), level: 210 }, data);
+      near(rifle.hit.health, 43.125 * 1.27, 1e-9);
+      const pistol = calc({ weapon: find.weapon('Lex Prime'), slot: 'secondary', buffs: [amp] }, { enemy: find.enemy('Heavy Gunner'), level: 115 }, data);
+      near(pistol.hit.health, 18.84375, 1e-6);
+    },
+  },
+  {
+    name: 'Аура Corrosive Projection: броня Пулемётчицы 2700 → 2214',
+    run({ data, find, near }) {
+      const cp = { name: 'Corrosive Projection', effects: find.mod('warframe', 'Corrosive Projection').ranks.at(-1) };
+      const r = calc({ weapon: find.weapon('Lex Prime'), slot: 'secondary', buffs: [cp] }, { enemy: find.enemy('Heavy Gunner'), level: 115 }, data);
+      near(r.enemy.armor, 2214, 1e-6); near(r.enemy.dr, 0.9 * Math.sqrt(2214 / 2700), 1e-9);
+    },
+  },
+  {
+    name: 'Осколки: Фиолетовый даёт основному +30% Электричества и +10% за каждый Багровый/Лазурный/Фиолетовый',
+    run({ data, near }) {
+      const src = shardSources([{ color: 'violet', effect: 'primary_electricity' }, { color: 'crimson', effect: 'strength' }, { color: 'azure', effect: 'armor' }], data.shards);
+      near(src[0].effects[0].value, 0.6, 1e-9);
+    },
+  },
+
   // ---------- механики ----------
   {
     name: 'Крит: 250% шанса, ×3 → уровни ×5 и ×7, средний ×6',
@@ -177,6 +230,7 @@ export function makeContext(data) {
     weapon: name => { const w = allWeapons.find(x => x.name === name); if (!w) throw new Error('нет оружия ' + name); return w; },
     enemy: name => { const e = data.enemies.find(x => x.name === name); if (!e) throw new Error('нет врага ' + name); return e; },
     mod: (group, name) => { const m = data.mods[group].find(x => x.name === name); if (!m) throw new Error('нет мода ' + name); return m; },
+    frame: name => { const f = data.warframes.find(x => x.name === name); if (!f) throw new Error('нет фрейма ' + name); return f; },
     arcane: (group, name) => { const m = data.arcanes[group].find(x => x.name === name); if (!m) throw new Error('нет мистификатора ' + name); return m; },
   };
   const near = (a, b, eps = 1e-6) => { if (!(Math.abs(a - b) <= eps)) throw new Error(`ожидалось ${b} ± ${eps}, получено ${a}`); };
@@ -187,6 +241,7 @@ export function makeContext(data) {
 export const DATA_FILES = {
   scaling: 'data/manual/scaling.json', damage: 'data/damage.json', enemies: 'data/enemies.json',
   weapons: { primary: 'data/weapons/primary.json', secondary: 'data/weapons/secondary.json' },
-  mods: { secondary: 'data/mods/secondary.json', primary: 'data/mods/primary.json' },
+  mods: { secondary: 'data/mods/secondary.json', primary: 'data/mods/primary.json', warframe: 'data/mods/warframe.json' },
+  warframes: 'data/warframes.json', shards: 'data/manual/shards.json',
   arcanes: { secondary: 'data/arcanes/secondary.json' },
 };

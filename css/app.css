@@ -112,3 +112,9 @@ dialog.sheet::backdrop{background:rgba(10,16,13,.55)}
   .mini b{color:var(--accent)}
   body{padding-bottom:84px}
 }
+.views{max-width:1180px;margin:14px auto 0}
+.views .seg button{padding:8px 18px;font-weight:600}
+.shard{display:grid;grid-template-columns:18px minmax(0,1fr) minmax(0,1.6fr) auto auto;gap:8px;align-items:center}
+.shard select{min-width:0}
+.shard input[type=number]{width:72px}
+@media (max-width:560px){.shard{grid-template-columns:18px minmax(0,1fr) auto;}.shard select:nth-of-type(2){grid-column:2 / -1}}

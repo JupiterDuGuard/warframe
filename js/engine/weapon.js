@@ -94,6 +94,8 @@ export function moddedAttack(weapon, attackIndex, eff) {
     attack: atk, baseDamage: base, baseTotal, scale, raw, types, typesTotal, elements, elemBonus,
     damageBonus: t.damage || 0, directBonus: t.direct_damage || 0, factionBonus: t.faction || 0,
     statusDamage: t.status_damage || 0, statusDuration: t.status_duration || 0,
+    statusDamageType: { Toxin: t.status_damage_toxin || 0 },          // изумрудный осколок: только статус Токсина
+    armorStrip: Math.min(1, t.armor_strip || 0), shieldStrip: Math.min(1, t.shield_strip || 0),
     headshotBonus: t.headshot_multiplier || 0, weakpointBonus: t.weakpoint_damage || 0,
     multishot, critChance, critMultiplier, statusChance, fireRate, magazine, reload,
     finalMult: eff.finalMult, forcedProcs: eff.forcedProcs, multishotLocked: msLocked,

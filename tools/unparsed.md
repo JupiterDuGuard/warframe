@@ -1,6 +1,6 @@
 # Неразобранные эффекты
 
-Сборка 2026-11-21 17:31 UTC. Строки, которые скрипт не смог превратить в {stat, value, bucket}. Правка — data/overrides/*.json (ключ — uniqueName или имя).
+Сборка 2026-11-21 17:42 UTC. Строки, которые скрипт не смог превратить в {stat, value, bucket}. Правка — data/overrides/*.json (ключ — uniqueName или имя).
 
 ## Моды: 130
 
@@ -247,7 +247,7 @@
 - [Theorem Demulcent](https://wiki.warframe.com/w/Theorem_Demulcent) — Standing in a zone created by a Residual Arcane increases weapon damage by 12%/s stacking up to 15x. Effect persists for 20s upon leaving the zone.
 - [Theorem Infection](https://wiki.warframe.com/w/Theorem_Infection) — Standing in a zone created by a Residual Arcane increases damage of companions and summoned allies within 90m by 24%/s stacking up to 15x. Effect persists for 20s upon leaving the zone.
 
-## Аугменты способностей (этап 6, баффы): 327
+## Аугменты способностей (этап 6, баффы): 314
 
 - [Abating Link](https://wiki.warframe.com/w/Abating_Link) — Link Augment: Reduces Armor Rating by 60% on enemies targeted by Link.
 - [Abundant Mutation](https://wiki.warframe.com/w/Abundant_Mutation) — Passive Augment: Nidus gains an additional 300 max stacks of Mutation. Undying has a 30s cooldown.
@@ -299,21 +299,19 @@
 - [Coaction Drift](https://wiki.warframe.com/w/Coaction_Drift) — Squad benefits +15% more from Auras; You benefit an additional +15% from Auras
 - [Coil Recharge](https://wiki.warframe.com/w/Coil_Recharge) — Coil Horizon Augment: Gyratory Sphere can be recalled. Enemies in its radius suffer 500 Electricity Damage and chain other enemies. Enemies pulled into detonation suffer additional discharges.
 - [Cold Front](https://wiki.warframe.com/w/Cold_Front) — Snow Globe Augment: Snow Globe is now attached to Frost with a smaller radius while increasing your mobility. Kills on frozen enemies increase the Globe health by 4% per kill.
-- [Combat Discipline](https://wiki.warframe.com/w/Combat_Discipline) — Squadmates gain 20 Health on kill; You lose 10 Health on kill
+- [Combat Discipline](https://wiki.warframe.com/w/Combat_Discipline) — You lose 10 Health on kill
 - [Concentrated Arrow](https://wiki.warframe.com/w/Concentrated_Arrow) — Artemis Bow Augment: Fires a single arrow with +25% Base Critical Chance on full charge, additional +50% Chance and explodes in a 7m radius on Weak Points. Removes Punch Through.
 - [Conductive Sphere](https://wiki.warframe.com/w/Conductive_Sphere) — Arcsphere Augment: Projectiles that pass through Arcsphere have guaranteed Electricity Status Effect and +75% Electricity Damage.
 - [Conductor](https://wiki.warframe.com/w/Conductor) — Resonator Augment: Reactivate the ability to command Resonator to move to your aim point at 150% Speed.
 - [Constitution](https://wiki.warframe.com/w/Constitution) — +40% Faster Knockdown Recovery
 - [Contagion Cloud](https://wiki.warframe.com/w/Contagion_Cloud) — Toxic Lash Augment: Create 5m toxic clouds, dealing 300 Toxin Damage/s for 12s with every kill. Damage is twice as strong for Melee kills.
 - [Controlled Slide](https://wiki.warframe.com/w/Controlled_Slide) — Disable Nezha's passive ability. Increase Ability Strength by 15%.
-- [Corrosive Projection](https://wiki.warframe.com/w/Corrosive_Projection) — Enemies lose -18% Armor
 - [Counter Pulse](https://wiki.warframe.com/w/Counter_Pulse) — Polarize Augment: Enemy weapons are jammed and robotics are disabled for 4s when hit by Polarize.
 - [Creeping Terrify](https://wiki.warframe.com/w/Creeping_Terrify) — Terrify Augment: Affected enemies have 60% reduced Movement Speed.
 - [Critical Surge](https://wiki.warframe.com/w/Critical_Surge) — Breach Surge Augment: Teleporting to a Reservoir costs 50% Energy and grants 10% Critical Chance to Primary Weapons per meter traveled for 9s. Maximum 250% Critical Chance.
 - [Cunning Drift](https://wiki.warframe.com/w/Cunning_Drift) — +12% Slide; -30% Friction
 - [Damage Decoy](https://wiki.warframe.com/w/Damage_Decoy) — Decoy Augment: Decoy can be cast on enemies. Enemies who attack that decoy receive 5 random Status Effects, and the reflected damage is increased by 350%.
 - [Dark Propagation](https://wiki.warframe.com/w/Dark_Propagation) — Sow Augment: Enemies killed while inflicted with Sow spread its effect in a 15m radius. Shadow's Death Harvest also inflicts Sow.
-- [Dead Eye](https://wiki.warframe.com/w/Dead_Eye) — Squad receives +52.5% Sniper Rifle Damage
 - [Deceptive Bond](https://wiki.warframe.com/w/Deceptive_Bond) — Decoy Augment: 50% of damage Loki takes is transferred to Decoy, and vice versa.
 - [Defiled Reckoning](https://wiki.warframe.com/w/Defiled_Reckoning) — Reckoning Augment: Health Orbs become unusable by enemies for 10s.
 - [Desiccation's Curse](https://wiki.warframe.com/w/Desiccation's_Curse) — Desiccation Augment: Killing a blinded enemy with a Finisher has a 100% chance to summon a Swarm Kavat that will spread Scarab Swarm. Maximum Swarm Kavats +2.
@@ -372,7 +370,6 @@
 - [Health Conversion](https://wiki.warframe.com/w/Health_Conversion) — Health Orbs grant 450 Armor, stacking up to 3x. Taking damage will consume a stack after 3s.
 - [Hearty Nourishment](https://wiki.warframe.com/w/Hearty_Nourishment) — Nourish Augment: Clear Status Effects and gain 5s of Status Immunity for each victim in Grendel's stomach.
 - [Heavy Impact](https://wiki.warframe.com/w/Heavy_Impact) — Create 6m seismic shockwaves from heavy landings, dealing 300 Damage and knocking foes off their feet.
-- [Holster Amp](https://wiki.warframe.com/w/Holster_Amp) — Squad gains 60% Weapon Damage for 3s
 - [Hunter Adrenaline](https://wiki.warframe.com/w/Hunter_Adrenaline) — Convert +45% of Damage on Health to Energy. Without Shields, ally Overguard imitates Health.
 - [Hushed Invisibility](https://wiki.warframe.com/w/Hushed_Invisibility) — Invisibility Augment: Weapon noise is reduced by 100% while invisible.
 - [Hysterical Assault](https://wiki.warframe.com/w/Hysterical_Assault) — Hysteria Augment: Attack with Valkyr's Talons to leap onto targeted enemies up to 50m away. Gain +50% Parkour Velocity and +50% Sprint Speed for 5s.
@@ -408,7 +405,7 @@
 - [Master Thief](https://wiki.warframe.com/w/Master_Thief) — +40% chance to unlock locked lockers.
 - [Mecha Empowered](https://wiki.warframe.com/w/Mecha_Empowered) — Squad deals +150% extra Damage against a Marked Enemy
 - [Mecha Pulse](https://wiki.warframe.com/w/Mecha_Pulse) — Killing a Marked Enemy grants +60% Armor for 20s for each enemy within 30m.
-- [Melee Guidance](https://wiki.warframe.com/w/Melee_Guidance) — Squadmates gain 12s Melee Combo Duration; You lose 6s Melee Combo Duration
+- [Melee Guidance](https://wiki.warframe.com/w/Melee_Guidance) — You lose 6s Melee Combo Duration
 - [Mending Splinters](https://wiki.warframe.com/w/Mending_Splinters) — Splinter Storm Augment: For each target affected, Splinter Storm heals 15 Health/s.
 - [Merulina Guardian](https://wiki.warframe.com/w/Merulina_Guardian) — Merulina Augment: Enemies eliminated during Sea Snares heal 20% of Merulina's health. Upon healing, gain +200% Reload Speed and Fire Rate on Secondary weapons for 20s.
 - [Mesa's Waltz](https://wiki.warframe.com/w/Mesa's_Waltz) — Peacemaker Augment: Mesa can move at 50% Speed while using Peacemaker.
@@ -434,16 +431,13 @@
 - [Peaceful Provocation](https://wiki.warframe.com/w/Peaceful_Provocation) — Pacify & Provoke Augment: Pacify converts damage done to allies into an aura that slows enemies by 40%. Provoke converts damage done to enemies into 15% extra Ability Strength.
 - [Phoenix Renewal](https://wiki.warframe.com/w/Phoenix_Renewal) — Renewal Augment: Taking fatal damage while under the effects of Renewal will instead Heal you or allies to 50% Health. This effect triggers only once for each ally every 60s.
 - [Photon Repeater](https://wiki.warframe.com/w/Photon_Repeater) — Photon Strike Augment: If Photon Strike hits at least 5 enemies, the next cast will cost no Energy and fire two additional strikes.
-- [Physique](https://wiki.warframe.com/w/Physique) — Squad gains +20% Maximum Health
 - [Piercing Navigator](https://wiki.warframe.com/w/Piercing_Navigator) — +3 Projectile Punch Through.; Navigator Augment: Each hit increases the projectile's Critical Chance by 50% up to a max of 250%.
 - [Piercing Roar](https://wiki.warframe.com/w/Piercing_Roar) — Roar Augment: Roar gains +40% range. Enemies within 25m are knocked down and suffer 5 stacks of Puncture Status.
 - [Piercing Step](https://wiki.warframe.com/w/Piercing_Step) — +18% Aim Glide/Wall Latch Duration; +60% Puncture on Bullet Jump
 - [Pilfering Strangledome](https://wiki.warframe.com/w/Pilfering_Strangledome) — Strangledome Augment: Enemies held in Strangledome have a 65% chance of dropping additional loot.
 - [Pilfering Swarm](https://wiki.warframe.com/w/Pilfering_Swarm) — Tentacle Swarm Augment: Enemies held by tentacles have a 100% chance at additional drops.
-- [Pistol Amp](https://wiki.warframe.com/w/Pistol_Amp) — Squad receives +27% Pistol Damage
 - [Pistol Scavenger](https://wiki.warframe.com/w/Pistol_Scavenger) — Squad receives +150% Pistol Ammo Recovery
 - [Pool Of Life](https://wiki.warframe.com/w/Pool_of_Life) — Well of Life Augment: On death, marked enemies will drop 4 Health Orbs with a 100% chance of dropping an Energy Orb.
-- [Power Donation](https://wiki.warframe.com/w/Power_Donation) — Squadmates gain 30% Ability Strength; You lose 30% Ability Strength
 - [Power Drift](https://wiki.warframe.com/w/Power_Drift) — +30% Chance to Resist Knockdown
 - [Power Of Three](https://wiki.warframe.com/w/Power_of_Three) — Quiver Augment: Quiver fires three arrows and consumes 20 more Energy.
 - [Precision Intensify](https://wiki.warframe.com/w/Precision_Intensify) — +90% Ability Strength for your 4th Ability
@@ -483,7 +477,6 @@
 - [Retribution](https://wiki.warframe.com/w/Retribution) — +60% Chance to deal Electrical Damage when shield struck by melee enemies.; +80 Electricity
 - [Reverse Rotorswell](https://wiki.warframe.com/w/Reverse_Rotorswell) — Rotorswell Augment: 35% of damage received is redirected toward the instigator as Electricity Damage.
 - [Rhythm Guard](https://wiki.warframe.com/w/Rhythm_Guard) — Passive Augment: Gain 100 Overguard when using an Ability on the Backbeat. Amount doubles up to 1600 per Beat, but resets if the Beat is missed.
-- [Rifle Amp](https://wiki.warframe.com/w/Rifle_Amp) — Squad receives +27% Rifle Damage
 - [Rifle Scavenger](https://wiki.warframe.com/w/Rifle_Scavenger) — Squad receives +150% Rifle Ammo Recovery
 - [Rift Haven](https://wiki.warframe.com/w/Rift_Haven) — Banish Augment: Allies banished to the rift will have 25% of their Maximum Health restored every second.
 - [Rift Torrent](https://wiki.warframe.com/w/Rift_Torrent) — Rift Surge Augment: Limbo deals 30% Extra Damage for each enemy affected by Rift Surge while in the rift.
@@ -501,13 +494,11 @@
 - [Shadow Haze](https://wiki.warframe.com/w/Shadow_Haze) — Reap Augment: Increase Critical Chance by 50% on enemies inflicted with Death Harvest. A new Shadow emerges from those enemies when they perish. Limit of 3 Shadows.
 - [Shattered Storm](https://wiki.warframe.com/w/Shattered_Storm) — Shattered Lash Augment: When Gara breaks her Mass Vitrify ring with Shattered Lash, enemies struck by the glass suffer Splinter Storm at 100% Strength.
 - [Shepherd](https://wiki.warframe.com/w/Shepherd) — Squad's Companions receive +300 Health and +180 Armor
-- [Shield Disruption](https://wiki.warframe.com/w/Shield_Disruption) — Enemies lose -18% Shield Capacity
 - [Shield Of Shadows](https://wiki.warframe.com/w/Shield_of_Shadows) — Shadows of the Dead Augment: Each Shadow within 50m take 6% of the Damage done to Nekros in his stead.
 - [Shield Overload](https://wiki.warframe.com/w/Shield_Overload) — Polarize Augment: Increases the time for the target's Shields to regenerate by 9s.
 - [Shock Absorbers](https://wiki.warframe.com/w/Shock_Absorbers) — +20% Physical Damage Resistance
 - [Shock Trooper](https://wiki.warframe.com/w/Shock_Trooper) — Shock Augment: Hold to cast will grant all allies within 15m an additional 100% Electricity Damage to their attacks for 40s.
 - [Shocking Speed](https://wiki.warframe.com/w/Shocking_Speed) — Speed Augment: While moving under the effects of Speed, enemies within 3m will take 300 Electricity Damage with guaranteed Status effect.
-- [Shotgun Amp](https://wiki.warframe.com/w/Shotgun_Amp) — Squad receives +18% Shotgun Damage
 - [Shotgun Scavenger](https://wiki.warframe.com/w/Shotgun_Scavenger) — Squad receives +150% Shotgun Ammo Recovery
 - [Signal Flare](https://wiki.warframe.com/w/Signal_Flare) — Radial Blind Augment: Blinded enemies are marked on the Minimap for 12s.
 - [Singularity](https://wiki.warframe.com/w/Singularity) — Absorb Augment: Create a ring every 3s that drags in enemies at 15m/s.
@@ -519,11 +510,8 @@
 - [Spectral Spirit](https://wiki.warframe.com/w/Spectral_Spirit) — Grave Spirit Augment: Immediately assume Spectral Form. 100% chance for weapons and abilities to apply Doom. Kills outside of Spectral Form decrease its cooldown by 1s.
 - [Spectrosiphon](https://wiki.warframe.com/w/Spectrosiphon) — Spectrorage Augment: Enemies that die within Spectrorage have a 50% chance to drop an Energy Orb.
 - [Spellbound Harvest](https://wiki.warframe.com/w/Spellbound_Harvest) — Spellbind Augment: Hitting at least 4 enemies with Spellbind grants Titania 50. The next cast has +40% Ability Range.
-- [Sprint Boost](https://wiki.warframe.com/w/Sprint_Boost) — Squad receives +15% Sprint Speed
 - [Staggering Shield](https://wiki.warframe.com/w/Staggering_Shield) — Shatter Shield Augment: Reflected bullets have a chance to stagger enemies. The base 50% chance increases with power strength.
-- [Stand United](https://wiki.warframe.com/w/Stand_United) — Squad receives +25% Armor
 - [Stealth Drift](https://wiki.warframe.com/w/Stealth_Drift) — +12% Aim Glide/Wall Latch Duration
-- [Steel Charge](https://wiki.warframe.com/w/Steel_Charge) — Squad receives +60% Melee Damage
 - [Strain Consume](https://wiki.warframe.com/w/Strain_Consume) — Dead Maggots within 10m are consumed, increasing Max Health by 4% and increasing Health Regen by 2/sec for 45sec.
 - [Streamlined Form](https://wiki.warframe.com/w/Streamlined_Form) — +30% Slide; -30% Friction
 - [Summoner's Wrath](https://wiki.warframe.com/w/Summoner's_Wrath) — Squad receives 75% Companion and Summon Damage
@@ -573,11 +561,10 @@
 - [Warding Thurible](https://wiki.warframe.com/w/Warding_Thurible) — Thurible Augment: Allies in range take 50% less Damage while channeling Thurible and grant 1.0 additional Energy charge whenever damaged.
 - [Warm Coat](https://wiki.warframe.com/w/Warm_Coat) — +12% Shield Resistance to Environmental Ice Hazards
 - [Warrior's Rest](https://wiki.warframe.com/w/Warrior's_Rest) — Passive Augment: Umbra's Ability Strength increases by +15% but he no longer fights independently alongside his Operator.
-- [Worthy Comradery](https://wiki.warframe.com/w/Worthy_Comradery) — Squad receives +75% Weak Point Critical Chance
 - [Wrath Of Ukko](https://wiki.warframe.com/w/Wrath_of_Ukko) — Storm of Ukko Augment: Wrathful Advance moves the storm of daggers to the teleportation location and increases its duration by 6s.
 - [Wrecking Wall](https://wiki.warframe.com/w/Wrecking_Wall) — Containment Wall Augment: Strip 50% of armor and shields from struck enemies. Hitting 5 or more enemies will restart the duration of any Chyrinka Pillars and empower them.
 
-## Условные эффекты, разобранные автоматически: 76
+## Условные эффекты, разобранные автоматически: 77
 
 Условие (триггер, длительность, стаки) взято из текста; корзину и механику сверить с вики.
 
@@ -624,6 +611,7 @@
 - [Galvanized Steel](https://wiki.warframe.com/w/Galvanized_Steel)
 - [Guardian Derision](https://wiki.warframe.com/w/Guardian_Derision)
 - [Guided Ordnance](https://wiki.warframe.com/w/Guided_Ordnance)
+- [Holster Amp](https://wiki.warframe.com/w/Holster_Amp)
 - [Hydraulic Crosshairs](https://wiki.warframe.com/w/Hydraulic_Crosshairs)
 - [Killing Blow](https://wiki.warframe.com/w/Killing_Blow)
 - [Laser Sight](https://wiki.warframe.com/w/Laser_Sight)
