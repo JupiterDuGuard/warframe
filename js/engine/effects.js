@@ -80,7 +80,7 @@ export function collect(sources, ctx) {
       contrib.push({ source: s.name, key: s.key, stat: e.stat, value: v, bucket: e.bucket });
       if (e.bucket === 'element') {
         const type = e.stat.replace('element_', '');
-        elements.push({ type: type[0].toUpperCase() + type.slice(1), value: v, source: s.name });
+        elements.push({ type: type[0].toUpperCase() + type.slice(1), value: v, source: s.name, ...(e.noCombine ? { noCombine: true } : {}) });
       } else if (e.bucket === 'final_mult') {
         finalMult *= v;
       } else if (e.bucket === 'final_mult_noncrit') {     // Devouring Attrition: только на ударах без крита

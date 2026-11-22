@@ -528,6 +528,22 @@ export const cases = [
       near(calc({ weapon: find.weapon('Paracesis'), slot: 'melee', buffs: forte.weaponSources }, tgt, data).hit.health / p0.hit.health, 1.3, 0.01);
     },
   },
+  {
+    name: 'Шоковый Пехотинец: +100% Электричества не объединяется (Огонь остаётся Огнём, Токсин Торида — Токсином)',
+    run({ data, find, eq, near }) {
+      const st = resolveBuffs([{ id: 'shock_trooper', on: true, strength: 100 }], data.buffs.buffs, { slot: 'secondary' }).weaponSources;
+      const heat = { name: 'Heat', effects: [{ stat: 'element_heat', value: 0.9, bucket: 'element' }] };
+      const types = r => r.stats.elements.map(e => e.type).sort().join(',');
+      const lex = calc({ weapon: find.weapon('Lex Prime'), buffs: [heat, ...st] }, { enemy: NEUTRAL, level: 1 }, data);
+      eq(types(lex), 'Electricity,Heat');
+      near(lex.stats.elements.find(e => e.type === 'Electricity').bonus, 1, 1e-9);
+      const torid = calc({ weapon: find.weapon('Torid'), buffs: st }, { enemy: NEUTRAL, level: 1 }, data);
+      eq(types(torid), 'Electricity,Toxin');
+      const elec = { name: 'Elec', effects: [{ stat: 'element_electricity', value: 0.9, bucket: 'element' }] };
+      const both = calc({ weapon: find.weapon('Lex Prime'), buffs: [elec, ...st] }, { enemy: NEUTRAL, level: 1 }, data);
+      eq(types(both), 'Electricity'); near(both.stats.elements[0].bonus, 1.9, 1e-9);   // складывается с модом на Электричество
+    },
+  },
 ];
 
 /** Общий загрузчик: data = { scaling, damage, weapons: {slot: [...]}, mods: {group: [...]}, enemies: [...] } */

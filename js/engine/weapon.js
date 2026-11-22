@@ -29,7 +29,7 @@ export function combineElements(modEls, innate = {}) {
     const same = list.find(e => e.parts.includes(type) && (e.type === type || COMBINED[e.type]));
     if (same) { same.bonus += bonus; same.flat += flat; same.sources.push(source); return; }
     // иначе объединяется с первой одиночной первичной стихией
-    const open = list.find(e => PRIMARY.includes(e.type));
+    const open = list.find(e => PRIMARY.includes(e.type) && !e.noCombine);
     if (open) {
       const t = combineTypes(open.type, type);
       open.parts = [open.type, type];
@@ -39,9 +39,16 @@ export function combineElements(modEls, innate = {}) {
     }
     list.push({ type, bonus, flat, parts: [type], sources: [source] });
   };
-  for (const e of modEls) add(e.type, e.value, 0, e.source);
+  for (const e of modEls) if (!e.noCombine) add(e.type, e.value, 0, e.source);
   for (const [type, amount] of Object.entries(innate)) {
     if (amount) add(type, 0, amount, 'врождённый');
+  }
+  // «не объединяется с другими стихиями» (Shock Trooper): к той же стихии или отдельно, после всех
+  for (const e of modEls) {
+    if (!e.noCombine) continue;
+    const same = list.find(x => x.type === e.type);
+    if (same) { same.bonus += e.value; same.sources.push(e.source); }
+    else list.push({ type: e.type, bonus: e.value, flat: 0, parts: [e.type], sources: [e.source], noCombine: true });
   }
   return list;
 }

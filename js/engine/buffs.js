@@ -31,7 +31,7 @@ export function resolveBuffs(active, defs, ctx = {}) {
     const wEff = [], fEff = [];
     for (const e of effects) {
       const v = buffValue(e, def, a, strength);
-      if (e.target === 'weapon') wEff.push({ stat: e.stat, value: v, bucket: e.bucket, ...(e.condition ? { condition: e.condition } : {}) });
+      if (e.target === 'weapon') wEff.push({ stat: e.stat, value: v, bucket: e.bucket, ...(e.condition ? { condition: e.condition } : {}), ...(e.noCombine ? { noCombine: true } : {}) });
       else if (e.target === 'frame') fEff.push({ stat: e.stat, value: v, bucket: 'frame' });
       else if (e.target === 'enemy' && e.stat === 'armor_strip') strip += v;          // процент от полной брони — складываются
       else if (e.target === 'enemy' && e.stat === 'vulnerability') vulnerability += v;
