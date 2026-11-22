@@ -414,7 +414,7 @@ def build_weapons(ru):
     return out
 
 
-def build_warframes(ru, wf_wfcd):
+def build_warframes(ru, wf_wfcd, abil_ru_export=None):
     data = wiki("Warframes/data")
     abil_ru, abil_id = {}, {}
     for w in wf_wfcd:
@@ -424,6 +424,8 @@ def build_warframes(ru, wf_wfcd):
                 abil_ru[a["name"]] = n
             if a.get("uniqueName"):
                 abil_id[a["name"]] = a["uniqueName"]
+                if not n and (abil_ru_export or {}).get(a["uniqueName"]):
+                    abil_ru[a["name"]] = abil_ru_export[a["uniqueName"]]
     rows = []
     for key, w in (data.get("Warframes") or {}).items():
         if not isinstance(w, dict) or w.get("_IgnoreEntry"):
@@ -454,7 +456,48 @@ def parse_multis(lst):
     return out
 
 
-def build_enemies(ru, overrides):
+# Русские названия врагов и способностей из экспорта игры (зеркало PublicExport с переводами):
+# https://github.com/calamity-inc/warframe-public-export-plus — в WFCD i18n их нет.
+PEXPORT = "https://raw.githubusercontent.com/calamity-inc/warframe-public-export-plus/senpai/"
+TAGS = re.compile(r"<[^>]+>")
+
+
+def export_ru():
+    """-> (враги: англ. имя в нижнем регистре -> рус., способности: путь -> рус.)"""
+    try:
+        en_d = json.loads(fetch(PEXPORT + "dict.en.json", "pex_dict_en.json"))
+        ru_d = json.loads(fetch(PEXPORT + "dict.ru.json", "pex_dict_ru.json"))
+        enemies = json.loads(fetch(PEXPORT + "ExportEnemies.json", "pex_enemies.json"))
+        frames = json.loads(fetch(PEXPORT + "ExportWarframes.json", "pex_warframes.json"))
+    except Exception as ex:
+        print(f"  ! экспорт игры недоступен, русских названий врагов не будет: {ex}", file=sys.stderr)
+        return {}, {}
+    clean = lambda s: TAGS.sub("", s or "").strip()
+    enemy_ru = {}
+    for rec in list(enemies.get("agents", {}).values()) + list(enemies.get("avatars", {}).values()):
+        k = rec.get("name")
+        if k and en_d.get(k) and ru_d.get(k):
+            enemy_ru.setdefault(clean(en_d[k]).lower(), clean(ru_d[k]))
+    abil_ru = {}
+    for f in frames.values():
+        for a in f.get("abilities") or []:
+            if a.get("uniqueName") and ru_d.get(a.get("name")):
+                abil_ru[a["uniqueName"]] = clean(ru_d[a["name"]])
+    return enemy_ru, abil_ru
+
+
+def enemy_ru_name(name, enemy_ru):
+    """«Heavy Gunner» -> «Тяжёлый пулемётчик»; «X (Field Boss)» -> «рус. X (Field Boss)»."""
+    r = enemy_ru.get(name.lower())
+    if r:
+        return r
+    m = re.match(r"^(.*?)\s*(\(.+\))$", name)
+    if m and enemy_ru.get(m.group(1).lower()):
+        return f"{enemy_ru[m.group(1).lower()]} {m.group(2)}"
+    return None
+
+
+def build_enemies(ru, overrides, enemy_ru=None):
     rows, seen = [], set()
     for fac in ENEMY_FACTIONS:
         for key, e in wiki("Enemies/data/" + fac).items():
@@ -464,7 +507,8 @@ def build_enemies(ru, overrides):
             if s.get("Health") is None and s.get("Shield") is None:
                 continue
             uid = g.get("InternalName")
-            rec = {"id": uid, "name": g.get("Name", key), "ru": ru_name(ru, uid), "faction": g.get("Faction"),
+            rec = {"id": uid, "name": g.get("Name", key), "ru": ru_name(ru, uid) or enemy_ru_name(g.get("Name", key), enemy_ru or {}),
+                   "faction": g.get("Faction"),
                    "type": g.get("Type"), "health": s.get("Health"), "shield": s.get("Shield"), "armor": s.get("Armor"),
                    "overguard": s.get("Overguard"), "baseLevel": s.get("BaseLevel"),
                    "eximusHealth": s.get("EximusHealth"), "multis": parse_multis(s.get("Multis"))}
@@ -545,9 +589,10 @@ def main():
         sizes[f"weapons/{g}.json"] = write(f"weapons/{g}.json", rows)
     incarnon = build_incarnon(weapons, load_overrides("incarnon"), fetch, WIKI, parse_rank, log_unparsed, log_notes)
     sizes["incarnon.json"] = write("incarnon.json", incarnon)
-    frames = build_warframes(ru, wf_wfcd)
+    enemy_ru, abil_ru = export_ru()
+    frames = build_warframes(ru, wf_wfcd, abil_ru)
     sizes["warframes.json"] = write("warframes.json", frames)
-    enemies = build_enemies(ru, load_overrides("enemies"))
+    enemies = build_enemies(ru, load_overrides("enemies"), enemy_ru)
     sizes["enemies.json"] = write("enemies.json", enemies)
     sizes["damage.json"] = write("damage.json", build_damage())
 

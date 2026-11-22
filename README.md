@@ -66,6 +66,7 @@ python tools/build_data.py --refresh  # скачать всё заново
 
 - [WFCD warframe-items](https://github.com/WFCD/warframe-items) (MIT): моды и мистификаторы по рангам, русские названия.
 - [Warframe Wiki](https://wiki.warframe.com) (модули `Module:*/data`, лицензия CC BY-SA): оружие, фреймы, враги, типы урона и фракции.
+- [warframe-public-export-plus](https://github.com/calamity-inc/warframe-public-export-plus) — зеркало PublicExport игры: русские названия врагов и способностей.
 - Warframe и все связанные материалы принадлежат Digital Extremes.
 
 ## Этапы

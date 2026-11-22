@@ -425,7 +425,7 @@ function renderEnemySegs() {
   segmented($('partSeg'), [['body', 'Тело'], ['head', 'Голова']], S.part, v => { S.part = v; update(); });
   segmented($('critSeg'), [['none', 'Без крита'], ['avg', 'Средний'], ['crit', 'Крит']], S.crit, v => { S.crit = v; update(); });
   const e = currentEnemy();
-  $('enemyPick').replaceChildren(h('b', {}, e.ru || e.name), h('small', {}, `${e.faction || '—'}`));
+  $('enemyPick').replaceChildren(h('b', {}, e.ru || e.name), h('small', {}, `${e.ru && e.ru !== e.name ? e.name + ' · ' : ''}${e.faction || '—'}`));
 }
 
 // ---------- оружие: расчёт и результат ----------
@@ -434,6 +434,7 @@ function buildInput() {
   const mods = [...S.mods, S.exilus].filter(Boolean).map(s => ({ item: modById(s.id), rank: s.rank })).filter(m => m.item);
   const buffs = [];
   const cb = customBuffs();
+  if (S.cat === 'melee' && S.stanceHit && +S.stanceHit !== 1) buffs.push({ key: 'stance-hit', name: 'Удар стойки', effects: [{ stat: 'final_mult', value: +S.stanceHit, bucket: 'final_mult' }] });
   if (cb.weapon.length) buffs.push({ key: 'custom', name: 'Свои баффы', effects: cb.weapon });
   let frameSrc = [];
   if (F().use) {
@@ -986,6 +987,7 @@ function bindInputs() {
   bindNum('stCorr', () => S.status.corrosive, v => S.status.corrosive = +v || 0);
   bindNum('stMag', () => S.status.magnetic, v => S.status.magnetic = +v || 0);
   bindChk('stHeat', () => S.status.heat, v => S.status.heat = v);
+  bindNum('stanceHit', () => S.stanceHit ?? 1, v => S.stanceHit = v === '' ? 1 : +v);
   bindNum('stCold', () => S.status.cold || 0, v => S.status.cold = Math.max(0, Math.min(10, +v || 0)));
   bindChk('steelPath', () => !!S.steelPath, v => S.steelPath = v);
   bindChk('eximus', () => !!S.eximus, v => S.eximus = v);
@@ -999,8 +1001,8 @@ function bindInputs() {
     onPick: async w => { S.weapon = w.name; S.attack = 0; S.mods = Array(8).fill(null); S.exilus = null; S.arcane = null; await ensureCategory(); renderAll(); },
   }));
   $('enemyPick').addEventListener('click', () => openPicker({
-    items: D.enemies, placeholder: 'Имя врага (англ.) или фракция', label: e => e.ru || e.name,
-    sub: e => `${e.faction || '—'} · здоровье ${e.health ?? 0}${e.shield ? ', щиты ' + e.shield : ''}${e.armor ? ', броня ' + e.armor : ''} · баз. ур. ${e.baseLevel ?? 1}`,
+    items: D.enemies, placeholder: 'Имя врага (рус. или англ.) или фракция', label: e => e.ru || e.name,
+    sub: e => `${e.ru && e.ru !== e.name ? e.name + ' · ' : ''}${e.faction || '—'} · здоровье ${e.health ?? 0}${e.shield ? ', щиты ' + e.shield : ''}${e.armor ? ', броня ' + e.armor : ''} · баз. ур. ${e.baseLevel ?? 1}`,
     onPick: e => { S.enemy = e.name; update(); },
   }));
   $('framePick').addEventListener('click', () => openPicker({
