@@ -2,7 +2,7 @@
 // Каждый случай: { name, run(ctx) }, ctx = { data, find, near, eq } ; near(a, b, eps) / eq(a, b) бросают ошибку.
 import { calc, combineElements, critInfo, enemyState, frameStats, shardSources, resolveBuffs, capacity, modCost, polarityMatch, formaCount, modContribution, shotThresholds } from '../js/engine/index.js';
 import { encodeBuild, decodeBuild } from '../js/share.js';
-import { readAleca, upgradeLookup, slotPolarities, readShards } from '../js/aleca.js';
+import { readAleca, upgradeLookup, slotPolarities, readShards, rivenFromFingerprint } from '../js/aleca.js';
 
 const SILKEN = pct => ({ name: 'Шёлковая поступь', pct, type: 'Toxin', statusChance: 1, ability: true });
 const DEVOURING = { name: 'Devouring Attrition', effects: [{ stat: 'final_mult', value: 21, bucket: 'final_mult' }] };
@@ -452,6 +452,22 @@ export const cases = [
       const riven = { id: 'riven', name: 'Riven', ranks: [[{ stat: 'damage', value: 1, bucket: 'base_damage' }, { stat: 'element_toxin', value: 0.6, bucket: 'element' }]] };
       const r = calc({ weapon: W({ Impact: 100 }), mods: [{ item: riven, rank: 0 }] }, { enemy: NEUTRAL, level: 1 }, data, {});
       near(r.hit.health, 200 + Math.round(120 / 3.125) * 3.125, 1e-9);
+    },
+  },
+  {
+    name: 'Мод разлома из AlecaFrame: границы ролла совпадают с таблицей вики (пистолет, 2 плюса + минус, ранг 8)',
+    run({ near, eq }) {
+      const fp = v => ({ lvl: 8, pol: 'AP_TACTIC', buffs: [{ Tag: 'WeaponDamageAmountMod', Value: v }, { Tag: 'WeaponCritDamageMod', Value: v }],
+        curses: [{ Tag: 'WeaponFactionDamageGrineer', Value: v }] });
+      const lo = rivenFromFingerprint({ type: '/Lotus/Upgrades/Mods/Randomized/LotusPistolRandomModRare', fp: fp(0) });
+      const hi = rivenFromFingerprint({ type: '/Lotus/Upgrades/Mods/Randomized/LotusPistolRandomModRare', fp: fp(0x3FFFFFFF) });
+      near(lo.stats[0].value, 293.5, 0.05); near(hi.stats[0].value, 358.7, 0.05);      // урон 219,6% × 1,2 × 1,2375 × (0,9…1,1)
+      near(lo.stats[1].value, 120.3, 0.05); near(hi.stats[1].value, 147.0, 0.05);      // крит. урон
+      eq(lo.stats[2].stat, 'faction_grineer'); near(lo.stats[2].value, -24.1, 0.05);   // 45 × 1,2 × −0,495 × 0,9
+      eq(lo.drain, 18); eq(lo.polarity, 'naramon');
+      const r0 = rivenFromFingerprint({ type: '/Lotus/Upgrades/Mods/Randomized/LotusPistolRandomModRare', fp: { ...fp(0), lvl: 0 } });
+      near(r0.stats[0].value, Math.round(293.5 / 9 * 10) / 10, 0.11);                  // ранг 0 — 1/9 от максимума
+      eq(rivenFromFingerprint({ type: 'x', fp: { challenge: {} } }), null);           // нераскрытый
     },
   },
 ];

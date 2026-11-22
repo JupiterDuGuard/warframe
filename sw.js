@@ -1,6 +1,6 @@
 // Офлайн-кэш калькулятора. Сеть в приоритете (обновления видны сразу), без сети — из кэша.
 // При изменении файлов сайта поднимать VERSION, чтобы приложение предложило перезагрузку.
-const VERSION = 'v13-1';
+const VERSION = 'v14-1';
 const CACHE = 'wf-calc-' + VERSION;
 const SHELL = [
   './', 'index.html', 'css/theme.css', 'css/app.css', 'manifest.webmanifest', 'icons/icon.svg', 'icons/icon-192.png',
@@ -24,8 +24,11 @@ self.addEventListener('message', e => { if (e.data === 'skipWaiting') self.skipW
 self.addEventListener('fetch', e => {
   const req = e.request;
   if (req.method !== 'GET' || new URL(req.url).origin !== location.origin) return;
+  // no-cache: каждый файл сверяется с сервером (304, если не менялся) — иначе после обновления
+  // браузер мог смешать новый app.js со старым модулем из HTTP-кэша
+  const fresh = req.mode === 'navigate' ? fetch(req.url, { cache: 'no-cache', credentials: 'same-origin' }) : fetch(req, { cache: 'no-cache' });
   e.respondWith(
-    fetch(req).then(res => {
+    fresh.then(res => {
       if (res.ok) { const copy = res.clone(); caches.open(CACHE).then(c => c.put(req, copy)); }
       return res;
     }).catch(() => caches.match(req).then(r => r || caches.match('index.html')))

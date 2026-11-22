@@ -1,6 +1,6 @@
 // Интерфейс калькулятора. Считает движок js/engine (без DOM), здесь только ввод и вывод.
 import { calc, critTable, itemEffects, frameStats, resolveBuffs, modContribution, shotThresholds, capacity, formaCount, polarityMatch, TYPE_RU, DOT_TICKS } from './engine/index.js';
-import { readAleca, upgradeLookup, slotPolarities, readShards, ownedItems } from './aleca.js';
+import { readAleca, upgradeLookup, slotPolarities, readShards, ownedItems, rivenFromFingerprint } from './aleca.js?v=14';
 import { encodeBuild, decodeBuild } from './share.js';
 import { load, CATEGORIES, MOD_FILES, ARCANE_FILES, modGroup, modFits } from './store.js';
 import { $, h, num, pct, ruName, textRu, openPicker, initPicker, segmented, slotEl, tile, table, condRows } from './ui.js';
@@ -98,6 +98,7 @@ const RIVEN_STATS = [
   ['damage', 'Урон', 'base_damage'], ['multishot', 'Мультивыстрел', 'multishot'],
   ['crit_chance', 'Шанс крита', 'crit_chance'], ['crit_damage', 'Крит. урон', 'crit_damage'],
   ['status_chance', 'Шанс статуса', 'status_chance'], ['status_duration', 'Длительность статуса', 'status_duration'],
+  ['status_damage', 'Урон статусов', 'status_damage'],
   ['fire_rate', 'Скорострельность / скорость атаки', 'fire_rate'], ['magazine', 'Магазин', 'magazine'],
   ['reload_speed', 'Скорость перезарядки', 'reload'],
   ['element_heat', 'Огонь (Heat)', 'element'], ['element_cold', 'Холод (Cold)', 'element'],
@@ -787,9 +788,19 @@ async function applyAleca(e, lookup) {
   const ups = e.item.Configs[e.ci].Upgrades || [];
   const sp = slotPolarities(e.item);
   const missing = [];
+  let rivenMsg = '';
   const slotOf = (entry, find) => {
     const u = lookup(entry);
     if (!u) return null;
+    if (/\/Randomized\//.test(u.type)) {                    // мод разлома: характеристики из UpgradeFingerprint
+      const rv = rivenFromFingerprint(u, e.rec.class);
+      if (!rv) { missing.push('мод разлома (не раскрыт)'); return null; }
+      S.riven = { stats: rv.stats, drain: rv.drain, polarity: rv.polarity };
+      const names = Object.fromEntries(RIVEN_STATS.map(d => [d[0], d[1]]));
+      rivenMsg = ' Мод разлома: ' + rv.stats.map(x => `${x.value > 0 ? '+' : ''}${num(x.value, 1)}${rivenUnit(RIVEN_STATS.find(d => d[0] === x.stat))} ${names[x.stat]}`).join(', ') +
+        (rv.skipped.length ? ` (не влияют на урон: ${rv.skipped.length})` : '') + '. Сверь с игрой.';
+      return { id: 'riven', rank: 0 };
+    }
     const m = find(u.type);
     if (!m) { missing.push(u.type.split('/').pop()); return null; }
     return { id: m.id, rank: Math.min(u.rank, maxRank(m)) };
@@ -868,7 +879,7 @@ async function applyAleca(e, lookup) {
     setView('frame');
     renderFrame(); updateFrame();
   }
-  toolMsg(`Загружено: ${ruName(e.rec)}, конфиг ${'ABCDEF'[e.ci] || e.ci + 1}.` + (missing.length ? ` Не нашёл в данных: ${missing.join(', ')}.` : ''));
+  toolMsg(`Загружено: ${ruName(e.rec)}, конфиг ${'ABCDEF'[e.ci] || e.ci + 1}.` + rivenMsg + (missing.length ? ` Не нашёл в данных: ${missing.join(', ')}.` : ''));
   save();
 }
 
