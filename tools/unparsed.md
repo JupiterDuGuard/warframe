@@ -1,6 +1,6 @@
 # Неразобранные эффекты
 
-Сборка 2026-11-21 19:59 UTC. Строки, которые скрипт не смог превратить в {stat, value, bucket}. Правка — data/overrides/*.json (ключ — uniqueName или имя).
+Сборка 2026-11-22 03:29 UTC. Строки, которые скрипт не смог превратить в {stat, value, bucket}. Правка — data/overrides/*.json (ключ — uniqueName или имя).
 
 ## Моды: 129
 
@@ -245,7 +245,7 @@
 - [Theorem Demulcent](https://wiki.warframe.com/w/Theorem_Demulcent) — Standing in a zone created by a Residual Arcane increases weapon damage by 12%/s stacking up to 15x. Effect persists for 20s upon leaving the zone.
 - [Theorem Infection](https://wiki.warframe.com/w/Theorem_Infection) — Standing in a zone created by a Residual Arcane increases damage of companions and summoned allies within 90m by 24%/s stacking up to 15x. Effect persists for 20s upon leaving the zone.
 
-## Перки Инкарнона: 170
+## Перки Инкарнона: 164
 
 - [Angstrum: Hitman's Hoard](https://wiki.warframe.com/w/Angstrum_Incarnon_Genesis) — Increase Base Ammo Capacity by +9.
 - [Atomos: Mercenary Chamber](https://wiki.warframe.com/w/Atomos_Incarnon_Genesis) — Increase Base Ammo Capacity to 560.
@@ -278,9 +278,7 @@
 - [Bronco Prime: Practised Grip](https://wiki.warframe.com/w/Bronco_Incarnon_Genesis) — Increase Accuracy by +30%.
 - [Bronco: Enough for Everyone](https://wiki.warframe.com/w/Bronco_Incarnon_Genesis) — +75% Ammo efficiency when 6 enemies are within 6m.
 - [Bronco: Practised Grip](https://wiki.warframe.com/w/Bronco_Incarnon_Genesis) — Increase Accuracy by +30%.
-- [Burston Prime: Forceful Finality](https://wiki.warframe.com/w/Burston_Incarnon_Genesis) — +5 Base Multishot
 - [Burston Prime: Reaver's Rapture](https://wiki.warframe.com/w/Burston_Incarnon_Genesis) — On Full Burst Hit: +20% Damage
-- [Burston: Forceful Finality](https://wiki.warframe.com/w/Burston_Incarnon_Genesis) — +5 Base Multishot
 - [Burston: Reaver's Rapture](https://wiki.warframe.com/w/Burston_Incarnon_Genesis) — On Full Burst Hit: +20% Damage
 - [Cestra: Wiseman's Regard](https://wiki.warframe.com/w/Cestra_Incarnon_Genesis) — Increase Base Status Chance by 30% of current Critical Chance, up to 40%.
 - [Dera Vandal: Crimson Overture](https://wiki.warframe.com/w/Dera_Incarnon_Genesis) — +25% Ammo Efficiency for 5s. Stacks up to 3x.
@@ -289,7 +287,6 @@
 - [Dera: Crimson Overture](https://wiki.warframe.com/w/Dera_Incarnon_Genesis) — +25% Ammo Efficiency for 5s. Stacks up to 3x.
 - [Dera: Evolved Autoloader](https://wiki.warframe.com/w/Dera_Incarnon_Genesis) — +50% Magazine Reloaded per second when Holstered.
 - [Dera: High Ground](https://wiki.warframe.com/w/Dera_Incarnon_Genesis) — Increase Base Critical Chance by 25% of current Status Chance, up to 35%.
-- [Despair: Stalker's Vendetta](https://wiki.warframe.com/w/Despair_Incarnon_Genesis) — +100%.
 - [Despair: Survivor's Edge](https://wiki.warframe.com/w/Despair_Incarnon_Genesis) — Increase Critical Chance by +12%
 - [Dex Sybaris: Reaver's Rapture](https://wiki.warframe.com/w/Sybaris_Incarnon_Genesis) — On Full Burst Hit: +20% Damage
 - [Dex Sybaris: Survivor's Edge](https://wiki.warframe.com/w/Sybaris_Incarnon_Genesis) — Increase Critical Chance by +5%.
@@ -332,7 +329,6 @@
 - [Lex Prime: Trusty Sidearm](https://wiki.warframe.com/w/Lex_Incarnon_Genesis) — +60% Ammo Efficiency.
 - [Lex: Trusty Sidearm](https://wiki.warframe.com/w/Lex_Incarnon_Genesis) — +60% Ammo Efficiency.
 - [Miter: Mercenary Chamber](https://wiki.warframe.com/w/Miter_Incarnon_Genesis) — Increase Base Ammo Capacity to 160
-- [Miter: Plentiful Mayhem](https://wiki.warframe.com/w/Miter_Incarnon_Genesis) — +20.
 - [Miter: Sawblade Storm](https://wiki.warframe.com/w/Miter_Incarnon_Genesis) — Hold charged shot for 1s to increase area of effect.
 - [Mk1-Braton: Critical Parallel](https://wiki.warframe.com/w/Braton_Incarnon_Genesis) — Increase Base Critical Damage Multiplier by +0.5.
 - [Mk1-Braton: Daring Reverie](https://wiki.warframe.com/w/Braton_Incarnon_Genesis) — +50% Ammo Efficiency
@@ -408,8 +404,6 @@
 - [Thalys: Swift Transmute](https://wiki.warframe.com/w/Thalys) — Reach 3x Combo and Heavy Attack to activate Incarnon Form
 - [Thalys: Vaulting Leap](https://wiki.warframe.com/w/Thalys) — +100% Jump and Double Jump Height
 - [Thalys: Void Splinters](https://wiki.warframe.com/w/Thalys) — Shard duration is increased to 30s. Shards become weak spots that have +100% Critical Chance when damaged. Shard damage is reduced by -50%.
-- [Torid: Final Fusillade](https://wiki.warframe.com/w/Torid_Incarnon_Genesis) — +3 Multishot
-- [Torid: Plentiful Mayhem](https://wiki.warframe.com/w/Torid_Incarnon_Genesis) — +60%.
 - [Torid: Renewed Horror](https://wiki.warframe.com/w/Torid_Incarnon_Genesis) — Lingering damage field duration doubles on first shot.
 - [Vasto Prime: Awakened Readiness](https://wiki.warframe.com/w/Vasto_Incarnon_Genesis) — +20% Magazine Reloaded per second when Holstered.
 - [Vasto Prime: Reaper's Plenty](https://wiki.warframe.com/w/Vasto_Incarnon_Genesis) — Infinite Ammo for 2s.

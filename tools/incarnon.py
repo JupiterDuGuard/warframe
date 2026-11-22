@@ -51,8 +51,8 @@ def table_cells(row):
 NORMALIZE = [
     (r"^\*+\s*", ""),                                                     # вложенные пункты «** …»
     (r"([+-])\s+(\d)", r"\1\2"),                                          # «+ 15%» -> «+15%»
-    (r"^Multishot consumes ammo directly from Capacity and (?:does|increases Damage by) ", ""),
-    (r"^(\+\d+(?:\.\d+)?%) Damage\.?$", r"\1 Damage"),
+    (r"^Multishot consumes ammo directly from Capacity and ", ""),
+    (r"^does (\+\d+(?:\.\d+)?%) Damage", r"\1 Damage"),                  # Munitions Grit — TODO_VERIFY: корзина урона
     (r"^Increase Base Status by ", "Increase Base Status Chance by "),
     (r"^Increase Status Chance by ", "Increase Base Status Chance by "),  # Despair — TODO_VERIFY
     (r"^(?:Increase|increases) Damage by (\+\d+(?:\.\d+)?)\.?$", r"Increase Base Damage by \1"),
@@ -79,6 +79,12 @@ def normalize(lines):
                 continue
             for rx, rep in NORMALIZE:
                 part = re.sub(rx, rep, part).strip()
+            cm = re.match(r"^([^:]+:\s*)(.+)$", part)          # «On X: +3 Multishot» — значение после условия ещё раз
+            if cm:
+                tail = cm.group(2)
+                for rx, rep in NORMALIZE:
+                    tail = re.sub(rx, rep, tail).strip()
+                part = cm.group(1) + tail
             if part:
                 out.append(part)
     return out

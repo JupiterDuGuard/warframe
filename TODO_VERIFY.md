@@ -114,3 +114,13 @@
 - [ ] **Осколки**: эффект определяется по ключевым словам в `UpgradeType` — сверено только Изумрудный (Токсин) и Багровый (сила).
 - [ ] **Не распознаются**: ривены, моды Tennokai и мистификаторы, чей `ItemId` отсутствует в `Upgrades` файла (8 из 527 слотов на реальном файле).
 - [ ] **Пороговые уровни** — по среднему криту; с разбросом крита реальный порог может отличаться на несколько уровней.
+
+## Инкарнон: формулировки перков (нормализация в tools/incarnon.py)
+
+- [ ] **«Multishot consumes ammo directly from Capacity and does/increases Damage by +X%»** (Munitions Grit, Plentiful Mayhem, Stalker's Vendetta) — сделано как обычный «+X% урона» (складывается с Serration). Не сверено.
+- [ ] **«increases Damage by +20» без %** (Miter) и **«Increase Damage by +50»** (Despair) — как прибавка к базовому урону.
+- [ ] **«Increase Status Chance by +24%»** (Despair, Elemental Balance) — как прибавка к базовому шансу статуса, как у остальных Elemental Balance.
+- [ ] **«+40% / +100% Damage to enemies below half Health»** — как «+X% урона» с условием-галочкой.
+- [ ] **«x3 Critical Damage»** (Cestra) — множитель к итоговому множителю крита, как у Электрического щита.
+- [ ] **Devastating Attrition** (Felarx, «50% chance +2000% damage on non-critical hits») — как Devouring Attrition у Летума: ×21 на ударах без крита.
+- [ ] **Не разобраны**: Stalker's Resentment (Dread), King's Gambit (Sicarus Prime), Flensing Spikes (Latron Prime), High Ground (Dera Vandal), Devastation Cascade (Onos), перки Thalys про осколки.

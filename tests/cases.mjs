@@ -417,6 +417,16 @@ export const cases = [
       eq(sh[0].color, 'emerald'); eq(sh[0].tau, true); eq(sh[0].effect, 'toxin_status'); eq(sh[1], null);
     },
   },
+  {
+    name: 'Инкарнон: у Торида и Парных Токсоцистов есть эволюции, условный мультивыстрел Торида разобран',
+    run({ data, eq }) {
+      eq(data.incarnon['Torid'].tiers.map(t => t.tier).join(), '2,3,4');
+      eq(data.incarnon['Dual Toxocyst'].tiers.map(t => t.tier).join(), '2,3,4');
+      const ff = data.incarnon['Torid'].tiers[0].perks.find(p => p.name === 'Final Fusillade');
+      const ms = ff.effects.find(e => e.stat === 'multishot_base');
+      eq(ms.value, 3); eq(!!ms.condition?.trigger, true);
+    },
+  },
 ];
 
 /** Общий загрузчик: data = { scaling, damage, weapons: {slot: [...]}, mods: {group: [...]}, enemies: [...] } */
