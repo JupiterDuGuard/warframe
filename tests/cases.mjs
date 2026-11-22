@@ -508,6 +508,26 @@ export const cases = [
       near(b('normal'), base * 2.1, 1e-9); near(b('heavy') / b('normal'), 3.2 / 2.1, 1e-9);
     },
   },
+  {
+    name: 'Новые баффы: Psychic Bolts 80% брони, Magnetize ×2, Метроном +30%, Wrathful Advance +200% крита, Speed +75% скорости атаки',
+    run({ data, find, near }) {
+      const R = (a, slot) => resolveBuffs(a.map(x => ({ on: true, strength: 100, ...x })), data.buffs.buffs, { slot });
+      const t = R([{ id: 'psychic_bolts' }, { id: 'magnetize' }]);
+      near(t.armorStrip, 0.8, 1e-9); near(t.vulnerability, 1, 1e-9);
+      near(R([{ id: 'psychic_bolts', strength: 200 }]).armorStrip, 1, 1e-9);            // не больше 100%
+      const tgt = { enemy: NEUTRAL, level: 1 };
+      const base = calc({ weapon: find.weapon('Lex Prime') }, tgt, data);
+      const opera = R([{ id: 'metronome', variant: 'opera' }], 'secondary');
+      near(calc({ weapon: find.weapon('Lex Prime'), slot: 'secondary', buffs: opera.weaponSources }, tgt, data).stats.multishot, base.stats.multishot * 1.3, 1e-9);
+      const melee = R([{ id: 'wrathful_advance' }, { id: 'speed' }, { id: 'metronome', variant: 'forte' }], 'melee');
+      const p0 = calc({ weapon: find.weapon('Paracesis'), slot: 'melee' }, tgt, data);
+      const p1 = calc({ weapon: find.weapon('Paracesis'), slot: 'melee', buffs: melee.weaponSources }, tgt, data);
+      near(p1.stats.critChance, p0.stats.critChance + 2, 1e-9);
+      near(p1.stats.fireRate, p0.stats.fireRate * 1.75, 1e-9);
+      const forte = R([{ id: 'metronome', variant: 'forte' }], 'melee');                 // Forte отдельно: крит не мешает
+      near(calc({ weapon: find.weapon('Paracesis'), slot: 'melee', buffs: forte.weaponSources }, tgt, data).hit.health / p0.hit.health, 1.3, 0.01);
+    },
+  },
 ];
 
 /** Общий загрузчик: data = { scaling, damage, weapons: {slot: [...]}, mods: {group: [...]}, enemies: [...] } */
