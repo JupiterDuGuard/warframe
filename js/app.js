@@ -430,6 +430,13 @@ function renderEnemySegs() {
 }
 
 // ---------- оружие: расчёт и результат ----------
+// стаки статусов: введённые вручную и от способностей — берётся больший
+function mergeStatus(st, fromBuffs = {}) {
+  const out = { viral: st.viral, corrosive: st.corrosive, magnetic: st.magnetic, heat: st.heat, cold: st.cold || 0, puncture: st.puncture || 0 };
+  for (const [k, v] of Object.entries(fromBuffs)) out[k] = k === 'heat' ? (out.heat || v > 0) : Math.max(out[k] || 0, v);
+  return out;
+}
+const STATUS_RU = { viral: 'Вирус', corrosive: 'Коррозия', magnetic: 'Магнетизм', heat: 'Огонь', cold: 'Холод', puncture: 'Пронзание' };
 function buildInput() {
   const w = currentWeapon();
   const mods = [...S.mods, S.exilus].filter(Boolean).map(s => ({ item: modById(s.id), rank: s.rank })).filter(m => m.item);
@@ -458,7 +465,7 @@ function buildInput() {
   const target = {
     enemy: currentEnemy(), level: S.level, armorStrip: 1 - (1 - S.armorStrip / 100) * (1 - bs.armorStrip), vulnerability: bs.vulnerability + cb.vulnerability,
     drOverride: S.drOverride === '' || S.drOverride == null ? undefined : Math.max(0, Math.min(100, +S.drOverride)) / 100,
-    status: { viral: st.viral, corrosive: st.corrosive, magnetic: st.magnetic, heat: st.heat, cold: st.cold || 0 },
+    status: mergeStatus(st, bs.statuses),
     steelPath: !!S.steelPath, eximus: !!S.eximus,
   };
   return { build, target, frameSrc };
@@ -482,7 +489,8 @@ function renderResult() {
   $('enemyInfo').textContent = `Ур. ${E.level}: здоровье ${num(E.health, 0)}${E.shield ? ', щиты ' + num(E.shield, 0) : ''}, броня ${num(E.armorBase, 0)}` +
     (E.armorStrip ? ` → ${num(E.armor, 0)}` : '') + `, снижение урона ${pct(E.dr)}` + (E.abilityResist ? `, защита от способностей ${pct(E.abilityResist)}` : '') +
     (E.overguard ? `, Overguard ${num(E.overguard, 0)}` : '') + (E.coldStacks ? `, холод +${num(coldCritBonus(E.coldStacks), 2)}× к криту` : '') +
-    `. Фракция: ${E.faction || '—'}.` + (E.steelPath ? ' Стальной Путь: здоровье и щиты ×2,5.' : '');
+    `. Фракция: ${E.faction || '—'}.` + (E.steelPath ? ' Стальной Путь: здоровье и щиты ×2,5.' : '') +
+    (Object.keys(buffState().res.statuses).length ? ' От способностей: ' + Object.entries(buffState().res.statuses).map(([k, v]) => k === 'heat' ? STATUS_RU[k] : `${STATUS_RU[k]} ${v}`).join(', ') + '.' : '');
 
   const where = S.part === 'head' ? 'в голову' : 'в тело';
   const tiles = [
@@ -989,6 +997,7 @@ function bindInputs() {
   bindNum('stMag', () => S.status.magnetic, v => S.status.magnetic = +v || 0);
   bindChk('stHeat', () => S.status.heat, v => S.status.heat = v);
   bindNum('stanceHit', () => S.stanceHit ?? 1, v => S.stanceHit = v === '' ? 1 : +v);
+  bindNum('stPunct', () => S.status.puncture || 0, v => S.status.puncture = Math.max(0, Math.min(5, +v || 0)));
   bindNum('stCold', () => S.status.cold || 0, v => S.status.cold = Math.max(0, Math.min(10, +v || 0)));
   bindChk('steelPath', () => !!S.steelPath, v => S.steelPath = v);
   bindChk('eximus', () => !!S.eximus, v => S.eximus = v);

@@ -2,7 +2,7 @@
 //
 // active: [{ id, on, variant, ownStrength (bool), strength (%), helminth (bool), input (число для fill/seconds/value) }]
 // ctx:    { ownStrength — сила способностей своего фрейма (доля, 1 = 100%), slot — слот оружия }
-// -> { weaponSources, frameSources, extraHits, armorStrip, vulnerability, applied: [{ id, name, strength }] }
+// -> { weaponSources, frameSources, extraHits, armorStrip, vulnerability, statuses: { viral, cold, … стаки }, applied: [{ id, name, strength }] }
 
 export function buffValue(e, def, a, strength) {
   let v = a.helminth && e.helminth != null ? e.helminth : e.value;
@@ -20,6 +20,7 @@ export function buffValue(e, def, a, strength) {
 export function resolveBuffs(active, defs, ctx = {}) {
   const weaponSources = [], frameSources = [], extraHits = [], applied = [];
   let strip = 0, vulnerability = 0;
+  const statuses = {};                      // стаки статусов, которые способность вешает на врага (берётся наибольший)
   for (const a of active || []) {
     if (!a?.on) continue;
     const def = defs.find(d => d.id === a.id);
@@ -35,6 +36,7 @@ export function resolveBuffs(active, defs, ctx = {}) {
       else if (e.target === 'frame') fEff.push({ stat: e.stat, value: v, bucket: 'frame' });
       else if (e.target === 'enemy' && e.stat === 'armor_strip') strip += v;          // процент от полной брони — складываются
       else if (e.target === 'enemy' && e.stat === 'vulnerability') vulnerability += v;
+      else if (e.target === 'enemy' && e.stat === 'status') statuses[e.status] = Math.max(statuses[e.status] || 0, e.value);
     }
     if (wEff.length) weaponSources.push({ key: 'buff:' + def.id, name, effects: wEff });
     if (fEff.length) frameSources.push({ key: 'buff:' + def.id, name, effects: fEff });
@@ -46,5 +48,5 @@ export function resolveBuffs(active, defs, ctx = {}) {
     }
     applied.push({ id: def.id, name, strength });
   }
-  return { weaponSources, frameSources, extraHits, armorStrip: Math.min(1, strip), vulnerability, applied };
+  return { weaponSources, frameSources, extraHits, armorStrip: Math.min(1, strip), vulnerability, statuses, applied };
 }

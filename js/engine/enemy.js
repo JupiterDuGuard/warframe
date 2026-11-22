@@ -31,12 +31,15 @@ export function overguardMultiplier(level) {
 }
 
 // Холод на цели: +0,1× к множителю крита за 1 стак, +0,05× за каждый следующий (до +0,5× на 9), заморозка (10) — +1,0×
+// Пронзание на цели: +5% шанса крита урону оружия за стак, до +25% на 5 стаках — плоская прибавка (вики Puncture)
+export const punctureCritBonus = stacks => 0.05 * Math.min(Math.max(stacks || 0, 0), 5);
+
 export const coldCritBonus = stacks => (stacks >= 10 ? 1 : stacks > 0 ? 0.1 + 0.05 * (Math.min(stacks, 9) - 1) : 0);
 
 /**
  * Статы врага на уровне.
  * opts: { level, armorStrip (0..1 — уже снятая броня), drOverride, factionOverride,
- *         status: { viral, corrosive, magnetic, heat, cold } — стаки статусов на цели,
+ *         status: { viral, corrosive, magnetic, heat, cold, puncture } — стаки статусов на цели,
  *         steelPath — Стальной Путь: здоровье и щиты ×2,5 (уровень вводится как в игре, уже +100),
  *         eximus — Эксимус: Overguard 12 × множитель уровня }
  * scaling — data/manual/scaling.json, damage — data/damage.json
@@ -73,6 +76,7 @@ export function enemyState(enemy, opts, scaling, damage) {
     vulnerability: opts.vulnerability || 0,
     healthMult: viral, shieldMult: magnetic,
     coldStacks: Math.min(st.cold || 0, overguard > 0 ? 4 : 10),      // с Overguard — не больше 4 стаков (вики Cold)
+    punctureStacks: Math.min(st.puncture || 0, 5),
     overguard, steelPath: !!opts.steelPath,
     statusTypes: Object.values(st).filter(Boolean).length,
     dtm: type => matrix[type] ?? 1,

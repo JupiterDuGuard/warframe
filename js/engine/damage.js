@@ -5,7 +5,7 @@
 import { DOT, DOT_TICKS, TYPE_RU } from './constants.js';
 import { collect, itemEffects } from './effects.js';
 import { moddedAttack, critInfo } from './weapon.js';
-import { enemyState, coldCritBonus } from './enemy.js';
+import { enemyState, coldCritBonus, punctureCritBonus } from './enemy.js';
 
 const r2 = x => Math.round(x * 100) / 100;
 const fmt = x => (Math.round(x * 1000) / 1000).toLocaleString('ru-RU', { maximumFractionDigits: 3 });
@@ -55,7 +55,7 @@ export function calc(build, target, data, opts = {}) {
   const bodyMult = head ? headBase * (1 + A.headshotBonus) + 1.5 * A.weakpointBonus : 1;
   const cdHead = head && opts.headcrit !== false && headBase > 1 ? 2 : 1;      // крит в голову: ×2 к множителю крита (TODO_VERIFY)
   const cold = coldCritBonus(enemy.coldStacks);            // холод прибавляется к множителю крита после модов (вики Cold)
-  const ci = critInfo(A.critChance, (A.critMultiplier + cold) * cdHead);
+  const ci = critInfo(A.critChance + punctureCritBonus(enemy.punctureStacks), (A.critMultiplier + cold) * cdHead);
   const critFor = mode => {
     if (mode === 'avg') return ci.average;
     if (mode === 'crit') return ci.tierMult(Math.max(1, ci.highTier));

@@ -560,6 +560,20 @@ export const cases = [
       eq(R([{ id: 'critical_surge', input: 10 }], 'secondary').weaponSources[0].effects[0].condition.slot, 'primary');
     },
   },
+  {
+    name: 'Статусы от способностей: Пронзание +5% шанса крита за стак (до 25%), Neote/Tempest Barrage/Wyrd Scythes выставляют стаки',
+    run({ data, find, near, eq }) {
+      const lex = find.weapon('Lex Prime');
+      const r0 = calc({ weapon: lex }, { enemy: NEUTRAL, level: 1 }, data);
+      const r5 = calc({ weapon: lex }, { enemy: NEUTRAL, level: 1, status: { puncture: 9 } }, data);
+      near(r5.crit.chance, r0.crit.chance + 0.25, 1e-9);                       // не больше 5 стаков
+      const st = resolveBuffs([{ id: 'neote', on: true }, { id: 'tempest_barrage', on: true }, { id: 'wyrd_scythes', on: true, variant: 'spin' }, { id: 'fire_walker', on: true }],
+        data.buffs.buffs).statuses;
+      eq(JSON.stringify(st), JSON.stringify({ cold: 10, puncture: 5, corrosive: 10, viral: 7, heat: 1 }));
+      const hg = { enemy: find.enemy('Heavy Gunner'), level: 115 };
+      near(calc({ weapon: lex }, { ...hg, status: { corrosive: 10, heat: true } }, data).enemy.armor, 2700 * 0.2 * 0.5, 1e-6);   // −80% и −50%
+    },
+  },
 ];
 
 /** Общий загрузчик: data = { scaling, damage, weapons: {slot: [...]}, mods: {group: [...]}, enemies: [...] } */
