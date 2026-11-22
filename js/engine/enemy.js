@@ -21,10 +21,24 @@ export function armorDR(armor) {
   return a <= 2700 ? 0.9 * Math.sqrt(a / 2700) : a / (a + 300);
 }
 
+// Overguard Эксимусов (вики Enemy Level Scaling § Overguard): от текущего уровня, сглаживание между 45 и 50
+export function overguardMultiplier(level) {
+  const x = Math.max(1, level);
+  const f1 = 1 + 0.0015 * (x - 1) ** 4;
+  const f2 = 1 + 260 * (x - 1) ** 0.9;
+  const t = Math.min(1, Math.max(0, (x - 45) / 5));
+  return f1 + (f2 - f1) * t * t * (3 - 2 * t);
+}
+
+// Холод на цели: +0,1× к множителю крита за 1 стак, +0,05× за каждый следующий (до +0,5× на 9), заморозка (10) — +1,0×
+export const coldCritBonus = stacks => (stacks >= 10 ? 1 : stacks > 0 ? 0.1 + 0.05 * (Math.min(stacks, 9) - 1) : 0);
+
 /**
  * Статы врага на уровне.
  * opts: { level, armorStrip (0..1 — уже снятая броня), drOverride, factionOverride,
- *         status: { viral, corrosive, magnetic, heat, cold } — стаки статусов на цели }
+ *         status: { viral, corrosive, magnetic, heat, cold } — стаки статусов на цели,
+ *         steelPath — Стальной Путь: здоровье и щиты ×2,5 (уровень вводится как в игре, уже +100),
+ *         eximus — Эксимус: Overguard 12 × множитель уровня }
  * scaling — data/manual/scaling.json, damage — data/damage.json
  */
 export function enemyState(enemy, opts, scaling, damage) {
@@ -33,8 +47,10 @@ export function enemyState(enemy, opts, scaling, damage) {
   const faction = opts.factionOverride || enemy.faction;
   const hDef = scaling.health.factions[HEALTH_CURVE[faction] || 'Grineer'];
   const sDef = scaling.shield.factions[SHIELD_CURVE[faction] || 'Grineer'];
-  const health = (enemy.health || 0) * statMultiplier(q, hDef, scaling.health.transition);
-  const shield = (enemy.shield || 0) * statMultiplier(q, sDef, scaling.shield.transition);
+  const sp = opts.steelPath ? 2.5 : 1;                 // вики The Steel Path: +150% здоровья и щитов, броня без изменений
+  const health = (enemy.health || 0) * statMultiplier(q, hDef, scaling.health.transition) * sp;
+  const shield = (enemy.shield || 0) * statMultiplier(q, sDef, scaling.shield.transition) * sp;
+  const overguard = opts.eximus ? 12 * overguardMultiplier(level) : 0;
   let armorScaled = 0;
   if (enemy.armor) {
     const m = statMultiplier(q, scaling.armor.all, scaling.armor.transition);
@@ -56,7 +72,8 @@ export function enemyState(enemy, opts, scaling, damage) {
     abilityResist: enemy.abilityResist || 0, multis: enemy.multis || {},
     vulnerability: opts.vulnerability || 0,
     healthMult: viral, shieldMult: magnetic,
-    coldStacks: st.cold || 0,
+    coldStacks: Math.min(st.cold || 0, overguard > 0 ? 4 : 10),      // с Overguard — не больше 4 стаков (вики Cold)
+    overguard, steelPath: !!opts.steelPath,
     statusTypes: Object.values(st).filter(Boolean).length,
     dtm: type => matrix[type] ?? 1,
   };

@@ -26,8 +26,9 @@ export function weaponClassFits(wc, ctx) {
 }
 
 export function effectValue(eff, ctx, key) {
+  const heavy = eff.heavyMult && ctx.flags?.attack === 'heavy' ? eff.heavyMult : 1;   // «x2 for Heavy Attacks»
   const c = eff.condition;
-  if (!c) return eff.value;
+  if (!c) return eff.value * heavy;
   let mult = 1;
   if (c.faction) {
     const fam = FACTION_FAMILY[ctx.faction] || String(ctx.faction || '').toLowerCase();
@@ -49,7 +50,7 @@ export function effectValue(eff, ctx, key) {
     if (!n) return 0;
     mult *= c.stacks ? Math.min(n, c.stacks) : 1;
   }
-  return eff.value * mult;
+  return eff.value * mult * heavy;
 }
 
 // Эффекты предмета на ранге (моды и мистификаторы из data/*.json)

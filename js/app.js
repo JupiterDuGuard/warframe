@@ -1,5 +1,5 @@
 // Интерфейс калькулятора. Считает движок js/engine (без DOM), здесь только ввод и вывод.
-import { calc, critTable, itemEffects, frameStats, resolveBuffs, modContribution, shotThresholds, capacity, formaCount, polarityMatch, TYPE_RU, DOT_TICKS } from './engine/index.js';
+import { coldCritBonus, calc, critTable, itemEffects, frameStats, resolveBuffs, modContribution, shotThresholds, capacity, formaCount, polarityMatch, TYPE_RU, DOT_TICKS } from './engine/index.js';
 import { readAleca, upgradeLookup, slotPolarities, readShards, ownedItems, rivenFromFingerprint } from './aleca.js?v=14';
 import { encodeBuild, decodeBuild } from './share.js';
 import { load, CATEGORIES, MOD_FILES, ARCANE_FILES, modGroup, modFits } from './store.js';
@@ -17,7 +17,7 @@ const DEFAULT = {
   stacks: {}, flags: {}, statusTypes: 0,
   buffs: [],
   enemy: 'Heavy Gunner', level: 115, part: 'body', crit: 'none', armorStrip: 0, drOverride: '',
-  status: { viral: 0, corrosive: 0, magnetic: 0, heat: false },
+  status: { viral: 0, corrosive: 0, magnetic: 0, heat: false, cold: 0 }, steelPath: false, eximus: false,
   frame: FRAME_DEFAULT,
   pol: {}, stance: null, compareA: null,
 };
@@ -126,7 +126,7 @@ function rivenItem() {
     const v = d[3] === 'flat' ? value : value / 100;
     if (d[2] === 'faction') effects.push({ stat, value: v, bucket: 'faction', condition: { faction: stat.slice(8) } });
     else if (stat === 'crit_slide') effects.push({ stat: 'crit_chance', value: v, bucket: 'crit_chance', condition: { attack: 'slide' } });
-    else effects.push({ stat, value: v, bucket: d[2] });
+    else effects.push({ stat, value: v, bucket: d[2], ...(stat === 'crit_chance' && S.cat === 'melee' ? { heavyMult: 2 } : {}) });
     text.push(`${value > 0 ? '+' : ''}${value}${rivenUnit(d)} ${d[1]}`);
   }
   return { id: 'riven', name: 'Riven Mod', ru: 'Мод разлома', riven: true, ranks: [effects], maxRank: 0,
@@ -456,7 +456,8 @@ function buildInput() {
   const target = {
     enemy: currentEnemy(), level: S.level, armorStrip: 1 - (1 - S.armorStrip / 100) * (1 - bs.armorStrip), vulnerability: bs.vulnerability + cb.vulnerability,
     drOverride: S.drOverride === '' || S.drOverride == null ? undefined : Math.max(0, Math.min(100, +S.drOverride)) / 100,
-    status: { viral: st.viral, corrosive: st.corrosive, magnetic: st.magnetic, heat: st.heat },
+    status: { viral: st.viral, corrosive: st.corrosive, magnetic: st.magnetic, heat: st.heat, cold: st.cold || 0 },
+    steelPath: !!S.steelPath, eximus: !!S.eximus,
   };
   return { build, target, frameSrc };
 }
@@ -477,7 +478,9 @@ function renderResult() {
   }
   const A = r.stats, E = r.enemy;
   $('enemyInfo').textContent = `Ур. ${E.level}: здоровье ${num(E.health, 0)}${E.shield ? ', щиты ' + num(E.shield, 0) : ''}, броня ${num(E.armorBase, 0)}` +
-    (E.armorStrip ? ` → ${num(E.armor, 0)}` : '') + `, снижение урона ${pct(E.dr)}` + (E.abilityResist ? `, защита от способностей ${pct(E.abilityResist)}` : '') + `. Фракция: ${E.faction || '—'}.`;
+    (E.armorStrip ? ` → ${num(E.armor, 0)}` : '') + `, снижение урона ${pct(E.dr)}` + (E.abilityResist ? `, защита от способностей ${pct(E.abilityResist)}` : '') +
+    (E.overguard ? `, Overguard ${num(E.overguard, 0)}` : '') + (E.coldStacks ? `, холод +${num(coldCritBonus(E.coldStacks), 2)}× к криту` : '') +
+    `. Фракция: ${E.faction || '—'}.` + (E.steelPath ? ' Стальной Путь: здоровье и щиты ×2,5.' : '');
 
   const where = S.part === 'head' ? 'в голову' : 'в тело';
   const tiles = [
@@ -983,6 +986,9 @@ function bindInputs() {
   bindNum('stCorr', () => S.status.corrosive, v => S.status.corrosive = +v || 0);
   bindNum('stMag', () => S.status.magnetic, v => S.status.magnetic = +v || 0);
   bindChk('stHeat', () => S.status.heat, v => S.status.heat = v);
+  bindNum('stCold', () => S.status.cold || 0, v => S.status.cold = Math.max(0, Math.min(10, +v || 0)));
+  bindChk('steelPath', () => !!S.steelPath, v => S.steelPath = v);
+  bindChk('eximus', () => !!S.eximus, v => S.eximus = v);
   bindChk('fRank30', () => F().rank30, v => F().rank30 = v, () => updateFrame(false));
   $('helSlot').addEventListener('change', e => { F().helminth.slot = e.target.value; if (e.target.value === '') F().helminth.ability = ''; renderFrame(); updateFrame(false); });
   $('helAbility').addEventListener('change', e => { F().helminth.ability = e.target.value; updateFrame(false); });

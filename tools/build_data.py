@@ -298,6 +298,10 @@ def parse_rank(stats):
             if cm:
                 parts = [f"{cm.group(1)}% Critical Chance", f"{cm.group(1)}% Critical Damage"]
             effs = [match_line(p) for p in parts]
+            hx = re.search(r"\(x(\d+(?:\.\d+)?) for Heavy Attacks\)", text, re.I)   # «Critical Chance (x2 for Heavy Attacks)»
+            if hx and None not in effs:
+                for eff in effs:
+                    eff["heavyMult"] = float(hx.group(1))
             if None in effs:
                 if not IGNORE.search(line):
                     bad.append(line)

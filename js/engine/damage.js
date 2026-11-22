@@ -5,7 +5,7 @@
 import { DOT, DOT_TICKS, TYPE_RU } from './constants.js';
 import { collect, itemEffects } from './effects.js';
 import { moddedAttack, critInfo } from './weapon.js';
-import { enemyState } from './enemy.js';
+import { enemyState, coldCritBonus } from './enemy.js';
 
 const r2 = x => Math.round(x * 100) / 100;
 const fmt = x => (Math.round(x * 1000) / 1000).toLocaleString('ru-RU', { maximumFractionDigits: 3 });
@@ -54,7 +54,8 @@ export function calc(build, target, data, opts = {}) {
   const headBase = enemy.multis.Head ?? 1;
   const bodyMult = head ? headBase * (1 + A.headshotBonus) + 1.5 * A.weakpointBonus : 1;
   const cdHead = head && opts.headcrit !== false && headBase > 1 ? 2 : 1;      // крит в голову: ×2 к множителю крита (TODO_VERIFY)
-  const ci = critInfo(A.critChance, A.critMultiplier * cdHead);
+  const cold = coldCritBonus(enemy.coldStacks);            // холод прибавляется к множителю крита после модов (вики Cold)
+  const ci = critInfo(A.critChance, (A.critMultiplier + cold) * cdHead);
   const critFor = mode => {
     if (mode === 'avg') return ci.average;
     if (mode === 'crit') return ci.tierMult(Math.max(1, ci.highTier));
@@ -84,6 +85,10 @@ export function calc(build, target, data, opts = {}) {
     hitHealth += h; hitShield += s;
   }
   const weaponHit = A.typesTotal * preMult * K * bodyMult;            // «Weapon Hit Damage» для доп. ударов
+  // Overguard: броня и слабости не действуют, Бездна ×1,5, Магнетизм усиливает как по щитам
+  const ogFactor = type => (type === 'Void' ? 1.5 : 1) * enemy.shieldMult * (1 + enemy.vulnerability);
+  let hitOverguard = 0;
+  if (enemy.overguard) for (const [type, v] of Object.entries(A.types)) hitOverguard += v * preMult * (1 + A.directBonus) * K * bodyMult * ogFactor(type);
 
   steps.push({
     label: 'Урон за снаряд до противника',
@@ -123,7 +128,7 @@ export function calc(build, target, data, opts = {}) {
       value: dmg,
     });
     const pc = x.statusChance === 'weapon' ? Math.min(1, A.statusChance) : (x.statusChance || 0);
-    return { name: x.name, type: x.type, pre, damage: dmg, tick, ticks: DOT_TICKS, procChance: pc };
+    return { name: x.name, type: x.type, pre, damage: dmg, tick, ticks: DOT_TICKS, procChance: pc, vsOverguard: pre * ogFactor(x.type) };
   });
 
   // ---- статусы оружия: распределение по типам ∝ урону типа (до слабостей врага)
@@ -163,7 +168,9 @@ export function calc(build, target, data, opts = {}) {
   const shotShield = hitShield * ms;
   const fr = A.fireRate;
   const sustainedFactor = A.magazine && A.reload ? (A.magazine / fr) / (A.magazine / fr + A.reload) : 1;
-  const ehpShots = (enemy.shield > 0 && shotShield > 0 ? enemy.shield / shotShield : 0) +
+  const shotOverguard = (hitOverguard + extra.reduce((a, x) => a + x.vsOverguard, 0)) * ms;   // тики по Overguard не учтены (TODO_VERIFY)
+  const ehpShots = (enemy.overguard > 0 ? (shotOverguard > 0 ? enemy.overguard / shotOverguard : Infinity) : 0) +
+    (enemy.shield > 0 && shotShield > 0 ? enemy.shield / shotShield : 0) +
     (shotHealth > 0 ? enemy.health / shotHealth : Infinity);
   const shots = Math.ceil(ehpShots);
   const reloads = A.magazine ? Math.floor((shots - 1) / A.magazine) : 0;
@@ -173,7 +180,7 @@ export function calc(build, target, data, opts = {}) {
     enemy, stats: A, crit: ci, critUsed: K, bodyMult,
     hit: { perType, health: hitHealth, shield: hitShield, weaponHit, shown: Math.round(hitHealth) },
     extra, procs, dots,
-    perShot: { health: shotHealth, shield: shotShield, direct: hitHealth * ms, dot: dotPerPellet * ms, extra: extraPerPellet * ms },
+    perShot: { health: shotHealth, shield: shotShield, overguard: shotOverguard, direct: hitHealth * ms, dot: dotPerPellet * ms, extra: extraPerPellet * ms },
     dps: { burst: shotHealth * fr, sustained: shotHealth * fr * sustainedFactor },
     kill: { shots, seconds: Math.max(0, ttk) },
     contrib: eff.contrib,

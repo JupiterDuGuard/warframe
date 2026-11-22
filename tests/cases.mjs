@@ -1,6 +1,6 @@
 // Эталонные проверки движка. Работают и в node --test (tests/engine.test.mjs), и в браузере (tests/index.html).
 // Каждый случай: { name, run(ctx) }, ctx = { data, find, near, eq } ; near(a, b, eps) / eq(a, b) бросают ошибку.
-import { calc, combineElements, critInfo, enemyState, frameStats, shardSources, resolveBuffs, capacity, modCost, polarityMatch, formaCount, modContribution, shotThresholds } from '../js/engine/index.js';
+import { overguardMultiplier, coldCritBonus, calc, combineElements, critInfo, enemyState, frameStats, shardSources, resolveBuffs, capacity, modCost, polarityMatch, formaCount, modContribution, shotThresholds } from '../js/engine/index.js';
 import { encodeBuild, decodeBuild } from '../js/share.js';
 import { readAleca, upgradeLookup, slotPolarities, readShards, rivenFromFingerprint } from '../js/aleca.js';
 
@@ -468,6 +468,44 @@ export const cases = [
       const r0 = rivenFromFingerprint({ type: '/Lotus/Upgrades/Mods/Randomized/LotusPistolRandomModRare', fp: { ...fp(0), lvl: 0 } });
       near(r0.stats[0].value, Math.round(293.5 / 9 * 10) / 10, 0.11);                  // ранг 0 — 1/9 от максимума
       eq(rivenFromFingerprint({ type: 'x', fp: { challenge: {} } }), null);           // нераскрытый
+    },
+  },
+  {
+    name: 'Стальной Путь: здоровье и щиты ×2,5, броня та же; Overguard Эксимуса 12 × множитель уровня',
+    run({ data, find, near }) {
+      const hg = find.enemy('Heavy Gunner');
+      const a = enemyState(hg, { level: 115 }, data.scaling, data.damage);
+      const b = enemyState(hg, { level: 115, steelPath: true, eximus: true }, data.scaling, data.damage);
+      near(b.health, a.health * 2.5, 1e-6); near(b.armor, a.armor, 1e-9);
+      near(overguardMultiplier(1), 1, 1e-9); near(overguardMultiplier(30), 1 + 0.0015 * 29 ** 4, 1e-6);
+      near(overguardMultiplier(50), 1 + 260 * 49 ** 0.9, 1e-6); near(b.overguard, 12 * overguardMultiplier(115), 1e-6);
+    },
+  },
+  {
+    name: 'Холод (вики): +0,1× за 1 стак, +0,5× на 9, заморозка +1,0×; Кунаи с Primed Target Cracker → 3,86×',
+    run({ near }) {
+      near(coldCritBonus(1), 0.1, 1e-9); near(coldCritBonus(9), 0.5, 1e-9); near(coldCritBonus(10), 1, 1e-9);
+      near(1.6 * (1 + 1.1) + coldCritBonus(9), 3.86, 1e-9);
+    },
+  },
+  {
+    name: 'Эксимус: выстрелов до убийства больше на Overguard / урон по Overguard (броня его не защищает)',
+    run({ data, find, eq }) {
+      const t = { enemy: find.enemy('Heavy Gunner'), level: 115 };
+      const a = calc({ weapon: find.weapon('Lex Prime') }, t, data, {});
+      const b = calc({ weapon: find.weapon('Lex Prime') }, { ...t, eximus: true }, data, {});
+      const og = b.enemy.overguard / b.perShot.overguard;
+      eq(b.kill.shots, Math.ceil(a.perShot.health > 0 ? a.enemy.health / a.perShot.health + og : 0));
+    },
+  },
+  {
+    name: 'Galvanized Steel: «+110% шанса крита (×2 на тяжёлых)» — на тяжёлом ударе +220%',
+    run({ data, find, near }) {
+      const gs = find.mod('melee', 'Galvanized Steel');
+      const b = mode => calc({ weapon: find.weapon('Paracesis'), slot: 'melee', meleeMode: mode, mods: [{ item: gs, rank: 10 }] },
+        { enemy: NEUTRAL, level: 1 }, data, {}).stats.critChance;
+      const base = find.weapon('Paracesis').attacks[0].critChance;
+      near(b('normal'), base * 2.1, 1e-9); near(b('heavy') / b('normal'), 3.2 / 2.1, 1e-9);
     },
   },
 ];
