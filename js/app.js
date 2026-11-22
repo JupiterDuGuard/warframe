@@ -41,7 +41,7 @@ const weaponList = () => (D.weapons[S.cat] || []).filter(w => w.attacks?.length)
 const currentWeapon = () => weaponList().find(w => w.name === S.weapon) || weaponList()[0];
 const currentGroup = () => modGroup(currentWeapon(), S.cat);
 const modsOf = () => D.mods[currentGroup()] || [];
-const modById = id => modsOf().find(m => m.id === id);
+const modById = id => (id === 'riven' ? rivenItem() : modsOf().find(m => m.id === id));
 const arcanesOf = () => D.arcanes[S.cat] || [];
 const arcById = id => arcanesOf().find(a => a.id === id);
 const currentEnemy = () => D.enemies.find(e => e.name === S.enemy) || D.enemies[0];
@@ -90,6 +90,71 @@ function capLine(el, cap, pol, item, onToggle) {
 // стойка подходит классу оружия: «Glaives» ~ «Glaive», «Staves» ~ «Staff»
 const clsKey = c => (c || '').toLowerCase().replace('staves', 'staff').replace(/s\b/g, '');
 const stanceFits = (m, w) => clsKey(m.compat) === clsKey(w.class);
+
+// ---------- мод разлома ----------
+// Свои характеристики: S.riven = { stats: [4 × { stat, value }], drain, polarity }; в слоте — { id: 'riven', rank: 0 }.
+// [stat, подпись, корзина, 'flat' — значение без %]
+const RIVEN_STATS = [
+  ['damage', 'Урон', 'base_damage'], ['multishot', 'Мультивыстрел', 'multishot'],
+  ['crit_chance', 'Шанс крита', 'crit_chance'], ['crit_damage', 'Крит. урон', 'crit_damage'],
+  ['status_chance', 'Шанс статуса', 'status_chance'], ['status_duration', 'Длительность статуса', 'status_duration'],
+  ['fire_rate', 'Скорострельность / скорость атаки', 'fire_rate'], ['magazine', 'Магазин', 'magazine'],
+  ['reload_speed', 'Скорость перезарядки', 'reload'],
+  ['element_heat', 'Огонь (Heat)', 'element'], ['element_cold', 'Холод (Cold)', 'element'],
+  ['element_electricity', 'Электричество (Electricity)', 'element'], ['element_toxin', 'Токсин (Toxin)', 'element'],
+  ['physical_impact', 'Удар (Impact)', 'physical'], ['physical_puncture', 'Пронзание (Puncture)', 'physical'], ['physical_slash', 'Разрез (Slash)', 'physical'],
+  ['faction_grineer', 'Урон по Гринир (Grineer)', 'faction'], ['faction_corpus', 'Урон по Корпусу (Corpus)', 'faction'],
+  ['faction_infested', 'Урон по Заражённым (Infested)', 'faction'], ['faction_corrupted', 'Урон по Порабощённым (Corrupted)', 'faction'],
+  ['punch_through', 'Пробивание', 'utility', 'flat'], ['projectile_speed', 'Скорость снаряда', 'utility'],
+  ['crit_slide', 'Шанс крита в скольжении', 'crit_chance'], ['melee_range', 'Дальность, м', 'utility', 'flat'],
+  ['combo_duration', 'Длительность комбо, с', 'utility', 'flat'],
+];
+const RIVEN_PICK = { id: 'riven', name: 'Riven Mod', ru: 'Мод разлома — свои характеристики', text: ['Характеристики вводятся под слотами модов'] };
+const rivenState = () => {
+  S.riven ||= { stats: [], drain: 18, polarity: 'madurai' };
+  while (S.riven.stats.length < 4) S.riven.stats.push({ stat: '', value: 0 });
+  return S.riven;
+};
+const rivenUnit = d => (d?.[3] === 'flat' ? '' : '%');
+function rivenItem() {
+  const r = rivenState();
+  const effects = [], text = [];
+  for (const { stat, value } of r.stats) {
+    const d = RIVEN_STATS.find(x => x[0] === stat);
+    if (!d || !value) continue;
+    const v = d[3] === 'flat' ? value : value / 100;
+    if (d[2] === 'faction') effects.push({ stat, value: v, bucket: 'faction', condition: { faction: stat.slice(8) } });
+    else if (stat === 'crit_slide') effects.push({ stat: 'crit_chance', value: v, bucket: 'crit_chance', condition: { attack: 'slide' } });
+    else effects.push({ stat, value: v, bucket: d[2] });
+    text.push(`${value > 0 ? '+' : ''}${value}${rivenUnit(d)} ${d[1]}`);
+  }
+  return { id: 'riven', name: 'Riven Mod', ru: 'Мод разлома', riven: true, ranks: [effects], maxRank: 0,
+    drain: r.drain ?? 18, polarity: r.polarity || null, text, textRu: text };
+}
+function renderRiven() {
+  const on = S.mods.some(s => s?.id === 'riven');
+  $('rivenEdit').hidden = !on;
+  if (!on) return;
+  const r = rivenState();
+  const opts = RIVEN_STATS.filter(d => S.cat === 'melee' || !['crit_slide', 'melee_range', 'combo_duration'].includes(d[0]));
+  const rows = r.stats.map((st, i) => {
+    const d = RIVEN_STATS.find(x => x[0] === st.stat);
+    return h('div', { class: 'riven-row' },
+      h('select', { 'aria-label': `Характеристика ${i + 1}`, onchange: e => { st.stat = e.target.value; if (!st.stat) st.value = 0; update(); } },
+        h('option', { value: '' }, '— нет —'), ...opts.map(([id, ru]) => h('option', { value: id, selected: id === st.stat }, ru))),
+      h('input', { type: 'number', step: 'any', value: st.value || '', placeholder: '+/−', disabled: !st.stat, 'aria-label': `Значение ${i + 1}`,
+        oninput: e => { st.value = +e.target.value || 0; update(false); } }),
+      h('span', { class: 'muted' }, st.stat ? rivenUnit(d) || 'ед.' : ''));
+  });
+  $('rivenEdit').replaceChildren(
+    h('div', { class: 'riven-head' }, h('b', {}, 'Мод разлома'), h('span', { class: 'muted' }, 'значения с карточки мода; минус — для отрицательной характеристики')),
+    ...rows,
+    h('div', { class: 'riven-row' },
+      h('label', { class: 'muted', for: 'rivenDrain' }, 'Дренаж (число на карточке)'),
+      h('input', { type: 'number', id: 'rivenDrain', min: 0, max: 30, step: 1, value: r.drain ?? 18, onchange: e => { r.drain = Math.max(0, +e.target.value || 0); update(); } }),
+      h('select', { 'aria-label': 'Полярность мода', onchange: e => { r.polarity = e.target.value; update(); } },
+        [['madurai', 'V'], ['naramon', '—'], ['vazarin', 'D']].map(([v, t]) => h('option', { value: v, selected: v === r.polarity }, t)))));
+}
 
 // ---------- Инкарнон ----------
 const incOf = () => D.incarnon?.[currentWeapon().name];
@@ -224,9 +289,9 @@ function renderIncarnon() {
   }));
 }
 
-function pickMod({ items, onPick }) {
+function pickMod({ items, onPick, top = [] }) {
   openPicker({
-    items: items.sort((a, b) => ruName(a).localeCompare(ruName(b), 'ru')), placeholder: 'Название',
+    items: [...top, ...items.sort((a, b) => ruName(a).localeCompare(ruName(b), 'ru'))], placeholder: 'Название',
     label: ruName, sub: m => [textRu(m), m.name !== ruName(m) ? m.name : ''].filter(Boolean).join(' — '), onPick,
   });
 }
@@ -239,12 +304,13 @@ function renderMods() {
   const used = () => new Set([...S.mods, S.exilus].filter(Boolean).map(s => s.id));
   const modSlot = (slot, idx, exilus) => slotEl({
     slot, item: slot && modById(slot.id), tag: exilus ? 'Эксилус' : idx + 1, empty: exilus ? '+ мод эксилуса' : '+ мод',
-    cls: exilus ? 'exilus' : '',
+    cls: exilus ? 'exilus' : slot?.id === 'riven' ? 'riven-slot' : '',
     pol: exilus ? pol.exilus : pol.slots[idx], cost: cost(slot, exilus ? pol.exilus : pol.slots[idx]),
     onPol: v => { if (exilus) pol.exilus = v; else pol.slots[idx] = v; update(); },
     onPick: () => pickMod({
       items: modsOf().filter(m => modFits(m, w, S.cat) && (!exilus || m.exilus) && !used().has(m.id)),
-      onPick: m => { const v = { id: m.id, rank: maxRank(m) }; if (exilus) S.exilus = v; else S.mods[idx] = v; update(); },
+      top: exilus || used().has('riven') ? [] : [RIVEN_PICK],
+      onPick: m => { const v = { id: m.id, rank: m.id === 'riven' ? 0 : maxRank(m) }; if (exilus) S.exilus = v; else S.mods[idx] = v; update(); },
     }),
     onChange: update, onClear: () => { if (exilus) S.exilus = null; else S.mods[idx] = null; update(); },
   });
@@ -269,6 +335,7 @@ function renderMods() {
     }));
   }
   $('slotsExtra').replaceChildren(...extra);
+  renderRiven();
   const stanceMod = S.cat === 'melee' && S.stance && D.mods.stance?.find(m => m.id === S.stance.id);
   const cap = capacity({
     rank: pol.rank || 30, catalyst: pol.catalyst,

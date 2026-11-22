@@ -1,6 +1,6 @@
 // Офлайн-кэш калькулятора. Сеть в приоритете (обновления видны сразу), без сети — из кэша.
 // При изменении файлов сайта поднимать VERSION, чтобы приложение предложило перезагрузку.
-const VERSION = 'v12-2';
+const VERSION = 'v13-1';
 const CACHE = 'wf-calc-' + VERSION;
 const SHELL = [
   './', 'index.html', 'css/theme.css', 'css/app.css', 'manifest.webmanifest', 'icons/icon.svg', 'icons/icon-192.png',

@@ -74,6 +74,12 @@ export function slotEl({ slot, item, tag, empty, cls = '', onPick, onChange, onC
     return h('div', { class: 'slot ' + cls }, head,
       h('button', { type: 'button', class: 'empty', onclick: onPick }, empty));
   }
+  if (item.riven) {                                  // мод разлома: характеристики задаются под слотами
+    return h('div', { class: 'slot filled ' + cls }, head,
+      h('button', { type: 'button', class: 'name', onclick: onPick, title: (item.text || []).join(' · ') }, ruName(item)),
+      h('div', { class: 'rank' }, h('span', { class: 'muted' }, 'свои хар.'),
+        h('button', { type: 'button', class: 'x', 'aria-label': 'Убрать', onclick: onClear }, '×')));
+  }
   const max = item.maxRank ?? (item.ranks.length - 1);
   const setRank = d => { slot.rank = Math.max(0, Math.min(max, slot.rank + d)); onChange(); };
   return h('div', { class: 'slot filled ' + cls }, head,

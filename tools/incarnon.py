@@ -161,9 +161,9 @@ def build_incarnon(weapons, overrides, fetch, wiki_url, parse_rank, log_unparsed
             continue
         for t in tiers:
             for pk in t["perks"]:
-                ov = overrides.get(pk["name"])
-                if ov:
-                    pk["effects"] = ov["effects"]
+                ov = overrides.get(f"{name}: {pk['name']}") or overrides.get(pk["name"])
+                if ov:                                        # effects — заменить разобранное, add — дописать к нему
+                    pk["effects"] = ov["effects"] if "effects" in ov else pk["effects"] + ov.get("add", [])
                     pk["override"] = ov.get("source", True)
                     pk.pop("unparsed", None)
                 elif pk.get("unparsed") and t["tier"] > 1:

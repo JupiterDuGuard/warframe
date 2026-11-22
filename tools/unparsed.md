@@ -1,6 +1,6 @@
 # Неразобранные эффекты
 
-Сборка 2026-11-22 03:29 UTC. Строки, которые скрипт не смог превратить в {stat, value, bucket}. Правка — data/overrides/*.json (ключ — uniqueName или имя).
+Сборка 2026-11-22 04:28 UTC. Строки, которые скрипт не смог превратить в {stat, value, bucket}. Правка — data/overrides/*.json (ключ — uniqueName или имя).
 
 ## Моды: 129
 
@@ -245,7 +245,7 @@
 - [Theorem Demulcent](https://wiki.warframe.com/w/Theorem_Demulcent) — Standing in a zone created by a Residual Arcane increases weapon damage by 12%/s stacking up to 15x. Effect persists for 20s upon leaving the zone.
 - [Theorem Infection](https://wiki.warframe.com/w/Theorem_Infection) — Standing in a zone created by a Residual Arcane increases damage of companions and summoned allies within 90m by 24%/s stacking up to 15x. Effect persists for 20s upon leaving the zone.
 
-## Перки Инкарнона: 164
+## Перки Инкарнона: 158
 
 - [Angstrum: Hitman's Hoard](https://wiki.warframe.com/w/Angstrum_Incarnon_Genesis) — Increase Base Ammo Capacity by +9.
 - [Atomos: Mercenary Chamber](https://wiki.warframe.com/w/Atomos_Incarnon_Genesis) — Increase Base Ammo Capacity to 560.
@@ -291,7 +291,6 @@
 - [Dex Sybaris: Reaver's Rapture](https://wiki.warframe.com/w/Sybaris_Incarnon_Genesis) — On Full Burst Hit: +20% Damage
 - [Dex Sybaris: Survivor's Edge](https://wiki.warframe.com/w/Sybaris_Incarnon_Genesis) — Increase Critical Chance by +5%.
 - [Dread: Hitman's Hoard](https://wiki.warframe.com/w/Dread_Incarnon_Genesis) — Increase Base Ammo Capacity to 144
-- [Dread: Stalker's Resentment](https://wiki.warframe.com/w/Dread_Incarnon_Genesis) — Hits increase Base Damage by +10 and Fire Rate by +10%, stacks up to 5x. Resets on missed shot.
 - [Dual Toxocyst: Evolved Autoloader](https://wiki.warframe.com/w/Dual_Toxocyst_Incarnon_Genesis) — +50% Magazine Reloaded/s when holstered.
 - [Felarx: Agile Executor](https://wiki.warframe.com/w/Felarx) — Gain 50% Ammo Efficiency while Aim Gliding and Sliding
 - [Felarx: Dual-Mode](https://wiki.warframe.com/w/Felarx) — Reload toggles the weapon between +100% Projectile Speed and +4m Punch Through.
@@ -323,9 +322,6 @@
 - [Lato Vandal: Marksman's Gain](https://wiki.warframe.com/w/Lato_Incarnon_Genesis) — 20% chance for +50% Ammo Efficiency for 6s.
 - [Lato: Exact Penance](https://wiki.warframe.com/w/Lato_Incarnon_Genesis) — 50% chance for Instant Reload.
 - [Lato: Marksman's Gain](https://wiki.warframe.com/w/Lato_Incarnon_Genesis) — 20% chance for +50% Ammo Efficiency for 6s.
-- [Latron Prime: Flensing Spikes](https://wiki.warframe.com/w/Latron_Incarnon_Genesis) — Remove 20% of enemy Armor per Puncture Status.
-- [Latron Wraith: Flensing Spikes](https://wiki.warframe.com/w/Latron_Incarnon_Genesis) — Remove 20% of enemy Armor per Puncture Status.
-- [Latron: Flensing Spikes](https://wiki.warframe.com/w/Latron_Incarnon_Genesis) — Remove 20% of enemy Armor per Puncture Status.
 - [Lex Prime: Trusty Sidearm](https://wiki.warframe.com/w/Lex_Incarnon_Genesis) — +60% Ammo Efficiency.
 - [Lex: Trusty Sidearm](https://wiki.warframe.com/w/Lex_Incarnon_Genesis) — +60% Ammo Efficiency.
 - [Miter: Mercenary Chamber](https://wiki.warframe.com/w/Miter_Incarnon_Genesis) — Increase Base Ammo Capacity to 160
@@ -370,10 +366,8 @@
 - [Ruvox: Swift Transmute](https://wiki.warframe.com/w/Ruvox) — Reach 3x Combo and Heavy Attack to activate Incarnon Form
 - [Ruvox: Ternary Vault](https://wiki.warframe.com/w/Ruvox) — Gain +1 mid-air jumps
 - [Ruvox: Vulnerability Serum](https://wiki.warframe.com/w/Ruvox) — Impaled enemies are +35% more vulnerable to Status Chance
-- [Sicarus Prime: King's Gambit](https://wiki.warframe.com/w/Sicarus_Incarnon_Genesis) — x0 Critical Chance on Bodyshots, +150% Critical Chance on Weakpoint Hits.
 - [Sicarus Prime: Survivor's Edge](https://wiki.warframe.com/w/Sicarus_Incarnon_Genesis) — Increase Base Status Chance to 9%.
 - [Sicarus Prime: Wiseman's Regard](https://wiki.warframe.com/w/Sicarus_Incarnon_Genesis) — Increase Base Status Chance by 30% of current Critical Chance, up to 40%
-- [Sicarus: King's Gambit](https://wiki.warframe.com/w/Sicarus_Incarnon_Genesis) — x0 Critical Chance on Bodyshots, +150% Critical Chance on Weakpoint Hits.
 - [Sicarus: Survivor's Edge](https://wiki.warframe.com/w/Sicarus_Incarnon_Genesis) — Increase Base Status Chance to 12%.
 - [Sicarus: Wiseman's Regard](https://wiki.warframe.com/w/Sicarus_Incarnon_Genesis) — Increase Base Status Chance by 30% of current Critical Chance, up to 40%
 - [Soma Prime: Fortifying Bloodshed](https://wiki.warframe.com/w/Soma_Incarnon_Genesis) — +100 Overshield.

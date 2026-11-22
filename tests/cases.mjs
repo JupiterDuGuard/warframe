@@ -427,6 +427,33 @@ export const cases = [
       eq(ms.value, 3); eq(!!ms.condition?.trigger, true);
     },
   },
+  {
+    name: "King's Gambit (Sicarus Prime): по телу шанс крита 0, в голову +150%",
+    run({ data, find, near }) {
+      const kg = data.incarnon['Sicarus Prime'].tiers.flatMap(t => t.perks).find(p => p.name === "King's Gambit");
+      const build = { weapon: find.weapon('Sicarus Prime'), incarnon: [{ key: 'inc', name: kg.name, effects: kg.effects }] };
+      const t = { enemy: NEUTRAL, level: 1 };
+      const base = find.weapon('Sicarus Prime').attacks[0].critChance;
+      near(calc(build, t, data, { part: 'body' }).stats.critChance, 0, 1e-9);
+      near(calc(build, t, data, { part: 'head' }).stats.critChance, base * 2.5, 1e-9);
+    },
+  },
+  {
+    name: 'Flensing Spikes (Latron Prime): 3 стака Пронзания снимают 60% брони Пулемётчицы',
+    run({ data, find, near }) {
+      const fs = data.incarnon['Latron Prime'].tiers.flatMap(t => t.perks).find(p => p.name === 'Flensing Spikes');
+      const build = { weapon: find.weapon('Latron Prime'), incarnon: [{ key: 'inc', name: fs.name, effects: fs.effects }], stacks: { inc: 3 } };
+      near(calc(build, { enemy: find.enemy('Heavy Gunner'), level: 115 }, data, {}).enemy.armor, 2700 * 0.4, 1e-6);
+    },
+  },
+  {
+    name: 'Мод разлома как обычный мод: +100% урона и +60% Токсина к 100 Удара → 200 + 118,75 (квант 1/32)',
+    run({ data, near }) {
+      const riven = { id: 'riven', name: 'Riven', ranks: [[{ stat: 'damage', value: 1, bucket: 'base_damage' }, { stat: 'element_toxin', value: 0.6, bucket: 'element' }]] };
+      const r = calc({ weapon: W({ Impact: 100 }), mods: [{ item: riven, rank: 0 }] }, { enemy: NEUTRAL, level: 1 }, data, {});
+      near(r.hit.health, 200 + Math.round(120 / 3.125) * 3.125, 1e-9);
+    },
+  },
 ];
 
 /** Общий загрузчик: data = { scaling, damage, weapons: {slot: [...]}, mods: {group: [...]}, enemies: [...] } */

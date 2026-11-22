@@ -124,3 +124,12 @@
 - [ ] **«x3 Critical Damage»** (Cestra) — множитель к итоговому множителю крита, как у Электрического щита.
 - [ ] **Devastating Attrition** (Felarx, «50% chance +2000% damage on non-critical hits») — как Devouring Attrition у Летума: ×21 на ударах без крита.
 - [ ] **Не разобраны**: Stalker's Resentment (Dread), King's Gambit (Sicarus Prime), Flensing Spikes (Latron Prime), High Ground (Dera Vandal), Devastation Cascade (Onos), перки Thalys про осколки.
+- [x] **Stalker's Resentment** (Dread): +10 к базовому урону и +10% скорострельности за стак, до 5 — условие-стаки.
+- [x] **King's Gambit** (Sicarus): ×0 шанса крита по телу, +150% шанса крита по слабым местам («в голову» в калькуляторе).
+- [x] **Flensing Spikes** (Latron): −20% брони за стак Пронзания (до 5) — стаки вводятся в «Условных эффектах».
+
+## Мод разлома
+
+- [ ] Характеристики вводятся вручную с карточки мода; урон по фракции — в процентах (+45 = ×1,45, −30 = ×0,7). Складывается с Проклятиями, как обычный фракционный мод.
+- [ ] Импорт ривенов из AlecaFrame не сделан: в файле характеристики хранятся в сыром виде (до диспозиции).
+

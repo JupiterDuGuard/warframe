@@ -8,6 +8,7 @@
 //   statusTypes  — сколько разных статусов висит на цели (Condition Overload, Galvanized)
 //   comboMultiplier — множитель комбо ближнего боя (Blood Rush)
 //   slot         — слот оружия: 'primary' | 'secondary' | 'melee' (мистификаторы «to Primary Weapons»)
+//   part         — куда попадание: 'body' | 'head' (King's Gambit: шанс крита только по слабым местам)
 
 import { FACTION_FAMILY } from './constants.js';
 
@@ -41,7 +42,8 @@ export function effectValue(eff, ctx, key) {
   if (c.target && ctx.flags?.target !== c.target) return 0;
   if (c.per === 'status_type') mult *= ctx.statusTypes ?? 0;
   if (c.per === 'combo_multiplier') mult *= Math.max(0, (ctx.comboMultiplier ?? 1) - 1);   // Blood Rush: бонус × (комбо − 1)
-  if (c.form && (ctx.form || 'normal') !== c.form) return 0;                                  // «for Incarnon Form»
+  if (c.form && (ctx.form || 'normal') !== c.form) return 0;
+  if (c.part && (ctx.part || 'body') !== c.part) return 0;                                  // «for Incarnon Form»
   if (c.trigger || c.stacks || c.duration || c.chance) {
     const n = ctx.stacks?.[key] ?? 0;          // по умолчанию выключено
     if (!n) return 0;

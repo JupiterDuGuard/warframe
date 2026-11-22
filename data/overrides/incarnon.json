@@ -1,5 +1,5 @@
 {
-  "_comment": "Ручные правки перков Инкарнона. Ключ — название перка (англ.).",
+  "_comment": "Ручные правки перков Инкарнона. Ключ — название перка (англ.) или «Оружие: Перк». effects — заменить разобранное, add — дописать к нему.",
   "Devouring Attrition": {
     "effects": [
       {
@@ -27,5 +27,63 @@
       }
     ],
     "source": "https://wiki.warframe.com/w/Felarx"
+  },
+  "Stalker's Resentment": {
+    "add": [
+      {
+        "stat": "base_damage_flat",
+        "value": 10,
+        "bucket": "base_add",
+        "condition": {
+          "trigger": "Попадания подряд (с Hate и Despair у Dread)",
+          "stacks": 5
+        }
+      },
+      {
+        "stat": "fire_rate",
+        "value": 0.1,
+        "bucket": "fire_rate",
+        "condition": {
+          "trigger": "Попадания подряд (с Hate и Despair у Dread)",
+          "stacks": 5
+        }
+      }
+    ],
+    "source": "https://wiki.warframe.com/w/Dread_Incarnon_Genesis"
+  },
+  "King's Gambit": {
+    "add": [
+      {
+        "stat": "crit_chance_zero",
+        "value": 1,
+        "bucket": "special",
+        "condition": {
+          "part": "body"
+        }
+      },
+      {
+        "stat": "crit_chance",
+        "value": 1.5,
+        "bucket": "crit_chance",
+        "condition": {
+          "part": "head"
+        }
+      }
+    ],
+    "source": "https://wiki.warframe.com/w/Sicarus_Incarnon_Genesis"
+  },
+  "Flensing Spikes": {
+    "effects": [
+      {
+        "stat": "armor_strip",
+        "value": 0.2,
+        "bucket": "enemy",
+        "condition": {
+          "trigger": "Стаки Пронзания на враге",
+          "stacks": 5
+        }
+      }
+    ],
+    "source": "https://wiki.warframe.com/w/Latron_Incarnon_Genesis"
   }
 }

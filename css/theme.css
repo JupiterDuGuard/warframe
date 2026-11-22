@@ -13,7 +13,7 @@
   --accent:#86600F; --accent-soft:rgba(168,124,34,.15);
   --accent-grad:linear-gradient(180deg,#EACB80 0%,#C69A3E 55%,#A07424 100%); --on-accent:#1C1406;
   --glow:none;
-  --red:#992A37; --code:#CED3D8; --warn:#7A4E0C; --warn-soft:#EAD9B4;
+  --riven:#6A4CB0; --red:#992A37; --code:#CED3D8; --warn:#7A4E0C; --warn-soft:#EAD9B4;
   --display:"Exo 2","Golos Text",system-ui,sans-serif;
   --body:"Golos Text",system-ui,-apple-system,"Segoe UI",sans-serif;
   --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
@@ -33,7 +33,7 @@
     --accent:#DDB65C; --accent-soft:rgba(221,182,92,.13);
     --accent-grad:linear-gradient(180deg,#F3D68C 0%,#D5AA47 55%,#A97F2A 100%); --on-accent:#1A1305;
     --glow:0 0 14px rgba(240,200,110,.45);
-    --red:#E2747D; --code:#16191D; --warn:#E5B866; --warn-soft:#2E2614;
+    --riven:#B39BEA; --red:#E2747D; --code:#16191D; --warn:#E5B866; --warn-soft:#2E2614;
     color-scheme:dark;
   }
 }
@@ -50,7 +50,7 @@
   --accent:#DDB65C; --accent-soft:rgba(221,182,92,.13);
   --accent-grad:linear-gradient(180deg,#F3D68C 0%,#D5AA47 55%,#A97F2A 100%); --on-accent:#1A1305;
   --glow:0 0 14px rgba(240,200,110,.45);
-  --red:#E2747D; --code:#16191D; --warn:#E5B866; --warn-soft:#2E2614;
+  --riven:#B39BEA; --red:#E2747D; --code:#16191D; --warn:#E5B866; --warn-soft:#2E2614;
   color-scheme:dark;
 }
 

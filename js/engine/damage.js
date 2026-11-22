@@ -39,7 +39,7 @@ export function calc(build, target, data, opts = {}) {
   const ctx = {
     faction: enemy.faction, stacks: build.stacks || {}, flags: { ...(build.flags || {}), ...(meleeAttack ? { attack: meleeAttack } : {}) },
     statusTypes: build.statusTypes ?? enemy.statusTypes, comboMultiplier: build.comboMultiplier, slot: build.slot,
-    weaponClass: build.weapon?.class, form: /Incarnon/i.test(atkName) ? 'incarnon' : 'normal',
+    weaponClass: build.weapon?.class, form: /Incarnon/i.test(atkName) ? 'incarnon' : 'normal', part: opts.part || 'body',
   };
   const eff = collect(buildSources(build), ctx);
   const A = moddedAttack(build.weapon, build.attack || 0, eff,
