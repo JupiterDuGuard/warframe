@@ -160,7 +160,7 @@ dialog.sheet::backdrop{background:rgba(6,7,9,.7)}
 .buff-head b{font:600 12.5px var(--display);letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
 .buff-head:first-child{margin-top:0}
 .buff .tag{margin-left:8px;font:600 10.5px var(--display);letter-spacing:.06em;text-transform:uppercase;color:var(--on-accent);background:var(--accent-grad);padding:1px 6px}
-.addrow{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.addrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px;margin-top:8px}
 @media (max-width:560px){.addrow{grid-template-columns:1fr}}
 /* мод разлома: фиолетовый, как в игре */
 .riven{margin-top:10px;padding:10px 12px;display:flex;flex-direction:column;gap:6px;background:var(--code);border:1px solid var(--line-soft);border-left:3px solid var(--riven);box-shadow:inset 0 1px 3px var(--plate-lo)}
@@ -170,4 +170,5 @@ dialog.sheet::backdrop{background:rgba(6,7,9,.7)}
 .riven-row select:last-child{width:100%}
 .slot.riven-slot.filled{box-shadow:inset 0 1px 0 var(--plate-hi),inset 3px 0 0 var(--riven)}
 .slot.riven-slot .name{color:var(--riven)}
-
+.buff-ctl select{min-width:0;flex:1 1 220px}
+.buff-ctl input[type=number]{flex:0 0 90px}

@@ -15,7 +15,7 @@ const DEFAULT = {
   cat: 'secondary', weapon: 'Laetum', attack: 0, meleeMode: 'normal', combo: 1, exaltedScale: true, incarnon: {},
   mods: Array(8).fill(null), exilus: null, arcane: null,
   stacks: {}, flags: {}, statusTypes: 0,
-  buffs: [], customMult: 1, customStatus: 0,
+  buffs: [],
   enemy: 'Heavy Gunner', level: 115, part: 'body', crit: 'none', armorStrip: 0, drOverride: '',
   status: { viral: 0, corrosive: 0, magnetic: 0, heat: false },
   frame: FRAME_DEFAULT,
@@ -157,6 +157,51 @@ function renderRiven() {
         [['madurai', 'V'], ['naramon', '—'], ['vazarin', 'D']].map(([v, t]) => h('option', { value: v, selected: v === r.polarity }, t)))));
 }
 
+// ---------- свои баффы ----------
+// S.custom = [{ stat, value, on }] — любой бафф, которого нет в базе: множитель, +% урона, крит, стихия, снятие брони…
+// [id, подпись, корзина, вид: 'mult' — ×, 'flat' — без %, иначе %; цель: weapon | enemy | frame]
+const CUSTOM_STATS = [
+  ['final_mult', 'Множитель урона, ×', 'final_mult', 'mult'],
+  ['damage', 'Урон, % (как Serration)', 'base_damage'],
+  ['faction', 'Урон по фракции врага, % (как Проклятия)', 'faction'],
+  ['crit_chance', 'Шанс крита, %', 'crit_chance'], ['crit_damage', 'Крит. урон, %', 'crit_damage'],
+  ['multishot', 'Мультивыстрел, %', 'multishot'], ['fire_rate', 'Скорострельность / скорость атаки, %', 'fire_rate'],
+  ['status_chance', 'Шанс статуса, %', 'status_chance'], ['status_damage', 'Урон статусов, % (Изумрудные осколки, Элементалист)', 'status_damage'],
+  ['element_heat', 'Огонь, %', 'element'], ['element_cold', 'Холод, %', 'element'],
+  ['element_electricity', 'Электричество, %', 'element'], ['element_toxin', 'Токсин, %', 'element'],
+  ['physical_impact', 'Удар, %', 'physical'], ['physical_puncture', 'Пронзание, %', 'physical'], ['physical_slash', 'Разрез, %', 'physical'],
+  ['armor_strip', 'Снятие брони врага, %', 'enemy', 'pct', 'enemy'],
+  ['vulnerability', 'Уязвимость врага (получает больше урона), %', 'enemy', 'pct', 'enemy'],
+  ['ability_strength', 'Сила способностей своего фрейма, %', 'frame', 'pct', 'frame'],
+];
+const customDef = id => CUSTOM_STATS.find(d => d[0] === id);
+function customValue(c) {
+  const d = customDef(c.stat);
+  return !d || !c.on ? null : d[3] === 'mult' ? (+c.value || 1) : d[3] === 'flat' ? +c.value || 0 : (+c.value || 0) / 100;
+}
+// -> { weapon: эффекты для оружия, frame: источники для фрейма, vulnerability }
+function customBuffs() {
+  const weapon = [], frame = [];
+  let vulnerability = 0;
+  for (const c of S.custom || []) {
+    const v = customValue(c), d = customDef(c.stat);
+    if (v == null || (d[3] !== 'mult' && !v) || (d[3] === 'mult' && v === 1)) continue;
+    if (c.stat === 'vulnerability') vulnerability += v;
+    else if (d[4] === 'frame') frame.push({ stat: c.stat, value: v, bucket: 'frame' });
+    else weapon.push({ stat: c.stat, value: v, bucket: d[2] });
+  }
+  return { weapon, frame: frame.length ? [{ key: 'custom:frame', name: 'Свои баффы', effects: frame }] : [], vulnerability };
+}
+function customRow(c, i) {
+  const d = customDef(c.stat);
+  return h('div', { class: 'buff' }, h('div', { class: 'buff-ctl' },
+    h('label', { class: 'chk' }, h('input', { type: 'checkbox', checked: c.on !== false, onchange: e => { c.on = e.target.checked; onBuffsChange(); } }), 'Вкл.'),
+    h('select', { 'aria-label': 'Что даёт бафф', onchange: e => { c.stat = e.target.value; c.value = customDef(c.stat)[3] === 'mult' ? 1 : 0; onBuffsChange(); } },
+      CUSTOM_STATS.map(([id, ru]) => h('option', { value: id, selected: id === c.stat }, ru))),
+    h('input', { type: 'number', step: 'any', value: c.value, 'aria-label': d?.[1] || 'Значение', oninput: e => { c.value = e.target.value === '' ? '' : +e.target.value; onBuffsChange(false); } }),
+    h('button', { type: 'button', class: 'x-btn', 'aria-label': 'Убрать', onclick: () => { S.custom.splice(i, 1); onBuffsChange(); } }, '×')));
+}
+
 // ---------- Инкарнон ----------
 const incOf = () => D.incarnon?.[currentWeapon().name];
 function incSources() {
@@ -218,7 +263,15 @@ function activeBuffs() {
   return [...own, ...allies, ...(S.buffs || []).filter(a => buffDef(a.id)?.focus)];
 }
 // старый список S.buffs -> свой фрейм / союзники / фокус
+function migrateCustom() {
+  if (S.custom) return;
+  S.custom = [];
+  if (S.customMult && S.customMult !== 1) S.custom.push({ stat: 'final_mult', value: S.customMult, on: true });
+  if (S.customStatus) S.custom.push({ stat: 'status_damage', value: S.customStatus, on: true });
+  delete S.customMult; delete S.customStatus;
+}
 function migrateBuffs() {
+  migrateCustom();
   if (S.ownBuffs) return;
   S.ownBuffs = {}; S.allies = [];
   const base = frameBase(currentFrame()), focus = [];
@@ -242,8 +295,12 @@ function buffState() {
   const active = activeBuffs();
   const own0 = frameStats(fr, frameInput(), D.shards).strength;
   let res = resolveBuffs(active, D.buffs.buffs, { ownStrength: own0, slot: S.cat });
+  res.frameSources.push(...customBuffs().frame);
   const own = frameStats(fr, { ...frameInput(), buffSources: res.frameSources }, D.shards).strength;
-  if (own !== own0) res = resolveBuffs(active, D.buffs.buffs, { ownStrength: own, slot: S.cat });
+  if (own !== own0) {
+    res = resolveBuffs(active, D.buffs.buffs, { ownStrength: own, slot: S.cat });
+    res.frameSources.push(...customBuffs().frame);
+  }
   return { res, own };
 }
 const frameResult = () => frameStats(currentFrame(), { ...frameInput(), buffSources: buffState().res.frameSources }, D.shards);
@@ -376,8 +433,8 @@ function buildInput() {
   const w = currentWeapon();
   const mods = [...S.mods, S.exilus].filter(Boolean).map(s => ({ item: modById(s.id), rank: s.rank })).filter(m => m.item);
   const buffs = [];
-  if (S.customMult && S.customMult !== 1) buffs.push({ name: 'Свой множитель', effects: [{ stat: 'final_mult', value: S.customMult, bucket: 'final_mult' }] });
-  if (S.customStatus) buffs.push({ name: 'Свой бонус к урону статусов', effects: [{ stat: 'status_damage', value: S.customStatus / 100, bucket: 'status_damage' }] });
+  const cb = customBuffs();
+  if (cb.weapon.length) buffs.push({ key: 'custom', name: 'Свои баффы', effects: cb.weapon });
   let frameSrc = [];
   if (F().use) {
     frameSrc = frameResult().weaponSources;
@@ -397,7 +454,7 @@ function buildInput() {
   };
   const st = S.status;
   const target = {
-    enemy: currentEnemy(), level: S.level, armorStrip: 1 - (1 - S.armorStrip / 100) * (1 - bs.armorStrip), vulnerability: bs.vulnerability,
+    enemy: currentEnemy(), level: S.level, armorStrip: 1 - (1 - S.armorStrip / 100) * (1 - bs.armorStrip), vulnerability: bs.vulnerability + cb.vulnerability,
     drOverride: S.drOverride === '' || S.drOverride == null ? undefined : Math.max(0, Math.min(100, +S.drOverride)) / 100,
     status: { viral: st.viral, corrosive: st.corrosive, magnetic: st.magnetic, heat: st.heat },
   };
@@ -661,6 +718,10 @@ function renderBuffs() {
         h('button', { type: 'button', class: 'x-btn', 'aria-label': 'Убрать союзника', onclick: () => { S.allies.splice(i, 1); onBuffsChange(); } }, '×')));
       for (const d of frameBuffDefs(al.frame)) rows.push(buffRow(d, al.buffs[d.id] ||= {}));
     });
+    if (S.custom?.length) {
+      rows.push(h('div', { class: 'buff-head' }, h('b', {}, 'Свои баффы'), h('span', { class: 'muted' }, 'чего нет в базе')));
+      S.custom.forEach((c, i) => rows.push(customRow(c, i)));
+    }
     const focus = S.buffs.filter(a => buffDef(a.id)?.focus);
     if (focus.length) {
       rows.push(h('div', { class: 'buff-head' }, h('b', {}, 'Фокус')));
@@ -685,8 +746,9 @@ function openAllyPicker() {
 }
 function openFocusPicker() {
   openPicker({
-    items: D.buffs.buffs.filter(d => d.focus && !S.buffs.some(a => a.id === d.id)).sort((a, b) => buffLabel(a).localeCompare(buffLabel(b), 'ru')),
-    placeholder: 'Пассивка фокуса', label: buffLabel,
+    items: D.buffs.buffs.filter(d => d.focus && !S.buffs.some(a => a.id === d.id))
+      .sort((a, b) => a.focus.localeCompare(b.focus) || buffLabel(a).localeCompare(buffLabel(b), 'ru')),
+    placeholder: 'Школа или пассивка: Мадурай, Нарамон, Унайру, Зенурик, Вазарин', label: buffLabel,
     sub: d => `${buffFrom(d)}${d.ability !== buffLabel(d) ? ' · ' + d.ability : ''}${d.note ? ' · ' + d.note : ''}`,
     onPick: d => { S.buffs.push({ id: d.id, on: true }); onBuffsChange(); },
   });
@@ -910,8 +972,7 @@ function setView(v) {
 function bindInputs() {
   const bindNum = (id, get, set, cb = () => update(false)) => { const el = $(id); el.value = get(); el.addEventListener('input', () => { set(el.value); cb(); }); };
   const bindChk = (id, get, set, cb = () => update(false)) => { const el = $(id); el.checked = get(); el.addEventListener('change', () => { set(el.checked); cb(); }); };
-  bindNum('cMult', () => S.customMult, v => S.customMult = v === '' ? 1 : +v);
-  bindNum('cStatus', () => S.customStatus, v => S.customStatus = +v || 0);
+  for (const id of ['addCustom', 'fAddCustom']) $(id).addEventListener('click', () => { (S.custom ||= []).push({ stat: 'final_mult', value: 1, on: true }); onBuffsChange(); });
   bindChk('useFrame', () => F().use, v => F().use = v);
   bindNum('combo', () => S.combo, v => S.combo = Math.max(1, Math.min(13, Math.round(+v) || 1)));
   bindChk('exaltScale', () => S.exaltedScale, v => S.exaltedScale = v);
