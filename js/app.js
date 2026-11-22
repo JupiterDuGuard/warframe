@@ -239,9 +239,10 @@ function ownBuffDefs() {
   const slot = hel.slot === '' ? -1 : +hel.slot;
   const replaced = slot >= 0 ? fr.abilities?.[slot]?.name : null;     // способность, которую заменил Гельминт
   const out = frameBuffDefs(frameBase(fr)).filter(d => d.ability !== replaced).map(def => ({ def, helminth: false }));
-  if (slot >= 0 && hel.ability) {
-    const d = D.buffs.buffs.find(x => !x.focus && x.ability === hel.ability);
-    if (d && !out.some(o => o.def.id === d.id)) out.push({ def: d, helminth: true });
+  if (slot >= 0 && hel.ability) {                                      // способность Гельминта и её аугменты
+    for (const d of D.buffs.buffs.filter(x => !x.focus && x.ability === hel.ability)) {
+      if (!out.some(o => o.def.id === d.id)) out.push({ def: d, helminth: true });
+    }
   }
   return out;
 }

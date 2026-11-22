@@ -544,6 +544,22 @@ export const cases = [
       eq(types(both), 'Electricity'); near(both.stats.elements[0].bonus, 1.9, 1e-9);   // складывается с модом на Электричество
     },
   },
+  {
+    name: 'Аугменты союзников: Инфузия Кары — Радиация отдельно от Огня (пример вики), броня и уязвимость от Гельминта',
+    run({ data, find, near, eq }) {
+      const R = (a, slot) => resolveBuffs(a.map(x => ({ on: true, strength: 100, ...x })), data.buffs.buffs, { slot });
+      // вики Smite Infusion: 100 Удара + Hellfire + Инфузия при 110% силы -> 100 Удара, 90 Огня, 110 Радиации
+      const w = W({ Impact: 100 });
+      const hellfire = { name: 'Hellfire', effects: [{ stat: 'element_heat', value: 0.9, bucket: 'element' }] };
+      const r = calc({ weapon: w, buffs: [hellfire, ...R([{ id: 'smite_infusion', strength: 110 }]).weaponSources] }, { enemy: NEUTRAL, level: 1 }, data);
+      near(r.stats.types.Heat, 90, 3.125 / 2); near(r.stats.types.Radiation, 110, 3.125 / 2); near(r.stats.types.Impact, 100, 1e-9);   // ± полшага кванта 1/32
+      const t = R([{ id: 'seeking_shuriken' }, { id: 'fracturing_crush' }]);
+      near(t.armorStrip, 1, 1e-9);                                                       // 70% + 75% -> не больше 100%
+      near(R([{ id: 'rage' }, { id: 'petrify', strength: 300 }]).vulnerability, 1.0, 1e-9);   // Ярость 50% + Окаменение 50% (не от силы)
+      near(R([{ id: 'critical_surge', input: 30 }], 'primary').weaponSources[0].effects[0].value, 2.5, 1e-9);  // 10% × 30 м, но не больше 250%
+      eq(R([{ id: 'critical_surge', input: 10 }], 'secondary').weaponSources[0].effects[0].condition.slot, 'primary');
+    },
+  },
 ];
 
 /** Общий загрузчик: data = { scaling, damage, weapons: {slot: [...]}, mods: {group: [...]}, enemies: [...] } */
