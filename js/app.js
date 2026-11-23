@@ -328,7 +328,7 @@ function renderWeapon() {
   const w = currentWeapon();
   $('weaponPick').replaceChildren(h('b', {}, ruName(w)), h('small', {}, `${w.name} · ${w.class || ''}`));
   const sel = $('attackSel');
-  sel.replaceChildren(...w.attacks.map((a, i) => h('option', { value: i }, a.attackName || `Атака ${i + 1}`)));
+  sel.replaceChildren(...w.attacks.map((a, i) => h('option', { value: i }, (a.attackName || `Атака ${i + 1}`) + (a.incarnonForm ? ' — форма Инкарнона' : ''))));
   if (S.attack >= w.attacks.length) S.attack = 0;
   sel.value = S.attack;
   const melee = S.cat === 'melee';

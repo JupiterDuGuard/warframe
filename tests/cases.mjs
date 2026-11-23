@@ -574,6 +574,20 @@ export const cases = [
       near(calc({ weapon: lex }, { ...hg, status: { corrosive: 10, heat: true } }, data).enemy.armor, 2700 * 0.2 * 0.5, 1e-6);   // −80% и −50%
     },
   },
+  {
+    name: 'Инкарнон ближнего боя (Genesis): у Аку и Бранта есть эволюции, «Spectral Axe» — атака формы Инкарнона',
+    run({ data, find, eq }) {
+      const w = find.weapon('Ack & Brunt');
+      eq(!!data.incarnon['Ack & Brunt'], true);
+      const ax = w.attacks.findIndex(a => a.attackName === 'Spectral Axe');
+      eq(w.attacks[ax].incarnonForm, true);
+      // перк «for Incarnon Form» работает только на атаке формы
+      const perk = { key: 'inc', name: 'Тест', effects: [{ stat: 'damage', value: 1, bucket: 'base_damage', condition: { form: 'incarnon' } }] };
+      const hit = i => calc({ weapon: w, attack: i, slot: 'melee', incarnon: [perk] }, { enemy: NEUTRAL, level: 1 }, data).hit.health;
+      const plain = i => calc({ weapon: w, attack: i, slot: 'melee' }, { enemy: NEUTRAL, level: 1 }, data).hit.health;
+      eq(Math.round(hit(ax) / plain(ax) * 100) / 100, 2); eq(hit(0), plain(0));
+    },
+  },
 ];
 
 /** Общий загрузчик: data = { scaling, damage, weapons: {slot: [...]}, mods: {group: [...]}, enemies: [...] } */

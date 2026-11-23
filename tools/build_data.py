@@ -389,6 +389,9 @@ WEAPON_KEYS = ["Class", "Slot", "Mastery", "Magazine", "Reload", "AmmoMax", "Dis
                "HeavySlamAttack", "HeavyRadialDmg", "SlamAttack", "SlamRadialDmg", "SlideAttack", "Range", "WindUp"]
 
 
+MELEE_PLAIN = {"Normal Attack", "Slam Attack", "Heavy Slam Attack", "Slide Attack", "Heavy Attack", "Ground Slam", "Wall Attack"}
+
+
 def build_weapons(ru):
     out = {}
     for slot in WEAPON_SLOTS:
@@ -398,10 +401,18 @@ def build_weapons(ru):
             if not isinstance(w, dict) or w.get("_IgnoreEntry") or not w.get("Attacks") and not w.get("NormalAttack"):
                 continue
             attacks = []
+            # Инкарнон-адаптер (Genesis): на вики у оружия есть IncarnonDuration, а атаки формы названы по-своему
+            # (у Аку и Бранта — «Spectral Axe»); помечаем всё, кроме обычных атак ближнего боя
+            genesis = bool(w.get("IncarnonDuration") or w.get("IncarnonImage"))
             for a in w.get("Attacks") or []:
-                attacks.append({camel(k): v for k, v in a.items() if k not in ATTACK_SKIP})
+                rec_a = {camel(k): v for k, v in a.items() if k not in ATTACK_SKIP}
+                if genesis and slot == "melee" and a.get("AttackName") not in MELEE_PLAIN:
+                    rec_a["incarnonForm"] = True
+                attacks.append(rec_a)
             rec = {"id": w.get("InternalName"), "name": w.get("Name", key),
                    "ru": ru_name(ru, w.get("InternalName")), "attacks": attacks}
+            if genesis:
+                rec["incarnon"] = True
             for k in WEAPON_KEYS:
                 if k in w:
                     rec[camel(k)] = w[k]

@@ -136,7 +136,7 @@ def parse_evolutions(text, weapon, parse_rank):
 def build_incarnon(weapons, overrides, fetch, wiki_url, parse_rank, log_unparsed, log_notes):
     out = {}
     names = sorted({w["name"] for g in weapons.values() for w in g
-                    if w["name"] in INCARNON_NATIVE or any("Incarnon" in (a.get("attackName") or "") for a in w["attacks"])})
+                    if w["name"] in INCARNON_NATIVE or w.get("incarnon") or any("Incarnon" in (a.get("attackName") or "") for a in w["attacks"])})
     for name in names:
         page = genesis_page(name)
         url = wiki_url + page.replace(" ", "_")

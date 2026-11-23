@@ -34,12 +34,13 @@ export function buildSources(build) {
 export function calc(build, target, data, opts = {}) {
   const steps = [];
   let enemy = enemyState(target.enemy, target, data.scaling, data.damage);
-  const atkName = build.weapon?.attacks?.[build.attack || 0]?.attackName || '';
+  const atkRec = build.weapon?.attacks?.[build.attack || 0];
+  const atkName = atkRec?.attackName || '';
   const meleeAttack = build.meleeMode === 'heavy' ? 'heavy' : build.meleeMode === 'slide' ? 'slide' : undefined;
   const ctx = {
     faction: enemy.faction, stacks: build.stacks || {}, flags: { ...(build.flags || {}), ...(meleeAttack ? { attack: meleeAttack } : {}) },
     statusTypes: build.statusTypes ?? enemy.statusTypes, comboMultiplier: build.comboMultiplier, slot: build.slot,
-    weaponClass: build.weapon?.class, form: /Incarnon/i.test(atkName) ? 'incarnon' : 'normal', part: opts.part || 'body',
+    weaponClass: build.weapon?.class, form: /Incarnon/i.test(atkName) || atkRec?.incarnonForm ? 'incarnon' : 'normal', part: opts.part || 'body',
   };
   const eff = collect(buildSources(build), ctx);
   const A = moddedAttack(build.weapon, build.attack || 0, eff,
