@@ -5,6 +5,8 @@
 import { collect, itemEffects } from './effects.js';
 
 const FRAME_BUCKETS = new Set(['frame', 'utility']);
+const UMBRA_SET = new Set(['Umbral Vitality', 'Umbral Fiber', 'Umbral Intensify']);
+const UMBRA_BONUS = { 2: 0.25, 3: 0.5 };
 
 /**
  * Источники эффектов осколков. shards: [{ color, effect, tau, stacks }] (до 5), shardData — data/manual/shards.json.
@@ -44,8 +46,14 @@ export function frameStats(frame, input, shardData) {
     ? { health: frame.health || 0, shield: frame.shield || 0, energy: frame.energy || 0, armor: frame.armor || 0 }
     : { ...frame.rank30 };
   const modSources = [];
+  // комплект Умбры (вики Umbra Mods): 2 мода — их эффекты +25%, 3 — +50%
+  const umbral = (input.mods || []).filter(m => UMBRA_SET.has(m?.item?.name)).length;
+  const umbraK = 1 + (UMBRA_BONUS[umbral] || 0);
   for (const m of input.mods || []) {
-    if (m?.item) modSources.push({ key: 'mod:' + m.item.id, name: m.item.ru || m.item.name, effects: itemEffects(m.item, m.rank) });
+    if (!m?.item) continue;
+    let effects = itemEffects(m.item, m.rank);
+    if (umbraK !== 1 && UMBRA_SET.has(m.item.name)) effects = effects.map(e => ({ ...e, value: e.value * umbraK }));
+    modSources.push({ key: 'mod:' + m.item.id, name: m.item.ru || m.item.name, effects });
   }
   for (const a of input.arcanes || []) {
     if (a?.item) modSources.push({ key: 'arc:' + a.item.id, name: a.item.ru || a.item.name, effects: itemEffects(a.item, a.rank) });

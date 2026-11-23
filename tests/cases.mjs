@@ -624,6 +624,17 @@ export const cases = [
       near(hit(arc('Secondary Surge'), { ['arc:' + arc('Secondary Surge').id]: 8 }) / base, 8, 1e-6);
     },
   },
+  {
+    name: 'Комплект Умбры: Усиление Умбра 44% -> 55% с двумя модами Умбры, 66% с тремя',
+    run({ data, find, near }) {
+      const w = find.frame('Wisp Prime');
+      const m = n => ({ item: find.mod('warframe', n), rank: find.mod('warframe', n).maxRank });
+      const st = mods => frameStats(w, { rank30: true, mods, arcanes: [], shards: [], stacks: {}, flags: {} }, data.shards).strength;
+      near(st([m('Umbral Intensify')]), 1.44, 1e-9);
+      near(st([m('Umbral Intensify'), m('Umbral Vitality')]), 1.55, 1e-9);
+      near(st([m('Umbral Intensify'), m('Umbral Vitality'), m('Umbral Fiber')]), 1.66, 1e-9);
+    },
+  },
 ];
 
 /** Общий загрузчик: data = { scaling, damage, weapons: {slot: [...]}, mods: {group: [...]}, enemies: [...] } */

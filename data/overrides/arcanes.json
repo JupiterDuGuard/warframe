@@ -42,16 +42,16 @@
     "effectsMax": [
       {
         "stat": "ability_strength",
-        "value": 0.72,
+        "value": 0.06,
         "bucket": "frame",
         "condition": {
-          "trigger": "Здоровье 3000+ (макс. 72%)"
+          "trigger": "Каждые 250 макс. здоровья",
+          "stacks": 12
         }
       }
     ],
     "source": "https://wiki.warframe.com/w/Arcane_Bellicose",
-    "verified": false,
-    "note": "+6% силы за каждые 250 здоровья, до 72% — внесён максимум"
+    "note": "+6% силы за каждые 250 макс. здоровья, до 72% (12 стаков); стаки = здоровье / 250"
   },
   "Arcane Power Ramp": {
     "effectsMax": [

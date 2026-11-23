@@ -12,5 +12,6 @@
     "verified": false,
     "note": "Статус Удара с шансом 35% накладывает Разрез, ×2 при скорострельности ниже 2,5 (текст WFCD)"
   },
-  "Growing Power": {"effectsMax": [{"stat": "ability_strength", "value": 0.25, "bucket": "frame", "condition": {"trigger": "Статус оружием", "duration": 6}}], "source": "https://wiki.warframe.com/w/Growing_Power", "note": "+25% силы на 6 с после статуса оружием; складывается с модами на силу (вики)"}
+  "Growing Power": {"effectsMax": [{"stat": "ability_strength", "value": 0.25, "bucket": "frame", "condition": {"trigger": "Статус оружием", "duration": 6}}], "source": "https://wiki.warframe.com/w/Growing_Power", "note": "+25% силы на 6 с после статуса оружием; складывается с модами на силу (вики)"},
+  "Energy Conversion": {"effectsMax": [{"stat": "ability_strength", "value": 0.5, "bucket": "frame", "condition": {"trigger": "Сфера энергии — следующий каст"}}], "source": "https://wiki.warframe.com/w/Energy_Conversion", "note": "+50% силы на следующую способность после подбора сферы энергии"}
 }

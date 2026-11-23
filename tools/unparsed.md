@@ -1,6 +1,6 @@
 # Неразобранные эффекты
 
-Сборка 2026-11-23 16:10 UTC. Строки, которые скрипт не смог превратить в {stat, value, bucket}. Правка — data/overrides/*.json (ключ — uniqueName или имя).
+Сборка 2026-11-23 16:53 UTC. Строки, которые скрипт не смог превратить в {stat, value, bucket}. Правка — data/overrides/*.json (ключ — uniqueName или имя).
 
 ## Моды: 125
 
@@ -432,7 +432,7 @@
 - [Vectis Prime: Survivor's Edge](https://wiki.warframe.com/w/Vectis_Incarnon_Genesis) — Increase Base Status Chance by 30% of current Critical Chance, up to 40%
 - [Vectis: Survivor's Edge](https://wiki.warframe.com/w/Vectis_Incarnon_Genesis) — Increase Base Status Chance by 30% of current Critical Chance, up to 40%
 
-## Аугменты способностей (этап 6, баффы): 313
+## Аугменты способностей (этап 6, баффы): 312
 
 - [Abating Link](https://wiki.warframe.com/w/Abating_Link) — Link Augment: Reduces Armor Rating by 60% on enemies targeted by Link.
 - [Abundant Mutation](https://wiki.warframe.com/w/Abundant_Mutation) — Passive Augment: Nidus gains an additional 300 max stacks of Mutation. Undying has a 30s cooldown.
@@ -514,7 +514,6 @@
 - [Empowered Quiver](https://wiki.warframe.com/w/Empowered_Quiver) — Quiver Augment: Dashwire grants allies 100% Critical Damage. Cloak arrow has a 100% chance to prevent Status Effects.
 - [Endless Lullaby](https://wiki.warframe.com/w/Endless_Lullaby) — Lull Augment: Performing a finisher on or killing a sleeping enemy will retrigger Lull for 100% of the remaining duration.; Passive: +50% Lull Duration.
 - [Enduring Bastille](https://wiki.warframe.com/w/Enduring_Bastille) — Bastille Augment: Killing an enemy in Bastille extends the duration by 2s. Vortex's duration is increased by 70% of its Maximum Duration for each additional Vortex thrown into it.
-- [Energy Conversion](https://wiki.warframe.com/w/Energy_Conversion) — Energy Orbs grant 50% more Ability Strength to your next cast.
 - [Energy Nexus](https://wiki.warframe.com/w/Energy_Nexus) — Warframe receives +3 Energy Regen/s
 - [Energy Siphon](https://wiki.warframe.com/w/Energy_Siphon) — Squad receives +0.6 Energy Regen/s
 - [Energy Transfer](https://wiki.warframe.com/w/Energy_Transfer) — Mend & Maim Augment: 100% of charge is conserved when switching between forms.
