@@ -44,6 +44,17 @@ const modsOf = () => D.mods[currentGroup()] || [];
 const modById = id => (id === 'riven' ? rivenItem() : modsOf().find(m => m.id === id));
 const arcanesOf = () => D.arcanes[S.cat] || [];
 const arcById = id => arcanesOf().find(a => a.id === id);
+// фракции врагов: вкладки в выборе, русские названия как в игре (словарь экспорта игры)
+const FACTION_GROUPS = [
+  ['grineer', 'Гринир', ['Grineer', 'Kuva Grineer']], ['corpus', 'Корпус', ['Corpus', 'Corpus Amalgam']],
+  ['infested', 'Заражённые', ['Infested', 'Infested Deimos']], ['corrupted', 'Порабощённые', ['Orokin']],
+  ['sentient', 'Владеющие разумом', ['Sentient']], ['murmur', 'Шёпот', ['The Murmur']], ['narmer', 'Нармер', ['Narmer']],
+  ['techrot', 'Техрот', ['Techrot']], ['scaldra', 'Скальдра', ['Scaldra']], ['anarchs', 'Анархи', ['Anarchs']],
+  ['duviri', 'Дувири', ['Duviri']], ['stalker', 'Сталкер', ['Stalker']], ['wild', 'Дикие животные', ['Predator', 'Prey']],
+].map(([id, label, f]) => ({ id, label, has: e => f.includes(e.faction) }));
+FACTION_GROUPS.push({ id: 'other', label: 'Прочее', has: e => !FACTION_GROUPS.some(g => g.id !== 'other' && g.has(e)) });
+const FACTION_RU = { 'Kuva Grineer': 'Кува-Гринир', 'Corpus Amalgam': 'Амальгамы Корпуса', 'Infested Deimos': 'Заражённые Деймоса', Neutral: 'Нейтральные', Tenno: 'Тэнно', Unknown: 'Неизвестно', Objects: 'Объекты' };
+const factionRu = f => FACTION_RU[f] || FACTION_GROUPS.find(g => g.id !== 'other' && g.has({ faction: f }))?.label || f || '—';
 const currentEnemy = () => D.enemies.find(e => e.name === S.enemy) || D.enemies[0];
 const currentFrame = () => D.warframes.find(w => w.name === F().name) || D.warframes.find(w => w.name === 'Oraxia');
 const fModById = id => D.mods.warframe.find(m => m.id === id);
@@ -426,7 +437,7 @@ function renderEnemySegs() {
   segmented($('partSeg'), [['body', 'Тело'], ['head', 'Голова']], S.part, v => { S.part = v; update(); });
   segmented($('critSeg'), [['none', 'Без крита'], ['avg', 'Средний'], ['crit', 'Крит']], S.crit, v => { S.crit = v; update(); });
   const e = currentEnemy();
-  $('enemyPick').replaceChildren(h('b', {}, e.ru || e.name), h('small', {}, `${e.ru && e.ru !== e.name ? e.name + ' · ' : ''}${e.faction || '—'}`));
+  $('enemyPick').replaceChildren(h('b', {}, e.ru || e.name), h('small', {}, `${e.ru && e.ru !== e.name ? e.name + ' · ' : ''}${factionRu(e.faction)}`));
 }
 
 // ---------- оружие: расчёт и результат ----------
@@ -489,7 +500,7 @@ function renderResult() {
   $('enemyInfo').textContent = `Ур. ${E.level}: здоровье ${num(E.health, 0)}${E.shield ? ', щиты ' + num(E.shield, 0) : ''}, броня ${num(E.armorBase, 0)}` +
     (E.armorStrip ? ` → ${num(E.armor, 0)}` : '') + `, снижение урона ${pct(E.dr)}` + (E.abilityResist ? `, защита от способностей ${pct(E.abilityResist)}` : '') +
     (E.overguard ? `, Overguard ${num(E.overguard, 0)}` : '') + (E.coldStacks ? `, холод +${num(coldCritBonus(E.coldStacks), 2)}× к криту` : '') +
-    `. Фракция: ${E.faction || '—'}.` + (E.steelPath ? ' Стальной Путь: здоровье и щиты ×2,5.' : '') +
+    `. Фракция: ${factionRu(E.faction)}.` + (E.steelPath ? ' Стальной Путь: здоровье и щиты ×2,5.' : '') +
     (Object.keys(buffState().res.statuses).length ? ' От способностей: ' + Object.entries(buffState().res.statuses).map(([k, v]) => k === 'heat' ? STATUS_RU[k] : `${STATUS_RU[k]} ${v}`).join(', ') + '.' : '');
 
   const where = S.part === 'head' ? 'в голову' : 'в тело';
@@ -1011,8 +1022,9 @@ function bindInputs() {
     onPick: async w => { S.weapon = w.name; S.attack = 0; S.mods = Array(8).fill(null); S.exilus = null; S.arcane = null; await ensureCategory(); renderAll(); },
   }));
   $('enemyPick').addEventListener('click', () => openPicker({
-    items: D.enemies, placeholder: 'Имя врага (рус. или англ.) или фракция', label: e => e.ru || e.name,
-    sub: e => `${e.ru && e.ru !== e.name ? e.name + ' · ' : ''}${e.faction || '—'} · здоровье ${e.health ?? 0}${e.shield ? ', щиты ' + e.shield : ''}${e.armor ? ', броня ' + e.armor : ''} · баз. ур. ${e.baseLevel ?? 1}`,
+    items: D.enemies.slice().sort((a, b) => (a.ru || a.name).localeCompare(b.ru || b.name, 'ru')), id: 'enemy', groups: FACTION_GROUPS,
+    placeholder: 'Имя врага (рус. или англ.)', label: e => e.ru || e.name,
+    sub: e => `${e.ru && e.ru !== e.name ? e.name + ' · ' : ''}${factionRu(e.faction)} · здоровье ${e.health ?? 0}${e.shield ? ', щиты ' + e.shield : ''}${e.armor ? ', броня ' + e.armor : ''} · баз. ур. ${e.baseLevel ?? 1}`,
     onPick: e => { S.enemy = e.name; update(); },
   }));
   $('framePick').addEventListener('click', () => openPicker({

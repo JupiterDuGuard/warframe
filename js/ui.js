@@ -18,28 +18,56 @@ export const ruName = x => x?.ru || x?.name || '';
 export const textRu = x => ((x?.textRu?.length ? x.textRu : x?.text) || []).join(' · ').replace(/\\n/g, ' ');
 
 // ---------- окно выбора ----------
+// groups: [{ id, label, has(item) }] — вкладки над списком (напр. фракции врагов); выбранная запоминается по id окна
 let ctx = null;
-export function openPicker({ items, label, sub, onPick, placeholder }) {
-  ctx = { items, label, sub, onPick };
+const lastGroup = {};
+export function openPicker({ items, label, sub, onPick, placeholder, groups, id }) {
+  ctx = { items, label, sub, onPick, groups, id, group: groups ? lastGroup[id] ?? null : null };
   $('sheetSearch').value = '';
   $('sheetSearch').placeholder = placeholder || 'Поиск';
+  renderGroups();
   renderPicker();
   $('sheet').showModal();
   $('sheetSearch').focus();
+}
+function renderGroups() {
+  const box = $('sheetGroups');
+  box.hidden = !ctx.groups;
+  if (!ctx.groups) return;
+  const pick = g => { ctx.group = g; lastGroup[ctx.id] = g; renderGroups(); renderPicker(); };
+  box.replaceChildren(
+    h('button', { type: 'button', 'aria-pressed': String(ctx.group == null), onclick: () => pick(null) }, `Все `, h('small', {}, String(ctx.items.length))),
+    ...ctx.groups.map(g => {
+      const n = ctx.items.filter(g.has).length;
+      return n ? h('button', { type: 'button', 'aria-pressed': String(ctx.group === g.id), onclick: () => pick(g.id) }, g.label + ' ', h('small', {}, String(n))) : null;
+    }).filter(Boolean));
 }
 function renderPicker() {
   const q = $('sheetSearch').value.trim().toLowerCase().split(/\s+/).filter(Boolean);
   const list = $('sheetList');
   list.replaceChildren();
-  let n = 0;
-  for (const it of ctx.items) {
-    const s = ctx.sub(it) || '';
-    const text = (ctx.label(it) + ' ' + (it.name || '') + ' ' + s).toLowerCase();
-    if (q.some(w => !text.includes(w))) continue;
-    if (++n > 150) break;
-    list.append(h('button', { type: 'button', class: 'opt', onclick: () => { $('sheet').close(); ctx.onPick(it); } },
-      h('b', {}, ctx.label(it)), s ? h('span', {}, s) : null));
+  const g = ctx.groups && ctx.group != null ? ctx.groups.find(x => x.id === ctx.group) : null;
+  const limit = g ? 600 : 150;
+  const match = it => {
+    const text = (ctx.label(it) + ' ' + (it.name || '') + ' ' + (ctx.sub(it) || '')).toLowerCase();
+    return !q.some(w => !text.includes(w));
+  };
+  // без выбранной вкладки и поиска — с заголовками групп
+  const sections = ctx.groups && !g ? ctx.groups.map(x => [x.label, ctx.items.filter(x.has)]) : [[null, g ? ctx.items.filter(g.has) : ctx.items]];
+  let n = 0, more = 0;
+  for (const [title, items] of sections) {
+    const shown = items.filter(match);
+    if (!shown.length) continue;
+    if (title) list.append(h('div', { class: 'opt-head' }, title, h('small', {}, String(shown.length))));
+    for (const it of shown) {
+      if (n >= limit) { more++; continue; }
+      n++;
+      const s = ctx.sub(it) || '';
+      list.append(h('button', { type: 'button', class: 'opt', onclick: () => { $('sheet').close(); ctx.onPick(it); } },
+        h('b', {}, ctx.label(it)), s ? h('span', {}, s) : null));
+    }
   }
+  if (more) list.append(h('p', { class: 'muted', style: 'padding:10px' }, `Ещё ${more} — выбери фракцию или уточни поиск`));
   if (!n) list.append(h('p', { class: 'muted', style: 'padding:10px' }, 'Ничего не найдено'));
 }
 export function initPicker() {

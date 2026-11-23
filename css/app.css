@@ -172,3 +172,13 @@ dialog.sheet::backdrop{background:rgba(6,7,9,.7)}
 .slot.riven-slot .name{color:var(--riven)}
 .buff-ctl select{min-width:0;flex:1 1 220px}
 .buff-ctl input[type=number]{flex:0 0 90px}
+/* вкладки в окне выбора (фракции врагов) */
+.chips{display:flex;flex-wrap:wrap;gap:6px;padding:8px 12px;border-bottom:1px solid var(--line-soft)}
+.chips button{border:1px solid var(--line);background:var(--code);color:var(--muted);border-radius:2px;padding:4px 9px;font:600 12px var(--body);cursor:pointer}
+.chips button small{font:500 11px var(--mono);opacity:.75}
+.chips button:hover{color:var(--ink);border-color:var(--accent)}
+.chips button[aria-pressed="true"]{background:var(--accent-grad);color:var(--on-accent);border-color:var(--accent)}
+.opt-head{position:sticky;top:-6px;z-index:1;display:flex;gap:8px;align-items:baseline;margin:6px 0 2px;padding:6px 10px;background:var(--surface);
+  border-bottom:1px solid var(--accent-soft);font:600 12px var(--display);letter-spacing:.07em;text-transform:uppercase;color:var(--accent)}
+.opt-head small{font:500 11px var(--mono);color:var(--muted);letter-spacing:0}
+
