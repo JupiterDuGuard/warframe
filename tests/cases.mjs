@@ -611,6 +611,19 @@ export const cases = [
       near(sc(1), base, 1e-9); near(sc(12), base * (1 + 0.4 * 11), 1e-9);
     },
   },
+  {
+    name: 'Мистификаторы оружия со стаками: Cascadia Flare 40 стаков = +480% урона, Secondary Surge ×8, без стаков — выключены',
+    run({ data, find, near }) {
+      const arc = n => data.arcanes.secondary.find(a => a.name === n);
+      const lex = find.weapon('Lex Prime');
+      const hit = (item, stacks) => calc({ weapon: lex, slot: 'secondary', arcanes: [{ item, rank: 5 }], stacks }, { enemy: NEUTRAL, level: 1 }, data).hit.health;
+      const base = calc({ weapon: lex, slot: 'secondary' }, { enemy: NEUTRAL, level: 1 }, data).hit.health;
+      near(hit(arc('Cascadia Flare'), {}), base, 1e-9);                                     // условие не включено
+      const key = 'arc:' + arc('Cascadia Flare').id;
+      near(hit(arc('Cascadia Flare'), { [key]: 40 }) / base, 5.8, 0.02);                      // 1 + 4,8
+      near(hit(arc('Secondary Surge'), { ['arc:' + arc('Secondary Surge').id]: 8 }) / base, 8, 1e-6);
+    },
+  },
 ];
 
 /** Общий загрузчик: data = { scaling, damage, weapons: {slot: [...]}, mods: {group: [...]}, enemies: [...] } */

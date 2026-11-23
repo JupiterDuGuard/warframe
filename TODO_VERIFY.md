@@ -146,6 +146,15 @@
 - [x] **King's Gambit** (Sicarus): ×0 шанса крита по телу, +150% шанса крита по слабым местам («в голову» в калькуляторе).
 - [x] **Flensing Spikes** (Latron): −20% брони за стак Пронзания (до 5) — стаки вводятся в «Условных эффектах».
 
+## Мистификаторы оружия (ручные правки, data/overrides/arcanes.json)
+
+- [ ] Значения взяты из текста мистификатора на максимальном ранге, по рангам — линейно; корзины не сверены с игрой:
+  Melee Animosity, Assimilation, Exposure (Коррозия не объединяется), Retaliation; Longbow Sharpshot, Primary Bulwark, Crux, Overcharge;
+  Cascadia Accuracy, Cascadia Flare, Secondary Enervate, Kinship, Outburst, Shiver (как +% урона), Surge (множитель вводится вручную).
+- [ ] **Melee Careen**: ×2,5 на 5-м ранге, по рангам ×1,25…×2,5 — предположение.
+- [ ] **Не внесены**: Melee Duplicate (второй удар при базовом крите), Melee Doughty, Primary Plated Round, Primary Compression, Cascadia Empowered,
+  Secondary Fortifier (×8 по Overguard), Secondary Irradiate, Exodia Force; мистификаторы китганов (Residual, Pax Bolt).
+
 ## Мод разлома
 
 - [ ] Характеристики вводятся вручную с карточки мода; урон по фракции — в процентах (+45 = ×1,45, −30 = ×0,7). Складывается с Проклятиями, как обычный фракционный мод.

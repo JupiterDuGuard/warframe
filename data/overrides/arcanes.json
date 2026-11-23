@@ -111,5 +111,378 @@
     ],
     "source": "https://wiki.warframe.com/w/Arcane_Reaper",
     "note": "+660 брони на 10 с после убийства в ближнем бою (регенерация здоровья не учтена)"
+  },
+  "Melee Animosity": {
+    "effectsMax": [
+      {
+        "stat": "crit_chance",
+        "value": 0.42,
+        "bucket": "crit_chance",
+        "condition": {
+          "trigger": "Попадания перед тяжёлым ударом",
+          "stacks": 10,
+          "attack": "heavy"
+        }
+      }
+    ],
+    "note": "+42% шанса крита следующему тяжёлому удару за попадание, до 420%",
+    "verified": false,
+    "source": "https://wiki.warframe.com/w/Melee_Animosity"
+  },
+  "Melee Assimilation": {
+    "effectsMax": [
+      {
+        "stat": "damage",
+        "value": 1.5,
+        "bucket": "base_damage",
+        "condition": {
+          "trigger": "После пробития щитов",
+          "attack": "heavy"
+        }
+      }
+    ],
+    "note": "+150% урона тяжёлым ударам после пробития щитов",
+    "verified": false,
+    "source": "https://wiki.warframe.com/w/Melee_Assimilation"
+  },
+  "Melee Careen": {
+    "note": "×2,5 урона ближнего боя по замороженным на 5-м ранге (по рангам ×1,25…×2,5 — линейно, не сверено)",
+    "verified": false,
+    "source": "https://wiki.warframe.com/w/Melee_Careen",
+    "ranks": [
+      [
+        {
+          "stat": "final_mult",
+          "value": 1.25,
+          "bucket": "final_mult",
+          "condition": {
+            "trigger": "Враг заморожен"
+          }
+        }
+      ],
+      [
+        {
+          "stat": "final_mult",
+          "value": 1.5,
+          "bucket": "final_mult",
+          "condition": {
+            "trigger": "Враг заморожен"
+          }
+        }
+      ],
+      [
+        {
+          "stat": "final_mult",
+          "value": 1.75,
+          "bucket": "final_mult",
+          "condition": {
+            "trigger": "Враг заморожен"
+          }
+        }
+      ],
+      [
+        {
+          "stat": "final_mult",
+          "value": 2.0,
+          "bucket": "final_mult",
+          "condition": {
+            "trigger": "Враг заморожен"
+          }
+        }
+      ],
+      [
+        {
+          "stat": "final_mult",
+          "value": 2.25,
+          "bucket": "final_mult",
+          "condition": {
+            "trigger": "Враг заморожен"
+          }
+        }
+      ],
+      [
+        {
+          "stat": "final_mult",
+          "value": 2.5,
+          "bucket": "final_mult",
+          "condition": {
+            "trigger": "Враг заморожен"
+          }
+        }
+      ]
+    ]
+  },
+  "Melee Exposure": {
+    "effectsMax": [
+      {
+        "stat": "element_corrosive",
+        "value": 0.6,
+        "bucket": "element",
+        "condition": {
+          "trigger": "Касты способностей",
+          "stacks": 4
+        },
+        "noCombine": true
+      }
+    ],
+    "note": "+60% Коррозии ударам ближнего боя за каст, до 240%",
+    "verified": false,
+    "source": "https://wiki.warframe.com/w/Melee_Exposure"
+  },
+  "Melee Retaliation": {
+    "effectsMax": [
+      {
+        "stat": "damage",
+        "value": 0.3,
+        "bucket": "base_damage",
+        "condition": {
+          "trigger": "Каждые 200 текущих щитов",
+          "stacks": 14
+        }
+      }
+    ],
+    "note": "+30% урона ближнего боя за каждые 200 текущих щитов, до 420% (сверхщиты — вдвое меньше)",
+    "verified": false,
+    "source": "https://wiki.warframe.com/w/Melee_Retaliation"
+  },
+  "Longbow Sharpshot": {
+    "effectsMax": [
+      {
+        "stat": "damage",
+        "value": 3.0,
+        "bucket": "base_damage",
+        "condition": {
+          "trigger": "Попадание в слабое место — следующий выстрел"
+        }
+      }
+    ],
+    "note": "+300% урона следующему выстрелу лука после попадания в слабое место",
+    "verified": false,
+    "source": "https://wiki.warframe.com/w/Longbow_Sharpshot"
+  },
+  "Primary Bulwark": {
+    "effectsMax": [
+      {
+        "stat": "damage",
+        "value": 0.1,
+        "bucket": "base_damage",
+        "condition": {
+          "trigger": "Каждые 100 брони фрейма сверх 1000",
+          "stacks": 50
+        }
+      }
+    ],
+    "note": "+1% урона за единицу брони сверх 1000, до 500% (вводится сотнями брони)",
+    "verified": false,
+    "source": "https://wiki.warframe.com/w/Primary_Bulwark"
+  },
+  "Primary Crux": {
+    "effectsMax": [
+      {
+        "stat": "status_chance",
+        "value": 0.3,
+        "bucket": "status_chance",
+        "condition": {
+          "trigger": "Попадания в слабые места",
+          "stacks": 10
+        }
+      }
+    ],
+    "note": "+30% шанса статуса за попадание в слабое место, до 10 стаков",
+    "source": "https://wiki.warframe.com/w/Primary_Crux"
+  },
+  "Primary Overcharge": {
+    "effectsMax": [
+      {
+        "stat": "multishot",
+        "value": 0.35,
+        "bucket": "multishot",
+        "condition": {
+          "trigger": "Энергия ≥ 90%: каждые 100 макс. энергии",
+          "stacks": 10
+        }
+      }
+    ],
+    "note": "Мультивыстрел = 35% макс. энергии, до 350% (вводится сотнями энергии)",
+    "verified": false,
+    "source": "https://wiki.warframe.com/w/Primary_Overcharge"
+  },
+  "Cascadia Accuracy": {
+    "effectsMax": [
+      {
+        "stat": "crit_chance",
+        "value": 3.0,
+        "bucket": "crit_chance",
+        "condition": {
+          "trigger": "После переката, в слабые места",
+          "part": "head"
+        }
+      }
+    ],
+    "note": "+300% шанса крита по слабым местам 4 с после переката",
+    "verified": false,
+    "source": "https://wiki.warframe.com/w/Cascadia_Accuracy"
+  },
+  "Cascadia Flare": {
+    "effectsMax": [
+      {
+        "stat": "damage",
+        "value": 0.12,
+        "bucket": "base_damage",
+        "condition": {
+          "trigger": "Статусы Огня",
+          "stacks": 40
+        }
+      }
+    ],
+    "note": "+12% урона за статус Огня, до 480%",
+    "verified": false,
+    "source": "https://wiki.warframe.com/w/Cascadia_Flare"
+  },
+  "Secondary Enervate": {
+    "effectsMax": [
+      {
+        "stat": "crit_chance",
+        "value": 0.1,
+        "bucket": "crit_chance",
+        "condition": {
+          "trigger": "Попадания подряд (сброс после 6 больших критов)",
+          "stacks": 30
+        }
+      }
+    ],
+    "note": "+10% шанса крита за попадание; сбрасывается после 6 критов высокого уровня",
+    "verified": false,
+    "source": "https://wiki.warframe.com/w/Secondary_Enervate"
+  },
+  "Secondary Kinship": {
+    "effectsMax": [
+      {
+        "stat": "crit_chance",
+        "value": 0.2,
+        "bucket": "crit_chance",
+        "condition": {
+          "trigger": "Баффы на союзных фреймах",
+          "stacks": 10
+        }
+      }
+    ],
+    "note": "+20% шанса крита за каждый бафф на союзниках",
+    "verified": false,
+    "source": "https://wiki.warframe.com/w/Secondary_Kinship"
+  },
+  "Secondary Outburst": {
+    "effectsMax": [
+      {
+        "stat": "crit_chance",
+        "value": 0.2,
+        "bucket": "crit_chance",
+        "condition": {
+          "trigger": "Потрачено множителей комбо",
+          "stacks": 12
+        }
+      },
+      {
+        "stat": "crit_damage",
+        "value": 0.2,
+        "bucket": "crit_damage",
+        "condition": {
+          "trigger": "Потрачено множителей комбо",
+          "stacks": 12
+        }
+      }
+    ],
+    "note": "+20% шанса и урона крита за каждый потраченный множитель комбо",
+    "verified": false,
+    "source": "https://wiki.warframe.com/w/Secondary_Outburst"
+  },
+  "Secondary Shiver": {
+    "effectsMax": [
+      {
+        "stat": "damage",
+        "value": 0.45,
+        "bucket": "base_damage",
+        "condition": {
+          "trigger": "Стаки Холода на враге",
+          "stacks": 10
+        }
+      }
+    ],
+    "note": "Враги получают +45% урона за каждый стак Холода",
+    "verified": false,
+    "source": "https://wiki.warframe.com/w/Secondary_Shiver"
+  },
+  "Secondary Surge": {
+    "note": "Следующий выстрел после каста: введи множитель (×1 за каждые 200 текущей энергии, до ×8)",
+    "verified": false,
+    "source": "https://wiki.warframe.com/w/Secondary_Surge",
+    "ranks": [
+      [
+        {
+          "stat": "final_mult",
+          "value": 1.0,
+          "bucket": "final_mult",
+          "condition": {
+            "trigger": "Множитель за энергию (×1 за каждые 200), до 8",
+            "stacks": 8
+          }
+        }
+      ],
+      [
+        {
+          "stat": "final_mult",
+          "value": 1.0,
+          "bucket": "final_mult",
+          "condition": {
+            "trigger": "Множитель за энергию (×1 за каждые 200), до 8",
+            "stacks": 8
+          }
+        }
+      ],
+      [
+        {
+          "stat": "final_mult",
+          "value": 1.0,
+          "bucket": "final_mult",
+          "condition": {
+            "trigger": "Множитель за энергию (×1 за каждые 200), до 8",
+            "stacks": 8
+          }
+        }
+      ],
+      [
+        {
+          "stat": "final_mult",
+          "value": 1.0,
+          "bucket": "final_mult",
+          "condition": {
+            "trigger": "Множитель за энергию (×1 за каждые 200), до 8",
+            "stacks": 8
+          }
+        }
+      ],
+      [
+        {
+          "stat": "final_mult",
+          "value": 1.0,
+          "bucket": "final_mult",
+          "condition": {
+            "trigger": "Множитель за энергию (×1 за каждые 200), до 8",
+            "stacks": 8
+          }
+        }
+      ],
+      [
+        {
+          "stat": "final_mult",
+          "value": 1.0,
+          "bucket": "final_mult",
+          "condition": {
+            "trigger": "Множитель за энергию (×1 за каждые 200), до 8",
+            "stacks": 8
+          }
+        }
+      ]
+    ]
   }
 }

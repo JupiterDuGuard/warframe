@@ -1,6 +1,6 @@
 # Неразобранные эффекты
 
-Сборка 2026-11-23 10:17 UTC. Строки, которые скрипт не смог превратить в {stat, value, bucket}. Правка — data/overrides/*.json (ключ — uniqueName или имя).
+Сборка 2026-11-23 15:01 UTC. Строки, которые скрипт не смог превратить в {stat, value, bucket}. Правка — data/overrides/*.json (ключ — uniqueName или имя).
 
 ## Моды: 125
 
@@ -130,7 +130,7 @@
 - [Xata Invocation](https://wiki.warframe.com/w/Xata_Invocation) — Alternate Fire grants 1 Energy Regen/s for 20s for each enemy hit. Stacks up to 10 times.
 - [Zazvat-Kar](https://wiki.warframe.com/w/Zazvat-Kar) — +75% Ammo Efficiency while Airborne
 
-## Мистификаторы: 88
+## Мистификаторы: 72
 
 - [Akimbo Slip Shot](https://wiki.warframe.com/w/Akimbo_Slip_Shot) — Gain 65% ammo efficiency with Dual Pistols.
 - [Arcane Barrier](https://wiki.warframe.com/w/Arcane_Barrier) — 6% chance to instantly restore all Shields; 6s cooldown
@@ -169,26 +169,18 @@
 - [Arcane Universal Fallout](https://wiki.warframe.com/w/Arcane_Universal_Fallout) — Each Radiation Status Effect inflicted on enemies by Abilities gives a 6% chance to drop a Universal Orb on enemy death.
 - [Arcane Victory](https://wiki.warframe.com/w/Arcane_Victory) — 75% chance for +3% Health Regeneration/s for 9s
 - [Arcane Warmth](https://wiki.warframe.com/w/Arcane_Warmth) — +102% chance to resist a Cold Status effect.
-- [Cascadia Accuracy](https://wiki.warframe.com/w/Cascadia_Accuracy) — +300% Critical Chance on Weak Point Hits for 4s
 - [Cascadia Empowered](https://wiki.warframe.com/w/Cascadia_Empowered) — Deals +750 Damage matching the Damage Type of the Status Effect
-- [Cascadia Flare](https://wiki.warframe.com/w/Cascadia_Flare) — +12% Damage for 10s. Stacks up to 480%.
 - [Exodia Brave](https://wiki.warframe.com/w/Exodia_Brave) — +5 Energy Rate for 4s. Stacks up to 3x.
 - [Exodia Contagion](https://wiki.warframe.com/w/Exodia_Contagion) — Melee while Aim Gliding launches a projectile that explodes on impact
 - [Exodia Epidemic](https://wiki.warframe.com/w/Exodia_Epidemic) — Slam emits a shockwave forwards that suspends enemies in the air for a short period
 - [Exodia Force](https://wiki.warframe.com/w/Exodia_Force) — 50% chance to deal 200% Weapon Damage to enemies within 6m.
 - [Exodia Hunt](https://wiki.warframe.com/w/Exodia_Hunt) — 50% chance to pull enemies within 12m into melee range.
 - [Exodia Might](https://wiki.warframe.com/w/Exodia_Might) — 50% chance for +30% Life Steal for 8s
-- [Longbow Sharpshot](https://wiki.warframe.com/w/Longbow_Sharpshot) — Gain +300% damage on your next shot.
 - [Melee Afflictions](https://wiki.warframe.com/w/Melee_Afflictions) — Enemies affected by Status Effects gain 6 additional stacks when they're knocked down or flung by melee attacks.
-- [Melee Animosity](https://wiki.warframe.com/w/Melee_Animosity) — Gain 42% Critical Chance on your next Heavy Attack, up to 420%
-- [Melee Assimilation](https://wiki.warframe.com/w/Melee_Assimilation) — +150% Melee Damage on Heavy Attack and Heavy Attack kills restore +30% of max Shields for 20s.
-- [Melee Careen](https://wiki.warframe.com/w/Melee_Careen) — x2.50 Melee Damage against Frozen enemies. On Roll: Freeze enemies in a 5.5m radius with a 2s Cooldown.
 - [Melee Crescendo](https://wiki.warframe.com/w/Melee_Crescendo) — Gain 6 Initial Combo for the rest of your mission
 - [Melee Doughty](https://wiki.warframe.com/w/Melee_Doughty) — Gain 1.0x Critical Damage for every 10% Puncture Status chance on your Melee Weapon.
 - [Melee Duplicate](https://wiki.warframe.com/w/Melee_Duplicate) — 100% chance for your attack to strike a second time
-- [Melee Exposure](https://wiki.warframe.com/w/Melee_Exposure) — Gain 60% Corrosive Damage on Melee strikes for 25s. Stacks up to 240%.
 - [Melee Influence](https://wiki.warframe.com/w/Melee_Influence) — 20% chance for elemental Melee Status Effects to apply to enemies within 20m for 18s. Cannot refresh while active.
-- [Melee Retaliation](https://wiki.warframe.com/w/Melee_Retaliation) — Gain 30% Melee Damage for every 200 current Shields, up to 420%. Bonus halved for Overshields.
 - [Melee Vortex](https://wiki.warframe.com/w/Melee_Vortex) — Kill an enemy affected by Magnetic Status for a 45% chance to pull in enemies within 18m radius
 - [Molt Efficiency](https://wiki.warframe.com/w/Molt_Efficiency) — Gain 6% Ability Duration per second, up to a maximum of 36%
 - [Molt Reconstruct](https://wiki.warframe.com/w/Molt_Reconstruct) — Heal yourself and allies within Affinity Range 6 Health for each Energy point spent on the initial casting cost of abilities.
@@ -196,13 +188,10 @@
 - [Pax Charge](https://wiki.warframe.com/w/Pax_Charge) — Battery Recharge Delay is reduced by +50%
 - [Pax Seeker](https://wiki.warframe.com/w/Pax_Seeker) — 4 projectiles burst from the target and seek the heads of nearby enemies.
 - [Pax Soar](https://wiki.warframe.com/w/Pax_Soar) — +50% Accuracy while Airborne; +5s Aim Glide/Wall Latch Duration; -50% Weapon Recoil while Airborne
-- [Primary Bulwark](https://wiki.warframe.com/w/Primary_Bulwark) — Gain +1% damage for each unit of armor past 1,000, up to a max of +500%.
 - [Primary Compression](https://wiki.warframe.com/w/Primary_Compression) — x0.2 explosion radius, +100% damage and +5.5% ammo efficiency for every 1m radius lost.
-- [Primary Crux](https://wiki.warframe.com/w/Primary_Crux) — Gain +30% Status Chance and +6% Ammo Efficiency for 10s. Stacks up to 10x.
 - [Primary Debilitate](https://wiki.warframe.com/w/Primary_Debilitate) — If an enemy has 10 stacks of a combined Status Effect, inflicting the same Status Effect again has a 100% chance to inflict one of the base Status Effects it is composed of.
 - [Primary Exhilarate](https://wiki.warframe.com/w/Primary_Exhilarate) — +1.2 Energy Regen/s for 10s. Stacks up to 3x.
 - [Primary Obstruct](https://wiki.warframe.com/w/Primary_Obstruct) — Enemy weapons jam within 15m of target. Cooldown 10s.
-- [Primary Overcharge](https://wiki.warframe.com/w/Primary_Overcharge) — Gain 35% of Max Energy as Multishot, capped at 350%.
 - [Primary Plated Round](https://wiki.warframe.com/w/Primary_Plated_Round) — Deal increased damage per round loaded based on max magazine size. Lasts for 10s.
 - [Residual Boils](https://wiki.warframe.com/w/Residual_Boils) — 20% chance to spawn volatile hives for 12s that explode when enemies approach for 80 Heat Damage in 10m. Standing in the area applies Heat Damage type to Theorem Arcanes.
 - [Residual Malodor](https://wiki.warframe.com/w/Residual_Malodor) — 20% chance to create a frigid mist for 12s, dealing 40 Cold Damage/s. Standing in the area applies Cold Damage to Theorem Arcanes.
@@ -210,13 +199,8 @@
 - [Residual Viremia](https://wiki.warframe.com/w/Residual_Viremia) — 20% chance to create pool of toxic blood for 12s, dealing 40 Toxin Damage/s. Standing in the area applies the Toxin Damage to Theorem Arcanes.
 - [Secondary Cryogenic](https://wiki.warframe.com/w/Secondary_Cryogenic) — Apply 3 Cold stacks on targets within 15m.
 - [Secondary Encumber](https://wiki.warframe.com/w/Secondary_Encumber) — +24% chance to trigger a second random Status Effect.
-- [Secondary Enervate](https://wiki.warframe.com/w/Secondary_Enervate) — Increase Critical Chance by 10%. Resets after 6 Big Critical Hit.
 - [Secondary Fortifier](https://wiki.warframe.com/w/Secondary_Fortifier) — Deals x8 Extra Damage to Overguard.; Gain 1 Overguard for every 100 Damage dealt to an enemy's Overguard.
 - [Secondary Irradiate](https://wiki.warframe.com/w/Secondary_Irradiate) — Deal 180% of the hit damage to enemies within 7m.
-- [Secondary Kinship](https://wiki.warframe.com/w/Secondary_Kinship) — +20% Critical Chance per buff
-- [Secondary Outburst](https://wiki.warframe.com/w/Secondary_Outburst) — On swapping to Secondary Weapon, consume all Combo Multipliers to increase Secondary Weapon Critical Chance and Critical Damage by 20% per Combo consumed for 30s.
-- [Secondary Shiver](https://wiki.warframe.com/w/Secondary_Shiver) — Enemies take +45% damage per Cold Status
-- [Secondary Surge](https://wiki.warframe.com/w/Secondary_Surge) — Next shot gains a Damage Multiplier for every 200 current Energy, up to x8.
 - [Theorem Contagion](https://wiki.warframe.com/w/Theorem_Contagion) — Standing in a zone created by a Residual Arcane creates a globe that orbits the player every 2s. The globes will strike the nearest enemy within 15m dealing 150 damage increasing their vulnerability to the globe's damage type by 200% for 6s. Globes will persist for 30s upon leaving the zone.
 - [Theorem Demulcent](https://wiki.warframe.com/w/Theorem_Demulcent) — Standing in a zone created by a Residual Arcane increases weapon damage by 12%/s stacking up to 15x. Effect persists for 20s upon leaving the zone.
 - [Theorem Infection](https://wiki.warframe.com/w/Theorem_Infection) — Standing in a zone created by a Residual Arcane increases damage of companions and summoned allies within 90m by 24%/s stacking up to 15x. Effect persists for 20s upon leaving the zone.
