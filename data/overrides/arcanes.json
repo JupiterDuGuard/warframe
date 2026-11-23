@@ -484,5 +484,29 @@
         }
       ]
     ]
+  },
+  "Arcane Impetus": {
+    "effectsMax": [
+      {
+        "stat": "ability_strength",
+        "value": 0.06,
+        "bucket": "frame",
+        "condition": {
+          "trigger": "Разные статусы от способностей",
+          "stacks": 14
+        }
+      },
+      {
+        "stat": "ability_efficiency",
+        "value": 0.03,
+        "bucket": "frame",
+        "condition": {
+          "trigger": "Разные статусы от способностей",
+          "stacks": 14
+        }
+      }
+    ],
+    "source": "https://wiki.warframe.com/w/Arcane_Impetus",
+    "note": "+6% силы и +3% эффективности за каждый статус от способностей; реально до 14 стаков (вики)"
   }
 }

@@ -1,6 +1,6 @@
 # Неразобранные эффекты
 
-Сборка 2026-11-23 15:01 UTC. Строки, которые скрипт не смог превратить в {stat, value, bucket}. Правка — data/overrides/*.json (ключ — uniqueName или имя).
+Сборка 2026-11-23 16:10 UTC. Строки, которые скрипт не смог превратить в {stat, value, bucket}. Правка — data/overrides/*.json (ключ — uniqueName или имя).
 
 ## Моды: 125
 
@@ -130,7 +130,7 @@
 - [Xata Invocation](https://wiki.warframe.com/w/Xata_Invocation) — Alternate Fire grants 1 Energy Regen/s for 20s for each enemy hit. Stacks up to 10 times.
 - [Zazvat-Kar](https://wiki.warframe.com/w/Zazvat-Kar) — +75% Ammo Efficiency while Airborne
 
-## Мистификаторы: 72
+## Мистификаторы: 71
 
 - [Akimbo Slip Shot](https://wiki.warframe.com/w/Akimbo_Slip_Shot) — Gain 65% ammo efficiency with Dual Pistols.
 - [Arcane Barrier](https://wiki.warframe.com/w/Arcane_Barrier) — 6% chance to instantly restore all Shields; 6s cooldown
@@ -149,7 +149,6 @@
 - [Arcane Grace](https://wiki.warframe.com/w/Arcane_Grace) — 9% chance for +6% Health Regeneration/s for 9s
 - [Arcane Healing](https://wiki.warframe.com/w/Arcane_Healing) — +102% chance to resist a Radiation Status effect.
 - [Arcane Ice](https://wiki.warframe.com/w/Arcane_Ice) — +102% chance to resist a Heat Status effect.
-- [Arcane Impetus](https://wiki.warframe.com/w/Arcane_Impetus) — Unique Status Effects from Abilities grant +6% Ability Strength and +3% Ability Efficiency for 20s.
 - [Arcane Intention](https://wiki.warframe.com/w/Arcane_Intention) — Gain +250 Max Health per active channeled ability.
 - [Arcane Liquid]() — +102% chance to resist a Gas Status effect.
 - [Arcane Nullifier](https://wiki.warframe.com/w/Arcane_Nullifier) — +102% chance to resist a Magnetic Status effect.
@@ -433,7 +432,7 @@
 - [Vectis Prime: Survivor's Edge](https://wiki.warframe.com/w/Vectis_Incarnon_Genesis) — Increase Base Status Chance by 30% of current Critical Chance, up to 40%
 - [Vectis: Survivor's Edge](https://wiki.warframe.com/w/Vectis_Incarnon_Genesis) — Increase Base Status Chance by 30% of current Critical Chance, up to 40%
 
-## Аугменты способностей (этап 6, баффы): 314
+## Аугменты способностей (этап 6, баффы): 313
 
 - [Abating Link](https://wiki.warframe.com/w/Abating_Link) — Link Augment: Reduces Armor Rating by 60% on enemies targeted by Link.
 - [Abundant Mutation](https://wiki.warframe.com/w/Abundant_Mutation) — Passive Augment: Nidus gains an additional 300 max stacks of Mutation. Undying has a 30s cooldown.
@@ -545,7 +544,6 @@
 - [Gladiator Finesse](https://wiki.warframe.com/w/Gladiator_Finesse) — Drains Energy to stop Lethal Damage with +60% Efficiency.
 - [Gourmand](https://wiki.warframe.com/w/Gourmand) — Feast Augment: Instead of Energy, consumes 200 Health on cast. Glutton grants an additional 150 Armor per enemy.
 - [Greedy Pull](https://wiki.warframe.com/w/Greedy_Pull) — Pull Augment: Adds 100% chance to pull pickups towards Mag.
-- [Growing Power](https://wiki.warframe.com/w/Growing_Power) — Squad increases personal Ability Strength by 25% for 6s.
 - [Guardian Armor](https://wiki.warframe.com/w/Guardian_Armor) — Vex Armor Augment: Chroma reduces the damage his squadmates within Affinity Range take by 75%. Squad kills restore 5% of his Health over 3s and increases Vex Armor duration by 1s.
 - [Guided Effigy](https://wiki.warframe.com/w/Guided_Effigy) — Effigy Augment: Cast and hold to make Effigy move to your aim point. Deals 4000 Damage/s and restores 5 Energy for each enemy in its path. Roars on arrival, stunning nearby enemies.
 - [Hall Of Malevolence](https://wiki.warframe.com/w/Hall_of_Malevolence) — Hall of Mirrors Augment: The damage of your doppelgangers is increased by 5% every time you kill an enemy.

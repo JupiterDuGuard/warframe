@@ -11,5 +11,6 @@
     "source": "https://wiki.warframe.com/w/Internal_Bleeding",
     "verified": false,
     "note": "Статус Удара с шансом 35% накладывает Разрез, ×2 при скорострельности ниже 2,5 (текст WFCD)"
-  }
+  },
+  "Growing Power": {"effectsMax": [{"stat": "ability_strength", "value": 0.25, "bucket": "frame", "condition": {"trigger": "Статус оружием", "duration": 6}}], "source": "https://wiki.warframe.com/w/Growing_Power", "note": "+25% силы на 6 с после статуса оружием; складывается с модами на силу (вики)"}
 }
