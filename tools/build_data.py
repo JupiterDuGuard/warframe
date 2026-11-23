@@ -162,6 +162,7 @@ RULES = [
     (rf"^{PCT} Health$", "health", "frame", "pct"),
     (rf"^{PCT} Shield Capacity$", "shield", "frame", "pct"),
     (rf"^{PCT} Armor$", "armor", "frame", "pct"),
+    (rf"^\+?{NUM} Armor$", "armor_flat", "frame", "flat"),
     (rf"^{PCT} Energy Max$", "energy", "frame", "pct"),
     (rf"^{PCT} Ability (Strength|Duration|Range|Efficiency)$", "ability_{1}", "frame", "pct"),
     (rf"^{PCT} Sprint Speed$", "sprint_speed", "frame", "pct"),
@@ -191,7 +192,17 @@ COND_PHRASES = [
 STACKS_ONLY = re.compile(r"\.?\s*Stacks up to (\d+)\s*(?:x|times)\.?$", re.I)
 AND_SPLIT = re.compile(rf"^({PCT} [^0-9]+?) and ({PCT} .+)$", re.I)
 CHANCE = re.compile(r"^(\d+(?:\.\d+)?)% chance for (.+)$", re.I)
-TO_WEAPONS = re.compile(r"\s+(?:to|for) (Primary|Secondary|Melee) Weapons?$", re.I)
+TO_WEAPONS = re.compile(r"\s+(?:to|for|on) (Primary and Secondary [Ww]eapons|Primary Weapons? \(Excludes Shotguns\)|Primary|Secondary|Melee|Pistols|Shotguns|Sniper Rifles|Rifles)(?: Weapons?)?$", re.I)
+# «to Pistols» и т.п. -> условие эффекта
+WEAPON_TARGET = {"primary and secondary weapons": {"notSlot": "melee"}, "pistols": {"slot": "secondary"}, "shotguns": {"weaponClass": "shotgun"},
+                 "sniper rifles": {"weaponClass": "sniper_rifle"}, "rifles": {"weaponClass": "rifle"}}
+
+
+def weapon_target(s):
+    s = s.lower()
+    if "excludes shotguns" in s:
+        return {"weaponClass": "rifle"}
+    return WEAPON_TARGET.get(s) or {"slot": s.split()[0]}
 TAG = re.compile(r"<DT_[A-Z_]+>|<[A-Z_]+>")
 # строки, которые на урон и статы не влияют: в отчёт не попадают
 IGNORE = re.compile(r"Arcane Revive|Converts .* ammo pickups|Chance to Explode|Gore Chance|Hush|"
@@ -255,6 +266,9 @@ def parse_rank(stats):
                 continue
             text, c = line.rstrip("."), (dict(cond) if cond else None)
             text = re.sub(r"^Squad (?:receives|gains) ", "", text)
+            text = re.sub(r"^Gains? ", "", text)                              # «Gain +2% Ability Strength …»
+            text = re.sub(r"(\+?\d+(?:\.\d+)?%) (Primary|Secondary|Melee) Weapon Damage", r"\1 Damage to \2 Weapons", text)   # Arcane Primary Charger
+            text = re.sub(r"(\d),(\d{3})\b", r"\1\2", text)                    # «+1,200 Armor»
             pd = re.match(rf"^You lose {NUM}% Ability Strength", text)   # Power Donation
             if pd:
                 text = f"-{pd.group(1)}% Ability Strength"
@@ -284,7 +298,7 @@ def parse_rank(stats):
                     text = text[:sm.start()].strip()
                 wm = TO_WEAPONS.search(text)
                 if wm:
-                    c = {**(c or {}), "slot": wm.group(1).lower()}
+                    c = {**(c or {}), **weapon_target(wm.group(1))}
                     text = text[:wm.start()].strip()
             for rx, extra in COND_PHRASES:
                 pm = rx.search(text)

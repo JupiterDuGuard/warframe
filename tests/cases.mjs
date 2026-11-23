@@ -588,6 +588,19 @@ export const cases = [
       eq(Math.round(hit(ax) / plain(ax) * 100) / 100, 2); eq(hit(0), plain(0));
     },
   },
+  {
+    name: 'Мистификаторы фрейма: Crepuscular +3 к итоговому крит. множителю (вики: Скана 1,5 -> 4,5), Arachne только для основного и вторичного',
+    run({ data, find, near, eq }) {
+      const arcs = data.arcanes.warframe;
+      const crep = arcs.find(a => a.name === 'Arcane Crepuscular');
+      const skana = find.weapon('Skana');
+      const src = [{ key: 'arc', name: 'Crepuscular', effects: crep.ranks[crep.ranks.length - 1] }];
+      const r = calc({ weapon: skana, slot: 'melee', buffs: src, flags: { invisible: true } }, { enemy: NEUTRAL, level: 1 }, data);
+      near(r.stats.critMultiplier, skana.attacks[0].critMultiplier + 3, 1e-9);
+      const arachne = arcs.find(a => a.name === 'Arcane Arachne').ranks.at(-1)[0];
+      eq(arachne.condition.notSlot, 'melee'); near(arachne.value, 1.5, 1e-9);
+    },
+  },
 ];
 
 /** Общий загрузчик: data = { scaling, damage, weapons: {slot: [...]}, mods: {group: [...]}, enemies: [...] } */
@@ -611,5 +624,5 @@ export const DATA_FILES = {
   mods: { secondary: 'data/mods/secondary.json', primary: 'data/mods/primary.json', warframe: 'data/mods/warframe.json', melee: 'data/mods/melee.json' },
   incarnon: 'data/incarnon.json',
   warframes: 'data/warframes.json', shards: 'data/manual/shards.json', buffs: 'data/manual/buffs.json',
-  arcanes: { secondary: 'data/arcanes/secondary.json' },
+  arcanes: { secondary: 'data/arcanes/secondary.json', warframe: 'data/arcanes/warframe.json' },
 };

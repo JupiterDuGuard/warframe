@@ -1,3 +1,115 @@
 {
-  "_comment": "Ручные правки разбора мистификаторов. Формат как в mods.json."
+  "_comment": "Ручные правки разбора мистификаторов. Формат как в mods.json.",
+  "Arcane Hot Shot": {
+    "effectsMax": [
+      {
+        "stat": "crit_chance",
+        "value": 0.06,
+        "bucket": "crit_chance",
+        "condition": {
+          "trigger": "Огонь от способностей",
+          "stacks": 50
+        }
+      }
+    ],
+    "source": "https://wiki.warframe.com/w/Arcane_Hot_Shot",
+    "note": "+6% шанса крита оружию за стак (до 50), складывается с модами вроде Point Strike"
+  },
+  "Arcane Crepuscular": {
+    "effectsMax": [
+      {
+        "stat": "ability_strength",
+        "value": 0.3,
+        "bucket": "frame",
+        "condition": {
+          "invisible": true
+        }
+      },
+      {
+        "stat": "crit_mult_add",
+        "value": 3.0,
+        "bucket": "crit_mult_add",
+        "condition": {
+          "invisible": true
+        }
+      }
+    ],
+    "source": "https://wiki.warframe.com/w/Arcane_Crepuscular",
+    "verified": false,
+    "note": "Пока невидим: +30% силы и +3 к итоговому множителю крита (вики: плоская прибавка после модов; точное значение в игре округлено)"
+  },
+  "Arcane Bellicose": {
+    "effectsMax": [
+      {
+        "stat": "ability_strength",
+        "value": 0.72,
+        "bucket": "frame",
+        "condition": {
+          "trigger": "Здоровье 3000+ (макс. 72%)"
+        }
+      }
+    ],
+    "source": "https://wiki.warframe.com/w/Arcane_Bellicose",
+    "verified": false,
+    "note": "+6% силы за каждые 250 здоровья, до 72% — внесён максимум"
+  },
+  "Arcane Power Ramp": {
+    "effectsMax": [
+      {
+        "stat": "ability_strength",
+        "value": 0.09,
+        "bucket": "frame",
+        "condition": {
+          "trigger": "Каст другой способности",
+          "stacks": 4
+        }
+      }
+    ],
+    "source": "https://wiki.warframe.com/w/Arcane_Power_Ramp",
+    "note": "+9% силы следующей способности за стак, до 4"
+  },
+  "Molt Vigor": {
+    "effectsMax": [
+      {
+        "stat": "ability_strength",
+        "value": 0.45,
+        "bucket": "frame",
+        "condition": {
+          "trigger": "Способность Оператора перед кастом"
+        }
+      }
+    ],
+    "source": "https://wiki.warframe.com/w/Molt_Vigor",
+    "note": "+45% силы на следующую способность фрейма"
+  },
+  "Arcane Camisado": {
+    "effectsMax": [
+      {
+        "stat": "ability_strength",
+        "value": 0.06,
+        "bucket": "frame",
+        "condition": {
+          "trigger": "Атаки призванных союзников",
+          "stacks": 10
+        }
+      }
+    ],
+    "source": "https://wiki.warframe.com/w/Arcane_Camisado",
+    "note": "+6% силы следующей способности за атаку призванного, до 60%"
+  },
+  "Arcane Reaper": {
+    "effectsMax": [
+      {
+        "stat": "armor_flat",
+        "value": 660,
+        "bucket": "frame",
+        "condition": {
+          "trigger": "Убийство в ближнем бою",
+          "duration": 10
+        }
+      }
+    ],
+    "source": "https://wiki.warframe.com/w/Arcane_Reaper",
+    "note": "+660 брони на 10 с после убийства в ближнем бою (регенерация здоровья не учтена)"
+  }
 }

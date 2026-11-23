@@ -1,8 +1,8 @@
 # Неразобранные эффекты
 
-Сборка 2026-11-23 10:10 UTC. Строки, которые скрипт не смог превратить в {stat, value, bucket}. Правка — data/overrides/*.json (ключ — uniqueName или имя).
+Сборка 2026-11-23 10:15 UTC. Строки, которые скрипт не смог превратить в {stat, value, bucket}. Правка — data/overrides/*.json (ключ — uniqueName или имя).
 
-## Моды: 129
+## Моды: 127
 
 - [Acid Shells](https://wiki.warframe.com/w/Acid_Shells) — Enemies explode on death, dealing 450 Corrosive Damage (+45% Enemy Max Health) in a 10m radius.
 - [Adhesive Blast](https://wiki.warframe.com/w/Adhesive_Blast) — Grenades have 100% chance to stick to surfaces.
@@ -14,7 +14,6 @@
 - [Amalgam Daikyu Target Acquired](https://wiki.warframe.com/w/Amalgam_Daikyu_Target_Acquired) — +3% Life Steal on Nikanas; 60% chance to pickup used arrows.
 - [Amalgam Furax Body Count](https://wiki.warframe.com/w/Amalgam_Furax_Body_Count) — Melee kills Blast and stagger enemies in 15m
 - [Amalgam Javlok Magazine Warp](https://wiki.warframe.com/w/Amalgam_Javlok_Magazine_Warp) — +100% Combo Count Chance while Blocking with a Shield
-- [Amalgam Ripkas True Steel](https://wiki.warframe.com/w/Amalgam_Ripkas_True_Steel) — +20% Reload Speed on Shotguns
 - [Amalgam Shotgun Barrage](https://wiki.warframe.com/w/Amalgam_Shotgun_Barrage) — +45% Revive Speed
 - [Avenging Truth](https://wiki.warframe.com/w/Avenging_Truth) — +1 'Truth'; Blocking absorbs 50% of incoming damage, stored as Extra Damage for the next charge attack.
 - [Ballista Measure](https://wiki.warframe.com/w/Ballista_Measure) — +20% Range
@@ -27,7 +26,6 @@
 - [Cautious Shot](https://wiki.warframe.com/w/Cautious_Shot) — +100% chance to reduce the Stagger effect from self-imposed Radial Attacks
 - [Clip Delegation](https://wiki.warframe.com/w/Clip_Delegation) — Next Magazine has Status Chance and Multishot increased by 15% per shot landed with current Magazine. Max 15 stacks.
 - [Combat Reload](https://wiki.warframe.com/w/Combat_Reload) — If 5 pellets are headshots, increase reload speed by +120% for 3s.
-- [Combo Fury](https://wiki.warframe.com/w/Combo_Fury) — +100% Magazine Capacity for 12s on Secondary Weapon
 - [Combo Killer](https://wiki.warframe.com/w/Combo_Killer) — Reset Melee Combo Timer
 - [Combustion Beam](https://wiki.warframe.com/w/Combustion_Beam) — Enemies killed explode, dealing 600 Damage shortly after death.
 - [Condition's Perfection](https://wiki.warframe.com/w/Condition's_Perfection) — Enables Tennokai. Increases status chance by +100% on Tennokai attacks.
@@ -134,20 +132,14 @@
 - [Xata Invocation](https://wiki.warframe.com/w/Xata_Invocation) — Alternate Fire grants 1 Energy Regen/s for 20s for each enemy hit. Stacks up to 10 times.
 - [Zazvat-Kar](https://wiki.warframe.com/w/Zazvat-Kar) — +75% Ammo Efficiency while Airborne
 
-## Мистификаторы: 108
+## Мистификаторы: 88
 
 - [Akimbo Slip Shot](https://wiki.warframe.com/w/Akimbo_Slip_Shot) — Gain 65% ammo efficiency with Dual Pistols.
-- [Arcane Acceleration](https://wiki.warframe.com/w/Arcane_Acceleration) — 30% chance for +90% Fire Rate to Primary Weapons (Excludes Shotguns) for 9s
-- [Arcane Arachne](https://wiki.warframe.com/w/Arcane_Arachne) — +150% Damage to Primary and Secondary weapons for 30s
-- [Arcane Awakening](https://wiki.warframe.com/w/Arcane_Awakening) — 60% chance for +150% Damage to Pistols for 24s
 - [Arcane Barrier](https://wiki.warframe.com/w/Arcane_Barrier) — 6% chance to instantly restore all Shields; 6s cooldown
 - [Arcane Battery](https://wiki.warframe.com/w/Arcane_Battery) — Gain 0.30 maximum Energy per Armor point, up to 1000 Energy.
-- [Arcane Bellicose](https://wiki.warframe.com/w/Arcane_Bellicose) — Gain 6% Ability Strength for every 250 Max Health up to 72%.
 - [Arcane Blessing](https://wiki.warframe.com/w/Arcane_Blessing) — +24 Max Health. Stacks up to 50x.
 - [Arcane Bodyguard](https://wiki.warframe.com/w/Arcane_Bodyguard) — Heal Companion for 900
-- [Arcane Camisado](https://wiki.warframe.com/w/Arcane_Camisado) — Attacks from summoned minions increase Ability Strength by 6% up to 60% on the next Ability Cast. Summons gain 20% Movement Speed.
 - [Arcane Circumvent](https://wiki.warframe.com/w/Arcane_Circumvent) — Roll through enemies to steal 50% of their defenses for yourself. Stolen Armor lasts 15s.
-- [Arcane Crepuscular](https://wiki.warframe.com/w/Arcane_Crepuscular) — While invisible, gain +30% Ability Strength and +3x Final Critical Damage.
 - [Arcane Defense]() — +102% chance to resist a Puncture Status effect.
 - [Arcane Deflection](https://wiki.warframe.com/w/Arcane_Deflection) — +102% chance to resist a Slash Status effect.
 - [Arcane Detoxifier]() — +102% chance to resist a Toxin Status effect.
@@ -157,38 +149,26 @@
 - [Arcane Escapist](https://wiki.warframe.com/w/Arcane_Escapist) — Gain a stack of Escapist, up to 9x. On taking fatal damage, consume 3 stacks to avoid death and become invulnerable for 12s.
 - [Arcane Expertise](https://wiki.warframe.com/w/Arcane_Expertise) — 100% of Ability Strength modifiers are also applied to Max Shields.
 - [Arcane Grace](https://wiki.warframe.com/w/Arcane_Grace) — 9% chance for +6% Health Regeneration/s for 9s
-- [Arcane Guardian](https://wiki.warframe.com/w/Arcane_Guardian) — 15% chance for +900 Armor for 20s
 - [Arcane Healing](https://wiki.warframe.com/w/Arcane_Healing) — +102% chance to resist a Radiation Status effect.
-- [Arcane Hot Shot](https://wiki.warframe.com/w/Arcane_Hot_Shot) — Gain 6% weapon Critical Chance for 10s, when using abilities to inflict Heat Status effect on enemies. Maximum 50x stacks.
 - [Arcane Ice](https://wiki.warframe.com/w/Arcane_Ice) — +102% chance to resist a Heat Status effect.
-- [Arcane Ice Storm](https://wiki.warframe.com/w/Arcane_Ice_Storm) — Gain +2% Ability Strength and +2% Ability Duration for 15s. Stacks up to 20x.
 - [Arcane Impetus](https://wiki.warframe.com/w/Arcane_Impetus) — Unique Status Effects from Abilities grant +6% Ability Strength and +3% Ability Efficiency for 20s.
 - [Arcane Intention](https://wiki.warframe.com/w/Arcane_Intention) — Gain +250 Max Health per active channeled ability.
 - [Arcane Liquid]() — +102% chance to resist a Gas Status effect.
-- [Arcane Momentum](https://wiki.warframe.com/w/Arcane_Momentum) — 60% chance for +150% Reload Speed to Sniper Rifles for 12s
 - [Arcane Nullifier](https://wiki.warframe.com/w/Arcane_Nullifier) — +102% chance to resist a Magnetic Status effect.
 - [Arcane Persistence](https://wiki.warframe.com/w/Arcane_Persistence) — Remove all Shields. If Armor is above 700: Cannot be hit for more than 500 Damage/s. Magnetic Status and Ability Nullifying Effects disable this protection.
 - [Arcane Phantasm](https://wiki.warframe.com/w/Arcane_Phantasm) — 45% chance for +60% Speed for 18s
 - [Arcane Pistoleer](https://wiki.warframe.com/w/Arcane_Pistoleer) — 60% chance for Infinite Ammo for 12s
-- [Arcane Power Ramp](https://wiki.warframe.com/w/Arcane_Power_Ramp) — Next Ability cast gains +9% Ability Strength, stacking up to 4x. Resets when the same ability is recast consecutively.
-- [Arcane Precision](https://wiki.warframe.com/w/Arcane_Precision) — +300% Damage for 18s on Secondary Weapon
-- [Arcane Primary Charger](https://wiki.warframe.com/w/Arcane_Primary_Charger) — 30% chance for +300% Primary Weapon Damage for 12s
 - [Arcane Protection]() — +102% chance to resist a Corrosive Status effect.
 - [Arcane Pulse](https://wiki.warframe.com/w/Arcane_Pulse) — 15s cooldown; 60% chance to restore 500 Health to allies within 25m
-- [Arcane Reaper](https://wiki.warframe.com/w/Arcane_Reaper) — +24 Health Regen/s and +660 Armor for 10s.
 - [Arcane Resistance](https://wiki.warframe.com/w/Arcane_Resistance) — +102% chance to resist a Toxin Status effect.
 - [Arcane Sculptor](https://wiki.warframe.com/w/Arcane_Sculptor) — casts have 175% Ability Efficiency for 12s.
 - [Arcane Shield]() — +102% chance to resist an Impact Status effect.
 - [Arcane Steadfast](https://wiki.warframe.com/w/Arcane_Steadfast) — 20% chance that the next three Abilities will not cost Energy.
 - [Arcane Survival]() — 60% chance for -100% Bleedout Rate
-- [Arcane Tanker](https://wiki.warframe.com/w/Arcane_Tanker) — +1,200 Armor for 60s
 - [Arcane Temperance]() — -90% Damage Taken During Revive
-- [Arcane Tempo](https://wiki.warframe.com/w/Arcane_Tempo) — 15% chance for +90% Fire Rate to Shotguns for 12s
 - [Arcane Trickery](https://wiki.warframe.com/w/Arcane_Trickery) — 15% chance to become invisible for 30s
 - [Arcane Truculence](https://wiki.warframe.com/w/Arcane_Truculence) — When gaining 3,000 or more Overguard threshold, release a 30m Radial Attack that applies max Viral Status stacks.
-- [Arcane Ultimatum](https://wiki.warframe.com/w/Arcane_Ultimatum) — +1,200 Armor for 45s
 - [Arcane Universal Fallout](https://wiki.warframe.com/w/Arcane_Universal_Fallout) — Each Radiation Status Effect inflicted on enemies by Abilities gives a 6% chance to drop a Universal Orb on enemy death.
-- [Arcane Velocity](https://wiki.warframe.com/w/Arcane_Velocity) — 90% chance for +120% Fire Rate to Pistols for 9s
 - [Arcane Victory](https://wiki.warframe.com/w/Arcane_Victory) — 75% chance for +3% Health Regeneration/s for 9s
 - [Arcane Warmth](https://wiki.warframe.com/w/Arcane_Warmth) — +102% chance to resist a Cold Status effect.
 - [Cascadia Accuracy](https://wiki.warframe.com/w/Cascadia_Accuracy) — +300% Critical Chance on Weak Point Hits for 4s
@@ -209,13 +189,11 @@
 - [Melee Doughty](https://wiki.warframe.com/w/Melee_Doughty) — Gain 1.0x Critical Damage for every 10% Puncture Status chance on your Melee Weapon.
 - [Melee Duplicate](https://wiki.warframe.com/w/Melee_Duplicate) — 100% chance for your attack to strike a second time
 - [Melee Exposure](https://wiki.warframe.com/w/Melee_Exposure) — Gain 60% Corrosive Damage on Melee strikes for 25s. Stacks up to 240%.
-- [Melee Fortification](https://wiki.warframe.com/w/Melee_Fortification) — +210 Armor for 10s
 - [Melee Influence](https://wiki.warframe.com/w/Melee_Influence) — 20% chance for elemental Melee Status Effects to apply to enemies within 20m for 18s. Cannot refresh while active.
 - [Melee Retaliation](https://wiki.warframe.com/w/Melee_Retaliation) — Gain 30% Melee Damage for every 200 current Shields, up to 420%. Bonus halved for Overshields.
 - [Melee Vortex](https://wiki.warframe.com/w/Melee_Vortex) — Kill an enemy affected by Magnetic Status for a 45% chance to pull in enemies within 18m radius
 - [Molt Efficiency](https://wiki.warframe.com/w/Molt_Efficiency) — Gain 6% Ability Duration per second, up to a maximum of 36%
 - [Molt Reconstruct](https://wiki.warframe.com/w/Molt_Reconstruct) — Heal yourself and allies within Affinity Range 6 Health for each Energy point spent on the initial casting cost of abilities.
-- [Molt Vigor](https://wiki.warframe.com/w/Molt_Vigor) — 45% Ability Strength on next Warframe Ability Cast
 - [Pax Bolt](https://wiki.warframe.com/w/Pax_Bolt) — +30% Ability Efficiency and +30% Ability Strength on the next Ability used within 4s.
 - [Pax Charge](https://wiki.warframe.com/w/Pax_Charge) — Battery Recharge Delay is reduced by +50%
 - [Pax Seeker](https://wiki.warframe.com/w/Pax_Seeker) — 4 projectiles burst from the target and seek the heads of nearby enemies.
@@ -790,21 +768,34 @@
 - [Wrath Of Ukko](https://wiki.warframe.com/w/Wrath_of_Ukko) — Storm of Ukko Augment: Wrathful Advance moves the storm of daggers to the teleportation location and increases its duration by 6s.
 - [Wrecking Wall](https://wiki.warframe.com/w/Wrecking_Wall) — Containment Wall Augment: Strip 50% of armor and shields from struck enemies. Hitting 5 or more enemies will restart the duration of any Chyrinka Pillars and empower them.
 
-## Условные эффекты, разобранные автоматически: 80
+## Условные эффекты, разобранные автоматически: 94
 
 Условие (триггер, длительность, стаки) взято из текста; корзину и механику сверить с вики.
 
 - [Amalgam Furax Body Count](https://wiki.warframe.com/w/Amalgam_Furax_Body_Count)
+- [Amalgam Ripkas True Steel](https://wiki.warframe.com/w/Amalgam_Ripkas_True_Steel)
+- [Arcane Acceleration](https://wiki.warframe.com/w/Arcane_Acceleration)
 - [Arcane Aegis](https://wiki.warframe.com/w/Arcane_Aegis)
 - [Arcane Agility](https://wiki.warframe.com/w/Arcane_Agility)
+- [Arcane Arachne](https://wiki.warframe.com/w/Arcane_Arachne)
 - [Arcane Avenger](https://wiki.warframe.com/w/Arcane_Avenger)
+- [Arcane Awakening](https://wiki.warframe.com/w/Arcane_Awakening)
 - [Arcane Blade Charger](https://wiki.warframe.com/w/Arcane_Blade_Charger)
 - [Arcane Concentration](https://wiki.warframe.com/w/Arcane_Concentration)
 - [Arcane Consequence](https://wiki.warframe.com/w/Arcane_Consequence)
 - [Arcane Fury](https://wiki.warframe.com/w/Arcane_Fury)
+- [Arcane Guardian](https://wiki.warframe.com/w/Arcane_Guardian)
+- [Arcane Ice Storm](https://wiki.warframe.com/w/Arcane_Ice_Storm)
+- [Arcane Momentum](https://wiki.warframe.com/w/Arcane_Momentum)
+- [Arcane Precision](https://wiki.warframe.com/w/Arcane_Precision)
+- [Arcane Primary Charger](https://wiki.warframe.com/w/Arcane_Primary_Charger)
 - [Arcane Rage](https://wiki.warframe.com/w/Arcane_Rage)
 - [Arcane Rise](https://wiki.warframe.com/w/Arcane_Rise)
 - [Arcane Strike](https://wiki.warframe.com/w/Arcane_Strike)
+- [Arcane Tanker](https://wiki.warframe.com/w/Arcane_Tanker)
+- [Arcane Tempo](https://wiki.warframe.com/w/Arcane_Tempo)
+- [Arcane Ultimatum](https://wiki.warframe.com/w/Arcane_Ultimatum)
+- [Arcane Velocity](https://wiki.warframe.com/w/Arcane_Velocity)
 - [Archgun Ace](https://wiki.warframe.com/w/Archgun_Ace)
 - [Argon Scope](https://wiki.warframe.com/w/Argon_Scope)
 - [Berserker Fury](https://wiki.warframe.com/w/Berserker_Fury)
@@ -844,6 +835,7 @@
 - [Lasting Purity](https://wiki.warframe.com/w/Lasting_Purity)
 - [Maiming Strike](https://wiki.warframe.com/w/Maiming_Strike)
 - [Marked Target](https://wiki.warframe.com/w/Marked_Target)
+- [Melee Fortification](https://wiki.warframe.com/w/Melee_Fortification)
 - [Molt Augmented](https://wiki.warframe.com/w/Molt_Augmented)
 - [Nano-Applicator](https://wiki.warframe.com/w/Nano-Applicator)
 - [Narrow Barrel](https://wiki.warframe.com/w/Narrow_Barrel)

@@ -105,7 +105,8 @@ export function moddedAttack(weapon, attackIndex, eff, opts = {}) {
   const multishot = ((atk.multishot || 1) + (t.multishot_base || 0)) * (msLocked ? 1 : 1 + (t.multishot || 0));
   const critChance = eff.special.has('crit_chance_zero') ? 0                // King's Gambit: ×0 шанса крита по телу
     : ((atk.critChance || 0) + (t.crit_chance_base || 0)) * (1 + (t.crit_chance || 0)) + (t.crit_chance_flat || 0);
-  const critMultiplier = ((atk.critMultiplier || 1) + (t.crit_mult_base || 0)) * (1 + (t.crit_damage || 0)) * (eff.critFinal || 1);
+  // crit_mult_add — плоская прибавка к итоговому множителю (Arcane Crepuscular: Скана 1,5 -> 4,5)
+  const critMultiplier = ((atk.critMultiplier || 1) + (t.crit_mult_base || 0)) * (1 + (t.crit_damage || 0)) * (eff.critFinal || 1) + (t.crit_mult_add || 0);
   const statusChance = ((atk.statusChance || 0) + (t.status_chance_base || 0)) * (1 + (t.status_chance || 0)) + (t.status_chance_flat || 0);
   const fireRate = ((atk.fireRate || 1) + (t.fire_rate_base || 0)) * (1 + (t.fire_rate || 0) + (t.attack_speed || 0));
   const magazine = weapon.magazine ? Math.max(1, Math.round((weapon.magazine + (t.magazine_base || 0)) * (1 + (t.magazine || 0)))) : null;
