@@ -186,6 +186,7 @@ COND_PHRASES = [
     (re.compile(r"\s+on first shot in Magazine$", re.I), {"first_shot": True}),
     (re.compile(r"\s+per Status Type affecting the target$", re.I), {"per": "status_type"}),
     (re.compile(r"\s+stacks with Combo Multiplier$", re.I), {"per": "combo_multiplier"}),
+    (re.compile(r"\s+per Combo Multiplier$", re.I), {"per": "combo_multiplier"}),          # Weeping Wounds
     (re.compile(r"\s+for Incarnon Form$", re.I), {"form": "incarnon"}),
     (re.compile(r"\s+per (?:projectile|pellet)$", re.I), {}),
 ]
@@ -311,6 +312,9 @@ def parse_rank(stats):
             cm = re.match(rf"^{PCT} Critical Chance and Damage$", text, re.I)
             if cm:
                 parts = [f"{cm.group(1)}% Critical Chance", f"{cm.group(1)}% Critical Damage"]
+            sc = re.match(rf"^{PCT} (Status|Critical) and (Status|Critical) Chance$", text, re.I)   # Mark of the Beast
+            if sc:
+                parts = [f"{sc.group(1)}% {sc.group(2)} Chance", f"{sc.group(1)}% {sc.group(3)} Chance"]
             effs = [match_line(p) for p in parts]
             hx = re.search(r"\(x(\d+(?:\.\d+)?) for Heavy Attacks\)", text, re.I)   # «Critical Chance (x2 for Heavy Attacks)»
             if hx and None not in effs:

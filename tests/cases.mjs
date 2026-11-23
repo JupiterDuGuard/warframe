@@ -601,6 +601,16 @@ export const cases = [
       eq(arachne.condition.notSlot, 'melee'); near(arachne.value, 1.5, 1e-9);
     },
   },
+  {
+    name: 'Weeping Wounds: +40% шанса статуса × (комбо − 1), как Blood Rush — при 12× это +440%',
+    run({ data, find, near }) {
+      const ww = find.mod('melee', 'Weeping Wounds');
+      const sc = combo => calc({ weapon: find.weapon('Paracesis'), slot: 'melee', comboMultiplier: combo, mods: [{ item: ww, rank: ww.maxRank }] },
+        { enemy: NEUTRAL, level: 1 }, data).stats.statusChance;
+      const base = find.weapon('Paracesis').attacks[0].statusChance;
+      near(sc(1), base, 1e-9); near(sc(12), base * (1 + 0.4 * 11), 1e-9);
+    },
+  },
 ];
 
 /** Общий загрузчик: data = { scaling, damage, weapons: {slot: [...]}, mods: {group: [...]}, enemies: [...] } */

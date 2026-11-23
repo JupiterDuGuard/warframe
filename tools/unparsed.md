@@ -1,8 +1,8 @@
 # Неразобранные эффекты
 
-Сборка 2026-11-23 10:15 UTC. Строки, которые скрипт не смог превратить в {stat, value, bucket}. Правка — data/overrides/*.json (ключ — uniqueName или имя).
+Сборка 2026-11-23 10:17 UTC. Строки, которые скрипт не смог превратить в {stat, value, bucket}. Правка — data/overrides/*.json (ключ — uniqueName или имя).
 
-## Моды: 127
+## Моды: 125
 
 - [Acid Shells](https://wiki.warframe.com/w/Acid_Shells) — Enemies explode on death, dealing 450 Corrosive Damage (+45% Enemy Max Health) in a 10m radius.
 - [Adhesive Blast](https://wiki.warframe.com/w/Adhesive_Blast) — Grenades have 100% chance to stick to surfaces.
@@ -70,7 +70,6 @@
 - [Life Strike](https://wiki.warframe.com/w/Life_Strike) — +20% Life Steal on Heavy Attack
 - [Lohk Canticle](https://wiki.warframe.com/w/Lohk_Canticle) — Killing enemies grants Allies within Affinity Range +30% Fire Rate for 15s.
 - [Magnetic Welt](https://wiki.warframe.com/w/Magnetic_Welt) — Impact Status Effects have 35% chance to apply a Magnetic Status Effect (x2 when Fire Rate is below 2.5)
-- [Mark Of The Beast](https://wiki.warframe.com/w/Mark_of_the_Beast) — +120% Status and Critical Chance for Secondary Weapon for 24s
 - [Master's Edge](https://wiki.warframe.com/w/Master's_Edge) — Enables Tennokai. Increases Tennokai damage by 60%.
 - [Mending Shot](https://wiki.warframe.com/w/Mending_Shot) — Shoot Health Orbs to obtain them with +110% extra effect.
 - [Metamorphic Magazine](https://wiki.warframe.com/w/Metamorphic_Magazine) — Inflicting 20 cumulative attacks on an enemy will petrify them for 5s.
@@ -126,7 +125,6 @@
 - [Voltage Sequence](https://wiki.warframe.com/w/Voltage_Sequence) — +1 'Sequence'; Killing a flying enemy creates a lightning trap from their remains, lasting 8s
 - [Vome Invocation](https://wiki.warframe.com/w/Vome_Invocation) — Alternate Fire increases Ability Strength by 4% for 20s for each enemy hit. Stacks up to 15 times.
 - [Vulcan Blitz](https://wiki.warframe.com/w/Vulcan_Blitz) — Enemies explode on death, dealing 300 Blast Damage (+60% Enemy Max Health) in a 6m radius.
-- [Weeping Wounds](https://wiki.warframe.com/w/Weeping_Wounds) — +40% Status Chance per Combo Multiplier
 - [Wild Frenzy](https://wiki.warframe.com/w/Wild_Frenzy) — Secondary Fire will shoot with +400% Fire Rate until the magazine is empty. Killing 2 or more enemies will refund 100% of the ammo.
 - [Winds Of Purity](https://wiki.warframe.com/w/Winds_of_Purity) — +1 'Purity'; +20% Life Steal
 - [Xata Invocation](https://wiki.warframe.com/w/Xata_Invocation) — Alternate Fire grants 1 Energy Regen/s for 20s for each enemy hit. Stacks up to 10 times.
@@ -768,7 +766,7 @@
 - [Wrath Of Ukko](https://wiki.warframe.com/w/Wrath_of_Ukko) — Storm of Ukko Augment: Wrathful Advance moves the storm of daggers to the teleportation location and increases its duration by 6s.
 - [Wrecking Wall](https://wiki.warframe.com/w/Wrecking_Wall) — Containment Wall Augment: Strip 50% of armor and shields from struck enemies. Hitting 5 or more enemies will restart the duration of any Chyrinka Pillars and empower them.
 
-## Условные эффекты, разобранные автоматически: 94
+## Условные эффекты, разобранные автоматически: 96
 
 Условие (триггер, длительность, стаки) взято из текста; корзину и механику сверить с вики.
 
@@ -834,6 +832,7 @@
 - [Laser Sight](https://wiki.warframe.com/w/Laser_Sight)
 - [Lasting Purity](https://wiki.warframe.com/w/Lasting_Purity)
 - [Maiming Strike](https://wiki.warframe.com/w/Maiming_Strike)
+- [Mark Of The Beast](https://wiki.warframe.com/w/Mark_of_the_Beast)
 - [Marked Target](https://wiki.warframe.com/w/Marked_Target)
 - [Melee Fortification](https://wiki.warframe.com/w/Melee_Fortification)
 - [Molt Augmented](https://wiki.warframe.com/w/Molt_Augmented)
@@ -866,6 +865,7 @@
 - [Spring-Loaded Chamber](https://wiki.warframe.com/w/Spring-Loaded_Chamber)
 - [Targeting Subsystem](https://wiki.warframe.com/w/Targeting_Subsystem)
 - [Vigorous Swap](https://wiki.warframe.com/w/Vigorous_Swap)
+- [Weeping Wounds](https://wiki.warframe.com/w/Weeping_Wounds)
 
 ## Пропущены (одноимённые записи WFCD, которых нет на вики): 174
 
