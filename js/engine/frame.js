@@ -6,7 +6,8 @@ import { collect, itemEffects } from './effects.js';
 
 const FRAME_BUCKETS = new Set(['frame', 'utility']);
 const UMBRA_SET = new Set(['Umbral Vitality', 'Umbral Fiber', 'Umbral Intensify']);
-const UMBRA_BONUS = { 2: 0.25, 3: 0.5 };
+// вики Umbral Vitality / Umbral Intensify: Живучесть и Волокно +30% / +80%, Усиление +25% / +75% (2 / 3 мода комплекта)
+const UMBRA_BONUS = { 'Umbral Intensify': { 2: 0.25, 3: 0.75 }, default: { 2: 0.3, 3: 0.8 } };
 
 /**
  * Источники эффектов осколков. shards: [{ color, effect, tau, stacks }] (до 5), shardData — data/manual/shards.json.
@@ -46,13 +47,13 @@ export function frameStats(frame, input, shardData) {
     ? { health: frame.health || 0, shield: frame.shield || 0, energy: frame.energy || 0, armor: frame.armor || 0 }
     : { ...frame.rank30 };
   const modSources = [];
-  // комплект Умбры (вики Umbra Mods): 2 мода — их эффекты +25%, 3 — +50%
+  // комплект Умбры: бонус к эффектам модов комплекта зависит от числа надетых
   const umbral = (input.mods || []).filter(m => UMBRA_SET.has(m?.item?.name)).length;
-  const umbraK = 1 + (UMBRA_BONUS[umbral] || 0);
+  const umbraK = name => 1 + ((UMBRA_BONUS[name] || UMBRA_BONUS.default)[umbral] || 0);
   for (const m of input.mods || []) {
     if (!m?.item) continue;
     let effects = itemEffects(m.item, m.rank);
-    if (umbraK !== 1 && UMBRA_SET.has(m.item.name)) effects = effects.map(e => ({ ...e, value: e.value * umbraK }));
+    if (umbral >= 2 && UMBRA_SET.has(m.item.name)) effects = effects.map(e => ({ ...e, value: e.value * umbraK(m.item.name) }));
     modSources.push({ key: 'mod:' + m.item.id, name: m.item.ru || m.item.name, effects });
   }
   for (const a of input.arcanes || []) {
@@ -78,7 +79,9 @@ export function frameStats(frame, input, shardData) {
 
   // Сила/длительность/дальность/эффективность: ограничения из вики (TODO_VERIFY): эффективность ≤ 175%,
   // длительность ≥ 12,5%, дальность ≥ 34%
-  const strength = clampMin(1 + (t.ability_strength || 0), 0);
+  // Arcane Bellicose: round(макс. здоровье / 250 × бонус) — до 12 шагов (вики)
+  const perHealth = t.strength_per_250_health ? Math.min(t.strength_per_250_health * 12, Math.round(core.health / 250 * t.strength_per_250_health * 100) / 100) : 0;
+  const strength = clampMin(1 + (t.ability_strength || 0) + perHealth, 0);
   const duration = clampMin(1 + (t.ability_duration || 0), 0.125);
   const range = clampMin(1 + (t.ability_range || 0), 0.34);
   const efficiency = Math.min(1.75, 1 + (t.ability_efficiency || 0));

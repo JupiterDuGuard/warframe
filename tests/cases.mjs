@@ -625,14 +625,17 @@ export const cases = [
     },
   },
   {
-    name: 'Комплект Умбры: Усиление Умбра 44% -> 55% с двумя модами Умбры, 66% с тремя',
+    name: 'Комплект Умбры (вики): Усиление Умбра 44% -> 55% / 77%, Живучесть Умбра — +30% / +80%',
     run({ data, find, near }) {
       const w = find.frame('Wisp Prime');
       const m = n => ({ item: find.mod('warframe', n), rank: find.mod('warframe', n).maxRank });
       const st = mods => frameStats(w, { rank30: true, mods, arcanes: [], shards: [], stacks: {}, flags: {} }, data.shards).strength;
       near(st([m('Umbral Intensify')]), 1.44, 1e-9);
       near(st([m('Umbral Intensify'), m('Umbral Vitality')]), 1.55, 1e-9);
-      near(st([m('Umbral Intensify'), m('Umbral Vitality'), m('Umbral Fiber')]), 1.66, 1e-9);
+      near(st([m('Umbral Intensify'), m('Umbral Vitality'), m('Umbral Fiber')]), 1.77, 1e-9);
+      // игра (скриншот владельца): Живучесть Умбра 9-го ранга + Усиление Умбра -> 807 здоровья у Виспа Прайм
+      const uv9 = { item: find.mod('warframe', 'Umbral Vitality'), rank: 9 };
+      near(frameStats(w, { rank30: true, mods: [m('Umbral Intensify'), uv9], arcanes: [], shards: [], stacks: {}, flags: {} }, data.shards).health, 807, 1);
     },
   },
 ];
