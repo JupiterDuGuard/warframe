@@ -1065,6 +1065,8 @@ async function start() {
     return;
   }
   bindInputs();
+  // ссылка на билд, открытая во вкладке, где сайт уже загружен: меняется только «#b=…» — перезагрузить
+  window.addEventListener('hashchange', () => { if (/^#b=/.test(location.hash)) location.reload(); });
   setView(S.view || 'weapon');
   renderFrame();
   renderFrameMods(); renderShards(); renderFrameConds(); renderBuffs(); renderFrameResult();
